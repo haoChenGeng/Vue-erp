@@ -1,0 +1,9 @@
+{
+    "indexPage" : [
+        { "prop": "code", "label": "按钮编码" },
+        { "prop": "name", "label": "按钮名称" },
+        { "prop": "symbol", "label": "英文标识" },
+        { "prop": "visible", "label": "隐藏", "list":"visibleOptions"},
+        { "prop": "url", "label": "URL" }
+    ]
+}

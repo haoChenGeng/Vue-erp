@@ -1,0 +1,10 @@
+{
+    "importColumns": [
+        { "prop": "costDomainName", "label": "成本域"},
+        { "prop": "warhouseCode", "label": "仓库编码"},
+        { "prop": "goodsCode", "label": "商品编码" },
+        { "prop": "goodsInitialCount", "label": "期初数量"},
+        { "prop": "initialNoTaxPrice", "label": "期初单价"},
+        { "prop": "remark", "label": "备注"}
+    ]
+}

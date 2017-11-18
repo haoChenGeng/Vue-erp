@@ -1,0 +1,31 @@
+{
+    "blankData": {
+        "fundPurpose": {
+            "code": null,
+            "businessTypeCode": null,
+            "debitTypeCode": null,
+            "createUser": 587,
+            "debitObjectCode": null,
+            "name": null,
+            "status": null
+        }
+    },
+    "demoData": [
+        {
+            "code": "002008001",
+            "createTime": 1489661979,
+            "createUser": 0,
+            "description": "",
+            "id": 553,
+            "isDel": 0,
+            "isPreset": 0,
+            "level": 3,
+            "name": "首期款",
+            "typeName": "款项用途",
+            "updateTime": 1489661979,
+            "updateUser": 0,
+            "fundPurposeId": 553,
+            "chae": 0
+        }
+    ]
+}

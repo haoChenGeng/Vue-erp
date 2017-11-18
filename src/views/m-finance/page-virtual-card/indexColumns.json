@@ -1,0 +1,8 @@
+{
+    "importColumns": [
+        { "prop": "bankAccount", "label": "主卡卡号"},
+        { "prop": "virtualCard", "label": "虚拟卡卡号"},
+        { "prop": "cardStatus", "label": "卡状态" },
+        { "prop": "occupyStatus", "label": "卡占用情况" }
+    ]
+}

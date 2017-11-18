@@ -1,0 +1,20 @@
+{
+	"options_workerSex": [
+        {"label": "男", "value": 0},
+        {"label": "女", "value": 1}
+    ],
+	"options_workerStatus": [
+	    {"label": "暂存", "value": 0},
+	    {"label": "信息待审核", "value": 1},
+	    {"label": "信息审核通过", "value": 2},
+	    {"label": "信息审核被驳回", "value": 3},
+	    {"label": "合作中", "value": 4},
+	    {"label": "待清退", "value": 5},
+	    {"label": "已清退", "value": 6},
+	    {"label": "工长解约被驳回", "value": 7}
+	],
+	"options_isProjectManager": [
+        {"label": "是", "value": 1},
+        {"label": "否", "value": 0}
+    ]
+}

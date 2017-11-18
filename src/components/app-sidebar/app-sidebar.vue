@@ -1,0 +1,443 @@
+<template>
+    <div class="app-sidebar"
+         :class="{ 'is-hide' : hide} ">
+        <!--<el-menu unique-opened-->
+                 <!--@select="handleSelect"-->
+                 <!--:default-active="defaultActive">-->
+            <!--<el-submenu v-for="item1 in sidebarData"-->
+                        <!--:index="item1.index"-->
+                        <!--class="sidebar-bb">-->
+                <!--<template slot="title">-->
+                    <!--<img :src="iconSrc(item1.title)" class="sidebar-icon">{{item1.title}}-->
+                <!--</template>-->
+                <!--&lt;!&ndash; 第二层非子节点 &ndash;&gt;-->
+                <!--<el-submenu v-if="item2.items"-->
+                            <!--v-for="item2 in item1.items"-->
+                            <!--:index="item2.index"-->
+                            <!--class="ani-menu sidebar2">-->
+                    <!--<template slot="title">-->
+                        <!--<i class="el-icon-caret-right ani-icon"></i>-->
+                        <!--{{item2.title}}-->
+                    <!--</template>-->
+                    <!--&lt;!&ndash;第三次节点&ndash;&gt;-->
+                    <!--<el-menu-item v-for="item3 in item2.items"-->
+                                  <!--:index="item3.url.path"-->
+                                  <!--class="sidebar3">-->
+                        <!--{{item3.title}}-->
+                    <!--</el-menu-item>-->
+                <!--</el-submenu>-->
+                <!--&lt;!&ndash; 第二层子节点 &ndash;&gt;-->
+                <!--<el-menu-item v-if="!item2.items"-->
+                              <!--v-for="item2 in item1.items"-->
+                              <!--:index="item2.url.path"-->
+                              <!--class="sidebar4">-->
+                    <!--{{item2.title}}-->
+                <!--</el-menu-item>-->
+            <!--</el-submenu>-->
+        <!--</el-menu>-->
+
+        <el-menu
+            unique-opened
+            @select="handleSelect"
+            :default-active="defaultActive"
+        >
+            <div>
+                <!-- 第1层非子节点 -->
+                <el-submenu
+                    v-for="item1 in sidebarData"
+                    v-if="item1.items"
+                    :index="item1.index"
+                    class="sidebar-bb"
+                >
+                    <template slot="title">
+                        <img :src="iconSrc(item1.title)" class="sidebar-icon">
+                        {{item1.title}}
+                    </template>
+                    <!-- 下一层 START -->
+                    <div>
+                        <!-- 第2层非子节点 -->
+                        <el-submenu
+                            v-for="item2 in item1.items"
+                            v-if="item2.items"
+                            :index="item2.index"
+                            class="ani-menu sidebar23"
+                        >
+                            <template slot="title">
+                                <i class="el-icon-caret-right ani-icon"></i>
+                                {{item2.title}}
+                            </template>
+                            <!-- 下一层 START -->
+                            <div>
+                                <!-- 第3层非子节点 -->
+                                <el-submenu
+                                    v-for="item3 in item2.items"
+                                    v-if="item3.items"
+                                    :index="item3.index"
+                                    class="ani-menu sidebar23"
+                                >
+                                    <template slot="title">
+                                        <i class="el-icon-caret-right ani-icon"></i>
+                                        {{item3.title}}
+                                    </template>
+                                    <!-- 下一层 START -->
+                                    <div>
+                                        <!-- 第4层非子节点 -->
+                                        <el-submenu
+                                            v-for="item4 in item3.items"
+                                            v-if="item4.items"
+                                            :index="item4.index"
+                                            class="ani-menu sidebar23"
+                                        >
+                                            <template slot="title">
+                                                <i class="el-icon-caret-right ani-icon"></i>
+                                                {{item4.title}}
+                                            </template>
+                                            <!-- 下一层 START -->
+                                            <div>
+                                                <!-- 第5层非子节点 -->
+                                                <el-submenu
+                                                    v-for="item5 in item4.items"
+                                                    v-if="item5.items"
+                                                    :index="item5.index"
+                                                    class="ani-menu sidebar23"
+                                                >
+                                                    <template slot="title">
+                                                        <i class="el-icon-caret-right ani-icon"></i>
+                                                        {{item5.title}}
+                                                    </template>
+                                                    <!-- 下一层 START -->
+
+                                                    <!-- 下一层 END -->
+                                                </el-submenu>
+                                                <!-- 第5层子节点 -->
+                                                <el-menu-item
+                                                    v-for="item5 in item4.items"
+                                                    v-if="!item5.items"
+                                                    :index="getPath(item5)"
+                                                    class="sidebar-item"
+                                                >
+                                                    {{item5.title}}
+                                                </el-menu-item>
+                                            </div>
+                                            <!-- 下一层 END -->
+                                        </el-submenu>
+                                        <!-- 第4层子节点 -->
+                                        <el-menu-item
+                                            v-for="item4 in item3.items"
+                                            v-if="!item4.items"
+                                            :index="getPath(item4)"
+                                            class="sidebar-item"
+                                        >
+                                            {{item4.title}}
+                                        </el-menu-item>
+                                    </div>
+                                    <!-- 下一层 END -->
+                                </el-submenu>
+                                <!-- 第3层子节点 -->
+                                <el-menu-item
+                                    v-for="item3 in item2.items"
+                                    v-if="!item3.items"
+                                    :index="getPath(item3)"
+                                    class="sidebar-item"
+                                >
+                                    {{item3.title}}
+                                </el-menu-item>
+                            </div>
+                            <!-- 下一层 END -->
+                        </el-submenu>
+                        <!-- 第2层子节点 -->
+                        <el-menu-item
+                            v-for="item2 in item1.items"
+                            v-if="!item2.items"
+                            :index="getPath(item2)"
+                            class="sidebar-item"
+                        >
+                            {{item2.title}}
+                        </el-menu-item>
+                    </div>
+                    <!-- 下一层 END -->
+                </el-submenu>
+                <!-- 第1层子节点 -->
+                <el-menu-item
+                    v-for="item1 in sidebarData"
+                    v-if="!item1.items"
+                    :index="getPath(item1)"
+                    class="sidebar-item"
+                >
+                    {{item1.title}}
+                </el-menu-item>
+            </div>
+        </el-menu>
+
+        <div class="sidebar-hide" @click="onHide"></div>
+    </div>
+</template>
+
+<script>
+    import img1 from './img/icon-side01.png'
+    import img2 from './img/icon-side02.png'
+    import img3 from './img/icon-side03.png'
+    import img4 from './img/icon-side04.png'
+    import img5 from './img/icon-side05.png'
+    import img6 from './img/icon-side06.png'
+    import img7 from './img/icon-side07.png'
+    import img8 from './img/icon-side08.png'
+    import img9 from './img/icon-side09.png'
+    import img10 from './img/icon-side10.png'
+    import Cookie from 'js-cookie'
+    import api from 'src/utils/api.js'
+
+    export default {
+
+        name: 'app-sidebar',
+
+        props: {
+            hide: {
+                type: Boolean,
+                default: false
+            }
+        },
+
+        data() {
+            return {
+                sidebarData: [],
+                defaultActive: ''
+            }
+        },
+        created() {
+            api.account.listMenuTree({accountId: Cookie.get('t8t-tc-uid')})
+                .then(res => {
+                    if (res.data.status === 200) {
+                        let temp = res.data.result || []
+
+                        let item1 = {
+                            index: "1-101",
+                            url: {path: "#/index/"},
+                            title: "我的工作台"
+                        }
+
+                        let item2 = {
+                            index: "1-102",
+                            url: {path: "#/helpcenter/page-faq"},
+                            title: "帮助"
+                        }
+
+                        let flag = false
+                        for (let i = 0; i < temp.length; i++) {
+                            temp[i] = temp[i] || {}
+                            if (temp[i].title === "工作台") {
+                                flag = true
+                                temp[i].items.push(item1, item2)
+                            }
+                        }
+
+                        if (!flag) {
+                            let workBentch = {
+                                index: 100,
+                                title: '工作台',
+                                items: [
+                                    item1,
+                                    item2
+                                ]
+                            }
+                            temp.unshift(workBentch)
+                        }
+
+                        this.sidebarData = temp
+                        // 根据路由初始化展开路径
+                        this.$nextTick(function () {
+                            this.setDefaultActive('#' + this.$route.path)
+                        })
+                    }
+                })
+        },
+        watch: {
+            $route: function () {
+                // 根据路由初始化展开路径
+                this.$nextTick(function () {
+                    this.setDefaultActive('#' + this.$route.path)
+                })
+            }
+        },
+        methods: {
+            handleSelect(path) {
+                this.handleIndex(path)
+            },
+            handleIndex(path) {
+                if (path[0] === '#') {
+                    this.$router.push(path.slice(1))
+                } else {
+                    window.location.href = 'http://erp.to8to.com/index.php/' + path
+                }
+            },
+            onHide() {
+                this.$emit('toggle-button-click')
+            },
+            iconSrc(title) {
+                if (title === '工作台') return img1
+                if (title === '工模售前') return img2
+                if (title === '施工包交付') return img3
+                if (title === '整装包交付') return img4
+                if (title === '供应链管理') return img5
+                if (title === '系统管理') return img6
+                if (title === '交付管理') return img7
+                if (title === '商家后台') return img8
+                if (title === '财务') return img9
+                if (title === '流程中心') return img10
+                return img1
+            },
+            setDefaultActive(path) {
+                this.defaultActive = path
+            },
+            getPath(item) {
+                try {
+                    return item.url.path
+                } catch (e) {
+                    return null
+                }
+            }
+        }
+    }
+
+</script>
+
+<style lang="css">
+    .app-sidebar {
+        z-index: 100;
+        position: relative;
+        -webkit-user-select: none;
+        box-sizing: border-box;
+        background-color: #eef3f6;
+        height: 100%;
+        border-right: 1px solid #d4dde6;
+        width: 200px;
+    }
+
+    .app-sidebar.is-hide {
+        width: 0;
+    }
+
+    .app-sidebar .sidebar-icon {
+        margin-right: 10px;
+    }
+
+    .app-sidebar .sidebar-bb {
+        border-bottom: 1px solid #d4dee7;
+    }
+
+    .app-sidebar .sidebar-bb > .el-menu {
+        border-top: 1px solid #d4dee7;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #f7fcff;
+    }
+
+    .app-sidebar .sidebar2 > .el-menu {
+        background-color: #f7fcff;
+    }
+
+    .app-sidebar .ani-icon {
+        font-size: 12px;
+        transform: scale(0.8);
+    }
+
+    .app-sidebar .ani-menu.is-opened>.el-submenu__title>.ani-icon {
+        transform: rotate(90deg) scale(0.8);
+    }
+
+    .app-sidebar .el-menu-item,
+    .app-sidebar .el-submenu__title {
+        height: 32px !important;
+    }
+
+    .app-sidebar .sidebar-bb > .el-submenu__title {
+        height: 50px !important;
+        padding-left: 10px !important;
+    }
+
+    .app-sidebar .sidebar4 {
+        padding-left: 16px !important;
+    }
+
+    .app-sidebar .sidebar2 .el-submenu__title {
+        background-color: #f7fcff;
+        padding-left: 18px !important;
+    }
+
+    .app-sidebar .sidebar2 .el-submenu__title:hover {
+        background-color: rgb(209, 217, 229);
+    }
+
+    .app-sidebar .sidebar-item {
+        background-color: #f7fcff;
+        display: flex;
+        align-items: center;
+        /*padding-left: 40px !important;*/
+        overflow: hidden;
+    }
+
+    /*.app-sidebar .sidebar3:before {
+        content: '';
+        width: 6px;
+        height: 6px;
+    }*/
+
+    .app-sidebar .sidebar4 {
+        background-color: #f7fcff;
+        /*display: flex;
+            align-items: center;*/
+        height: 32px !important;
+        line-height: 32px !important;
+    }
+
+    .app-sidebar .sidebar4:before {
+        float: left;
+        margin-top: 13px;
+        content: '';
+        width: 6px;
+        height: 6px;
+        margin-right: 12px;
+        margin-left: 6px;
+        border-radius: 50%;
+        background-color: #354052;
+    }
+
+    .app-sidebar .sidebar-hide {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate3d(100%, -50%, 0);
+        width: 17px;
+        height: 61px;
+        background-image: url(./img/icon_arrow.png);
+        z-index: 1001;
+        cursor: pointer;
+    }
+
+    .app-sidebar > .el-menu {
+        height: 100%;
+        overflow: auto;
+    }
+
+    .app-sidebar .sidebar-hide:hover {
+        background-position: -21px 0px;
+    }
+
+    .app-sidebar.is-hide .sidebar-hide {
+        background-position: 0px -61px;
+    }
+
+    .app-sidebar.is-hide .sidebar-hide:hover {
+        background-position: -21px -61px;
+    }
+
+    .app-sidebar .el-submenu__title {
+        display: flex;
+        /*background-color: #eef3f6;*/
+        align-items: center;
+    }
+
+    .app-sidebar .el-submenu__icon-arrow {
+        display: none;
+    }
+</style>
