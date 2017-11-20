@@ -4,8 +4,8 @@
 
 let  Services = {
     template: {
-        // /biz/t8t-prs-pqm/app
-        name: 'xn8QzCUzoAE7KPVqAowQmXMFkFO90Ky',
+        // /biz/dsp-prs-pqm/app
+        name: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3',
         methods:{
             //查询产品包模板 views.productPkgTemp.query
             searchTemplate: 'CNXZAq_UTBYDp9COKIC-kQAnFIgOKmlWRPJXgJl',
@@ -28,8 +28,8 @@ let  Services = {
         }
     },
     tempItem:{
-        // /biz/t8t-prs-pqm/app
-        name: 'xn8QzCUzoAE7KPVqAowQmXMFkFO90Ky',
+        // /biz/dsp-prs-pqm/app
+        name: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3',
         methods:{
             //views.tempItem.update
             updateTempItem: 'LnUSpgz6fZCYfe0kwIbZ0ceGFnUFChh',

@@ -28,7 +28,7 @@ let Service = {
         }
 	},
 	PROJECTOFFER:{
-		name:"1JmzG7LaR7h3HGukjyxab7L8a-Fkdzt", // /biz/t8t-prs-pqm/app
+		name:"hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3", // /biz/dsp-prs-pqm/app
 		methods:{
 			spaceQuery:"lvtq0Ai02AJnuRtKlztsLtlvptX", //views.space.query
 		}

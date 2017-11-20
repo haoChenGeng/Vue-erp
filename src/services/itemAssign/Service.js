@@ -122,8 +122,8 @@ let Services = {
         }
     },
     PRS_PQM: {
-        // /biz/t8t-prs-pqm/app
-        name: 'oCSUK6yMCxju8nkpApzWeOnde9sWOCj',
+        // /biz/dsp-prs-pqm/app
+        name: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3',
         methods: {
             // views.product.package.query
             LOAD_PRODUCT_INFO: '05p2eQSHejbaBsgrJ7gbOHraesxc2nf4XIyth08'

@@ -304,7 +304,7 @@
 		    },
 			getFileList(){
 				axios({
-					service: 'oPdv6na46lcZz1bj4ifXO0mD9hkGHlX', // /biz/t8t-prs-pqm/app
+					service: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3', // /biz/dsp-prs-pqm/app
 					method: 'w649sMeGrciF1ZT5t44pHtpM9xpct0yo7axrV5fKkDasvcerYPW', // views.photoesItem.queryByPhotoesId
 					args:{ photoesId: this.photoesId, sort:[ 'photoeType_desc' ]} // todo 替换动态数据
 				}).then((res)=>{
@@ -334,7 +334,7 @@
 					type:'warning'
 				}).then(()=>{
 					axios({
-						service: 'oPdv6na46lcZz1bj4ifXO0mD9hkGHlX', // /biz/t8t-prs-pqm/app
+						service: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3', // /biz/dsp-prs-pqm/app
 						method: 'ipaXTOANij4V0jH9lPU1su5cLmkiHJzLLWrRnl8aHFD', // views.photoesItem.deleteById
 						args: {id: id,updateName: Cookie.get('t8t-tc-username'), updateBy: Cookie.get('t8t-tc-username'),updateUser: Cookie.get('t8t-tc-uid')}
 					}).then((res)=>{
@@ -418,7 +418,7 @@
 				};
 				this.isLoading = true;
 				axios({
-					service: 'oPdv6na46lcZz1bj4ifXO0mD9hkGHlX', // /biz/t8t-prs-pqm/app
+					service: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3', // /biz/dsp-prs-pqm/app
 					method: 'pxte8i6D1UPtmS71aorbAketzbuQTdEhjIa', // views.photoesItem.create
 					args: {photoesItem: params}
 				}).then((res)=>{

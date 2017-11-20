@@ -51,6 +51,7 @@
     import md5 from 'md5'
     import axios from 'axios'
     import qs from 'qs'
+    import Utils from 'src/utils/Utils.js'
 
     export default {
         name: 'login',
@@ -86,7 +87,7 @@
         },
         methods: {
             onLogin() {
-                this.$router.push('/index/')
+                Utils.redirectIndex()
             },
             submitForm(formName) {
                 this.$refs[formName].validate((isValid) => {
