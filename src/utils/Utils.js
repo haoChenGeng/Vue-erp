@@ -12,10 +12,10 @@ import axios from 'axios'
 
 let Utils = {
     redirectLoginPage() {
-        location.href = 'http://tuchat.to8to.com/#/login/'
+        location.href = '/#/login/'
     },
     redirectIndex() {
-        location.href = 'http://tuchat.to8to.com/#/login/'
+       location.href = '/#/index/'
     },
     // 上传url处理
     getUploadURL() {

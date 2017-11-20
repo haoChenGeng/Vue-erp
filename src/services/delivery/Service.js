@@ -231,7 +231,7 @@ let Services = {
         }
     },
     PRSPQM: {
-        name: 'EvCUJKobNuKVHGAsIOSi3qULoMEynS_', // /biz/t8t-prs-pqm/app
+        name: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3', // /biz/dsp-prs-pqm/app
         methods: {
             productPkgTempBaseQuery: 'NXmkNqU1P3KdfeJJjjN1bK2QVOfHhIn14bG5n3lKLFjfPwz', // views.productPkgTemp.base.query
             productPkgTempBaseQueryPage: 'AIaJWwyQT8tpLQStKVWM-mO7q1eU9ilNKms_HrqW74UT56a_YL1', // views.productPkgTemp.base.queryPage

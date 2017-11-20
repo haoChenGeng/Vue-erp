@@ -4,8 +4,8 @@
 
 let  Services = {
     price: {
-        // /biz/t8t-prs-pqm/app
-        name: 'lQV25C8K_Gwpf5qnpAskdL1eK88ULni',
+        // /biz/dsp-prs-pqm/app
+        name: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3',
         methods:{
             //views.tempPrice.create
             createPrice:'KUVoXNzPabzGaMzvfKE5S5WQOiVZxymGBtw',

@@ -1,8 +1,8 @@
 //报价项接口
 let Services = {
     TEMPLATE:{
-        //biz/t8t-prs-pqm/app
-        name: 'xn8QzCUzoAE7KPVqAowQmXMFkFO90Ky',
+        // /biz/dsp-prs-pqm/app
+        name: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3',
         methods: {
             QUERY: 'q233b2f_ZDW0ZYsEv747sInfb5epY4F1PbmetMoaS3ri-_g', //views.category.search.queryPage
             CREATE: 'G4H63EhuPrdvX-pGTytKOIXuYnIGIu7yQwXs_pKA0pS', //views.category.search.create

@@ -3,8 +3,8 @@
  */
 let Services = {
     order: {
-        //  /biz/t8t-prs-pqm/app
-        name:'I1c2Cx1PxgTcpqUYzfTQualK0vhZ94S',
+        // /biz/dsp-prs-pqm/app
+        name: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3',
         methods:{
 
             create: 'CYfdVCcvmAInVRLrotLJeTFv5J-6AR6Zs5cN9KW',  //增改变更单 views.variationOrder.create
@@ -34,8 +34,8 @@ let Services = {
 
     //审核流相关
     workFlow:{
-        //  /biz/t8t-prs-pqm/app
-        name: 'I1c2Cx1PxgTcpqUYzfTQualK0vhZ94S',
+        // /biz/dsp-prs-pqm/app
+        name: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3',
         methods: {
             getBusinessKeyDetail: 'ntwMuDkDFF1gAtmoeocMEDugiSemvf2jCaBIyMsnQDsnAUXSetOlceZlNpN', //获取审批流数据 views.changeOrderWkf.getBusinessKeyDetail
             querySignedProjects: 'Yul33uIcygqk-hcqTs4yg2b0LCUumZ2xkctvL91rUSxtI62o7VG', // 查询已签约的报价单 views.quoteOrder.querySignedProjects

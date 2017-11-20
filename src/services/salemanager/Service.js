@@ -197,16 +197,16 @@ let Services = {
     },
     //施工图片
     PHOTOS:{
-        ///biz/t8t-prs-pqm/app
-        name:'nYOhE97GTlfm30jQLj17fNzqYA1QfTX',
+        // /biz/dsp-prs-pqm/app
+        name: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3',
         methods:{
             FINDPHOTOSBYPROJECTID:"dlnnSvoBwbFpggO9nhxF4mZY7ZF7jucOu2YnnVbl9pbYClHYPb_",//views.photoes.findPhotosByProjectId
         }
     },
     //报价单
     QUOTE:{
-        // /biz/t8t-prs-pqm/app
-        name:'HutKeCI2ZI-YHiSDuvE-ptT2yFCAlh6',
+        // /biz/dsp-prs-pqm/app
+        name: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3',
         methods:{
             SHOWNOVERIFY:'-xBypVo86izBh9nefJ07CWFkzV66SvNoAH5txwSlj6E'//views.quote.order.showNoVerify
 

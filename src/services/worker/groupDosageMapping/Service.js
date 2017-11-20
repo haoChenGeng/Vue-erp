@@ -4,8 +4,8 @@
 
 let  Services = {
     default: {
-        // /biz/t8t-prs-pqm/app
-        name: 'xn8QzCUzoAE7KPVqAowQmXMFkFO90Ky',
+        // /biz/dsp-prs-pqm/app
+        name: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3',
         methods:{
             /////////组合用量关系
 

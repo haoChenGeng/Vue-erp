@@ -16,11 +16,6 @@
             // 检测登陆状态，没有登陆直接跳转登录页
             let uid = Cookie.get('t8t-tc-uid');
             let ticket = Cookie.get('t8t-tc-ticket');
-
-            // 开发环境为了方便开发，不校验登陆
-            if (!(document.domain === 'localhost') && (!uid || !ticket)) {
-                location.href = 'http://tuchat.to8to.com/#/login/'
-            }
         },
         mounted() {
             this.$Progress.finish()

@@ -136,8 +136,8 @@ let Services = {
     },
 
     PRODUCTPKG: {
-        // /biz/t8t-prs-pqm/app
-        name: 'mn4VM8RrR.qw4K2g6R3BtMMBpP21dnc',
+        // /biz/dsp-prs-pqm/app
+        name: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3',
         methods: {
             productPkgTempBaseQuery: 'Y1ijwXxY-pPCppYPgoB9moyPfVjQ7gf_DqM2kE8ZSQBbO66', // views.productPkgTemp.base.query
         }

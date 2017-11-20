@@ -134,9 +134,9 @@
                 this.$refs[formName].resetFields()
             },
             onLogout(){
-                Cookie.remove('t8t-tc-ticket', {domain: '.to8to.com'})
-                Cookie.remove('t8t-tc-uid', {domain: '.to8to.com'})
-                Cookie.remove('t8t-tc-username', {domain: '.to8to.com'})
+                Cookie.remove('t8t-tc-ticket')
+                Cookie.remove('t8t-tc-uid')
+                Cookie.remove('t8t-tc-username')
                 Utils.redirectLoginPage()
             }
         }

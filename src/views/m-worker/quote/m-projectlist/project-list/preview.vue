@@ -401,7 +401,7 @@
                     type:'warning'
                 }).then(()=>{
                     axios({
-                        service: 'oPdv6na46lcZz1bj4ifXO0mD9hkGHlX', // /biz/t8t-prs-pqm/app
+                        service: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3', // /biz/dsp-prs-pqm/app
                         method: '0pZ5re5e_fMzDtfCrdsD_MfaXifbYmYiIp0t8XiuNs2', // views.photoes.updateUsedStatus
                         args: {"statusUpdateDTO":{id: photoesId,projectId:this.yid,photoesType:photoesType,updateName: Cookie.get('t8t-tc-username'), updateBy: Cookie.get('t8t-tc-username'),updateUser:+Cookie.get('t8t-tc-uid')}
                     }}).then((res)=>{
@@ -578,7 +578,7 @@
                         }
                     };
                     axios({
-                        service: 'tk3-KBCQsoum-f7q8V_G1TJAeFK20_g', //  /biz/t8t-prs-pqm/app
+                        service: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3', //  /biz/dsp-prs-pqm/app
                         method: 'vhkkrCb6nGs9nSH4o8I1W10-mVhA_Ze8bOK', // views.photoes.complete
                         args:args
                     }).then((result)=>{
@@ -646,7 +646,7 @@
                         }
                     };
                     axios({
-                        service: 'tk3-KBCQsoum-f7q8V_G1TJAeFK20_g', //  /biz/t8t-prs-pqm/app
+                        service: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3', //  /biz/dsp-prs-pqm/app
                         method: 'OSWF_ngrQI7Sg7yuE5hntmHVtRL2jY1OICD', // views.photoes.unComplete
                         args: args
                     }).then((result) => {

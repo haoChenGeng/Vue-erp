@@ -4,8 +4,8 @@
 
 let  Services = {
     quoteItem:{
-        // /biz/t8t-prs-pqm/app
-        name:'xn8QzCUzoAE7KPVqAowQmXMFkFO90Ky',
+        // /biz/dsp-prs-pqm/app
+        name: 'hMNCl9S9hJbGkcd4dsaHxWWo3cOZFd3',
         methods:{
             //views.quote.item.queryPage
             quoteItemQueryPage: 'QLKWUxAVC54gB7Jh3V1T93YA3qoXK8YA4yFOrH5'
