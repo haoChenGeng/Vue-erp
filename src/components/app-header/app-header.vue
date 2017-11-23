@@ -118,7 +118,6 @@
                                 })
                             } else {
                                 // 修改密码失败
-                                console.log(res.data)
                                 this.$message({
                                     type: 'error',
                                     message: res.data.message

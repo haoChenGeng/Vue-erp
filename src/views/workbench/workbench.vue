@@ -518,7 +518,7 @@ showB: false,
                         'uid': Cookie.get('t8t-tc-uid'),
                         'ticket': Cookie.get('t8t-tc-ticket'),
                         'action': 'dataCenter',
-                        'appName': 'tuchat',
+                        'appName': 'tuchat-pc',
                         'sort': 'WORKBENCH',
                         'chartItems': chartItems
                     };
