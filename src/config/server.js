@@ -1,10 +1,12 @@
 export default {
 
-    //gatewayAddr: 'https://scmgw.to8to.com',
+    // 文件网关 action
     gatewayAddr: 'https://scmgw.to8to.com',
 
-    protocol: 'https',
+    // php网关
+    oldGatewayAddr: 'https://apigw.to8to.com/old',
 
-    host: 'scmgw.to8to.com'
+    // java网关
+    newGatewayAddr: 'https://apigw.to8to.com/cgi',
 
 }

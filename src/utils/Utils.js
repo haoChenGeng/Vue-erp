@@ -7,7 +7,6 @@
  */
 import Config from 'src/config/server.js'
 import Cookie from 'js-cookie'
-import Parser from 'url'
 import axios from 'axios'
 
 let Utils = {
@@ -43,11 +42,10 @@ let Utils = {
         return _url
     },
     getPublicKey(cb) {
-        let _url = '?action=pbs'
+        let _url =  Config.gatewayAddr + '?action=pbs'
 
         axios.defaults.timeout = 20000
         axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-        // axios.defaults.baseURL = _url
         return axios({
             method: 'GET',
             url: _url
@@ -56,17 +54,9 @@ let Utils = {
         })
     },
     getImportURL(service, method) {
-        let path = [service, method].join('/') + '/'
-        return Parser.format({
-            protocol: Config.protocol,
-            host: Config.host,
-            pathname: path,
-            query: {
-                action: "import",
-                uid: Cookie.get('t8t-tc-uid'),
-                ticket: Cookie.get('t8t-tc-ticket')
-            }
-        });
+        let path = '/' + [service, method].join('/') + '/'
+        let _url = Config.gatewayAddr + path + '?action=import&uid=' + Cookie.get('t8t-tc-uid') + '&ticket=' + Cookie.get('t8t-tc-ticket')
+        return _url
     },
     getFullURLById(id) {
         let _url = Config.gatewayAddr + '?file=' + id + '&action=file&uid=' + Cookie.get('t8t-tc-uid') + '&ticket=' + Cookie.get('t8t-tc-ticket')

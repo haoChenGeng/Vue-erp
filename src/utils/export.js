@@ -20,8 +20,7 @@ function buildURL(obj) {
 
     let _url = arr.join('/')
     let ref = encodeURIComponent(window.location.hash.split('#')[1].split('?')[0])
-    let querys = 'action=export&uid=' + Cookie.get('t8t-tc-uid') + '&ticket=' + Cookie.get('t8t-tc-ticket') + '&headers=' + obj.headers + '&args=' + JSON.stringify(args) + '&sorts=' + obj.sorts + '&title=' + (obj.title || "") + '&ref=' + ref
-
+    let querys = 'action=export&uid=' + Cookie.get('t8t-tc-uid') + '&ticket=' + Cookie.get('t8t-tc-ticket') + '&headers=' + encodeURIComponent(obj.headers) + '&args=' + JSON.stringify(args) + '&sorts=' + obj.sorts + '&title=' + (obj.title || "") + '&ref=' + ref
     _url += ('/?' + querys)
 
     return _url

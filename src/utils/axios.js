@@ -8,7 +8,7 @@ import Config from 'src/config/server.js'
 
 axios.defaults.timeout = 20000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-axios.defaults.baseURL = Config.gatewayAddr
+axios.defaults.baseURL = Config.oldGatewayAddr
     // POST传参序列化
 axios.interceptors.request.use((config) => {
         if (config.method === 'post') {
@@ -55,36 +55,6 @@ export default function(obj) {
     }
 
     let url = buildURL(obj)
-
-    return axios({
-        method: 'post',
-        url: url,
-        data: requestData,
-        headers: {'ref-src': window.location.hash.split('#')[1].split('?')[0]}
-    })
-}
-// 鉴权请求
-function buildURLPer(obj) {
-    let arr = [
-        axios.defaults.baseURL,
-        encodeURIComponent(obj.service),
-        encodeURIComponent(obj.method)
-    ];
-
-    let _url = arr.join('/');
-    let querys = 'action=urlRight&' + 'uid=' + Cookie.get('t8t-tc-uid') + '&ticket=' + Cookie.get('t8t-tc-ticket')
-
-    _url += ('/?' + querys)
-
-    return _url
-}
-
-export const axiosPer = function(obj) {
-    var requestData = {
-        args: JSON.stringify(obj.args || {})
-    }
-
-    let url = buildURLPer(obj)
 
     return axios({
         method: 'post',

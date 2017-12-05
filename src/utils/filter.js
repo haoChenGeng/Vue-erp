@@ -40,24 +40,4 @@ Vue.filter('toDate', (value) => {
 	return t;
 })
 
-// 用户id转化name
-Vue.filter('id2Name', (id) => {
-	let args = {
-		id: id,
-
-	}
-	axios({
-		service: Service.ACCOUNT.name,
-		method: Service.ACCOUNT.methods.AC_FIND_BY_ID,
-		args: args
-	})
-	.then((res) => {
-		if (res && res.status == 200) return res.result.name
-		return ""
-	})
-	.catch((res) => {
-		return ""
-	})
-})
-
 export default {}

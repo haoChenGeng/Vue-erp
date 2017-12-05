@@ -12,11 +12,6 @@
     const DOWNLOAD_ADDR = 'http://www.google.cn/chrome/browser/desktop/'
 
     export default {
-        beforeCreate() {
-            // 检测登陆状态，没有登陆直接跳转登录页
-            let uid = Cookie.get('t8t-tc-uid');
-            let ticket = Cookie.get('t8t-tc-ticket');
-        },
         mounted() {
             this.$Progress.finish()
             // 浏览器版本检测提示代码

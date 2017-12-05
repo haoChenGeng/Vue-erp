@@ -1,6 +1,5 @@
 import axios from './axios.js'
 import Service from './Service.js'
-import { axiosPer } from './axios.js'
 // 历史文件，不要在这里加东西了 新接口写在src/services里
 let account = {
     login(args) {
