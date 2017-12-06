@@ -6,5 +6,5 @@ test/e2e/reports
 selenium-debug.log
 /.idea
 /.vscode/
-/dist
+dist/
 src/router/route-dev.js
