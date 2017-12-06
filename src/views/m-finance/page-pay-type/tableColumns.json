@@ -1,0 +1,56 @@
+[
+    {
+        "prop": "code",
+        "label": "编码"
+    },
+    {
+        "prop": "name",
+        "label": "收款类型"
+    },
+    {
+        "prop": "businessTypeName",
+        "label": "业务类型"
+    },
+    {
+        "prop": "debitObjectName",
+        "label": "收款对象"
+    },
+    {
+        "prop": "containDebitObjectId",
+        "label": "收款对象ID",
+        "list": "aOptions"
+    },
+    {
+        "prop": "containDebitObjectName",
+        "label": "收款对象名称",
+        "list": "aOptions"
+    },
+    {
+        "prop": "containProjectId",
+        "label": "项目ID",
+        "list": "aOptions"
+    },
+    {
+        "prop": "status",
+        "label": "状态",
+        "list": "statusOptions"
+    },
+    {
+        "prop": "createName",
+        "label": "创建人"
+    },
+    {
+        "prop": "createTime",
+        "label": "创建时间",
+        "formatter": "dateParser"
+    },
+    {
+        "prop": "updateName",
+        "label": "修改人"
+    },
+    {
+        "prop": "updateTime",
+        "label": "修改时间",
+        "formatter": "dateParser"
+    }
+]

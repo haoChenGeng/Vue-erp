@@ -1,0 +1,67 @@
+{
+    "columns":[
+        {
+            "prop": "id",
+            "label": "编码"
+        },{
+            "prop": "name",
+            "label": "分类名称"
+        },{
+            "prop": "code",
+            "label": "分类编码"
+        },
+        {
+            "prop":"parentName",
+            "label":"父类名称"
+        },
+        {
+            "prop": "isDel",
+            "label": "状态",
+            "list":"status"
+        }
+    ],
+
+    "fields":[
+        {
+            "type": "input",
+            "label":"分类名称",
+            "name":"name"
+        },
+        {
+            "type": "input",
+            "label":"分类编码",
+            "name": "code"
+        },
+        {
+            "type":"select",
+            "label":"状态",
+            "name":"isDel",
+            "selectSourceKey":"statusTypes"
+        }
+    ],
+    "selectSource":{
+        "statusTypes":[
+            {"text":"启用","value":0},
+            {"text":"禁用","value":1}
+        ],
+        "procNames":[]
+    },
+    "commonData": {
+        "status": [
+            {
+                "text": "启用",
+                "value": 0
+            },
+            {
+                "text": "禁用",
+                "value": 1
+            }
+        ]
+    },
+    "breadcrumbData":[
+        { "title": "流程中心"},
+        { "title": "流程管理"},
+        { "title": "流程分类"}
+
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "indexPage" : [
+        { "prop": "id", "label": "岗位编号", "width": "80" },
+        { "prop": "name", "label": "岗位名称" },
+        { "prop": "roleName", "label": "角色名称" },
+        { "prop": "category", "label": "岗位类别", "list":"categoryOptions" },
+        { "prop": "startUsing", "label": "是否启用", "list":"startUseOptions" },
+        { "prop": "createTime", "label": "创建时间","formatter": "dateParser"  },
+        { "prop": "updateTime", "label": "更新时间","formatter": "dateParser"  }
+    ]
+}

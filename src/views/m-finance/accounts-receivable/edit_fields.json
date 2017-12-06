@@ -1,0 +1,72 @@
+{
+	"formData":{
+		    "id":"",
+            "invoiceType":"",
+            "taxPayerType":"",
+            "invoiceTitle":"",
+            "registrationNumber":"",
+            "bankAddress":"",
+            "bankAccount":"",
+            "registeredAddress":"",
+            "registeredPhoneId":"",
+            "registeredPhone":"",
+            "companyCertificationUrl":"",
+            "customerInvoiceInfoUrl":"",
+            "businessLicenceUrl":"",
+            "entrustedCertificateUrl":"",
+            "townId":"",
+            "townIdArr":[],
+            "postAddress":"",
+            "contactPerson":"",
+            "contactPhoneId":"",
+            "contactPhone":"",
+            "status":"",
+            "customerName":""
+	},
+	"rules":{
+           "invoiceType":[
+           		{"type":"number", "required": true, "message": "请选择开票类型", "trigger": "change"}
+           ],
+           "taxPayerType":[
+           		{"type":"number", "required": true, "message": "请选择纳税人类型", "trigger": "change"}
+           ],
+           "invoiceTitle":[
+           	    {"required": true, "message": "请填写发票抬头", "trigger": "blur"},
+           	    { "min": 1, "max": 128, "message": "发票抬头长度不能超过128个字符", "trigger": "blur" }
+           ],
+           "townIdArr":[
+           	    {"type":"array", "required": true, "message": "请选择邮件区域", "trigger": "change"}
+           ],
+           "postAddress":[
+                {"required": true, "message": "请填写具体地址", "trigger": "blur"},
+                { "min": 1, "max": 128, "message": "具体地址长度不能超过128个字符", "trigger": "blur" }
+           ],
+           "contactPerson":[
+           	    {"required": true, "message": "请填写联系人", "trigger": "blur"},
+           	    { "min": 1, "max": 50, "message": "联系人长度不能超过50个字符", "trigger": "blur" }
+           ],
+           "customerName":[
+                {"required": true, "message": "请填写客户名称", "trigger": "blur"},
+                { "min": 1, "max": 50, "message": "客户名称长度不能超过50个字符", "trigger": "blur" }
+           ],
+           "bankAddress":[
+           		{"required": true, "message": "请填写开户行", "trigger": "blur"},
+           		{ "min": 1, "max": 50, "message": "开户行长度不能超过50个字符", "trigger": "blur" }
+           ],
+           "registeredAddress":[
+           		{"required": true, "message": "请填写注册地址", "trigger": "blur"},
+           		{ "min": 1, "max": 128, "message": "注册地址长度不能超过128个字符", "trigger": "blur" }
+           ],
+           "companyCertificationUrl":[
+           		{"required": true, "message": "请上传一般纳税人公司证明"}
+           ],
+           "customerInvoiceInfoUrl":[
+           		{"required": true, "message": "请上传公司客户开票信息表"}
+           ],
+           "businessLicenceUrl":[
+           		{"required": true, "message": "请上传公司营业执照复印件"}
+           ]
+	}
+}
+
+              	
