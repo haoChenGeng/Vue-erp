@@ -8,7 +8,6 @@ import Config from 'src/config/server.js'
 
 axios.defaults.timeout = 20000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-axios.defaults.baseURL = Config.oldGatewayAddr
     // POST传参序列化
 axios.interceptors.request.use((config) => {
         if (config.method === 'post') {
@@ -36,7 +35,7 @@ axios.interceptors.response.use((res) => {
 
 function buildURL(obj) {
     let arr = [
-        axios.defaults.baseURL,
+        Config.oldGatewayAddr,
         encodeURIComponent(obj.service),
         encodeURIComponent(obj.method)
     ];
