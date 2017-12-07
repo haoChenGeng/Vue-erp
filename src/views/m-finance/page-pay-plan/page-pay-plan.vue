@@ -252,7 +252,7 @@
                                 selectIds.push(selections[i].id)
                             }
                             this.$router.push({
-                                path:'/finance/page-pay-plan/pay',
+                                path:'/tuchat-finance/page-pay-plan/pay',
                                 query:{selectIds:selectIds,organization:selections[0].finOrgId}
                             })
                         }
@@ -269,7 +269,7 @@
                             return
                         };
                         selectIds.push(selections[0].id)
-                        this.$router.push({path:'/finance/page-pay-plan/pay',
+                        this.$router.push({path:'/tuchat-finance/page-pay-plan/pay',
                             query:{
                                 selectIds:selectIds,
                                 organization: selections[0].finOrgId
@@ -317,7 +317,7 @@
                 } else if (selections.length > 1) {
                     this.$message.error('请对单条数据进行操作。')
                 }else{
-                    this.$router.push({path:'/finance/page-pay-plan/see',query:{rowId:selections[0].id}})
+                    this.$router.push({path:'/tuchat-finance/page-pay-plan/see',query:{rowId:selections[0].id}})
                 }
             }
         }

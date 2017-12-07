@@ -237,7 +237,7 @@
                 })
             },
             btnCancleClick() {
-                this.$router.push({path: '/finance/page-payment-method-distribution'})
+                this.$router.push({path: '/tuchat-finance/page-payment-method-distribution'})
             },
             //新增提交
             addPayMethods(formData){

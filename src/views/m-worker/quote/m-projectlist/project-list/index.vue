@@ -351,7 +351,7 @@
                     })
 
                 }else{
-                    this.$router.push({path:'/worker/quote-order-detail',query:{'yid':yid}})
+                    this.$router.push({path:'/tuchat-worker/quote-order-detail',query:{'yid':yid}})
                 }
             },
 

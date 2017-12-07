@@ -26,7 +26,7 @@ const accountBalance = resolve => require(['src/views/m-finance/page-acc-account
 const accountBalanceDetail = resolve => require(['src/views/m-finance/page-acc-account-balance/accAccountBalance-detail.vue'], resolve)
 
 const routes = [{
-    path: '/finance',
+    path: '/tuchat-finance',
     component: Console,
     children: [
         { path: 'accAccountConfig-list', meta: { isFulldialog: false, title: '基础账户配置' }, component: AccAccountConfig },

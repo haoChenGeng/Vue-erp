@@ -740,7 +740,7 @@
                 this.$TCS.addTag('erp_scm_015002003001');
                 editForm = true
                 this.$router.push({
-                    path: '/sale-manage/page-potential-owner-list/edit',
+                    path: '/tuchat-sale-manage/page-potential-owner-list/edit',
                     query: {id: this.formData.id,type:'edit'}
                 })
             },
@@ -1176,7 +1176,7 @@
 
             },
             closeDialog() {
-                this.$router.push({ path: '/sale-manage/page-potential-owner-list'})
+                this.$router.push({ path: '/tuchat-sale-manage/page-potential-owner-list'})
                 this.$emit('close')
             },
 

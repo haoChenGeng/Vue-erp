@@ -61,7 +61,7 @@
                 orderCode:null,
 
                 // 详情页路由地址
-                detailRoute: '/delivery/page-duration-detail',
+                detailRoute: '/tuchat-delivery/page-duration-detail',
                 // service 和 method 目前需要加密
                 service: Service.BROADCAST.name,
                 method: Service.BROADCAST.methods.BROADCASTDURATIONQUERYPAGE,

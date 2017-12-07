@@ -342,7 +342,7 @@ export default {
 
         },
         closeDialog() {
-            this.$router.push({path: '/commodule/templet'})
+            this.$router.push({path: '/tuchat-commodule/templet'})
         },
         version()
         {

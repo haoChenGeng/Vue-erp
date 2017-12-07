@@ -12,7 +12,7 @@ const PageVoucherTemplateAdd = resolve => require(['src/views/m-finance/page-vou
 const PageVoucherTemplateEdit = resolve => require(['src/views/m-finance/page-voucher-template/voucherTemplate-edit.vue'], resolve)
 
 const routes = [{
-    path: '/finance',
+    path: '/tuchat-finance',
     component: Console,
     children: [
         { path: 'page-voucher-template', meta: { isFulldialog: false,title: '凭证模板设置' }, component: PageVoucherTemplate },

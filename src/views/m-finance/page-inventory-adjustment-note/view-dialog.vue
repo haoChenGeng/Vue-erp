@@ -252,7 +252,7 @@
                                             confirmButtonText: '知道了',
                                             confirmButtonClass: 'is-plain'
                                         })
-                                        this.$router.push({ path: '/finance/page-purchase-invoice'})
+                                        this.$router.push({ path: '/tuchat-finance/page-purchase-invoice'})
                                         this.$emit('close')
                                     }
                                     else{

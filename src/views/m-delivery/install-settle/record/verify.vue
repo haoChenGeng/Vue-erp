@@ -484,7 +484,7 @@
                                     message: '提交成功',
                                     callback:()=>{
                                         this.$router.push({
-                                            path: '/delivery/settle-record/install-list',
+                                            path: '/tuchat-delivery/settle-record/install-list',
                                             query: {refresh: 1}
                                         })
                                     }

@@ -6,7 +6,7 @@ const CategorySearchTemplateBase = resolve => require(['src/views/m-worker/quote
 const routes = [
     //
     {
-        path: '/categorysearch',
+        path: '/tuchat-categorysearch',
         component: Console,
         children: [
             { path: 'showlist', meta: { title: '选品维度',isFulldialog:false }, component: CategorySearchTemplateBase},

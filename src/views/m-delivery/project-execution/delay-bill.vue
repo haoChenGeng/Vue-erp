@@ -346,7 +346,7 @@
                     return false;
                 }
                 this.$router.push({
-                    path: '/delivery/delay-detail',
+                    path: '/tuchat-delivery/delay-detail',
                     query:{
                         billCode: row.billCode
                     }

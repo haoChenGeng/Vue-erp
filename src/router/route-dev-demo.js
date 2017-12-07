@@ -8,7 +8,7 @@ const Console = resolve => require(['src/views/console/console.vue'], resolve)
 
 const routes = [
     // {
-    //     path: '/system',
+    //     path: '/tuchat-system',
     //     component: Console,
     //     children: [
     //         {path: 'permission', meta: { isFulldialog: false, title: '权限管理'}, component: permission}

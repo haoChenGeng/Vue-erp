@@ -134,7 +134,7 @@
             return {
                 templateName: null,
                 isLoading: false,
-                sourceItemRoute: '/finance/page-voucher-order/detail/sourceItem',
+                sourceItemRoute: '/tuchat-finance/page-voucher-order/detail/sourceItem',
                 id: null,
                 createUser: parseInt(Cookie.get('t8t-tc-uid')),
                 createName: Cookie.get('t8t-tc-username'),
@@ -567,7 +567,7 @@
                                                     confirmButtonClass: 'is-plain',
                                                 })
                                                 this.dialogVisible = false
-                                                this.$router.push('/finance/page-voucher-template')
+                                                this.$router.push('/tuchat-finance/page-voucher-template')
                                             } else {
                                                 this.isLoading = false
                                                 this.$message.error(res.data.message)
@@ -809,7 +809,7 @@
             },
             closeDialog(){
                 this.dialogVisible = false
-                this.$router.push({path: '/finance/page-voucher-template'})
+                this.$router.push({path: '/tuchat-finance/page-voucher-template'})
             }
         }
     }

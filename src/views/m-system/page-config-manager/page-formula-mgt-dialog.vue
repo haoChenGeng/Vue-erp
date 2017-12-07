@@ -666,7 +666,7 @@
             },
             closeDialog() {
                 // 填写对应的路由
-                this.$router.push({ path: '/system/formula-management' })
+                this.$router.push({ path: '/tuchat-system/formula-management' })
             },
             closeDialog1() {
                 this.dialogVisible = false
@@ -1345,7 +1345,7 @@
                         }).then((res) => {
                             if (res.data.status === 200) {
                                 this.$message('公式创建成功')
-                                this.$router.push('/system/formula-management')
+                                this.$router.push('/tuchat-system/formula-management')
                             } else {
                                 this.$message.error('公式创建失败')
                             }
@@ -1377,7 +1377,7 @@
                         }).then((res) => {
                             if (res.data.status === 200) {
                                 this.$message('表达式创建成功')
-                                this.$router.push('/system/formula-management')
+                                this.$router.push('/tuchat-system/formula-management')
                             } else {
                                 this.$message.error('表达式创建失败')
                             }

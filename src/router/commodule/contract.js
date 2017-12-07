@@ -10,7 +10,7 @@ const TrafficSee = resolve => require(['src/views/m-commodule/contract/traffic/t
 const ProcessSee = resolve => require(['src/views/m-commodule/contract/traffic/trafficProcess.vue'], resolve)
 
 const routes = [{
-    path: '/commodule',
+    path: '/tuchat-commodule',
     component: Console,
     children: [
         { path: 'certification', meta: { isFulldialog: false, title: '实名认证库' }, component: Certification },

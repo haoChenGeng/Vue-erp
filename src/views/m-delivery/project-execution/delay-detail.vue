@@ -145,7 +145,7 @@
         methods:{
             closeDialog(){
                 this.$router.push({
-                    path: '/delivery/delay-bill'
+                    path: '/tuchat-delivery/delay-bill'
                 });
             },
             onTopHide(){

@@ -362,7 +362,7 @@
             //查看详情
             showDetail: function (id, name) {
                 this.$router.push({
-                    path: '/delivery/project-detail',
+                    path: '/tuchat-delivery/project-detail',
                     query: {id: id}
                 })
             },
@@ -455,7 +455,7 @@
                     return
                 }
                 this.$router.push({
-                    path: '/delivery/template-ref',
+                    path: '/tuchat-delivery/template-ref',
                     query: {refId: rows[0]['id'], scheduleName: rows[0]['name']}
                 })
                 // this.$msgbox({

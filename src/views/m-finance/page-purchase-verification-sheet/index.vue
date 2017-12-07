@@ -78,7 +78,7 @@
             onTableRDC(row) {
                 this.curRow = row
 //                this.showDialog('view')
-                this.$router.push({path: '/finance/page-purchase-verification-sheet/view', query: {id: row.id}})
+                this.$router.push({path: '/tuchat-finance/page-purchase-verification-sheet/view', query: {id: row.id}})
             },
 //            onView(symbol, event) {
 //                if(!this.selRows){
@@ -94,7 +94,7 @@
                 if(!this.curRow){
                     return this.$message("请勾选单据后再试。")
                 }
-                this.$router.push({path: '/finance/page-purchase-verification-sheet/view', query: {id: this.curRow.id}})
+                this.$router.push({path: '/tuchat-finance/page-purchase-verification-sheet/view', query: {id: this.curRow.id}})
             },
             antiVerificationClick (symbol, event) {
                 this.$TCS.addTag('erp_finance_007008006002')

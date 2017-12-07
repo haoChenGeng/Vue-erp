@@ -156,7 +156,7 @@
             //查看详情
             showDetail: function(id, name){
                 this.$router.push({
-                    path: '/delivery/template-detail',
+                    path: '/tuchat-delivery/template-detail',
                     query:{id: id, name:name}
                 })
             },
@@ -249,7 +249,7 @@
                     this.$message.error('只能查看一行！')
                     return
                 }
-                this.$router.push({path: '/delivery/template-ref', query:{refId:rows[0]['id'], scheduleName:rows[0]['name']}})
+                this.$router.push({path: '/tuchat-delivery/template-ref', query:{refId:rows[0]['id'], scheduleName:rows[0]['name']}})
                 // this.$msgbox({
                 //     title: '消息',
                 //     type: 'success',

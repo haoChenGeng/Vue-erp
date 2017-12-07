@@ -9,7 +9,7 @@ const PageVirtualCardRmit = resolve => require(['src/views/m-finance/page-virtua
 const VirtualCardConfigCreate = resolve => require(['src/views/m-finance/page-virtual-card-config/card-config-dialog.vue'], resolve)
 
 const routes = [{
-    path: '/finance',
+    path: '/tuchat-finance',
     component: Console,
     children: [
         { path: 'page-virtual-card-config', meta: { isFulldialog: false, title: '银行虚拟卡配置' }, component: PageVitualCardConfig },

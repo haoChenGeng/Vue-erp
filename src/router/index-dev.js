@@ -19,15 +19,14 @@ import dev from './route-dev.js'
 
 let routes = []
 
-// 开发环境跳转登录页
 
-if (debug === true) {
-    routes = routes.concat(login)
-    routes.push({
-        path: '/',
-        redirect: '/login'
-    })
-}
+routes = routes.concat(login)
+
+// 只输入域名是，跳转到/index
+routes.push({
+    path: '/',
+    redirect: '/index'
+})
 
 routes = routes.concat(
     forbidden,

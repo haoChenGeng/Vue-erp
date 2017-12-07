@@ -7,7 +7,7 @@ const SpaceConfigTemplateBase = resolve => require(['src/views/m-worker/quote/m-
 const routes = [
     //交付
     {
-        path: '/spaceconfig',
+        path: '/tuchat-spaceconfig',
         component: Console,
         children: [
             { path: 'showlist', meta: { title: '空间配置',isFulldialog:false }, component: SpaceConfigTemplateBase},

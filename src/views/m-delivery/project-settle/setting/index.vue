@@ -218,7 +218,7 @@
             },
 			add(){
 				this.$router.push({
-					path: '/delivery/settle-setting/detail',
+					path: '/tuchat-delivery/settle-setting/detail',
                     query: {type: 'add'}
 				})
 			},
@@ -232,7 +232,7 @@
                     this.$message.error('已作废的配置不能编辑！');
                 }else{
                     this.$router.push({
-                        path: '/delivery/settle-setting/detail',
+                        path: '/tuchat-delivery/settle-setting/detail',
                         query: {id: selections[0].id,type: 'edit'}
                     })
                 }
@@ -245,7 +245,7 @@
                     this.$message.error('只能选择一行进行查看！');
                 }else{
                     this.$router.push({
-                        path: '/delivery/settle-setting/detail',
+                        path: '/tuchat-delivery/settle-setting/detail',
                         query: {id: selections[0].id,type: 'view'}
                     })
                 }

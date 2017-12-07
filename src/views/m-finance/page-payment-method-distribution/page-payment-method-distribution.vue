@@ -47,7 +47,7 @@
         methods: {
             //点击新增按钮
             btnAddClick() {
-                this.$router.push({path: '/finance/page-payment-method-distribution/create', query: {editType: "add"}})
+                this.$router.push({path: '/tuchat-finance/page-payment-method-distribution/create', query: {editType: "add"}})
             },
             btnEditClick() {
                 // 编辑
@@ -62,7 +62,7 @@
                     this.rowId = selections[0].id
 
                     this.$router.push({
-                        path: '/finance/page-payment-method-distribution/create',
+                        path: '/tuchat-finance/page-payment-method-distribution/create',
                         query: {id: this.rowId, editType: "edit"}
                     })
                 }

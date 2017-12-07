@@ -189,7 +189,7 @@
                     }],
                     receiptModeOptions:[]
                 },
-                eReceipt: '/finance/page-pay-bills/e-receipt'
+                eReceipt: '/tuchat-finance/page-pay-bills/e-receipt'
             }
         },
         created() {
@@ -237,7 +237,7 @@
             //新增
             onBtn1() {
                 this.$TCS.addTag('erp_finance_007005002001')
-                this.$router.push({path: '/finance/page-pay-bills/create'})
+                this.$router.push({path: '/tuchat-finance/page-pay-bills/create'})
             },
             //查看
             onBtn2() {
@@ -460,7 +460,7 @@
                 // if (this.checkSelection() === false) return false
                 // let selectRow = this.$refs['t8ttable'].getSelectRows()[0]
                 // this.$router.push({ path: 'page-pay-bills/update', query: { id: selectRow.receiptOrderId } })
-                this.$router.push({path: '/finance/page-pay-bills/create', query: {mode: 'tz'}})
+                this.$router.push({path: '/tuchat-finance/page-pay-bills/create', query: {mode: 'tz'}})
             },
             // 核销
             onBtn7() {
@@ -492,7 +492,7 @@
                 }
                 // 审核通过状态并且非已核销
                 this.$router.push({
-                    path: '/finance/page-pay-bills/verify',
+                    path: '/tuchat-finance/page-pay-bills/verify',
                     query: {
                         projectId: selectRow.projectId,
                         receiptRoleId: selectRow.receiptRoleId,

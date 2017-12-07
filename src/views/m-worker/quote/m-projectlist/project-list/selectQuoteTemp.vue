@@ -154,7 +154,7 @@
                         //探测可不可以报价
                         methods.initQuoteOrderDetail(this.yid, selection.id, this.projectInfo.area, this.projectInfo.houseTypeId, +Cookie.get('t8t-tc-uid')).then((res) => {
                             _this.$router.push({
-                                path:'/worker/quote-order-detail',
+                                path:'/tuchat-worker/quote-order-detail',
                                 query:{
                                     'area': _this.projectInfo.area,
                                     'houseTypeId': _this.projectInfo.houseTypeId,

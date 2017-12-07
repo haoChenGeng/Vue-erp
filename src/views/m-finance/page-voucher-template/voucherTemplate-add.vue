@@ -184,7 +184,7 @@
                 },
                 createUser: parseInt(Cookie.get('t8t-tc-uid')),
                 createName: Cookie.get('t8t-tc-username'),
-                sourceItemRoute: '/finance/page-voucher-order/detail/sourceItem',
+                sourceItemRoute: '/tuchat-finance/page-voucher-order/detail/sourceItem',
                 id: null,
                 editMode: 'cell',
                 accountId: +Cookie.get('t8t-tc-uid'),
@@ -662,7 +662,7 @@
                                                     confirmButtonClass: 'is-plain'
                                                 })
                                                 this.dialogVisible = false
-                                                this.$router.push('/finance/page-voucher-template')
+                                                this.$router.push('/tuchat-finance/page-voucher-template')
                                             } else {
                                                 this.isLoading = false
                                                 this.$message.error(res.data.message)
@@ -696,11 +696,11 @@
             //取消
             cancel(){
                 this.dialogVisible = false
-                this.$router.push('/finance/page-voucher-template')
+                this.$router.push('/tuchat-finance/page-voucher-template')
             },
             closeDialog(){
                 this.dialogVisible = false
-                this.$router.push('/finance/page-voucher-template')
+                this.$router.push('/tuchat-finance/page-voucher-template')
             },
 
             // 模板分录新增

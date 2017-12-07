@@ -35,15 +35,11 @@ import om from './operationdata/index.js'
 
 let routes = []
 
-// 开发环境跳转登录页
-
-if (debug === true) {
-    routes = routes.concat(login)
-    routes.push({
-        path: '/',
-        redirect: '/login'
-    })
-}
+// 只输入域名是，跳转到/index
+routes.push({
+    path: '/',
+    redirect: '/index'
+})
 
 routes = routes.concat(
     forbidden,
@@ -68,9 +64,10 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     // 不需要鉴权页面可以直接跳转
-    if (to.meta.auth === false || debug === true) {
+    if (to.meta.auth === false || ['/login/','/login'].indexOf(to.path) > -1 || debug === true) {
         return next()
     }
+
     // 鉴权页面
     let args = {
         ticket: Cookie.get('t8t-tc-ticket'),
@@ -104,6 +101,7 @@ router.afterEach(route => {
 })
 
 function routerAlert(route) {
+    console.log(route)
     if (debug && route.meta.auth !== false && route.meta.isFulldialog !== true && route.meta.isFulldialog !== false) {
         let _url = 'http://192.168.1.156:3000/kai-fa-zhi-nan/lu-you-shi-yong-gui-fan.html'
         Vue.prototype.$confirm('此页面路由写法不规范<br><a href="' + _url + '" target="_blank">到这里查看规范</a>', '警告', {

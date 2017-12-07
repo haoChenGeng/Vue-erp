@@ -12,7 +12,7 @@ const version = resolve => require(['src/views/m-worker/quote/packtemp/version.v
 
 
 const routes = [{
-        path: '/worker',
+        path: '/tuchat-worker',
         component: Console,
         children: [
             { path: 'quote-packtemp-index', component: index, meta: { title: '产品包模板',isFulldialog:false } },

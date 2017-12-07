@@ -37,7 +37,7 @@
         data () {
             return {                
                 // 详情页路由地址
-                detailRoute: '/delivery/page-surcharge-detail',
+                detailRoute: '/tuchat-delivery/page-surcharge-detail',
                 // service 和 method 目前需要加密
                 service: Service.SURCHARGE.name,
                 method: Service.SURCHARGE.methods.QUERYPAGE,

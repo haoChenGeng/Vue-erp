@@ -250,7 +250,7 @@
                 // 附表tab默认激活页
                 subActiveTab: '',
                 // 点击关闭后的返回route
-                goBackRoute: '/delivery/demand-list',
+                goBackRoute: '/tuchat-delivery/demand-list',
                 sourceMap: {},
                 columns: {},
                 remarkSource:{

@@ -2069,8 +2069,8 @@
                 //this.$router.go(0)
                 this.closeSelectQuoteItemDialog()
                 this.dialogVisible = false
-                //this.$router.push('/worker/quote-packtemp-index')
-                this.$router.push({path:'/worker/quote-packtemp-index'})
+                //this.$router.push('/tuchat-worker/quote-packtemp-index')
+                this.$router.push({path:'/tuchat-worker/quote-packtemp-index'})
             },
             submitSearch(objForm) {
 

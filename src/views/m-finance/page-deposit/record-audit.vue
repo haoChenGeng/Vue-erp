@@ -126,7 +126,7 @@
         methods: {
             backRoute(){
                 this.$router.push({
-                    path: '/finance/record-list'
+                    path: '/tuchat-finance/record-list'
                 })
             },
             doSubmit(){

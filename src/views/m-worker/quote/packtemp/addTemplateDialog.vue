@@ -187,7 +187,7 @@
                         packtemp.createTemp(formData).then((res) => {
                             if (res.data.status === 200) {
                                 let tempCode = res.data.result // 创建的insertid()
-                                this.$router.push({ path: '/worker/quote-packtemp-view',query:{'tempCode':tempCode}})
+                                this.$router.push({ path: '/tuchat-worker/quote-packtemp-view',query:{'tempCode':tempCode}})
                             } else {
                                 this.canSubmit = true
                                 this.$msgbox(mb(res.data.message, 'error'))

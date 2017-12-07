@@ -7,7 +7,7 @@ const loginLog = resolve => require(['src/views/m-om/system/loginLog.vue'], reso
 
 const routes = [
     {
-        path: '/om',
+        path: '/tuchat-om',
         component: Console,
         children: [
             { path: 'loginLog', meta:{isFulldialog: false,title: '登录日志'}, component: loginLog}

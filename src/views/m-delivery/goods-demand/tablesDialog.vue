@@ -222,7 +222,7 @@
                 }
             },
             closeDialog() {
-//                this.$router.push({ path: '/delivery/demand-list'})
+//                this.$router.push({ path: '/tuchat-delivery/demand-list'})
                 this.$emit('close')
             },
             closeBtn() {

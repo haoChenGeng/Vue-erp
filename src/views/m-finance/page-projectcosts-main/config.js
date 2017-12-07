@@ -25,7 +25,7 @@ export const columns = [
             type:'hyperlink',
             onClick: (val, row, col, tab) => {
                 tab.$router.push({
-                    path: '/finance/projectCosts-detail',
+                    path: '/tuchat-finance/projectCosts-detail',
                     query: {
                         id: row.id,
                         projectId: row.projectId,

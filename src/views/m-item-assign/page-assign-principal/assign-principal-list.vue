@@ -113,7 +113,7 @@
                 if (selectRow == null)
                     return
                 // 派单-交付经理
-                this.$refs['list-view'].doView('/itemAssign/assign-principal-delivery-page', 'projectId')
+                this.$refs['list-view'].doView('/tuchat-itemAssign/assign-principal-delivery-page', 'projectId')
             },
             assignProject: function (row, abc) {
                 // 判断是否已分配交付经理
@@ -125,7 +125,7 @@
                     return
                 }
                 // 派单-工程管家
-                this.$refs['list-view'].doView('/itemAssign/assign-principal-project-page', 'projectId')
+                this.$refs['list-view'].doView('/tuchat-itemAssign/assign-principal-project-page', 'projectId')
             },
             assignItemManager: function () {
                 // 判断是否分配交付经理、工程管家
@@ -140,7 +140,7 @@
                     return
                 }
                 // 派单-项目经理
-                this.$refs['list-view'].doView('/itemAssign/assign-principal-item-page', 'projectId')
+                this.$refs['list-view'].doView('/tuchat-itemAssign/assign-principal-item-page', 'projectId')
             },
             assignCustomerService: function () {
                 // 判断合同审核是否审核通过
@@ -153,7 +153,7 @@
                     return
                 }
                 // 派单-项目经理
-                this.$refs['list-view'].doView('/itemAssign/assign-principal-customer-service-page', 'projectId')
+                this.$refs['list-view'].doView('/tuchat-itemAssign/assign-principal-customer-service-page', 'projectId')
             },
             getSelectRowData: function () {
                 let rows = this.$refs['list-view'].getTableInstance().getSelectRows()

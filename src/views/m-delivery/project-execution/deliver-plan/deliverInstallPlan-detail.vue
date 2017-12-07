@@ -350,7 +350,7 @@ import Utils from 'src/utils/Utils.js'
             },
             closeDialog() {
                 // 填写对应的路由
-                this.$router.push({ path: '/delivery/distribution-plan' })
+                this.$router.push({ path: '/tuchat-delivery/distribution-plan' })
             },
             handleCellClick(row, column, cell, event){
                 if(column.property =="attachName"){

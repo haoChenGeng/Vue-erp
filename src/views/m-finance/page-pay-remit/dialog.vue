@@ -252,7 +252,7 @@ export default {
             return rows
         },
         closeDialog() {
-            this.$router.push({ path: '/finance/page-pay-remit'})
+            this.$router.push({ path: '/tuchat-finance/page-pay-remit'})
             this.$emit('close')
         },
         //处理选择行变化

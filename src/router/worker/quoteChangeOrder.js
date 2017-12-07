@@ -8,7 +8,7 @@ const detail = resolve => require(['src/views/m-worker/quote/quoteChangeOrder/de
 const list = resolve => require(['src/views/m-worker/quote/quoteChangeOrder/list.vue'], resolve)
 const routes = [
     {
-        path: '/worker',
+        path: '/tuchat-worker',
         component: Console,
         children: [
             {

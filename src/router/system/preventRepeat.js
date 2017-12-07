@@ -5,7 +5,7 @@ const Console = resolve => require(['src/views/console/console.vue'], resolve)
 const PagePreventRepeat = resolve => require(['src/views/m-system/page-preventRepeat/page-prevent-repeat.vue'], resolve)
 
 const routes = [{
-    path: '/system',
+    path: '/tuchat-system',
     component: Console,
     children: [
         { path: 'page-prevent-repeat', meta: { isFulldialog: false,title: '业务防重复配置' }, component: PagePreventRepeat }

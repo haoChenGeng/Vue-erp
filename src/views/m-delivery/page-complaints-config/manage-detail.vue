@@ -199,7 +199,7 @@
                 // 附表tab默认激活页
                 subActiveTab: '',
                 // 点击关闭后的返回route
-                goBackRoute: '/delivery/complaints-manage-config',
+                goBackRoute: '/tuchat-delivery/complaints-manage-config',
                 sourceMap: {},
                 columns: {},
                 manageToolbarList:[],

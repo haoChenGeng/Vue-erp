@@ -123,7 +123,7 @@
         methods: {
             //点击新增按钮
             btnAddClick() {
-                this.$router.push({path: '/finance/page-virtual-card-config/create', query: {editType: "add"}})
+                this.$router.push({path: '/tuchat-finance/page-virtual-card-config/create', query: {editType: "add"}})
             },
             btnEditClick() {
                 // 点击编辑按钮
@@ -135,7 +135,7 @@
                 } else {
                     let selectRow = this.$refs['t8tTable'].getSelectRows()[0]
                     this.$router.push({
-                        path: '/finance/page-virtual-card-config/edit',
+                        path: '/tuchat-finance/page-virtual-card-config/edit',
                         query: {id: selectRow.id, editType: "edit"}
                     })
 

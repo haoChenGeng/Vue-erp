@@ -46,7 +46,7 @@
                 columns: config.columns,
                 isLoading: false,
                 // 详情页路由地址
-                detailRoute: '/finance/projectCosts-detail',
+                detailRoute: '/tuchat-finance/projectCosts-detail',
                 // service 和 method 目前需要加密
                 service: Service.PROJECT_COSTS.name, // /biz/t8t-fi-pca/app
                 method: Service.PROJECT_COSTS.methods.projectCostsQueryPage, // views.projectCosts.queryPage
@@ -119,7 +119,7 @@
                 } else {
                     let selectRow = this.$refs['t8tTable'].getSelectRows()[0]
                     this.$router.push({
-                        path: '/finance/projectCosts-detail',
+                        path: '/tuchat-finance/projectCosts-detail',
                         query: {
                             id: selectRow.id,
                             projectId:selectRow.projectId,

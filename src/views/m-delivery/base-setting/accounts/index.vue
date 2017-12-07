@@ -110,13 +110,13 @@
         },
         // watch:{
         //     $route(val){
-        //         if(val.path == '/delivery/base-setting/accounts-index'){
+        //         if(val.path == '/tuchat-delivery/base-setting/accounts-index'){
         //             this.$refs['list-view'].getTableInstance().reloadTable();
         //         }
         //     }
         // },
         activated(){
-            if(this.$route.path == '/delivery/base-setting/accounts-index'){
+            if(this.$route.path == '/tuchat-delivery/base-setting/accounts-index'){
                 this.$refs['list-view'].getTableInstance().reloadTable();
             }
         },
@@ -133,7 +133,7 @@
             },
             add(){
                 this.$router.push({
-                    path: '/delivery/base-setting/accounts-detail?type=add'
+                    path: '/tuchat-delivery/base-setting/accounts-detail?type=add'
                 })
             },
             edit(){
@@ -144,7 +144,7 @@
                     this.$message.error('只能选择一行进行操作！')
                 } else{
                     this.$router.push({
-                        path: '/delivery/base-setting/accounts-detail?type=edit&id='+selIds[0]
+                        path: '/tuchat-delivery/base-setting/accounts-detail?type=edit&id='+selIds[0]
                     })
                 }
             },
@@ -156,7 +156,7 @@
                     this.$message.error('只能选择一行进行操作！')
                 } else{
                     this.$router.push({
-                        path: '/delivery/base-setting/accounts-detail?type=view&id='+selIds[0]
+                        path: '/tuchat-delivery/base-setting/accounts-detail?type=view&id='+selIds[0]
                     })
                 }
             },

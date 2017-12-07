@@ -373,7 +373,7 @@
             showDialog(id, type) {
                 this.$router.push({
                     query: {id: id, mode: type},
-                    path: '/system/formula-management-dialog'
+                    path: '/tuchat-system/formula-management-dialog'
                 })
             },
             onView() {

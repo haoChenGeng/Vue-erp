@@ -70,7 +70,7 @@
         },
         methods:{
             authorize(){
-                this.$router.push({path:'/procenter/page-pro-devolution/create',query:{treeData:JSON.stringify(this.treeData)}})
+                this.$router.push({path:'/tuchat-procenter/page-pro-devolution/create',query:{treeData:JSON.stringify(this.treeData)}})
             },
             view_detail(){ //查看授权详情
 

@@ -45,7 +45,7 @@
         data () {
             return {
                 // 详情页路由地址
-                detailRoute: '/delivery/sub-account/contractBill-detail',
+                detailRoute: '/tuchat-delivery/sub-account/contractBill-detail',
                 service: Service.PSSUB.name,
                 method: Service.PSSUB.methods.contractBillQueryPage,
                 deleteMethod: 'g8BjoP9pcua5Rdf5fUcTthKK_hIR9JNofIq',

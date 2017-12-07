@@ -5,7 +5,7 @@ const SignManageAdd = resolve => require(['src/views/m-worker/solution/sign-mana
 const SignManagePreview = resolve => require(['src/views/m-worker/solution/sign-manage/agreenment-preview.vue'], resolve)
 
 const routes = [{
-    path: '/worker',
+    path: '/tuchat-worker',
     component: Console,
     children: [
         { path: 'sign-manage', meta: { title: '签约管理',isFulldialog:false }, component: SignManage },

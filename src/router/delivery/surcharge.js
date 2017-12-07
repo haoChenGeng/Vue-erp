@@ -6,7 +6,7 @@ const PageSurchargeApprove = resolve => require(['src/views/m-delivery/page-surc
 const routes = [
     //工期配置
     {
-        path: '/delivery',
+        path: '/tuchat-delivery',
         component: Console,
         children: [
             { path: 'page-surcharge-list', meta: { isFulldialog:false,title: '附加费管理' }, component: PageSurchargeList},

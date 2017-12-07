@@ -431,7 +431,7 @@
 
             //查看
             viewClick() {
-                this.$router.push({path: '/sale-manage/page-potential-owner-list/view', query: {id: this.curRow.id}})
+                this.$router.push({path: '/tuchat-sale-manage/page-potential-owner-list/view', query: {id: this.curRow.id}})
             },
             //搜索提交
             submitSearch(obj) {

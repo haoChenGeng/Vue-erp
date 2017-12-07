@@ -150,8 +150,8 @@
         data() {
             return {
                 isDialogShow: true,
-                goBackRoute: '/worker/sign-manage',
-                previewRoute: '/worker/sign-manage/preview',
+                goBackRoute: '/tuchat-worker/sign-manage',
+                previewRoute: '/tuchat-worker/sign-manage/preview',
                 mainActiveTab: 'tab1',
                 id: null,
                 projectId: null,

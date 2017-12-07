@@ -316,7 +316,7 @@
                 }
                 else {
                     this.$router.push({
-                        path: '/finance/record-list/record-audit',
+                        path: '/tuchat-finance/record-list/record-audit',
                         query: {
                             procInsId: selection[0].proInsId,
                             taskId: 1
@@ -337,7 +337,7 @@
                 }
                 else {
                     this.$router.push({
-                        path: '/finance/record-list/approval',
+                        path: '/tuchat-finance/record-list/approval',
                         query: {
                             id: selection[0].id
                         }
@@ -346,7 +346,7 @@
             },
             onAdd(){
                 this.$router.push({
-                    path: '/finance/record-list/create',
+                    path: '/tuchat-finance/record-list/create',
                 })
             },
             onEdit(){
@@ -360,7 +360,7 @@
                 else {
                     if (selection[0].recordDirect === 1 && selection[0].status === 1) {
                         this.$router.push({
-                            path: '/finance/record-list/update',
+                            path: '/tuchat-finance/record-list/update',
                             query: {
                                 id: selection[0].id,
                                 orgName: selection[0].orgName,
@@ -394,7 +394,7 @@
                     let pmId = selections[0].pmId
                     let pmName = selections[0].pmName
                     this.$router.push({
-                        path: '/finance/record-list/record-detail',
+                        path: '/tuchat-finance/record-list/record-detail',
                         query: {
                             id: id,
                             code: selections[0].code,

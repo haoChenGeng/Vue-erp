@@ -6,7 +6,7 @@ const npsView = resolve => require(['src/views/m-delivery/nps/edit.vue'], resolv
 
 const routes = [
     {
-        path: '/delivery',
+        path: '/tuchat-delivery',
         component: Console,
         children: [
         	{ path: 'nps-list', meta: { isFulldialog:false, title: 'NPS评分' }, component: npsList },

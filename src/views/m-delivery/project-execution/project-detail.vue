@@ -266,7 +266,7 @@
         methods: {
             closeDialog() {
                 // 填写对应的路由
-                this.$router.push({ path: '/delivery/yanshou-bill' })
+                this.$router.push({ path: '/tuchat-delivery/yanshou-bill' })
             },
             onTopHide(){
                 this.isTopHide = !this.isTopHide
@@ -290,7 +290,7 @@
                     this.$message.error('只能选择一行进行操作！')
                 } else{
                     this.$router.push({
-                        path: '/delivery/yanshou-view',
+                        path: '/tuchat-delivery/yanshou-view',
                         query:{ billCode: selections[0].billCode,id: selections[0].id}
                     });
                 }
@@ -332,7 +332,7 @@
                     this.$message.error('只能选择一行进行操作！')
                 } else{
                     this.$router.push({
-                        path: '/delivery/yanshou-detail',
+                        path: '/tuchat-delivery/yanshou-detail',
                         query:{ billCode: selections[0].billCode,id: selections[0].id}
                     });
                 }

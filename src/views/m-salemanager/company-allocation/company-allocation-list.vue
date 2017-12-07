@@ -57,7 +57,7 @@
                 orderCode:null,
 
                 // 详情页路由地址
-                detailRoute: '/sale-manage/company-allocation-detail',
+                detailRoute: '/tuchat-sale-manage/company-allocation-detail',
                 // service 和 method 目前需要加密
                 service: Service.COMPANYALLOCATION.name,
                 method: Service.COMPANYALLOCATION.methods.COMPANYALLOCATIONVIEWSQUERYPAGE,

@@ -398,13 +398,13 @@
         },
         // watch:{
         //     '$route': function(route,oldRoute){
-        //         if(route.path == '/delivery/yanshou-bill' && typeof route.query.refresh !== 'undefined'){
+        //         if(route.path == '/tuchat-delivery/yanshou-bill' && typeof route.query.refresh !== 'undefined'){
         //             this.getTableData();
         //         }
         //     }
         // },
         activated(){
-            if(this.$route.path == '/delivery/yanshou-bill' && typeof this.$route.query.refresh !== 'undefined'){
+            if(this.$route.path == '/tuchat-delivery/yanshou-bill' && typeof this.$route.query.refresh !== 'undefined'){
                 this.getTableData();
             }
         },
@@ -445,7 +445,7 @@
                     this.$message.error('只能选择一行进行操作！')
                 } else{
                     this.$router.push({
-                        path: '/delivery/yanshou-view',
+                        path: '/tuchat-delivery/yanshou-view',
                         query:{ billCode: selections[0].billCode,id: selections[0].id}
                     });
                 }
@@ -487,7 +487,7 @@
                     this.$message.error('只能选择一行进行操作！')
                 } else{
                     this.$router.push({
-                        path: '/delivery/yanshou-detail',
+                        path: '/tuchat-delivery/yanshou-detail',
                         query:{ billCode: selections[0].billCode,id: selections[0].id}
                     });
                 }
