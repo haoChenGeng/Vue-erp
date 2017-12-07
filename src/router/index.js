@@ -35,7 +35,7 @@ import om from './operationdata/index.js'
 
 let routes = []
 
-// 只输入域名是，跳转到/index
+// 只输入域名时，跳转到/index
 routes.push({
     path: '/',
     redirect: '/index'
@@ -101,7 +101,6 @@ router.afterEach(route => {
 })
 
 function routerAlert(route) {
-    console.log(route)
     if (debug && route.meta.auth !== false && route.meta.isFulldialog !== true && route.meta.isFulldialog !== false) {
         let _url = 'http://192.168.1.156:3000/kai-fa-zhi-nan/lu-you-shi-yong-gui-fan.html'
         Vue.prototype.$confirm('此页面路由写法不规范<br><a href="' + _url + '" target="_blank">到这里查看规范</a>', '警告', {
