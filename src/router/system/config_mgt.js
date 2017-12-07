@@ -14,7 +14,7 @@ const conditionManagement = resolve => require(['src/views/m-system/page-config-
 const routes = [
     // 配置管理
     {
-        path: '/tochat-system',
+        path: '/tuchat-system',
         component: Console,
         children: [
             { path: 'event-management', meta: { isFulldialog: false, title: '事件管理' }, component: eventManagement },

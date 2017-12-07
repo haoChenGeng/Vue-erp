@@ -5,7 +5,7 @@ const RefundOrderDetail = resolve => require(['src/views/m-delivery/project-exec
 const routes = [
     //交付
     {
-        path: '/tochat-delivery',
+        path: '/tuchat-delivery',
         component: Console,
         children: [
             { path: 'refundOrder-index', meta: { isFulldialog:false, title: '工程退货' }, component: RefundOrderIndex},

@@ -22,7 +22,7 @@ const pageAssignPrincipalRecord = resolve => require(['src/views/m-item-assign/p
 
 
 const routes = [{
-    path: '/tochat-itemAssign',
+    path: '/tuchat-itemAssign',
     component: Console,
     children: [
         // 项目经理派单模块

@@ -587,7 +587,7 @@
                                 confirmButtonClass: 'is-plain'
                             })
                             setTimeout(function () {
-                                _this.$router.push({ path: '/tochat-finance/page-purchase-invoice'})
+                                _this.$router.push({ path: '/tuchat-finance/page-purchase-invoice'})
                             }, 3000)
 
                         }
@@ -774,7 +774,7 @@
                 }
             },
             closeDialog() {
-                this.$router.push({ path: '/tochat-finance/page-purchase-invoice'})
+                this.$router.push({ path: '/tuchat-finance/page-purchase-invoice'})
                 this.$emit('close')
             },
             //处理选择行变化

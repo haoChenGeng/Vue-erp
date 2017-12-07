@@ -9,7 +9,7 @@ const QuoteConfigTemplateRef = resolve => require(['src/views/m-worker/quote/m-q
 const routes = [
     //交付
     {
-        path: '/tochat-quoteconfig',
+        path: '/tuchat-quoteconfig',
         component: Console,
         children: [
             { path: 'showlist', meta: { title: '报价字典',isFulldialog:false }, component: QuoteConfigTemplateBase},

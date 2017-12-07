@@ -349,7 +349,7 @@
                 // 附表tab默认激活页
                 subActiveTab: '',
                 // 点击关闭后的返回route
-                goBackRoute: '/tochat-delivery/complaints-order-list',
+                goBackRoute: '/tuchat-delivery/complaints-order-list',
                 sourceMap: {},
                 columns: {},
                 count: 1,
@@ -1607,7 +1607,7 @@
                     this.$message.error("当前状态不能编辑")
                     return
                 }
-                this.$router.replace({path: '/tochat-delivery/complaints-order-detail', query: {mode: "edit", id: this.id}})
+                this.$router.replace({path: '/tuchat-delivery/complaints-order-detail', query: {mode: "edit", id: this.id}})
 
             },
             follow(){
@@ -1615,7 +1615,7 @@
                     this.$message.error("当前状态不能跟进")
                     return
                 }
-                this.$router.replace({path: '/tochat-delivery/complaints-order-detail', query: {mode: "follow", id: this.id}})
+                this.$router.replace({path: '/tuchat-delivery/complaints-order-detail', query: {mode: "follow", id: this.id}})
             },
             complete(){
                 if(this.dataSource.orderStatus != 3) {
@@ -1623,7 +1623,7 @@
                     return
                 }
                 this.$router.replace({
-                    path: '/tochat-delivery/complaints-order-detail',
+                    path: '/tuchat-delivery/complaints-order-detail',
                     query: {mode: "complete", procInsId: this.dataSource.processId}
                 })
                 this.initPage()
@@ -1635,7 +1635,7 @@
                     return
                 }
                 this.$router.replace({
-                    path: '/tochat-delivery/complaints-order-detail',
+                    path: '/tuchat-delivery/complaints-order-detail',
                     query: {mode: "approve", procInsId: this.dataSource.processId}
                 })
 

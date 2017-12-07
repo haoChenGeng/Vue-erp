@@ -215,7 +215,7 @@
                 let selections = this.$refs['t8tTable'].getSelectRows();
                 if(selections.length > 0){
                     this.$router.push({
-                        path: '/tochat-delivery/measure-view',
+                        path: '/tuchat-delivery/measure-view',
                         query:{id: selections[0].id}
                     })
                 }else{
@@ -235,7 +235,7 @@
                             return false
                         }
                         this.$router.push({
-                            path: '/tochat-delivery/measure-edit',
+                            path: '/tuchat-delivery/measure-edit',
                             query:{id: selections[0].id}
                         })
                 }

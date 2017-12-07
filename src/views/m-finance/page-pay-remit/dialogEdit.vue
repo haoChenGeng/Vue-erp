@@ -248,7 +248,7 @@
                 this.pageSizeOperate = val
             },
             closeDialog() {
-                this.$router.push({ path: '/tochat-finance/page-pay-remit'})
+                this.$router.push({ path: '/tuchat-finance/page-pay-remit'})
                 this.$emit('close')
             },
             submitSearch(obj) {

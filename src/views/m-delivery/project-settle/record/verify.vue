@@ -307,7 +307,7 @@
                                     message: '提交成功',
                                     callback:()=>{
                                         this.$router.push({
-                                            path: '/tochat-delivery/settle-record/index',
+                                            path: '/tuchat-delivery/settle-record/index',
                                             query: {refresh: 1}
                                         })
                                     }

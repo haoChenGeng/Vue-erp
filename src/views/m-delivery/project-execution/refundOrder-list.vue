@@ -58,7 +58,7 @@
                 // 面包屑
                 breadcrumbData: [{ title: '工程管理' },{ title: '工程下单' },{ title: '工程退货' }],
                 // 详情页路由地址
-                detailRoute: '/tochat-delivery/refundOrder-detail',
+                detailRoute: '/tuchat-delivery/refundOrder-detail',
                 // service 和 method 目前需要加密
                 service: '6P0Z49WQ726I5w0aLvTckhWu1K3Zc0t', // /biz/t8t-ps-pim/app
                 method: 'NVSU5i6OJTRza7Cq6WDn9uUIE3KHF1SHFZuEHPV', // views.refundOrder.queryPage

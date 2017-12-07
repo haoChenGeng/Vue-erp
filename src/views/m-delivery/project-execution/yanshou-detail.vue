@@ -397,7 +397,7 @@
             },
             closeDialog() {
                 // 填写对应的路由
-                //this.$router.push({ path: '/tochat-delivery/yanshou-bill' })
+                //this.$router.push({ path: '/tuchat-delivery/yanshou-bill' })
                 this.$router.go(-1)
             },
             handleCheckTimeChange(val,variable){
@@ -593,7 +593,7 @@
                             callback:function(action,instance){
                                 if(optType === 1){
                                     _this.$router.push({
-                                        path: '/tochat-delivery/yanshou-bill',
+                                        path: '/tuchat-delivery/yanshou-bill',
                                         query:{
                                             refresh:null
                                         }

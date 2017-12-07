@@ -72,7 +72,7 @@
         components: {},
         methods: {
             closeDialog(){
-                this.$router.push({path: '/tochat-finance/page-accounting-task'})
+                this.$router.push({path: '/tuchat-finance/page-accounting-task'})
             },
             btnDownloadClick(){
                 let selections = this.$refs['t8tTable'].getSelectRows()

@@ -374,7 +374,7 @@
             closeQuoteOrderDialog: function (){
                 //this.quoteOrderDialogVisible = false
                 //this.$router.go(-1)
-                this.$router.push('/tochat-worker/quote-project-list')
+                this.$router.push('/tuchat-worker/quote-project-list')
             },
             closeSelectQuoteTempItemDialog: function (){
                 this.selectQuoteTempItemVisible = false
@@ -524,7 +524,7 @@
             },
 
             preview: function (){
-                this.$router.push({path:'/tochat-worker/quote-order-preview',query:{tempId:this.tempId, yid: this.yid,orderId:this.quoteOrderInfo.id}})
+                this.$router.push({path:'/tuchat-worker/quote-order-preview',query:{tempId:this.tempId, yid: this.yid,orderId:this.quoteOrderInfo.id}})
             },
 
             //提交

@@ -244,7 +244,7 @@
         },
         methods:{
             closeDialog() {
-                this.$router.push({path: '/tochat-commodule/traffic'})
+                this.$router.push({path: '/tuchat-commodule/traffic'})
                 this.$emit('close')
             },
             //获取业务合同详细信息
@@ -323,7 +323,7 @@
             },
             processTraffic()
             {
-                this.$router.push({ path: '/tochat-commodule/traffic/process',query:{rowId:this.$route.query.rowId}})
+                this.$router.push({ path: '/tuchat-commodule/traffic/process',query:{rowId:this.$route.query.rowId}})
             }
             
         },

@@ -485,7 +485,7 @@
 			},
             onView(row){
                 this.$router.push({
-                    path: '/tochat-delivery/project/detail',
+                    path: '/tuchat-delivery/project/detail',
                     query: { projectId: row.id, type: 'view' }
                 })
             },
@@ -497,7 +497,7 @@
                     this.$message.error('只能选择一行进行操作！')
                 } else{
                     this.$router.push({
-                        path: '/tochat-delivery/project/detail',
+                        path: '/tuchat-delivery/project/detail',
                         query: { projectId: selections[0].decorationOrderVO.id, type: 'view' }
                     })
                 }

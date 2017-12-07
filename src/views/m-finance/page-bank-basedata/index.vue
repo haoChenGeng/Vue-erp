@@ -89,12 +89,12 @@
                     return
                 }
                 // 弹窗查看
-                this.$router.push({path: '/tochat-finance/basedata/view', query: {id: selections[0].id}} )
+                this.$router.push({path: '/tuchat-finance/basedata/view', query: {id: selections[0].id}} )
             },
             onView1(row) {
                 // let CurrentRow = this.$refs['t8ttable'].getCurrentRow()
                 // 弹窗查看
-                this.$router.push({path: '/tochat-finance/basedata/view', query: {id: row.id}} )
+                this.$router.push({path: '/tuchat-finance/basedata/view', query: {id: row.id}} )
             },
             onExport() {
                 exportUtils({

@@ -424,7 +424,7 @@
 		methods: {
             closeDialog() {
                 this.$router.push({
-                    path: '/tochat-delivery/settle-setting/index'
+                    path: '/tuchat-delivery/settle-setting/index'
                 })
             },
             selectTemplate(){
@@ -584,7 +584,7 @@
                                             message: '提交成功！',
                                             callback: ()=>{
                                                 this.$router.push({
-                                                    path: '/tochat-delivery/settle-setting/index',
+                                                    path: '/tuchat-delivery/settle-setting/index',
                                                     query: { refresh: 1 }
                                                 })
                                             }

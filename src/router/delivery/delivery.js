@@ -93,7 +93,7 @@ const GoodsDemandSetting = resolve => require(['src/views/m-delivery/goods-deman
 const routes = [
     //交付
     {
-        path: '/tochat-delivery',
+        path: '/tuchat-delivery',
         component: Console,
         children: [
             { path: 'template-base', meta: { isFulldialog:false, title: '排期模板维护' }, component: PageDeliveryTemplateBase},

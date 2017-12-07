@@ -10,7 +10,7 @@ const appVersion = resolve => require(['src/views/m-system/app-version/list.vue'
 const appVersionDetail = resolve => require(['src/views/m-system/app-version/detail.vue'], resolve)
 
 const routes = [{
-    path: '/tochat-system',
+    path: '/tuchat-system',
     component: Console,
     children: [
         { path: 'app-permissions', meta: { isFulldialog: false, title: 'APP功能管理' }, component: appFunction },

@@ -109,17 +109,17 @@
                 if (row == null) {
                     return
                 }
-                this.$refs['list-view'].doView('/tochat-itemAssign/page-synthesis-grade-set/view')
+                this.$refs['list-view'].doView('/tuchat-itemAssign/page-synthesis-grade-set/view')
             },
             doAdd () {
-                this.$refs['list-view'].doAdd('/tochat-itemAssign/page-synthesis-grade-set/create')
+                this.$refs['list-view'].doAdd('/tuchat-itemAssign/page-synthesis-grade-set/create')
             },
             doEdit () {
                 let row = this.getSelectRowId()
                 if (row == null) {
                     return
                 }
-                this.$refs['list-view'].doEdit('/tochat-itemAssign/page-synthesis-grade-set/edit')
+                this.$refs['list-view'].doEdit('/tuchat-itemAssign/page-synthesis-grade-set/edit')
             },
             doVoid: function () {
                 // 弃用

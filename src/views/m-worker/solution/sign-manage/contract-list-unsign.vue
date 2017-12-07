@@ -75,9 +75,9 @@
                     orderStatusArray: orderStatusArray
                 },
                 // 路由地址
-                viewPaperRouter: '/tochat-projectlist/preview',
-                viewSelectionRouter: '/tochat-worker/quote-order-detail',
-                addRouter: '/tochat-worker/sign-manage/add'
+                viewPaperRouter: '/tuchat-projectlist/preview',
+                viewSelectionRouter: '/tuchat-worker/quote-order-detail',
+                addRouter: '/tuchat-worker/sign-manage/add'
             }
         },
         created() {

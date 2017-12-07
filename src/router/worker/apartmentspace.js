@@ -7,7 +7,7 @@ const ApartmentSpaceTemplateBase = resolve => require(['src/views/m-worker/quote
 const routes = [
     //
     {
-        path: '/tochat-apartmentspace',
+        path: '/tuchat-apartmentspace',
         component: Console,
         children: [
             { path: 'showlist', meta: { title: '户型空间',isFulldialog:false }, component: ApartmentSpaceTemplateBase},

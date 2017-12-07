@@ -109,7 +109,7 @@
         methods: {
             backRoute(){
                 this.$router.push({
-                    path: '/tochat-finance/record-list'
+                    path: '/tuchat-finance/record-list'
                 })
             },
             onChange(value, name){

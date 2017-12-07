@@ -57,7 +57,7 @@
             },
             //点击新增按钮
             btnAddClick() {
-                this.$router.push({path: '/tochat-finance/page-cost-domain-config/create', query: {editType: "add"}})
+                this.$router.push({path: '/tuchat-finance/page-cost-domain-config/create', query: {editType: "add"}})
             },
             btnEditClick() {
                 // 点击编辑按钮
@@ -69,7 +69,7 @@
                 } else {
                     let selectRow = this.$refs['t8tTable'].getSelectRows()[0]
                     this.$router.push({
-                        path: '/tochat-finance/page-cost-domain-config/edit',
+                        path: '/tuchat-finance/page-cost-domain-config/edit',
                         query: {id: selectRow.id, editType: "edit"}
                     })
 
@@ -84,7 +84,7 @@
                 } else {
                     let selectRow = this.$refs['t8tTable'].getSelectRows()[0]
                     this.$router.push({
-                        path: '/tochat-finance/page-cost-domain-config/view',
+                        path: '/tuchat-finance/page-cost-domain-config/view',
                         query: {id: selectRow.id, editType: "view"}
                     })
                 }

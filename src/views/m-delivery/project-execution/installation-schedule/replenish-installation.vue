@@ -225,7 +225,7 @@
             },
             closeDialog() {
                 // 填写对应的路由
-                this.$router.push({ path: '/tochat-delivery/installtion-schedule-list' })
+                this.$router.push({ path: '/tuchat-delivery/installtion-schedule-list' })
             },
             addGoodsRow(){
                 this.showGoodsSearchDialog = true

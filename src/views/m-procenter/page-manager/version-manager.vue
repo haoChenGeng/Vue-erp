@@ -297,7 +297,7 @@
             onNodeClick: function (obj) {
                 let id = obj.id;
                 let args = {
-                    path: '/tochat-procenter/version-workflow',
+                    path: '/tuchat-procenter/version-workflow',
                     query: {
                         id: id
                     }
@@ -355,7 +355,7 @@
             },
             onCreate (symbol, event){
                /*let args = {
-                    path: '/tochat-procenter/version-workflow/create',
+                    path: '/tuchat-procenter/version-workflow/create',
                     query: {
                         modelId: this.modelId,
                         procName: this.procName,
@@ -368,7 +368,7 @@
             onEdit (symbol, event){
                if(this.checkIfSelectWorkflow()){
                    /* let args = {
-                        path: '/tochat-procenter/version-workflow/edit',
+                        path: '/tuchat-procenter/version-workflow/edit',
                         query: {
                             id: this.selectWFId,
                             procName: this.procName,
@@ -382,7 +382,7 @@
             onCheck (symbol, event){
                 if(this.checkIfSelectWorkflow()){
                     /*let args = {
-                        path: '/tochat-procenter/version-workflow/see',
+                        path: '/tuchat-procenter/version-workflow/see',
                         query: {
                             id: this.selectWFId,
                             procName: this.procName,
@@ -460,7 +460,7 @@
                 // 属性配置
                 if(this.checkIfSelectWorkflow()) {
                     let args = {
-                        path: '/tochat-procenter/workflow-attribute',
+                        path: '/tuchat-procenter/workflow-attribute',
                         query: {
                             vid: this.selectWFId,
                             mid: this.modelId,

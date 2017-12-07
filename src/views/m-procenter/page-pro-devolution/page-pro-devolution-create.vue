@@ -203,7 +203,7 @@
                                     confirmButtonClass: 'is-plain',
                                  }).then(action=>{
                                     if (action==='confirm') {
-                                        this.$router.push({path:'/tochat-procenter/page-pro-devolution'})
+                                        this.$router.push({path:'/tuchat-procenter/page-pro-devolution'})
                                     }
                                 })
                           this.$emit('getTableData')

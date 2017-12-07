@@ -319,7 +319,7 @@
                     this.$message.error('结算单审核状态错误！');
                 } else {
                     this.$router.push({
-                        path: '/tochat-delivery/settle-record/verify',
+                        path: '/tuchat-delivery/settle-record/verify',
                         query: {processId: selections[0].processId}
                     })
                 }
@@ -332,7 +332,7 @@
                     this.$message.error('只能选择一行进行查看！');
                 } else {
                     this.$router.push({
-                        path: '/tochat-delivery/settle-record/detail',
+                        path: '/tuchat-delivery/settle-record/detail',
                         query: {id: selections[0].id, billCode: selections[0].billCode, type: 'view'}
                     })
                 }
@@ -396,7 +396,7 @@
                     this.$message.error('只能选择一行进行操作！');
                 } else {
                     this.$router.push({
-                        path: '/tochat-delivery/settle-record/flow',
+                        path: '/tuchat-delivery/settle-record/flow',
                         query: {id: selections[0].id}
                     })
                 }

@@ -3,7 +3,7 @@ const companyAllocationList = resolve => require(['src/views/m-salemanager/compa
 const companyAllocationDetail = resolve => require(['src/views/m-salemanager/company-allocation/company-allocation-detail.vue'], resolve);
 const routes = [
     {
-        path: '/tochat-sale-manage',
+        path: '/tuchat-sale-manage',
         component: Console,
         children: [
             {path: 'company-allocation-list', component: companyAllocationList, meta: {isFulldialog:false,title: '分单记录'}},

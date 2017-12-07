@@ -116,7 +116,7 @@
                 // 面包屑
                 breadcrumbData: [{title: '交付管理'}, {title: '客服管理'}, {title: '投诉管理'}],
                 // 详情页路由地址
-                detailRoute: '/tochat-delivery/complaints-order-detail?mode=add',
+                detailRoute: '/tuchat-delivery/complaints-order-detail?mode=add',
                 // service 和 method 目前需要加密
                 service: Service.COMPLAINT.name,
                 method: Service.COMPLAINT.methods.COMPLAINTSORDERQUERYPAGE,

@@ -305,13 +305,13 @@
 
             showOrderDetail(id){
                 this.$router.push({
-                    path: '/tochat-sale-manage/page-potential-owner-list/view',
+                    path: '/tuchat-sale-manage/page-potential-owner-list/view',
                     query: {id: id,}
                 })
             },
             //查看
             viewClick() {
-                this.$router.push({ path: '/tochat-sale-manage/page-intention-owner-list/view', query: { id: this.curRow.id } })
+                this.$router.push({ path: '/tuchat-sale-manage/page-intention-owner-list/view', query: { id: this.curRow.id } })
             },
             //搜索提交
             submitSearch(obj) {

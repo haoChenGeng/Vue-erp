@@ -287,7 +287,7 @@
             //查看详情
             showDetail: function (id, name) {
                 this.$router.push({
-                    path: '/tochat-delivery/yanshou-project-detail',
+                    path: '/tuchat-delivery/yanshou-project-detail',
                     query: {projectId: id}
                 })
             },

@@ -313,7 +313,7 @@ export default {
                                             confirmButtonClass: 'is-plain'
                                         }).then(action=>{
                                             if (action==='confirm') {
-                                                this.$router.replace('/tochat-finance/page-pay-plan')
+                                                this.$router.replace('/tuchat-finance/page-pay-plan')
                                             }
                                         })
                                     }

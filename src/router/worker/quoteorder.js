@@ -12,7 +12,7 @@ const selectionList = resolve => require(['src/views/m-worker/quote/m-quoteorder
 
 const routes = [
     {
-        path: '/tochat-worker',
+        path: '/tuchat-worker',
         component: Console,
         children: [
             { path: 'quote-project-list', meta: { title: '选材报价',isFulldialog:false }, component: projectList},

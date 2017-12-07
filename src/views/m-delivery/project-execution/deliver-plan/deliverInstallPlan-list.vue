@@ -328,7 +328,7 @@
             handWorkerReported () {
                 this.$TCS.addTag('red_6788_010006005004') //点击流
                  this.$router.push({
-                    path: '/tochat-delivery/distribution-plan/master-reported'
+                    path: '/tuchat-delivery/distribution-plan/master-reported'
                 })
             },
             handInstallationSchedule(){

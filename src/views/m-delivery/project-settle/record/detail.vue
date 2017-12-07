@@ -112,7 +112,7 @@
             },
             approvalFlow(){
                 this.$router.push({
-                    path: '/tochat-delivery/settle-record/flow',
+                    path: '/tuchat-delivery/settle-record/flow',
                     query: { id: this.$route.query.id }
                 })
             }

@@ -10,7 +10,7 @@ const intentinOwnerView = resolve => require(['src/views/m-salemanager/owner/pag
 const standingBook = resolve => require(['src/views/m-salemanager/standing-book/page-standing-book.vue'], resolve);
 const routes = [
     {
-        path: '/tochat-sale-manage',
+        path: '/tuchat-sale-manage',
         component: Console,
         children: [
             {path: 'page-potential-owner-list', component: potentialOwnerList, meta: {isFulldialog:false, title: '潜在业主管理'}},

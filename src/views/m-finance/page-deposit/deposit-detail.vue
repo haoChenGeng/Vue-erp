@@ -85,7 +85,7 @@
         methods: {
             backRoute(){
               this.$router.push({
-                  path: '/tochat-finance/deposit-list'
+                  path: '/tuchat-finance/deposit-list'
               })
 
             }

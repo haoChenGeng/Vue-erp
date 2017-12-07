@@ -126,7 +126,7 @@
 					{type: 'input',label: '工长姓名',prop:"workerName",disabled:true}
 				],
                 isDialogShow:true,
-                goBackRoute:'/tochat-delivery/demand-list',
+                goBackRoute:'/tuchat-delivery/demand-list',
 				isTopHide:false,
 				activeTab:'one',
 				dataSource:{
@@ -411,12 +411,12 @@
                 }
                 if(row.replenishType == 1 && row.orderStatus == 5){
                     this.$router.push({
-                        path: '/tochat-delivery/demand-edit',
+                        path: '/tuchat-delivery/demand-edit',
                         query: {id: row.id}
                     })
                 } else {
                     this.$router.push({
-                        path: '/tochat-delivery/demand-receipts',
+                        path: '/tuchat-delivery/demand-receipts',
                         query: {mode:'edit',id: row.id}
                     })
                 }

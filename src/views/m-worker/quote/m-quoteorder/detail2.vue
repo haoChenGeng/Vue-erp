@@ -412,13 +412,13 @@
                 this.totalPrice = 0 //合同总价
             },
             closeQuoteOrderDialog: function (){
-                this.$router.push('/tochat-worker/quote-project-list')
+                this.$router.push('/tuchat-worker/quote-project-list')
             },
             goBack: function (){
                 //TODO 返回来源页面有bug
                 // this.quoteOrderDialogVisible = false
                 // this.$router.go(-1)
-                this.$router.push('/tochat-worker/quote-project-list')
+                this.$router.push('/tuchat-worker/quote-project-list')
             },
             closeSelectQuoteTempItemDialog: function (){
                 this.selectQuoteTempItemVisible = false
@@ -605,7 +605,7 @@
             },
 
             preview: function (){
-                this.$router.push({path:'/tochat-worker/quote-order-preview',query:{tempId:this.tempId, yid: this.yid,orderId:this.quoteOrderInfo.id}})
+                this.$router.push({path:'/tuchat-worker/quote-order-preview',query:{tempId:this.tempId, yid: this.yid,orderId:this.quoteOrderInfo.id}})
             },
 
             //提交
@@ -1572,7 +1572,7 @@
             },
 
             jumpToSelectionList: function (){
-                this.$router.push({path:'/tochat-worker/quote-order-selectionList',query:{'yid':this.yid}})
+                this.$router.push({path:'/tuchat-worker/quote-order-selectionList',query:{'yid':this.yid}})
             },
             syncDataFromTemp: function (){
                 let _this = this

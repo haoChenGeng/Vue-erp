@@ -216,13 +216,13 @@
             },
             viewBtn(obj){
                 if(typeof (obj) === 'object') {
-                    this.$router.push({ path: '/tochat-sale-manage/contract-detail', query: { mode:'view', projectId: obj.projectId } })
+                    this.$router.push({ path: '/tuchat-sale-manage/contract-detail', query: { mode:'view', projectId: obj.projectId } })
                     return
                 }
                 if(this.$refs['contractTable'].states) {
                     let selectRow = this.$refs['contractTable'].states.currentRow
                     if (selectRow) {
-                        this.$router.push({ path: '/tochat-sale-manage/contract-detail', query: { projectId: selectRow.projectId } })
+                        this.$router.push({ path: '/tuchat-sale-manage/contract-detail', query: { projectId: selectRow.projectId } })
                     } else {
                         this.$message.error("请选中要查看的合同")
                         return
@@ -263,7 +263,7 @@
                             this.$message.error("当前单据不能提交")
                             return
                         }
-                        this.$router.push({ path: '/tochat-sale-manage/contract-detail', query: { projectId: selectRow.projectId,mode:'create' } })
+                        this.$router.push({ path: '/tuchat-sale-manage/contract-detail', query: { projectId: selectRow.projectId,mode:'create' } })
                     } else {
                         this.$message.error("请选中要提交的单据")
                         return
@@ -279,7 +279,7 @@
                     let selectRow = this.$refs['contractTable'].states.currentRow
                     if (selectRow) {
                         if(selectRow.processId && selectRow.state == 1) {
-                            this.$router.push({ path: '/tochat-sale-manage/contract-detail', query: { procInsId: selectRow.processId,mode:'verify' } })
+                            this.$router.push({ path: '/tuchat-sale-manage/contract-detail', query: { procInsId: selectRow.processId,mode:'verify' } })
                         } else {
                             this.$message.error("选中的合同不能审核")
                             return

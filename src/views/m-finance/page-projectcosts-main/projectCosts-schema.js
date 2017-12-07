@@ -139,7 +139,7 @@ export default {
                         type: 'hyperlink',
                         onClick: (val, row, col, tab) => {
                             tab.$router.push({
-                                path: '/tochat-delivery/dosage-detail',
+                                path: '/tuchat-delivery/dosage-detail',
                                 query: {
                                     yid: row.projectId,
                                     deliveryId: row.goodsId,
@@ -175,9 +175,9 @@ export default {
                             let rout = ''
                             //要货单
                             if(row.orderType === 1){
-                                rout = '/tochat-delivery/demand-list'
+                                rout = '/tuchat-delivery/demand-list'
                             }else{
-                                rout = '/tochat-delivery/refundOrder-index'
+                                rout = '/tuchat-delivery/refundOrder-index'
                             }
                             tab.$router.push({
                                 path: rout,

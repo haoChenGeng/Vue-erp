@@ -19,7 +19,7 @@ const routes = [
             { path: 'page-organization', meta: { isFulldialog: false, title: '组织机构' }, component: PageOrganization }
         ]
     }, {
-        path: '/tochat-system',
+        path: '/tuchat-system',
         component: Console,
         children: [
             { path: 'organization', meta: { isFulldialog: false, title: '组织机构' }, component: PageOrganization },

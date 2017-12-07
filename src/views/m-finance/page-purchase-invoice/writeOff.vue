@@ -341,7 +341,7 @@
                 })
             },
             closeDialog() {
-                this.$router.push({ path: '/tochat-finance/page-purchase-invoice'})
+                this.$router.push({ path: '/tuchat-finance/page-purchase-invoice'})
                 this.$emit('close')
             },
 

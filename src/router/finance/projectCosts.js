@@ -6,7 +6,7 @@ const ProjectCostsDetails = resolve => require(['src/views/m-finance/page-projec
 
 
 const routes = [{
-    path: '/tochat-finance',
+    path: '/tuchat-finance',
     component: Console,
     children: [
         { path: 'projectCosts', meta: { isFulldialog: false, title: '成本核算主页面'}, component: ProjectCosts },

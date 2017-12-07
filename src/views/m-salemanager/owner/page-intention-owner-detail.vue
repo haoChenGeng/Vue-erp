@@ -696,7 +696,7 @@
             doEdit(){
                 editForm = true
                 this.$router.push({
-                    path: '/tochat-sale-manage/page-potential-owner-list/edit',
+                    path: '/tuchat-sale-manage/page-potential-owner-list/edit',
                     query: {id: this.formData.id,type:'edit'}
                 })
             },
@@ -1035,7 +1035,7 @@
                 }
             },
             closeDialog() {
-                this.$router.push({ path: '/tochat-sale-manage/page-intention-owner-list'})
+                this.$router.push({ path: '/tuchat-sale-manage/page-intention-owner-list'})
                 this.$emit('close')
             },
 

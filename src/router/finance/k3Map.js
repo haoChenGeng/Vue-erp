@@ -5,7 +5,7 @@ const k3Map = resolve => require(['../../views/m-finance/page-k3-map/k3-cloud-ma
 
 
 const routes = [{
-    path: '/tochat-finance',
+    path: '/tuchat-finance',
     component: Console,
     children: [
         { path: 'k3-cloud-map', meta : { isFulldialog: false, title : '数据对照表'}, component: k3Map}

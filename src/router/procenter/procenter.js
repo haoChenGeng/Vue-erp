@@ -37,7 +37,7 @@ const PageProcDiagram = resolve => require(['src/views/m-procenter/page-pro-diag
 const routes = [
     //流程后台管理
     {
-        path: '/tochat-procenter',
+        path: '/tuchat-procenter',
         component: Console,
         children: [
             { path: '', redirect: 'page-pro-del' },

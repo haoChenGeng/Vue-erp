@@ -110,7 +110,7 @@
         methods:{
             closeDialog(){
                 this.$router.push({
-                    path: '/tochat-delivery/lockout-bill'
+                    path: '/tuchat-delivery/lockout-bill'
                 });
             },
             onTopHide(){

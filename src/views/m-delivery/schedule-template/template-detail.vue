@@ -1051,7 +1051,7 @@
             //查看详情
             showDetail: function (id, nodeType) {
                 this.$router.push({
-                    path: '/tochat-delivery/node-attribute',
+                    path: '/tuchat-delivery/node-attribute',
                     query: {id: id, nodeType: nodeType}
                 })
             },

@@ -45,7 +45,7 @@
             abcPayPage()
             {
                 this.dialogVisible=false
-                this.$router.push({path:'/tochat-finance/page-pay-plan/abcPay',
+                this.$router.push({path:'/tuchat-finance/page-pay-plan/abcPay',
                             query:{
                                 rowId:this.rowId,
                             }
@@ -54,7 +54,7 @@
             aliPayPage()
             {
                 this.dialogVisible=false
-                this.$router.push({path:'/tochat-finance/page-pay-plan/aliPay',
+                this.$router.push({path:'/tuchat-finance/page-pay-plan/aliPay',
                     query:{
                         rowId:this.rowId,
                     }

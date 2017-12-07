@@ -346,7 +346,7 @@
             },
             //新增
             onBtn1() {
-                this.$router.push({path: '/tochat-finance/page-pay-remit/create'})
+                this.$router.push({path: '/tuchat-finance/page-pay-remit/create'})
             },
             //查看
             onBtn2() {

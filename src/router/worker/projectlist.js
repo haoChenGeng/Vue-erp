@@ -8,7 +8,7 @@ const PreviewTemplateBase = resolve => require(['src/views/m-worker/quote/m-proj
 const routes = [
     //项目列表
     {
-        path: '/tochat-projectlist',
+        path: '/tuchat-projectlist',
         component: Console,
         children: [
             { path: 'showlist', meta: { title: '项目列表',isFulldialog:false }, component: ProjectListTemplateBase},

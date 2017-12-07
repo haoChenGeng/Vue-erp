@@ -194,7 +194,7 @@
                     assignReasons: []   // 派单原因
                 },
                 // 点击关闭后的返回route
-                goBackRoute: '/tochat-itemAssign/assign-principal-list',
+                goBackRoute: '/tuchat-itemAssign/assign-principal-list',
             }
         },
         beforeCreate () {

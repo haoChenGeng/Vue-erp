@@ -83,7 +83,7 @@
                 this.curRow = row
                 this.showId = this.curRow.id
                 this.showDialog('view')
-//                this.$router.push({path: '/tochat-finance/page-inventory-adjustment-note/view', query: {id: this.curRow.id}})
+//                this.$router.push({path: '/tuchat-finance/page-inventory-adjustment-note/view', query: {id: this.curRow.id}})
             },
             onView(symbol, event) {
                 this.$TCS.addTag('erp_finance_007008009001')
@@ -104,7 +104,7 @@
 //                debugger
 //                if (this.checkSelection() === false) return false
 //                let selectRow = this.$refs['list-view'].getTableInstance().getSelectRows()[0]
-//                this.$router.push({path: '/tochat-finance/page-purchase-verification-sheet/view', query: {id: selectRow.id}})
+//                this.$router.push({path: '/tuchat-finance/page-purchase-verification-sheet/view', query: {id: selectRow.id}})
 //            },
             //提交搜索
             onSearchSubmit(obj) {

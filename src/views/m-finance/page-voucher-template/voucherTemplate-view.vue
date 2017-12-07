@@ -90,7 +90,7 @@
         components: {},
         data(){
             return {
-                sourceItemRoute: '/tochat-finance/page-voucher-order/detail/sourceItem',
+                sourceItemRoute: '/tuchat-finance/page-voucher-order/detail/sourceItem',
                 id: null,
                 editMode: 'cell',
                 dialogVisible: true,
@@ -414,7 +414,7 @@
             // 编辑页面
             editDateTemplate(){
                 this.dialogVisible = false
-                this.$router.push({path: '/tochat-finance/page-voucher-template/edit', query: {id: this.id}})
+                this.$router.push({path: '/tuchat-finance/page-voucher-template/edit', query: {id: this.id}})
             },
             mainTableClick(){
                 let selections = this.$refs['mainTable'].getSelectRows()
@@ -440,8 +440,8 @@
 
             closeDialog(){
                 this.dialogVisible = false
-                this.$router.push('/tochat-finance/page-voucher-template')
-                //this.$router.push({ path: '/tochat-finance/page-voucher-template/edit' , query: { id:this.id}})
+                this.$router.push('/tuchat-finance/page-voucher-template')
+                //this.$router.push({ path: '/tuchat-finance/page-voucher-template/edit' , query: { id:this.id}})
             },
         }
     }

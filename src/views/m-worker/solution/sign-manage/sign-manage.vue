@@ -37,7 +37,7 @@
                 mainActiveTab: 'unsign',
                 // 面包屑
                 breadcrumbData: [{ title: '设计管理' },{ title: '方案' },{ title: '签约管理' }],
-                indexRoute: '/tochat-worker/sign-manage',
+                indexRoute: '/tuchat-worker/sign-manage',
             }
         },
         created() {

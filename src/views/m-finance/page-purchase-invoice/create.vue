@@ -632,7 +632,7 @@
             },
             closeDialog() {
                 this.$emit('close')
-                this.$router.push({ path: '/tochat-finance/page-purchase-invoice'})
+                this.$router.push({ path: '/tuchat-finance/page-purchase-invoice'})
             },
             //处理选择行变化
             add() {
@@ -646,7 +646,7 @@
             },
             closeDialog() {
                 // 填写对应的路由
-                this.$router.push({ path: '/tochat-finance/page-purchase-invoice' })
+                this.$router.push({ path: '/tuchat-finance/page-purchase-invoice' })
             }
         },
         watch:{

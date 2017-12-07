@@ -248,7 +248,7 @@
             //查看详情
             showDetail: function(id, name){
                 this.$router.push({
-                    path: '/tochat-delivery/template-detail',
+                    path: '/tuchat-delivery/template-detail',
                     query:{id: id, name:name}
                 })
             },

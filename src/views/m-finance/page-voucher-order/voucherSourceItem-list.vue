@@ -60,7 +60,7 @@
                         voucherEntryId:null
                     }
                 },
-                goBackRoute: '/tochat-finance/page-voucher-order/detail',
+                goBackRoute: '/tuchat-finance/page-voucher-order/detail',
                 // 表头描述
                 tableColumns: [
                     {prop: 'voucherCode', label: '凭证单据号'},

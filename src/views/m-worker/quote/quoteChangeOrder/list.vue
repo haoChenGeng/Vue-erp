@@ -252,7 +252,7 @@
                     query={'yid':selection.yid}
                 }
 
-                this.$router.push({path:'/tochat-worker/quote-changeOrder-detail',query:query})
+                this.$router.push({path:'/tuchat-worker/quote-changeOrder-detail',query:query})
 
             },
 
@@ -270,7 +270,7 @@
                 }
                 let selection = selections[0]
 
-                this.$router.push({path:'/tochat-worker/quote-order-detail',query:{yid:selection.yid}})
+                this.$router.push({path:'/tuchat-worker/quote-order-detail',query:{yid:selection.yid}})
 
             },
 

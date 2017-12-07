@@ -127,7 +127,7 @@
                 mainActiveTab: '',
                 loading:false,
                 // 点击关闭后的返回route
-                goBackRoute: '/tochat-delivery/surcharge-list',
+                goBackRoute: '/tuchat-delivery/surcharge-list',
                 sourceMap: {},            
             }
         },

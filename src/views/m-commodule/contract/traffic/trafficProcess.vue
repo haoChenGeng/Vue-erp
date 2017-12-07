@@ -101,7 +101,7 @@
         },
         methods:{
         	closeDialog() {
-                this.$router.push({path: '/tochat-commodule/traffic/see'})
+                this.$router.push({path: '/tuchat-commodule/traffic/see'})
                 this.$emit('close')
             },
             //获取业务合同详细信息
