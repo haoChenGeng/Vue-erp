@@ -159,7 +159,7 @@
         methods:{
             closeDialog(){
                 this.$router.push({
-                    path: '/delivery/delay-bill'
+                    path: '/tochat-delivery/delay-bill'
                 });
             },
             onTopHide(){

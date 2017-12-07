@@ -6,7 +6,7 @@ const PageBankBasedata = resolve => require(['src/views/m-finance/page-bank-base
 const PageBankBasedataView = resolve => require(['src/views/m-finance/page-bank-basedata/view-dialog.vue'], resolve)
 
 const routes = [{
-    path: '/finance',
+    path: '/tochat-finance',
     component: Console,
     children: [
         { path: 'basedata', meta: { isFulldialog: false, title: '银行账号' }, component: PageBankBasedata },

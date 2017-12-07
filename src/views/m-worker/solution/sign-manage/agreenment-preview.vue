@@ -23,7 +23,7 @@
         data() {
             return {
                 isDialogShow: true,
-                goBackRoute: '/worker/sign-manage',
+                goBackRoute: '/tochat-worker/sign-manage',
                 // 合同名称id
                 contractNameId: null,
                 // 项目id

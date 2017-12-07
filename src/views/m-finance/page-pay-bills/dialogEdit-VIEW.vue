@@ -492,7 +492,7 @@ export default {
             })
         },
         closeDialog() {
-            this.$router.push({ path: '/finance/page-pay-bills'})
+            this.$router.push({ path: '/tochat-finance/page-pay-bills'})
             this.$emit('close')
         },
         getReceiptModeCode: function(args,selectName){

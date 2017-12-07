@@ -14,7 +14,7 @@ const RecordAudit = resolve => require(['../../views/m-finance/page-deposit/reco
 
 
 const routes = [{
-    path: '/finance',
+    path: '/tochat-finance',
     component: Console,
     children: [
         { path: 'depositCredit-list', meta: { isFulldialog: false, title: '质保金额度配置'}, component: DepositCreditList },

@@ -532,7 +532,7 @@
         methods: {
             closeDialog(){
                 this.$router.push({
-                    path: '/delivery/base-setting/accounts-index'
+                    path: '/tochat-delivery/base-setting/accounts-index'
                 })
             },
             getBaseInfo(){
@@ -918,7 +918,7 @@
                                         confirmButtonClass: 'is-plain',
                                         callback: ()=>{
                                             this.$router.push({
-                                                path: '/delivery/base-setting/accounts-index'
+                                                path: '/tochat-delivery/base-setting/accounts-index'
                                             })
                                         }
                                     });

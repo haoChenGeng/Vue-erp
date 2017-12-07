@@ -207,7 +207,7 @@
                     this.$message.error('只能查看一行！')
                     return
                 }
-                this.$router.push({path:'/projectlist/preview', query:{yid:rows[0]['id']}})
+                this.$router.push({path:'/tochat-projectlist/preview', query:{yid:rows[0]['id']}})
             },
             //获取辅助资料
             getCommonOptions: function(fatherCode,selectName) {

@@ -275,12 +275,12 @@
             //新增
             addClick() {
                 this.$TCS.addTag('erp_finance_007008001001')
-                this.$router.push({path: '/finance/page-purchase-invoice/create'})
+                this.$router.push({path: '/tochat-finance/page-purchase-invoice/create'})
             },
             //参照对账单新增
             autoAddClick() {
                 this.$TCS.addTag('erp_finance_007008001002')
-                this.$router.push({path: '/finance/page-purchase-invoice/create', query: {type:'auto'}})
+                this.$router.push({path: '/tochat-finance/page-purchase-invoice/create', query: {type:'auto'}})
             },
             //修改
             editClick() {
@@ -293,7 +293,7 @@
                     return false
                 }
                 //手动新增
-                this.$router.push({path: '/finance/page-purchase-invoice/edit', query: {id: selectRow.id,type:'edit'}})
+                this.$router.push({path: '/tochat-finance/page-purchase-invoice/edit', query: {id: selectRow.id,type:'edit'}})
             },
             //查看
             viewClick() {
@@ -301,7 +301,7 @@
                 // 判断是否选择
                 if (this.checkSelection() === false) return false
                 let selectRow = this.$refs['t8tTable'].getSelectRows()[0]
-                this.$router.push({ path: '/finance/page-purchase-invoice/view', query: { id: selectRow.id } })
+                this.$router.push({ path: '/tochat-finance/page-purchase-invoice/view', query: { id: selectRow.id } })
             },
             //作废
             voidClick(){
@@ -699,7 +699,7 @@
                             type: 'warning',
                             confirmButtonText: '核销'
                         }).then(() => {
-                            this.$router.push({path: '/finance/page-purchase-invoice/writeOff', query: {id: selectRow.id}})
+                            this.$router.push({path: '/tochat-finance/page-purchase-invoice/writeOff', query: {id: selectRow.id}})
                         })
                     }
                 }else{

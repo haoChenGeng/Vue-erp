@@ -179,7 +179,7 @@
                 subActiveTab:'',
 
                 // 点击关闭后的返回route
-                goBackRoute: '/delivery/page-surcharge-list',
+                goBackRoute: '/tochat-delivery/page-surcharge-list',
                 sourceMap: {},
                 //审核相关
                 showAudit:true,

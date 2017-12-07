@@ -35,7 +35,7 @@ const PagePayAbcPay = resolve => require(['src/views/m-finance/page-pay-plan/dia
 const PagePayAliPay = resolve => require(['src/views/m-finance/page-pay-plan/dialog-alipay.vue'], resolve)
 
 const routes = [{
-    path: '/finance',
+    path: '/tochat-finance',
     component: Console,
     children: [
         { path: 'page-pay-plan-update', meta: { isFulldialog: false, title: '收款计划单' }, component: PagePayPlanUpdate },

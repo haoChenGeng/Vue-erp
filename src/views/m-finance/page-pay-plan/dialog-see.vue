@@ -241,7 +241,7 @@ export default {
         },
         //点击行的查看按钮
         viewDetail(id) {
-            this.$router.push({path:'/finance/page-verify-cancel-record/see',query:{rowId:id}})
+            this.$router.push({path:'/tochat-finance/page-verify-cancel-record/see',query:{rowId:id}})
         }
     }
 };

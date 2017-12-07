@@ -322,11 +322,11 @@
             },
             closeDialog() {
                 // 填写对应的路由
-                //this.$router.push({ path: '/delivery/installation-ducuments-list' })
+                //this.$router.push({ path: '/tochat-delivery/installation-ducuments-list' })
                 if (this.$route.query.planId) {
-                    this.$router.push({ path: '/delivery/installtion-schedule-list' })
+                    this.$router.push({ path: '/tochat-delivery/installtion-schedule-list' })
                 } else {
-                    this.$router.push({ path: '/delivery/installation-ducuments-list' })
+                    this.$router.push({ path: '/tochat-delivery/installation-ducuments-list' })
                 }
             },
             initDataById(id) {

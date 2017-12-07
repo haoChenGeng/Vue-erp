@@ -384,7 +384,7 @@
                 if(pageType == "measure-approval") {
                     window.close()
                 } else{
-                    this.$router.push({ path: '/delivery/measure-list' })
+                    this.$router.push({ path: '/tochat-delivery/measure-list' })
                 }
             },
             handleTabClick(tab,e){
@@ -406,7 +406,7 @@
                     return false
                 }
                 this.pageType = "measure-edit"
-                this.$router.replace({ path: '/delivery/measure-edit', query: {id: this.orderId } })
+                this.$router.replace({ path: '/tochat-delivery/measure-edit', query: {id: this.orderId } })
             },
             submit(){
                 if(pageType == "measure-approval" && this.detailInfo.orderStatus == 2) {
@@ -486,7 +486,7 @@
                                         confirmButtonText: '知道了',
                                         confirmButtonClass: 'is-plain'
                                     }).then((res) =>{
-                                        _this.$router.push({ path: '/delivery/measure-list'})
+                                        _this.$router.push({ path: '/tochat-delivery/measure-list'})
                                     })
                                 }else{
                                     this.$msgbox({

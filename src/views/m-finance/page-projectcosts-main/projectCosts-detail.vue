@@ -180,7 +180,7 @@
                 // 附表tab默认激活页
                 subActiveTab: 'laborCosts',
                 // 点击关闭后的返回route
-                goBackRoute: '/finance/projectCosts',
+                goBackRoute: '/tochat-finance/projectCosts',
                 sourceMap: {},
                 columns: {},
                 mianMaterSum: null,

@@ -261,7 +261,7 @@
                     return false;
                 }
                 this.$router.push({
-                    path: '/delivery/lockout-detail',
+                    path: '/tochat-delivery/lockout-detail',
                     query:{
                         billCode: row.billCode
                     }

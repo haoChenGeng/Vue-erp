@@ -52,7 +52,7 @@
             // 双击查看
             onView(row) {
                 this.$router.push({
-                    path: '/finance/page-accounting-task-item',
+                    path: '/tochat-finance/page-accounting-task-item',
                     query: {taskId: row.id, costDomainId: row.costDomainId}
                 })
             },
@@ -381,7 +381,7 @@
                 } else {
                     let selectedRow = selections[0]
                     this.$router.push({
-                        path: '/finance/page-accounting-task-item',
+                        path: '/tochat-finance/page-accounting-task-item',
                         query: {taskId: selectedRow.id, costDomainId: selectedRow.costDomainId}
                     })
                 }

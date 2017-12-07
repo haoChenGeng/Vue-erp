@@ -431,13 +431,13 @@
                     return
                 }
                 this.$router.push({
-                    path: '/finance/invoice-sales/view',
+                    path: '/tochat-finance/invoice-sales/view',
                     query: {id: rows[0]['id']}
                 })
             },
             doubleClick(row, event){
                 this.$router.push({
-                    path: '/finance/invoice-sales/view',
+                    path: '/tochat-finance/invoice-sales/view',
                     query: {id: row.id}
                 })
             },

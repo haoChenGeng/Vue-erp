@@ -301,7 +301,7 @@
 
             },
             closeDialog(){
-                this.$router.push({path: '/finance/page-cost-domain-config'})
+                this.$router.push({path: '/tochat-finance/page-cost-domain-config'})
             },
             getFormDataByEditType()
             {

@@ -304,13 +304,13 @@
                     return
                 }
                 this.$router.push({
-                    path: '/finance/invoice-info/view',
+                    path: '/tochat-finance/invoice-info/view',
                     query:{id: rows[0]['id']}
                 })
             },
             on_add(){
                 this.$router.push({
-                    path: '/finance/invoice-info/edit'
+                    path: '/tochat-finance/invoice-info/edit'
                 })
             },
             showImgDialog(data, index, name){
@@ -329,7 +329,7 @@
             },
             doubleClick(row, event){
                 this.$router.push({
-                    path: '/finance/invoice-info/view',
+                    path: '/tochat-finance/invoice-info/view',
                     query:{id: row.id}
                 })
             },

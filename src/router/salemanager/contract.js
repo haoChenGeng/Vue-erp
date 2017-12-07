@@ -6,7 +6,7 @@ const contractList = resolve => require(['src/views/m-salemanager/contract-verif
 const contractDetail = resolve => require(['src/views/m-salemanager/contract-verify/page-contract-detail.vue'], resolve);
 const routes = [
     {
-        path: '/sale-manage',
+        path: '/tochat-sale-manage',
         component: Console,
         children: [
             {path: 'contract-list', component: contractList, meta: {isFulldialog:false, title: '合同审核'}},

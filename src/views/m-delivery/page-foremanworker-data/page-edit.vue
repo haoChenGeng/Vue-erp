@@ -562,7 +562,7 @@ export default {
                             this.$message.error('只有暂存或审核被驳回的工人、工长才能进行编辑')
                             return
              }
-            this.$router.replace({ path: '/delivery/foremanworker/edit',query:{id: this.$route.query.id} })
+            this.$router.replace({ path: '/tochat-delivery/foremanworker/edit',query:{id: this.$route.query.id} })
         },
         dimissionUploadSuccess(response, file, fileList){
             if(response.status == 200){

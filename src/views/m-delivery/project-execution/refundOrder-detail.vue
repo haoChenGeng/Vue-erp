@@ -189,7 +189,7 @@
                 // 附表tab默认激活页
                 subActiveTab: 'refundOrderItem',
                 // 点击关闭后的返回route
-                goBackRoute: '/delivery/refundOrder-index',
+                goBackRoute: '/tochat-delivery/refundOrder-index',
                 // popup配置
                 item: {
                     name: 'demandOrderCode',

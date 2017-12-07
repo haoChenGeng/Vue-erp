@@ -192,7 +192,7 @@
                 this.$emit('getReconIds', ids);
             },
             closeDialog() {
-                this.$router.push({ path: '/finance/page-purchase-invoice'})
+                this.$router.push({ path: '/tochat-finance/page-purchase-invoice'})
                 this.$emit('close')
             },
             submitSearch(obj){

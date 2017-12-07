@@ -17,7 +17,7 @@ const PageInventoryAdjustmentNote = resolve => require(['src/views/m-finance/pag
 
 
 const routes = [{
-    path: '/finance',
+    path: '/tochat-finance',
     component: Console,
     children: [
         //应付核算-采购发票

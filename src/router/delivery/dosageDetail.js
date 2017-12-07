@@ -7,7 +7,7 @@ const dosageDetail = resolve => require(['src/views/m-delivery/dosageDetail/inde
 //用量明细
 const routes = [
     {
-        path: '/delivery',
+        path: '/tochat-delivery',
         component: Console,
         children: [
             { path: 'dosage-detail', meta: { isFulldialog:false, title: '项目用量明细' }, component: dosageDetail },

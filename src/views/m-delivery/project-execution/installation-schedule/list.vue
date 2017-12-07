@@ -317,7 +317,7 @@
                      return
                 }
                 let row = rows[0]
-                this.$router.push({ path: '/delivery/installation-ducuments-view' ,query:{planId: row['id']}})
+                this.$router.push({ path: '/tochat-delivery/installation-ducuments-view' ,query:{planId: row['id']}})
             },
             handleRowDblclick(row){
                 this.$router.push({ path: "/delivery/installation-view",query:{id: row['id']} })

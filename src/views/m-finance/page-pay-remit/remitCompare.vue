@@ -101,7 +101,7 @@
                 this.$router.push()
             },
             closeDialog() {
-                this.$router.push({ path: '/finance/page-pay-remit'})
+                this.$router.push({ path: '/tochat-finance/page-pay-remit'})
                 this.$emit('close')
             },
         }

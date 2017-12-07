@@ -8,7 +8,7 @@ const InvoicesSalesView = resolve => require(['../../views/m-finance/accounts-re
 
 
 const routes = [{
-    path: '/finance',
+    path: '/tochat-finance',
     component: Console,
     children: [
         { path: 'service-type-configuration', meta: {isFulldialog: false,title: '财务配置管理'}, component: ServiceTypeConfiguration },

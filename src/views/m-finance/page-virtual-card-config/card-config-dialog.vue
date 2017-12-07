@@ -195,7 +195,7 @@
         },
         methods: {
             closeDialog(){
-                this.$router.push({path: '/finance/page-virtual-card-config'})
+                this.$router.push({path: '/tochat-finance/page-virtual-card-config'})
             },
             getFormDataByEditType()
             {

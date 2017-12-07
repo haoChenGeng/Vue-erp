@@ -35,6 +35,15 @@ import om from './operationdata/index.js'
 
 let routes = []
 
+// 开发环境跳转登录页
+
+if (debug === true) {
+    routes = routes.concat(login)
+    routes.push({
+        path: '/',
+        redirect: '/login'
+    })
+}
 routes = routes.concat(
     forbidden,
     system,
@@ -94,6 +103,7 @@ router.afterEach(route => {
 })
 
 function routerAlert(route) {
+    console.log(route)
     if (debug && route.meta.auth !== false && route.meta.isFulldialog !== true && route.meta.isFulldialog !== false) {
         let _url = 'http://192.168.1.156:3000/kai-fa-zhi-nan/lu-you-shi-yong-gui-fan.html'
         Vue.prototype.$confirm('此页面路由写法不规范<br><a href="' + _url + '" target="_blank">到这里查看规范</a>', '警告', {

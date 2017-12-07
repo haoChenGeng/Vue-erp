@@ -12,7 +12,7 @@ const PageRecordDetail = resolve => require(['src/views/m-delivery/broadcast-rec
 const routes = [
     //工期配置
     {
-        path: '/delivery',
+        path: '/tochat-delivery',
         component: Console,
         children: [
             { path: 'page-duration-detail', meta: { isFulldialog:true,title: '查看工期' }, component:PageDurationDetail},

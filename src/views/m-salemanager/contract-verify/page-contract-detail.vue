@@ -439,7 +439,7 @@
                 // 附表tab默认激活页
                 subActiveTab: '',
                 // 点击关闭后的返回route
-                goBackRoute: '/sale-manage/contract-list',
+                goBackRoute: '/tochat-sale-manage/contract-list',
                 sourceMap: {},
                 columns: {},
 

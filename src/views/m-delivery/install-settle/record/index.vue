@@ -317,7 +317,7 @@
                     this.$message.error('结算单审核状态错误！');
                 }else{
                     this.$router.push({
-                        path: '/delivery/settle-record/verify',
+                        path: '/tochat-delivery/settle-record/verify',
                         query: {processId: selections[0].processId}
                     })
                 }
@@ -330,7 +330,7 @@
                     this.$message.error('只能选择一行进行查看！');
                 }else{
                     this.$router.push({
-                        path: '/delivery/settle-record/install-detail',
+                        path: '/tochat-delivery/settle-record/install-detail',
                         query: {id: selections[0].id, billCode: selections[0].billCode,type: 'view'}
                     })
                 }

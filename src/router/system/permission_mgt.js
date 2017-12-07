@@ -11,7 +11,7 @@ const Whitelist = resolve => require(['src/views/m-system/permission-whitelist/i
 const routes = [
     // 系统管理
     {
-        path: '/system',
+        path: '/tochat-system',
         component: Console,
         children: [
             {path: 'permission', meta: { isFulldialog: false, title: '权限管理'}, component: permission},

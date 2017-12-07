@@ -193,13 +193,13 @@
                 this.$refs['list-view'].disableBySymbol(symbol)
             },
             onCreate (symbol, event){
-               // this.$router.push({path: '/procenter/create-workflow'})
+               // this.$router.push({path: '/tochat-procenter/create-workflow'})
                 this.createDialogVisible=true
             },
             onEdit (symbol, event){
                 if(this.checkIfSelectWorkflow()){
                     /*let args = {
-                        path: '/procenter/workflow/edit',
+                        path: '/tochat-procenter/workflow/edit',
                         query: {
                             id: this.selectWFId,
                             identifyKey: this.identifyKey
@@ -212,7 +212,7 @@
             onCheck (symbol, event){
                 if(this.checkIfSelectWorkflow()){
                    /* let args = {
-                        path: '/procenter/see-workflow',
+                        path: '/tochat-procenter/see-workflow',
                         query: {
                             id: this.selectWFId
                         }
@@ -271,7 +271,7 @@
             onVersionControl (symbol, event){
                 if(this.checkIfSelectWorkflow()){
                     let args = {
-                        path: '/procenter/version-workflow',
+                        path: '/tochat-procenter/version-workflow',
                         query: {
                             id: this.selectWFId,
                             procName: this.procName,

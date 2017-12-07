@@ -150,8 +150,8 @@
         data() {
             return {
                 isDialogShow: true,
-                goBackRoute: '/worker/sign-manage',
-                previewRoute: '/worker/sign-manage/preview',
+                goBackRoute: '/tochat-worker/sign-manage',
+                previewRoute: '/tochat-worker/sign-manage/preview',
                 mainActiveTab: 'tab1',
                 id: null,
                 projectId: null,

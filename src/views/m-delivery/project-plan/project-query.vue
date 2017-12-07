@@ -188,7 +188,7 @@
             //查看详情
             showDetail: function (id, name) {
                 this.$router.push({
-                    path: '/delivery/project-show',
+                    path: '/tochat-delivery/project-show',
                     query: {id: id}
                 })
             },
@@ -281,7 +281,7 @@
                     return
                 }
                 this.$router.push({
-                    path: '/delivery/template-ref',
+                    path: '/tochat-delivery/template-ref',
                     query: {refId: rows[0]['id'], scheduleName: rows[0]['name']}
                 })
                 // this.$msgbox({

@@ -1159,7 +1159,7 @@
                 this.quoteOrderInfo = {}
             },
             closeQuoteOrderDialog: function (){
-                this.$router.push('/worker/quote-project-list')
+                this.$router.push('/tochat-worker/quote-project-list')
             },
             closeSelectSkuDialog: function (){
                 this.selectSkuVisible = false
@@ -1169,7 +1169,7 @@
             },
 
             jumpToQuoteOrderDetail: function (){
-                this.$router.push({path:'/worker/quote-order-detail',query:{'yid':this.yid}})
+                this.$router.push({path:'/tochat-worker/quote-order-detail',query:{'yid':this.yid}})
             },
             //获取户型数据
             getHouseTypes: function (){

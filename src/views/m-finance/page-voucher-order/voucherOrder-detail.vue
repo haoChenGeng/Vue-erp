@@ -150,7 +150,7 @@
             return {
                 id: null,
                 mode: "",
-                sourceItemRoute: '/finance/page-voucher-order/detail/sourceItem',
+                sourceItemRoute: '/tochat-finance/page-voucher-order/detail/sourceItem',
                 // 主表绑定数据源
                 dataSource: {
                     organizationName: null,
@@ -201,7 +201,7 @@
                 // 附表的附表默认激活页
                 thirdActiveTab: '',
                 // 点击关闭后的返回route
-                goBackRoute: '/finance/page-voucher-order',
+                goBackRoute: '/tochat-finance/page-voucher-order',
                 sourceMap: {},
                 columns: {},
                 data: ''

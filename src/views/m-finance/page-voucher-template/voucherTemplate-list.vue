@@ -44,9 +44,9 @@
                 // 面包屑
                 breadcrumbData: [{title: '财务'}, {title: '财务基础配置'}, {title: '凭证模版设置'}],
                 // 详情页路由地址
-                viewRoute:'/finance/page-voucher-template/view',// 查看按钮
-                editRoute:'/finance/page-voucher-template/edit',// 编辑按钮
-                addRoute:'/finance/page-voucher-template/add',// 新增按钮
+                viewRoute:'/tochat-finance/page-voucher-template/view',// 查看按钮
+                editRoute:'/tochat-finance/page-voucher-template/edit',// 编辑按钮
+                addRoute:'/tochat-finance/page-voucher-template/add',// 新增按钮
                 // service 和 method 目前需要加密
                 service: '9wjmWM9cR44vZeERRK2R3Z4Tye3fdrq', // /biz/t8t-fi-fvg/app
                 method: 'gZlVd8SuQ0q75b4TXdnXoOXxsddRYPlJ4bJ7k26WMIaZAAF', // views.voucherTemplate.queryPage

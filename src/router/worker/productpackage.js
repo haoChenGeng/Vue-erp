@@ -9,7 +9,7 @@ const ProductPackageTemplateBase = resolve => require(['src/views/m-worker/quote
 const routes = [
     //交付
     {
-        path: '/productpackage',
+        path: '/tochat-productpackage',
         component: Console,
         children: [
             { path: 'showlist', meta: { title: '产品包',isFulldialog:false}, component: ProductPackageTemplateBase},

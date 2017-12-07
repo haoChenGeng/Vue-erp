@@ -251,7 +251,7 @@ import Cookie from 'js-cookie'
             },
             closeDialog() {
                 // 填写对应的路由
-                this.$router.push({ path: '/delivery/distribution-plan' })
+                this.$router.push({ path: '/tochat-delivery/distribution-plan' })
             },
             onChange(val, name){
                 this.formData.applyId= val

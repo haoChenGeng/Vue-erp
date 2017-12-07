@@ -8,7 +8,7 @@ const Audit = resolve => require(['src/views/m-delivery/page-foremanworker-data/
 const routes = [
     //交付
     {
-        path: '/delivery',
+        path: '/tochat-delivery',
         component: Console,
         children: [
             { path: 'foremanworker-list', meta: { isFulldialog:false, title: '工长管理' }, component: PageForemanworkerList},

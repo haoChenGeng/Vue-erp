@@ -15,7 +15,7 @@ const InstallationDucumentsCost = resolve => require(['src/views/m-delivery/proj
 const routes = [
     //交付
     {
-        path: '/delivery',
+        path: '/tochat-delivery',
         component: Console,
         children: [
         	{ path: 'installtion-schedule-list', meta: { isFulldialog:false, title: '安装调度' }, component: InstalltionScheduleList},

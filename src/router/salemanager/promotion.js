@@ -11,7 +11,7 @@ const DiscountApproveBills = resolve => require(['src/views/m-salemanager/promot
 const DiscountApproveBillsAdd = resolve => require(['src/views/m-salemanager/promotion/discount-approve-bills/discount-approve-bills-add.vue'], resolve)
 
 const routes = [{
-    path: '/salemanager',
+    path: '/tochat-salemanager',
     component: Console,
     children: [
         { path: 'cash-discount', meta: {isFulldialog:false, title: '现金优惠' }, component: CashDiscount},

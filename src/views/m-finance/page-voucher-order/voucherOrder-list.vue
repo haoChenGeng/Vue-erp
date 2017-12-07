@@ -47,7 +47,7 @@
                 // 面包屑
                 breadcrumbData: [{title: '财务'}, {title: '财务月结'}, {title: '凭证查询'}],
                 // 详情页路由地址
-                detailRoute: '/finance/page-voucher-order/detail',
+                detailRoute: '/tochat-finance/page-voucher-order/detail',
                 // service 和 method 目前需要加密
                 service: 'N7MleTA0MHTcaUUxIqAYpQ5BwNDA-dv', // /biz/t8t-fi-fvg/app
                 method: 'JFijjU.0FoZektStIbBZc5eVETpIg_xR-BzLt7kRMs8', // voucherOrder.queryPage

@@ -137,7 +137,7 @@
                     let pmId = selections[0].pmId
                     let pmName = selections[0].pmName
                     this.$router.push({
-                        path: '/finance/deposit-list/deposit-detail',
+                        path: '/tochat-finance/deposit-list/deposit-detail',
                         query: {
                             orgName: orgName,
                             pmId: pmId,

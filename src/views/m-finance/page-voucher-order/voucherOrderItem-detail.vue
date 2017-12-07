@@ -97,7 +97,7 @@
         data(){
 
             return {
-                sourceItemRoute: '/finance/page-voucher-order/detail/sourceItem',
+                sourceItemRoute: '/tochat-finance/page-voucher-order/detail/sourceItem',
                 id: null,
                 editMode:'cell',
                 accountId:+Cookie.get('t8t-tc-uid'),
@@ -501,7 +501,7 @@
             closeDialog(){
                 //this.$router.go(0)
                 this.dialogVisible = false
-                this.$router.push('/finance/page-voucher-order')
+                this.$router.push('/tochat-finance/page-voucher-order')
             },
 
         }

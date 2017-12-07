@@ -45,7 +45,7 @@
                 // 面包屑
                 breadcrumbData: [{ title: '财务' },{ title: '资金管理' },{ title: '账户余额' }],
                 // 详情页路由地址
-                detailRoute: '/finance/accAccountBalance-detail',
+                detailRoute: '/tochat-finance/accAccountBalance-detail',
                 // service 和 method 目前需要加密
                 service: Service.ACC_ACCOUNT_CONFIG.name, // /biz/t8t-fi-acc/app
                 method: Service.ACC_ACCOUNT_CONFIG.methods.BALANCE_QUERYPAGE, // views.account.queryPage
@@ -110,7 +110,7 @@
             handleRowDbClick(row) {
                 debugger
                 this.$router.push({
-                    path: '/finance/accAccountBalance-detail',
+                    path: '/tochat-finance/accAccountBalance-detail',
                     query: {
                         //账户id
                         accountId: row.id,

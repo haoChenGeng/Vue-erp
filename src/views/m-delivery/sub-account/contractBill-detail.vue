@@ -207,7 +207,7 @@
                 // 附表tab默认激活页
                 subActiveTab: '',
                 // 点击关闭后的返回route
-                goBackRoute: '/delivery/sub-account/contractBill-list',
+                goBackRoute: '/tochat-delivery/sub-account/contractBill-list',
                 sourceMap: {},
                 columns: {},
                 accountItem: 'tab_0',

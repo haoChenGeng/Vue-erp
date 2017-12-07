@@ -360,7 +360,7 @@
             },
             closeDialog() {
                 // 填写对应的路由
-                //this.$router.push({ path: '/delivery/yanshou-bill' })
+                //this.$router.push({ path: '/tochat-delivery/yanshou-bill' })
                 this.$router.go(-1)
             },
             handleTabClick(tab,e){

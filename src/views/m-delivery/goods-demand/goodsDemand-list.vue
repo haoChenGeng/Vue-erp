@@ -81,9 +81,9 @@
             };
             return {
                 // 详情页路由地址
-                detailRoute: '/delivery/demand-view',
-                receiptsRoute: '/delivery/demand-receipts',
-                editRoute: '/delivery/demand-receipts',
+                detailRoute: '/tochat-delivery/demand-view',
+                receiptsRoute: '/tochat-delivery/demand-receipts',
+                editRoute: '/tochat-delivery/demand-receipts',
 
                 // service 和 method 目前需要加密
                 service: Service.DEMAND.name,
@@ -254,7 +254,7 @@
                         return false
                     }
                     if(selections[0].replenishType == 1 && selections[0].orderStatus == 5){
-                        this.$router.push({path: '/delivery/demand-edit', query: {id:selections[0].id}})
+                        this.$router.push({path: '/tochat-delivery/demand-edit', query: {id:selections[0].id}})
                     }else{
                         this.$router.push({path: this.editRoute, query: {"mode": "edit",id:selections[0].id}})
                     }

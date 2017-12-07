@@ -12,7 +12,7 @@ const PageInventoryAccountingItem = resolve => require(['src/views/m-finance/pag
 const PageTransceiverDepositBooks = resolve => require(['src/views/m-finance/page-transceiver-deposit-books/page-transceiver-deposit-books.vue'], resolve)
 
 const routes = [{
-    path: '/finance',
+    path: '/tochat-finance',
     component: Console,
     children: [
         { path: 'page-cost-domain-config', meta: { isFulldialog: false, title: '存货核算成本域配置' }, component: PageCostDomainConfig },

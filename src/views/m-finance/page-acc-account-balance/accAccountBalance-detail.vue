@@ -45,7 +45,7 @@
                 // 面包屑
                 breadcrumbData: [{ title: '财务' },{ title: '资金管理' },{ title: '账户余额明细' }],
                 // 详情页路由地址
-                detailRoute: '/finance/accAccountBalance-detail',
+                detailRoute: '/tochat-finance/accAccountBalance-detail',
                 // service 和 method 目前需要加密
                 service: Service.ACC_ACCOUNT_CONFIG.name, // /biz/t8t-fi-acc/app
                 method: Service.ACC_ACCOUNT_CONFIG.methods.TRANSACTION_FINDBYID, // views.transaction.record.findById

@@ -503,8 +503,8 @@
                             if( !this.isEmpty(res.data.result) && this.isEmpty(this.orderId) ){
                                 this.orderId = res.data.result
 
-                                this.$router.push({path:'/worker/quote-changeorder-detail',query:{'yid':this.yid,'orderId':this.orderId}})
-                                //this.$router.push({path:'/worker/quote-changeorder-list',query:{'yid':this.yid,'orderId':this.orderId}})
+                                this.$router.push({path:'/tochat-worker/quote-changeorder-detail',query:{'yid':this.yid,'orderId':this.orderId}})
+                                //this.$router.push({path:'/tochat-worker/quote-changeorder-list',query:{'yid':this.yid,'orderId':this.orderId}})
                             }
 
                             this.delVariationItemIds = []
@@ -621,7 +621,7 @@
                         type: 'success',
                         'message': '提交成功',
                         callback:function (){
-                            _this.$router.push('/worker/quote-changeorder-list')
+                            _this.$router.push('/tochat-worker/quote-changeorder-list')
                         }
                     })
                 }).catch(e => {
@@ -941,7 +941,7 @@
             },
 
             closeQuoteChangeOrderDialog(){
-                this.$router.push('/worker/quote-changeorder-list')
+                this.$router.push('/tochat-worker/quote-changeorder-list')
                 //this.$emit('close')
             },
 

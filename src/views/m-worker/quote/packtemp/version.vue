@@ -193,7 +193,7 @@
 
             closeDialog(){
                 this.dialogVisible = false
-                this.$router.push('/worker/quote-packtemp-index')
+                this.$router.push('/tochat-worker/quote-packtemp-index')
             },
             submitSearch(objForm) {
                 let obj = Object.assign({},objForm)
