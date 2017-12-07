@@ -35,15 +35,12 @@ import om from './operationdata/index.js'
 
 let routes = []
 
-// 开发环境跳转登录页
+// 只输入域名是，跳转到/index
+routes.push({
+    path: '/',
+    redirect: '/index'
+})
 
-if (debug === true) {
-    routes = routes.concat(login)
-    routes.push({
-        path: '/',
-        redirect: '/login'
-    })
-}
 routes = routes.concat(
     forbidden,
     system,
@@ -70,6 +67,7 @@ router.beforeEach((to, from, next) => {
     if (to.meta.auth === false || ['/login/','/login'].indexOf(to.path) > -1 || debug === true) {
         return next()
     }
+
     // 鉴权页面
     let args = {
         ticket: Cookie.get('t8t-tc-ticket'),
