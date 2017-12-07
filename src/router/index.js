@@ -35,16 +35,6 @@ import om from './operationdata/index.js'
 
 let routes = []
 
-// 开发环境跳转登录页
-
-if (debug === true) {
-    routes = routes.concat(login)
-    routes.push({
-        path: '/',
-        redirect: '/login'
-    })
-}
-
 routes = routes.concat(
     forbidden,
     system,
@@ -68,7 +58,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     // 不需要鉴权页面可以直接跳转
-    if (to.meta.auth === false || debug === true) {
+    if (to.meta.auth === false || ['/login/','/login'].indexOf(to.path) > -1 || debug === true) {
         return next()
     }
     // 鉴权页面
