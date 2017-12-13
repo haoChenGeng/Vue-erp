@@ -1,0 +1,18 @@
+.pay-dialog .el-dialog {
+    width: 450px;
+}
+
+.el-select-dropdown__wrap {
+    max-height: 185px !important;
+}
+
+.pay-dialog .el-form-item__content {
+    width: 254px;
+}
+
+.pay-dialog .el-select {
+    width: 100%;
+}
+.pay-dialog .el-dialog__body {
+    padding: 30px 40px;
+}
