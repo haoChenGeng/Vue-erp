@@ -13,10 +13,10 @@
                     <i class="el-icon-caret-bottom"></i>
                 </div>
                 <el-dropdown-menu slot="dropdown" class="app-header-dropdown">
-                    <el-dropdown-item @click.native="navToProfile" class="img-container">
+                    <!--<el-dropdown-item @click.native="navToProfile" class="img-container">
                         <img src="./img/icon1.png" width="13" class="img">
                         <span>个人信息</span>
-                    </el-dropdown-item>
+                    </el-dropdown-item>-->
                     <el-dropdown-item @click.native="dialogVisible = true" class="img-container">
                         <img src="./img/icon2.png" width="13" class="img">
                         <span>修改密码</span>
