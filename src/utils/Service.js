@@ -7,7 +7,10 @@ let Services = {
 		methods: {
 			// account相关
 			// account.login
-			LOGIN: 'NMDtf8eMjm2vxjQ7iTtfWF1',
+			//LOGIN: 'NMDtf8eMjm2vxjQ7iTtfWF1',
+            
+            // views.user.login
+            LOGIN: 'BaKVOtIClYCLEYCHaQPY_NPFwgx',
 			// account.findById
 			AC_FIND_BY_ID: 'rsgo1AdIwBKC97fdMtq9pcvTFna',
 			// account.changePassword

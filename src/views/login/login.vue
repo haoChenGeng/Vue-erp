@@ -93,14 +93,15 @@
                 this.$refs[formName].validate((isValid) => {
                     if (!isValid) return false
                     var args = {
-                        name: this.ruleForm.username,
-                        password: md5(this.ruleForm.password)
+                        loginField: this.ruleForm.username,
+                        password: md5(this.ruleForm.password),
+                        appName:'tuchat-pc'
                     }
                     api.account.login(args)
                         .then((res) => {
                            if (res.data.status === 200) {
                                 // 设置用户cookie
-                                Cookie.set('t8t-tc-ticket', res.data.result.tickets.erp.value)
+                                Cookie.set('t8t-tc-ticket', res.data.result.tickets['tuchat-pc'].value)
                                 Cookie.set('t8t-tc-uid', res.data.result.user.id)
                                 Cookie.set('t8t-tc-username', res.data.result.user.name)
                                 // 跳转登录
