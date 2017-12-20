@@ -98,7 +98,7 @@ let debitChannel = {
         })
     },
     statusUpdate(args) {
-         return axios({
+        return axios({
             method: Service.DEBITCHANNEL.methods.STATUSUPDATE,
             service: Service.DEBITCHANNEL.name,
             args: args
@@ -114,14 +114,14 @@ let debitWayDistribution = {
             args: args
         })
     },
-    statusUpdate(args){
+    statusUpdate(args) {
         return axios({
             method: Service.DEBITWAYDISTRIBUTION.methods.STATUSUPDATE,
             service: Service.DEBITWAYDISTRIBUTION.name,
             args: args
         })
     },
-    create(args){
+    create(args) {
         return axios({
             method: Service.DEBITWAYDISTRIBUTION.methods.CREATE_ALLOT,
             service: Service.DEBITWAYDISTRIBUTION.name,
@@ -241,6 +241,15 @@ let baseData = {
         })
     }
 }
+let newaccount = {
+    checkCertificate(args) {
+        return axios({
+            method: Service.NEWACCOUNT.methods.CHECK_CERTIFICATE,
+            service: Service.NEWACCOUNT.name,
+            args: args
+        })
+    }
+}
 
 let api = {
     organization,
@@ -252,7 +261,8 @@ let api = {
     debitWayDistribution,
     fundPurpose,
     employee,
-    baseData
+    baseData,
+    newaccount
 }
 
 export default api

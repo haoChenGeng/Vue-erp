@@ -169,6 +169,7 @@
 
     .login-logo {
         margin: 70px auto 30px;
+        border-radius: 30px;
     }
 
     .input-group {

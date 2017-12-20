@@ -2,14 +2,14 @@
     <div class="app-header">
         <div class="erp-header-left">
             <a href="javascript: void 0;" class="erp-logo">
-                <img src="./img/erp_logo.png">
+                <img src="./img/logo.png">
             </a>
         </div>
         <div class="erp-header-right">
             <el-dropdown>
                 <div class="erp-header-user-info">
-                    <img src="./img/logo.png" height="200" width="200" class="erp-header-avatar">
-                    <span class="erp-header-user-name">{{username}}</span>
+                    <!--<img src="./img/icon1.png" height="200" width="200" class="erp-header-avatar">-->
+                    <span class="erp-header-user-name">{{username}} ( {{comname}} )</span>
                     <i class="el-icon-caret-bottom"></i>
                 </div>
                 <el-dropdown-menu slot="dropdown" class="app-header-dropdown">
@@ -62,6 +62,7 @@
         data() {
 
             let username = Cookie.get('t8t-tc-username')
+            let comname = Cookie.get('t8t-tc-comname')
 
             var checkPass2 = (rule, value, callback) => {
                 if (value !== this.form.password1) {
@@ -71,6 +72,7 @@
             }
             return {
                 username: username,
+                comname:comname,
                 dialogVisible: false,
                 form: {
                     password: '',
@@ -136,6 +138,7 @@
                 Cookie.remove('t8t-tc-ticket')
                 Cookie.remove('t8t-tc-uid')
                 Cookie.remove('t8t-tc-username')
+                Cookie.remove('t8t-tc-comname')
                 Utils.redirectLoginPage()
             }
         }
@@ -151,7 +154,7 @@
     }
 
     .erp-header-left {
-        width: 200px;
+        width: 100px;
     }
 
     .erp-header-right {

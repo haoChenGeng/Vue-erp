@@ -117,6 +117,16 @@ let Services = {
             // goods.queryGoodsTreeByGroup  商品数信息
             QUERYGOODSTREE: '0RmGFxzZLG7B4N_e8IQY_3.6eoeD9AxN65OBRsd',
         }
+    },
+    // 新账户服务
+    NEWACCOUNT: {
+        // /biz/t8t-sys-acc/app
+        name: 'PpKvmV96W9EfRrok8WJnLzDepPHXGbI',
+        methods: {
+            // account.checkCertificate
+            CHECK_CERTIFICATE: 'JynA0lEHJgqP3wh-7PDP-W4BuCHV-PN2I9C',
+        }
+
     }
 }
 

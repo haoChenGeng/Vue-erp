@@ -31,6 +31,10 @@ Vue.use(T8tElementUI)
 
 import Filter from './utils/filter'
 
+// 网关sdk
+import http from 'src/utils/http.js'
+Vue.prototype.$http = http
+
 Vue.config.silent = true
 Vue.config.errorHandler = function(err, vm) {
     console.log(err, vm)
