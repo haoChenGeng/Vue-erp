@@ -91,9 +91,9 @@ router.beforeEach((to, from, next) => {
 router.afterEach(route => {
     let title
     if (route.meta.title) {
-        title = route.meta.title + ' - 土巴兔装修公司'
+        title = route.meta.title + ' - 兔信商家后台'
     } else {
-        title = '土巴兔装修公司'
+        title = '兔信商家后台'
     }
     document.title = title
         // 本地开发路由弹窗提示
