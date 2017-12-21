@@ -205,10 +205,15 @@
             }
         },
         created() {
-            api.account.listMenuTree({accountId: Cookie.get('t8t-tc-uid')})
+            api.account.listMenuTree({accountId: Cookie.get('t8t-tc-uid'),sysCode:"DSP"})
                 .then(res => {
                     if (res.data.status === 200) {
                         let temp = res.data.result || []
+
+                        if(temp.length){
+                            //树的第一级是根节点不需要展示, 取其下的项目作为菜单
+                            temp = temp[0].items
+                        }
 
                         let item1 = {
                             index: "1-101",
