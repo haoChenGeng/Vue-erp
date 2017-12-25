@@ -36,29 +36,23 @@ const PageDeliveryMeasureDetail = resolve => require(['src/views/m-delivery/meas
 //工费项词典
 const DictionaryIndex = resolve => require(['src/views/m-delivery/base-data/dictionary/index.vue'], resolve)
 //工费项定额
-const QuotaIndex = resolve => require(['src/views/m-delivery/base-data/quota/index.vue'],resolve)
+const QuotaIndex = resolve => require(['src/views/m-delivery/base-data/quota/index.vue'], resolve)
 
 //配送计划
-const DeliveryPlan = resolve => require(['src/views/m-delivery/project-execution/deliver-plan/deliverInstallPlan-list.vue'],resolve)
-const MasterReported = resolve => require(['src/views/m-delivery/project-execution/deliver-plan/master-reported.vue'],resolve)
-const DeliveryPlanDetail = resolve => require(['src/views/m-delivery/project-execution/deliver-plan/deliverInstallPlan-detail.vue'],resolve)
+const DeliveryPlan = resolve => require(['src/views/m-delivery/project-execution/deliver-plan/deliverInstallPlan-list.vue'], resolve)
+const MasterReported = resolve => require(['src/views/m-delivery/project-execution/deliver-plan/master-reported.vue'], resolve)
+const DeliveryPlanDetail = resolve => require(['src/views/m-delivery/project-execution/deliver-plan/deliverInstallPlan-detail.vue'], resolve)
 
 //发包核算
-const ContractBillList = resolve => require(['src/views/m-delivery/sub-account/contractBill-list.vue'],resolve)
-const ContractBillDetail = resolve => require(['src/views/m-delivery/sub-account/contractBill-detail.vue'],resolve)
+const ContractBillList = resolve => require(['src/views/m-delivery/sub-account/contractBill-list.vue'], resolve)
+const ContractBillDetail = resolve => require(['src/views/m-delivery/sub-account/contractBill-detail.vue'], resolve)
 
 
 //节点变更记录
-const PageProjectNodeModifyQuery = resolve => require(['src/views/m-delivery/project-plan/projectNodeModifyRecord-list.vue'],resolve)
+const PageProjectNodeModifyQuery = resolve => require(['src/views/m-delivery/project-plan/projectNodeModifyRecord-list.vue'], resolve)
 //节点-项目状态管理
-const NodeProjectList = resolve => require(['src/views/m-delivery/base-data/pro-status/index.vue'],resolve)
+const NodeProjectList = resolve => require(['src/views/m-delivery/base-data/pro-status/index.vue'], resolve)
 
-const GoodsDemandList = resolve => require(['src/views/m-delivery/goods-demand/list.vue'], resolve)
-const GoodsDemandDetail = resolve => require(['src/views/m-delivery/goods-demand/goodsDemand-detail.vue'], resolve)
-const GoodsDemandReceipts = resolve => require(['src/views/m-delivery/goods-demand/receiptsDialog.vue'], resolve)
-const GoodsDemandEdit = resolve => require(['src/views/m-delivery/goods-demand/editDialog.vue'], resolve)
-const GoodsDemandApprove = resolve => require(['src/views/m-delivery/goods-demand/approveDialog.vue'], resolve)
-const DemandProjectsDetail = resolve => require(['src/views/m-delivery/goods-demand/projectDetail.vue'], resolve)
 //客服配置 暂时不上线
 const PageCustomerOrderConfig = resolve => require(['src/views/m-delivery/page-customer-service-config/page-order-config.vue'], resolve)
 const PageCustomerAssignConfig = resolve => require(['src/views/m-delivery/page-customer-service-config/page-assign-config.vue'], resolve)
@@ -90,77 +84,61 @@ const ProjectDetail1 = resolve => require(['src/views/m-delivery/project/detail.
 
 //要货批次配置
 const GoodsDemandSetting = resolve => require(['src/views/m-delivery/goods-demand/setting.vue'], resolve)
+
 const routes = [
     //交付
     {
         path: '/tuchat-delivery',
         component: Console,
         children: [
-            { path: 'template-base', meta: { isFulldialog:false, title: '排期模板维护' }, component: PageDeliveryTemplateBase},
-            { path: 'template-detail', meta: { isFulldialog:true, title: '排期模板维护' }, component: PageDeliveryTemplateDetail },
-            { path: 'node-attribute', meta: { isFulldialog:true ,title: '排期模板维护' }, component: PageDeliveryNodeAttribute },
-            { path: 'template-ref', meta: { isFulldialog:true ,title: '查看排期模板引用' }, component: PageDeliveryTemplateRef },
-            { path: 'project-list', meta: { isFulldialog: false, title: '项目进度管理' }, component: PageDeliveryProjectList},
-            { path: 'project-detail', meta: { isFulldialog: true ,title: '项目进度管理' }, component: ProjectDetail },
-            { path: 'project-report', meta: { isFulldialog: false ,title: '交付监控报表' }, component: ProjectReport },
-            { path: 'project-query', meta: { isFulldialog:false, title: '项目综合查询' }, component:PageDeliveryProjectQuery },
-            { path: 'project-show', meta: { isFulldialog:true, title: '项目综合查询' }, component: PageDeliveryProjectShow },
-            { path: 'node-modify-query', meta: { isFulldialog:false, title: '节点变更查询' }, component: PageProjectNodeModifyQuery},
-            { path: 'node-project-status-list', meta: { isFulldialog: false, title: '项目状态管理' }, component: NodeProjectList},
-            { path: 'bills-entry', meta: { isFulldialog: false, title: '单据条目管理' }, component: BillsEntry},
-            { path: 'yanshou-bill', meta: { isFulldialog: false, title: '质检验收' }, component: YanShouBill},
-            { path: 'yanshou-detail', meta: { isFulldialog:true, title: '质检验收' }, component: YanShouDetail },
-            { path: 'yanshou-view', meta: { isFulldialog:true,  title: '质检验收' }, component: YanShouView },
+            { path: 'bills-entry', meta: { isFulldialog: false, title: '单据条目管理' }, component: BillsEntry },
+            { path: 'yanshou-bill', meta: { isFulldialog: false, title: '质检验收' }, component: YanShouBill },
+            { path: 'yanshou-detail', meta: { isFulldialog: true, title: '质检验收' }, component: YanShouDetail },
+            { path: 'yanshou-view', meta: { isFulldialog: true, title: '质检验收' }, component: YanShouView },
             { path: 'yanshou-project-detail', meta: { isFulldialog: true, title: '质检验收' }, component: YanshouProjectDetail },
-            { path: 'lockout-bill', meta: { isFulldialog:false ,title: '停工单' }, component: LockoutBill},
+            { path: 'lockout-bill', meta: { isFulldialog: false, title: '停工单' }, component: LockoutBill },
             { path: 'lockout-detail', meta: { isFulldialog: true, title: '停工单' }, component: LockoutDetail },
-            { path: 'lockout-verify', meta: { isFulldialog: true, title: '审核停工单' }, component: LockoutVerify},
-            { path: 'delay-bill', meta: { isFulldialog: false, title: '延期单' }, component: DelayBill},
+            { path: 'lockout-verify', meta: { isFulldialog: true, title: '审核停工单' }, component: LockoutVerify },
+            { path: 'delay-bill', meta: { isFulldialog: false, title: '延期单' }, component: DelayBill },
             { path: 'delay-detail', meta: { isFulldialog: true, title: '延期单' }, component: DelayDetail },
-            { path: 'delay-verify', meta: { isFulldialog: true, title: '审核延期单' }, component: DelayVerify},
+            { path: 'delay-verify', meta: { isFulldialog: true, title: '审核延期单' }, component: DelayVerify },
             { path: 'base-setting/accounts-index', meta: { isFulldialog: false, title: '核算发包配置' }, component: AccountsIndex },
             { path: 'base-setting/accounts-detail', meta: { isFulldialog: true, title: '核算发包配置' }, component: AccountsDetail },
-            { path: 'base-setting/shut-config', meta: { isFulldialog: false,title: '停工校验配置' }, component: ShutConfigIndex },
+            { path: 'base-setting/shut-config', meta: { isFulldialog: false, title: '停工校验配置' }, component: ShutConfigIndex },
             { path: 'base-data/fb-index', meta: { isFulldialog: false, title: '发包单价' }, component: FbIndex },
-	        { path: 'measure-list', meta: { isFulldialog: false,title: '主材测量单' }, component:PageDeliveryMeasure},
-            { path: 'measure-view', meta: { isFulldialog: true,title: '主材测量单' }, component: PageDeliveryMeasureDetail },
-            { path: 'measure-edit', meta: { isFulldialog: true, title: '主材测量单' }, component:PageDeliveryMeasureDetail },
+            { path: 'measure-list', meta: { isFulldialog: false, title: '主材测量单' }, component: PageDeliveryMeasure },
+            { path: 'measure-view', meta: { isFulldialog: true, title: '主材测量单' }, component: PageDeliveryMeasureDetail },
+            { path: 'measure-edit', meta: { isFulldialog: true, title: '主材测量单' }, component: PageDeliveryMeasureDetail },
             { path: 'measure-approval', meta: { isFulldialog: true, title: '主材测量单' }, component: PageDeliveryMeasureDetail },
-            { path: 'base-data/dictionary-index', meta: { isFulldialog: false, title: '工费项词典' }, component:DictionaryIndex},
-            { path: 'base-data/quota-index', meta: { isFulldialog: false, title: '工费项定额' }, component: QuotaIndex},
-            { path: 'sub-account/contractBill-list', meta: { isFulldialog: false ,title: '核算发包' }, component: ContractBillList},
+            { path: 'base-data/dictionary-index', meta: { isFulldialog: false, title: '工费项词典' }, component: DictionaryIndex },
+            { path: 'base-data/quota-index', meta: { isFulldialog: false, title: '工费项定额' }, component: QuotaIndex },
+            { path: 'sub-account/contractBill-list', meta: { isFulldialog: false, title: '核算发包' }, component: ContractBillList },
             { path: 'sub-account/contractBill-detail', meta: { isFulldialog: true, title: '核算发包' }, component: ContractBillDetail },
-            { path: 'distribution-plan', meta: { isFulldialog: false, title: '配送调度列表' },component: DeliveryPlan},
-            { path: 'distribution-plan/detail',meta: { isFulldialog: true, title: '配送调度详情' }, component: DeliveryPlanDetail },
-            { path: 'distribution-plan/master-reported', meta: { isFulldialog: true, title: '配送调度工长报备' },component: MasterReported},
-            { path: 'demand-list', meta: { isFulldialog: false, title: '工程下单' }, component:GoodsDemandList},
-            { path: 'demand-view', meta: { isFulldialog: true, title: '工程下单' }, component: GoodsDemandDetail },
-            { path: 'demand-receipts', meta: { isFulldialog: true, title: '工程下单' }, component: GoodsDemandReceipts },
-            { path: 'demand-edit', meta: { isFulldialog: true, title: '工程下单' }, component: GoodsDemandEdit },
-            { path: 'demand-approve', meta: { isFulldialog: true, title: '工程下单' }, component: GoodsDemandApprove },
-            { path: 'demand-projects-detail', meta: { isFulldialog: true, title: '工程下单' }, component: DemandProjectsDetail },
-            { path: 'customer-order-config', meta: { isFulldialog: false, title: '客服接单配置' }, component: PageCustomerOrderConfig},   //暂时不上线
-            { path: 'customer-assign-config', meta: { isFulldialog: false,title: '客服分配配置' }, component: PageCustomerAssignConfig},
-            { path: 'complaints-object-config', meta: { isFulldialog: false, title: '投诉对象配置' }, component: PageComplaintsObjectConfig},
-            { path: 'complaints-upgrade-config', meta: { isFulldialog: false, title: '投诉升级配置' }, component: PageComplaintsUpgradeConfig},
-            { path: 'complaints-manage-config', meta: { isFulldialog:false, title: '投诉管理配置' }, component: PageComplaintsManageList},
-            { path: 'complaints-manage-config-detail', meta: { isFulldialog: true,title: '投诉管理配置' }, component: PageComplaintsManageDetail },
-            { path: 'complaints-order-list', meta: { isFulldialog: false,title: '投诉管理' }, component: PageComplaintsOrderList},
+            { path: 'distribution-plan', meta: { isFulldialog: false, title: '配送调度列表' }, component: DeliveryPlan },
+            { path: 'distribution-plan/detail', meta: { isFulldialog: true, title: '配送调度详情' }, component: DeliveryPlanDetail },
+            { path: 'distribution-plan/master-reported', meta: { isFulldialog: true, title: '配送调度工长报备' }, component: MasterReported },
+            { path: 'customer-order-config', meta: { isFulldialog: false, title: '客服接单配置' }, component: PageCustomerOrderConfig },   //暂时不上线
+            { path: 'customer-assign-config', meta: { isFulldialog: false, title: '客服分配配置' }, component: PageCustomerAssignConfig },
+            { path: 'complaints-object-config', meta: { isFulldialog: false, title: '投诉对象配置' }, component: PageComplaintsObjectConfig },
+            { path: 'complaints-upgrade-config', meta: { isFulldialog: false, title: '投诉升级配置' }, component: PageComplaintsUpgradeConfig },
+            { path: 'complaints-manage-config', meta: { isFulldialog: false, title: '投诉管理配置' }, component: PageComplaintsManageList },
+            { path: 'complaints-manage-config-detail', meta: { isFulldialog: true, title: '投诉管理配置' }, component: PageComplaintsManageDetail },
+            { path: 'complaints-order-list', meta: { isFulldialog: false, title: '投诉管理' }, component: PageComplaintsOrderList },
             { path: 'complaints-order-detail', meta: { isFulldialog: true, title: '投诉单' }, component: PageComplaintsOrderDetail },
             { path: 'settle-setting/index', meta: { isFulldialog: false, title: '结算规则配置' }, component: ProjectSettleSettingIndex },
-            { path: 'settle-setting/detail', meta: { isFulldialog: true,title: '结算规则配置' }, component: ProjectSettleSettingDetail },
-            { path: 'settle-setting/install-quata-config', meta: { isFulldialog: false,title: '安装定额配置' }, component: InstallQuotaIndex },
-            { path: 'settle-record/index', meta: { isFulldialog: false ,title: '项目经理结算' }, component: ProjectSettleRecordIndex },
-            { path: 'settle-record/install-list', meta: { isFulldialog: false ,title: '安装结算' }, component: ProjectSettleRecordInstallIndex },
-            { path: 'settle-record/install-detail', meta: { isFulldialog: true ,title: '安装结算' }, component: ProjectSettleRecordInstallDetail },
-            { path: 'settle-record/install-verify', meta: { isFulldialog: true ,title: '安装结算' }, component: ProjectSettleRecordInstallVerify },
-            { path: 'settle-record/detail', meta: { isFulldialog: true ,title: '项目经理结算' }, component: ProjectSettleRecordDetail },
+            { path: 'settle-setting/detail', meta: { isFulldialog: true, title: '结算规则配置' }, component: ProjectSettleSettingDetail },
+            { path: 'settle-setting/install-quata-config', meta: { isFulldialog: false, title: '安装定额配置' }, component: InstallQuotaIndex },
+            { path: 'settle-record/index', meta: { isFulldialog: false, title: '项目经理结算' }, component: ProjectSettleRecordIndex },
+            { path: 'settle-record/install-list', meta: { isFulldialog: false, title: '安装结算' }, component: ProjectSettleRecordInstallIndex },
+            { path: 'settle-record/install-detail', meta: { isFulldialog: true, title: '安装结算' }, component: ProjectSettleRecordInstallDetail },
+            { path: 'settle-record/install-verify', meta: { isFulldialog: true, title: '安装结算' }, component: ProjectSettleRecordInstallVerify },
+            { path: 'settle-record/detail', meta: { isFulldialog: true, title: '项目经理结算' }, component: ProjectSettleRecordDetail },
             { path: 'settle-record/verify', meta: { isFulldialog: true, title: '项目经理结算' }, component: ProjectSettleRecordVerify },
             { path: 'settle-record/flow', meta: { isFulldialog: true, title: '项目经理结算' }, component: ProjectSettleRecordFlow },
             { path: 'project/index', meta: { isFulldialog: false, title: '全部项目' }, component: ProjectList },
             { path: 'project/manage', meta: { isFulldialog: false, title: '销售项目管理' }, component: ProjectManageList },
             { path: 'project/detail', meta: { isFulldialog: true, title: '项目详情' }, component: ProjectDetail1 },
-            { path: 'demand-setting', meta: { isFulldialog: false, title: '要货批次配置' }, component:GoodsDemandSetting},
+            { path: 'demand-setting', meta: { isFulldialog: false, title: '要货批次配置' }, component: GoodsDemandSetting },
         ]
     }
 ]

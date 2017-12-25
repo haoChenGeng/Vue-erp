@@ -17,6 +17,14 @@ import nps from './nps.js'
 //附加费管理
 import surcharge from './surcharge.js'
 
+//验收
+import check from './check.js'
+
+//要货单
+import goodsDemand from './goodsDemand.js'
+
+import scheduleSystem from './scheduleSystem.js'
+
 let routes = [].concat(
     delivery,
     foremanworker,
@@ -25,7 +33,10 @@ let routes = [].concat(
     installation,
     broadcast,
     nps,
-    surcharge
+    surcharge,
+    check,
+    goodsDemand,
+    scheduleSystem
 )
 
 export default routes

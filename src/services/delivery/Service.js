@@ -1,25 +1,25 @@
 //交付模块接口
 let Services = {
     TEMPLATE: {
-        ///biz/t8t-ps-pmd/app
-        name: 'rk2RJ6Qwg5g0AL966MJ2RE5jlMKzsKr',
+        ///biz/dsp-ps-pmd/app
+        name: '_dEkUaZ5NFumhFABUT_vYryxAsT8pEp',
         methods: {
-            QUERY: '1JRusrk7_hen1kdQc9juE-erLIuqPI_sZMwgjZG', //schedule.module.queryPage
-            CREATE: 'sxa1kfPFmVTrllG1gniw1Gza9iUV_oQP9Kp', //schedule.module.create
-            UPDATE: 'yftIu5zW_u8Au_P5C_Ha70H1F8oDmYTB4ST', //schedule.module.update
-            GETBYID: 'oNrBxieCL7QdH7hV-9f5xrEu8pjGEifSDpqTnHif1dZ8t9w', //schedule.moduleRedundancy.getById
-            SETMODULESTATUS: 'rOf6dog2zbjDcYsMohZOx0j4blvVOApFq1VlBogWA9mJVzlsItI', //schedule.module.batchSetModuleStatus
-            QUERYMODULEANDMODULEITEMBYID: 'IS6Y23AS5j1hJBZP6KFSRnU1S6GmXw3wSIycS_3lAAGaFMzPCzK_Q3_L2oz2Cst', //
-            queryModuleQuotaionById: 'dPfrxviIqhIMWvhrQ40ZKmk5INyoc_ZY-qypF8XwWIvJudCsJ_IgVr5', //schedule.module.queryModuleQuotaionById
-            moduleItemQueryPage: 'PpDcN4DlKlEP_JIuY8o1hYFNFZ9Epg8G2WQG1A4mHNz', //schedule.moduleItem.queryPage
-            scheduleRef: 'qxX2gkmJBXScponPosTrRCVgL1ZfRxlfEFghecoCfwlUGcXRM8M', //schedule.quotation.queryByModuleId
+            QUERY: 'WhdgS1GsGt4OW7893bZsRnWO4ZbQvPCSry_9Nv36D-iRL1-', //views.schedule.module.queryPage
+            CREATE: 'WShhFg1VUsKRWR8dCEUKnYHS5MaG_YdBj2vUBtbXG5s', //views.schedule.module.create
+            UPDATE: '9IVF-qqMLmBJIIzj53lCOa9GdFQ0PU7b2fLozS9K-gi', //views.schedule.module.update
+            GETBYID: 'cRdbXfAPkTApUdLYWsd4aiSMvmmZnc1HtKWfbwmKctaUE7wcNI1lJXm', //views.schedule.moduleRedundancy.getById
+            SETMODULESTATUS: 'GKRNxLxZ14e3U988YrybqX_Cl4x7c-zQ1FDxw_pM-Y_-R4CBKN-j1HIqsQI', //views.schedule.module.batchSetModuleStatus
+            QUERYMODULEANDMODULEITEMBYID: 'YgZNUxwoYuEaPP_FcAtJpVKlbX6rhDLesrCLwe6L4eR-of0Q1cK9zNeR9WMHSLZDLDdMSI3', //views.schedule.module.queryModuleAndModuleItemById
+            queryModuleQuotaionById: 'HM_MBPwb1bxTF-t4ObFs-YBwkI16e-wLwhB-vj5AnK39V945EuUBxxRCcjoI-L-', //views.schedule.module.queryModuleQuotaionById
+            moduleItemQueryPage: 'Fq99NEPB3CHLjR8uoeAHcpWyulL1BFQnt6IzpiWzr9J29o5EK_V', //views.schedule.moduleItem.queryPage
+            scheduleRef: 'LTSUa7QdfQ0SaIFR3Yd1GcJEEskhK03Ybvd6nH3IJ3m9WiRflUzg4E4ZCCv', //views.schedule.quotation.queryByModuleId
             scheduleRefUpdate: '4h7DHE09R71yAgM2wcG830QFEYc5SlBMk_Y0yuDJGtQ', //schedule.quotation.batchUpdate
-            NodeRelation: '2kmQDwvgJgRtY4GXBNWBf_AwR5P1z0T1fvRKwae2Vfjy_zTyxzBy6dw', //schedule.moduleItemRelation.queryPage
-            NodeRelationSave: 'Z9U0pfzJEVBQoWlKfYRBiZed1kNYfWGC_vpje4pG3KokykJ', //schedule.moduleItemRelation.save
+            NodeRelation: 'KHEXKZAcOj5K71zqcO52b81vR_KfX5_DzH63-YOoyV5IqQ_V3iF5rY274a7n9hf', //views.schedule.moduleItemRelation.queryPage
+            NodeRelationSave: 'l8_8wSo0y7dmt6wvZQ3Lv2xwU34y37MXwW80dkBghNK0tQJntjm2rrZ', //views.schedule.moduleItemRelation.save
             referenceRelation: 'DKfN2E_92Wwp8E_s7Vy3pobuoiUyMmK8_fclNLi-Z4Jtr7w-hVj', //schedule.quotation.queryByModuleId
-            itemBillQueryPage: '3JQAfbU5ybYChd3qO4iqdkEuJI0haZ8xr5Xevws', //schedule.moduleItemRelation.queryPage
-            moduleItemSave: 'WGGygmLAiCc5imExpQ8fiQbsrMdE67_Ufks', //schedule.moduleItem.save
-            itemBillSave: 'i6MaJIV8M6XHtefQYdc5vfFieO6LMn9NT_E',
+            itemBillQueryPage: 'Yjn7p25RxxJQpruWFgfX0btV-adZM-uJxA0culq1qrRua2n', //views.schedule.itemBill.queryPage
+            moduleItemSave: 'uFD47UQyU_ZeO93xDtXVk_60GQC68XI1o3J8yHFnnqE', //views.schedule.moduleItem.save
+            itemBillSave: 'nOq_C6xATH08TwtzX_s0ec4z0m5kbiBhM4C58PPxYKZ',//views.schedule.itemBill.save
             queryPagePqmQuotaion: 'WvDKL8HrApLhQPkVTIcSlfEdnn_N_eT394cS8ynNJ_uRZDHQMiR', //schedule.module.queryPagePqmQuotaion
             contractUnitPriceQueryPage: '78mvDmSl6gPF67lT8fRnzxwD9vgVxx-gM6hwws29QDmi0mA', // views.contractUnitPrice.queryPage
             unitPriceSave: 'm9CB6CVK4sC13RLKmvmuiEpV-ovwX6b', // views.unitPrice.save
@@ -38,27 +38,32 @@ let Services = {
             expenseQuotaExport: 'vIKI-dfT86zmE4-KZE5omH9c0Cwx56b_YRRFRRg', // views.expenseQuota.export
             expenseQuotaImport: 'Qborf8DjgJVzOe97fid7o5Q6XjQda0O65AnlEIJ', // views.expenseQuota.import
             listModuleNodeAsTree: 'NXVUIrqPd8JrC8JjDoIEkfK2DZPkGUQWyjSI5nC37wx',//views.module.node.listAsTree
-            queryPageModeuleItemByNode: 'hNtsUem_sa5-mfOaCoizFVyidslMJvjVIPrfDs4cXZ5lECQM0SD', //views.schedule.moduleItem.queryPage
+            queryPageModeuleItemByNode: 'w6--2u9lzym6grsrTKgYqBzvO1jv27WqU4wUO2vBsoK3mSny7rYvpo6', //views.schedule.moduleItem.queryPageTree
             saveNodeProjectStatus: 'ZhzIOOu7oWJQwsOtOKCYQlnERzp7dNeS-SoygHdHORr', //schduleNodeProjectStatus.save
             workerBaseServiceQueryPageInternal: '2PC-MnnWIpibbFjCP_qEgMCymUMCBUEU9ZJEy_6C-5Q1vMVt-kg3A0bFzKe', // views.workerBaseService.queryPageInternal
+            cityScheduleQuery: 'HnmiKlLYqW-xISG_SybwQYcX6RLVbfGiviCYG5-CvoaSg2Taw_vVAqX',//views.schedule.module.queryPageRelation
+            cityScheduleBan: '8IDKCayO5ZcKp7iTAUW5N90XiJA8RCu2r1AX.jZo7cQuLqR',//views.schedule.module.relationBan
+            cityScheduleUse: 'y63GLwYfNvL2hQ_r2Vtt8Dv3j3-pQ4g7xLwrClGB-SC29gG',//views.schedule.module.relationUse
+            cityScheduleCreate: '-GUS_W-NLqvJHM_o940uP7FqG8IQU_JqTR04WM2peO_krEKm2AZ',//views.schedule.module.relationCreate
+            scheduleReturnAllPs: '2NSLJO4dFf6CzjvqhKfuHCDjQ60CgO0Uj_2gZBh0_aa_88X',//views.schedule.module.returnPsId
         }
     },
     PROPERTY: {
-        ///biz/supply-chain/app.supply-server
-        name: '8m7ufp84fb2V0f5Z0e1LiSKvI9wfWGyPcR5O8IydTmjLcK9YcKE',
+        ///biz/t8t-scm-cfg/app
+        name: 'R8b7h4AHkMWAu5hFhrksUafEPkyKTyW',
         methods: {
             propertyQueryPage: 'xxyFxYonI0x3Fv7Po3D98lC_z76', //property.queryPage
             propertyQueryBatchByCodeAndPcode: '0wkcHzF4iIw08WJGyNJA9aBy-OH05k5OlRIxLtbydZM2j8S', // property.queryBatchByCodeAndPcode
             queryPropertyUnion: 'RxFkZaxSYW_PlV98ePFifFGinuEUvtWDAMnA9nX', //property.queryPropertyUnion
-	        queryUnionParent:'vWcCqRRuqavrv2SkNxuXiloq549mh9uvxSBYPMS',//property.queryUnionParent
-	        queryGroupsAndChilds: '4Sz-mEp7nAoeRzkDi-N40TVsFUK7jK_Zfa9sTqI4QtO',//sys.group.queryGroupsAndChilds
+            queryUnionParent: 'vWcCqRRuqavrv2SkNxuXiloq549mh9uvxSBYPMS',//property.queryUnionParent
+            queryGroupsAndChilds: '4Sz-mEp7nAoeRzkDi-N40TVsFUK7jK_Zfa9sTqI4QtO',//sys.group.queryGroupsAndChilds
             queryChildrenByWholeCode: 'XHjwvpIXoaQBZ7YUkB6uSsoZifxtyfBUWxonWR2msD2gAtAmAT9rCNz', // views.property.queryChildrenByWholeCode
             queryChildrenByWholeCodes: '0AAA4PS0mMRdG0wdyJ5ftF2ywA0trNka8AwkgBztgTwR8HhMfNvNl8k5HcY', // views.property.queryChildrenByWholeCodes
         }
     },
     PLAN: {
-        ///biz/t8t-ps-psm/app
-        name: 'U9PB33VOXPYLiiTF2dZT2S8dJx6YaSJ',
+        ///biz/dsp-ps-psm/app
+        name: 'qhXoFH8DI96EZMplm8pkqMsVhO9LZBe',
         methods: {
             projectDetailTree: 'PW-uTQZIeGB2ukCs5MBLscTc13PoMbsNLKn', //project.node.listAsTree
             projectDetailList: 'ULNnTOfZuSLw1R8BJeBzRtdbByNKQcFiHH2', //project.node.queryPage
@@ -71,8 +76,9 @@ let Services = {
             projectNodeStatusModify: '9_Ay9_X61iTMlFTs88LSGO0ReFcCd64Ry-q9OOOifF_5dgI', // views.project.nodeStatus.modify
             projectInitProjectNode: '5w5B3Tp0j.QfD0Art6JMSFl6BbOwkP2j8p93aDMjfwK', // views.project.initProjectNode
             accountQueryByRole: 'z6F2xfx_ou6j5Bc3bB_XeHx2mGG5taP48TS-yTi', // views.account.queryByRole
-            projectReportQueryPage:'kfpaV8XjWqM3QvN6X1s98OSb-xZR6hRdHH1',//views.report.queryPage
-            projectReportExport:'mD-_jSn4jAIs5yBSPU_KvB5fX44bKTH',//views.report.export
+            projectReportQueryPage: 'kfpaV8XjWqM3QvN6X1s98OSb-xZR6hRdHH1',//views.report.queryPage
+            projectReportExport: 'mD-_jSn4jAIs5yBSPU_KvB5fX44bKTH',//views.report.export
+            queryByRootId: 'HC9N1PkKDw4JBj-VX5wlb5u9.K2slfkuRjVJtMA',//views.account.queryByRootId
         }
     },
     ENTRY: {
@@ -102,12 +108,17 @@ let Services = {
         }
     },
     YANSHOU: {
-        // /biz/t8t-ps-pim/app
-        name: 'xHrIx1dVvYUyA7nsNrXJTPcYkDvghKh',
+        // /biz/dsp-ps-qcm/app
+        name: '5g2VJO-hIQhqaYG7rwKSNb1jxbIB9Js',
         methods: {
-            checkQueryPage: 'AYGb-_PV-d5lVFKjKP7IIIOIbC2IM.G', // views.check.queryPage
-            getCheckProject: 'WPHAcX9YwgHXDaHrpdl8ZGmxtTF5af_9IyZOHEX', // views.check.getCheckProject
-            checkCreate: '8DPjSJW1pIIoS_KgcZzR0E1B-hR', // views.check.create
+            platCheckQueryPage: '8T__OWpNXI1a85_xtra4yoK4Bfm40ylDvgDGuyf', // views.platCheck.queryPage
+            getCheckProject: 'EKILDouTB9nTO1Ehf8PySvJDLOmyNQM_cFR-PASTL8HAmmx', // views.platCheck.getCheckProject
+            createStartCheck: 'gqmlOsOP0NHkRcL-pbaVuPoNlNaPl7G', // views.platCheck.start
+            getOrderInfo: 'vpoj6zMasaUBt0wYd12cVi9Opb7yS7wnWoFmmGpaFSD',//views.platCheck.getOrderInfo
+            createCheck: '4BII4GnL8iQB_StGlztGmJwNVoxi5Uc1vgi',//views.platCheck.create
+            getCheckDetail: 'ijcloNo7te0fmcB_lLsaKwImgVOzMqEHESqO4SmcTqp',//views.platCheck.getCheckDetail
+            getAgainOrderInfo:'0QQBFlzZzuXQFc7ABu5C1R5NLbrwC-A8UWrlZhMxDgzGCBd',//views.platCheck.getAgainOrderInfo
+            againCreate:'tK8prfIhGsmeCztYwh_rbl7hqLppr9-oIb1sro3',//views.platCheck.againCreate
             checkUpdate: 'w6M5AVqhT5IwL7VSU78V53s-lUI', // views.check.update
             checkGetHead: 'hnpnTAAuAf2lrlgqh0e2V4TKXXi0ArH', // views.check.getHead
             checkDetailGetDetail: 'HQPKyMjTBEN0N6IWkpws7LEAVDuN6doZ9Wq_KJD', // views.checkDetail.getDetail
@@ -137,8 +148,8 @@ let Services = {
         }
     },
     FOREMANWORKER: {
-        // /biz/t8t-ps-pmd/app
-        name: 'HiBVKO6z3FEKmI0HrFFsg3uxcI9_mcp',
+        // /biz/dsp-ps-pmd/app
+        name: '_dEkUaZ5NFumhFABUT_vYryxAsT8pEp',
         methods: {
             // views.workerInfoService.create
             CREATE: 'yO760eSwYDJka9K9G9Gpab7DLi8DLDPrd8RsfdQr5mN',
@@ -207,6 +218,7 @@ let Services = {
             organizationQuery: "8TqE2fXZHE_vgB5hG8nzPW14mIX",
             queryTreeByType: 'IefMV_-kDFPfZ-shDibTaiAtug9yEjMCuudrr6HFltn', // organization.queryTreeByType
             organizationQueryWithoutDel: '2S0YnKyWFMXgSG1sN9EEgQ0C6rxTBiLhbh8zwX4bbPb', // organization.queryWithoutDel
+            queryCorpMember: 'aKSFfdOqzrh31zOBiXt0yqUky_PaZwZeICZ',//corpMember.queryPageAll
         }
     },
     PERMISSION: {
@@ -236,7 +248,7 @@ let Services = {
             productPkgTempBaseQuery: 'NXmkNqU1P3KdfeJJjjN1bK2QVOfHhIn14bG5n3lKLFjfPwz', // views.productPkgTemp.base.query
             productPkgTempBaseQueryPage: 'AIaJWwyQT8tpLQStKVWM-mO7q1eU9ilNKms_HrqW74UT56a_YL1', // views.productPkgTemp.base.queryPage
             productPackageQueryPage: 'C0JFucrPsWWU-ZzG9xRJVm6t891-1a0qar1sqZjWq19RwRl', // views.product.package.queryPage
-            packageQuery:'oe0uUFI1nAF5TVhsUmMD7ZQlWimpSkwEjPvnjSC'//views.product.package.query
+            packageQuery: 'oe0uUFI1nAF5TVhsUmMD7ZQlWimpSkwEjPvnjSC'//views.product.package.query
         }
     },
     PSCONFIG: {
@@ -263,11 +275,11 @@ let Services = {
             contractBillQueryPage: 'w420fGKwa1-CwXJ1aLbduVsnAualTH3YYdMkGZptcTS',//views.contractBill.queryPage
         }
     },
-    CONFIGURE:{
+    CONFIGURE: {
         // /biz/to8to-it/app.tit-configure
         name: 'Ihw1UIintVvO0J0kUY_5eWzrYdweuHDNddnVBEkWzSsF7qA',
-        methods:{
-            listNextLevelUnforbidden:'K4SRf0fzCaS5-gYA4paFT5iUTB6KxengnRrDV2mXj3jHCTRGD6D', //systemCode.listNextLevelUnforbidden
+        methods: {
+            listNextLevelUnforbidden: 'K4SRf0fzCaS5-gYA4paFT5iUTB6KxengnRrDV2mXj3jHCTRGD6D', //systemCode.listNextLevelUnforbidden
         }
     },
     SYSACC: {
@@ -278,7 +290,7 @@ let Services = {
         }
     },
     DEMAND: {
-        ///biz/t8t-ps-pim/app
+        ///biz/t8t-ps-pim/app views.goodsDemand.queryProperty
         name: 'Ky7aOj92RGBfe2-xiOLjsHo2gdQACaD',
         methods: {
             QUERYPAGE: "_CB_7PGoP2Qf97Tsrwe0jXD3CqMrz2C2Jzyk13A",//views.goodsDemand.queryPage
@@ -305,48 +317,48 @@ let Services = {
             ITEMQUERYPAGEALLITEM: "mfQxCvnuXpEoDK5TSb7ROwqUybTURQ8Y0PvklAxMBOglePjm_0BmguL",//views.goodsDemandItem.queryPageAllItem
             ITEMADDREMARK: "mbualJ_F2gGtD6gSHIfOsqQvGRl_d0CsQrk_FNrTNOnjlII",//views.goodsDemandItem.addRemark
             CANCELORDER: "kattS8P6cAFI1iPVQkbc-oPuYjd5zRxiBb1b_VvfgP0",//views.goodsDemand.cancelOrder
-            queryProjectList:"ftbanir_0YnAhMLB4KZ04jibSzQKbAkNqXDgaxbcZP7IIqnQG_x",//views.goodsDemand.queryProjectList
-            goodsDemandReport:"C4HH-IzU_ZgVCuzats-JGtIyPtN7W-0-avd",//views.goodsDemand.report
-            goodsDemandSave:"XwtvYuW0RtPJnfWF_TkEbluapTAKLu9Qc4G",//views.goodsDemand.save
-            querySaveOrder:"_2z2hwIyP7YMT8ovSqoVDr0hBt92H-2J25I5En2lXr0nobR",//views.goodsDemand.querySaveOrder
-            querySaveOrderItems:"PqVoh2QTxaH0AyV4MIeF0yTfWTybbYmaqoPJWdqC27oJaNIhJWrfz8x", //views.goodsDemand.querySaveOrderItems
+            queryProjectList: "ftbanir_0YnAhMLB4KZ04jibSzQKbAkNqXDgaxbcZP7IIqnQG_x",//views.goodsDemand.queryProjectList
+            goodsDemandReport: "C4HH-IzU_ZgVCuzats-JGtIyPtN7W-0-avd",//views.goodsDemand.report
+            goodsDemandSave: "XwtvYuW0RtPJnfWF_TkEbluapTAKLu9Qc4G",//views.goodsDemand.save
+            querySaveOrder: "_2z2hwIyP7YMT8ovSqoVDr0hBt92H-2J25I5En2lXr0nobR",//views.goodsDemand.querySaveOrder
+            querySaveOrderItems: "PqVoh2QTxaH0AyV4MIeF0yTfWTybbYmaqoPJWdqC27oJaNIhJWrfz8x", //views.goodsDemand.querySaveOrderItems
             goodsDemandItemDeleteByIds: 'MRGfZ6moZ6kqgHk6iLzmQGHFmMiAO5TCZT4zDzm2F4kzKui', //views.goodsDemandItem.deleteByIds
             goodsDemandQueryReplenishOrder: 'boljb6cvbGg-BtXaFanKfdmOsfknWnso3ZmpkCtqr3rc0fSsnT1dyUQ', // views.goodsDemand.queryReplenishOrder
             goodsDemandQueryReplenishOrderItem: 'dOgjSZ1DaBYuncVz44xBO0hVk9qaOBkURSOFCuURV5jajdNTSQdGRhgEDc4', // views.goodsDemand.queryReplenishOrderItem
             goodsDemandCheckDeletePermission: '62zwEn3WnF25_WO4iai3iM6oxv43R4FhPMj0jPDpdudk2TM1ut8z1cJ', // views.goodsDemand.checkDeletePermission
         }
     },
-    DISTRIBUTION:{
+    DISTRIBUTION: {
         // /biz/t8t-ps-pim/app
-        name:"LgHodN-sJIJnYbF1ZV_gt1L0EvHB4W7",
-        methods:{
-            getApplyInfo:"bRVkaxObVGPYXXFFWTMlgsHnlQeVIeMbJwr5SLVe_DbMFuzUD1meb9u",//views.deliverInstallPlan.getApplyInfo
-            getScheduleOptions:"PjiYP99OfcGGZueGKaUPkrgZ0EThIiTbKHy6nMYdL_gX5HqfH0lX5FjbFwuii99", //views.deliverInstallPlan.getScheduleOptions
-            planWorkerCreate:"Zwh4sDdsrBxS-Ynr0YixqmzkwnXviWDXsb5sraypvY3_c-qUXvqWi-Q", //views.deliverInstallPlan.workerCreate
-            drawDeliverPlanView:"MaVBRVA8i6nGNO1E4DJXRdQntV56lx83mipRvfLDM4JylHRa2TFnl_GDGHcFGQw",//views.deliverInstallPlan.drawDeliverPlanView
-            getGoodsInfo:"s63zzGbwobXnHuwtY4cl19wJ.f3qVzfwYHEhlwleUsDtEnChYI7tyWW",//views.deliverInstallPlan.getGoodsInfo
-            makeDeliverPlan:"RnsXPsi-xGQPL2fYbcRXXid-DTQ40Hk8PzMopsWNoJFgIjePpM7KQ2idX1z",//views.deliverInstallPlan.makeDeliverPlan
-            getDeliverDispatchView:"9KE1_GqAqZ5OB94FsHLOAWhDqkDlhuqbnVxF91AuqxJ6WHF3paX-50W33hGAl9Ip5re",//views.deliverInstallPlan.getDeliverDispatchView
-            uploadImgs:"9HRH9kAPO2CO836V8DXXO9jzwBI6SFLznQrIFQ64dCFmFaNYBw1",//views.deliverInstallPlan.uploadImgs
-            validateDeliverPlan:"pHDu2UoK6kgK4vyA7n9-69Va64iNx5RjMjA0s0fxF2gqCti2Kl81391AMFxixZe",//views.deliverInstallPlan.validateDeliverPlan
+        name: "LgHodN-sJIJnYbF1ZV_gt1L0EvHB4W7",
+        methods: {
+            getApplyInfo: "bRVkaxObVGPYXXFFWTMlgsHnlQeVIeMbJwr5SLVe_DbMFuzUD1meb9u",//views.deliverInstallPlan.getApplyInfo
+            getScheduleOptions: "PjiYP99OfcGGZueGKaUPkrgZ0EThIiTbKHy6nMYdL_gX5HqfH0lX5FjbFwuii99", //views.deliverInstallPlan.getScheduleOptions
+            planWorkerCreate: "Zwh4sDdsrBxS-Ynr0YixqmzkwnXviWDXsb5sraypvY3_c-qUXvqWi-Q", //views.deliverInstallPlan.workerCreate
+            drawDeliverPlanView: "MaVBRVA8i6nGNO1E4DJXRdQntV56lx83mipRvfLDM4JylHRa2TFnl_GDGHcFGQw",//views.deliverInstallPlan.drawDeliverPlanView
+            getGoodsInfo: "s63zzGbwobXnHuwtY4cl19wJ.f3qVzfwYHEhlwleUsDtEnChYI7tyWW",//views.deliverInstallPlan.getGoodsInfo
+            makeDeliverPlan: "RnsXPsi-xGQPL2fYbcRXXid-DTQ40Hk8PzMopsWNoJFgIjePpM7KQ2idX1z",//views.deliverInstallPlan.makeDeliverPlan
+            getDeliverDispatchView: "9KE1_GqAqZ5OB94FsHLOAWhDqkDlhuqbnVxF91AuqxJ6WHF3paX-50W33hGAl9Ip5re",//views.deliverInstallPlan.getDeliverDispatchView
+            uploadImgs: "9HRH9kAPO2CO836V8DXXO9jzwBI6SFLznQrIFQ64dCFmFaNYBw1",//views.deliverInstallPlan.uploadImgs
+            validateDeliverPlan: "pHDu2UoK6kgK4vyA7n9-69Va64iNx5RjMjA0s0fxF2gqCti2Kl81391AMFxixZe",//views.deliverInstallPlan.validateDeliverPlan
         }
     },
-    MEASURE:{
+    MEASURE: {
         ///biz/t8t-ps-pim/app
-        name:'o0PvBL5Yf5x2SZ3w3HLf8Wkcddzbr8r',
-        methods:{
-            queryItem:'XbVsVfqReaHZjg6XzXAVAwINF30FcBkMW71gYWwfT-v',//views.measureOrderItem.query
-            queryItemList:'LUAEPRnMIEHG_MmCQG_vgHh0ksyrOMDXhMDzmfJHGfX3WCa',//views.measureOrderItem.queryList
-            queryDetail:'ivooTqS1dZZnO8Yd6NlKE3iJYo-tM3cbPrWJdoPOdq1',//views.measureOrder.queryDetail
-            queryPage:'AQ8H_igCAC8tLwh7KBn8TVDd3U27Za_vzN-sdPBmJjq',//views.measureOrder.queryPage
+        name: 'o0PvBL5Yf5x2SZ3w3HLf8Wkcddzbr8r',
+        methods: {
+            queryItem: 'XbVsVfqReaHZjg6XzXAVAwINF30FcBkMW71gYWwfT-v',//views.measureOrderItem.query
+            queryItemList: 'LUAEPRnMIEHG_MmCQG_vgHh0ksyrOMDXhMDzmfJHGfX3WCa',//views.measureOrderItem.queryList
+            queryDetail: 'ivooTqS1dZZnO8Yd6NlKE3iJYo-tM3cbPrWJdoPOdq1',//views.measureOrder.queryDetail
+            queryPage: 'AQ8H_igCAC8tLwh7KBn8TVDd3U27Za_vzN-sdPBmJjq',//views.measureOrder.queryPage
 
-            verify:'9JcXD_r6hRK3BBJmz3lOFzSP4zU_VMbQIFTNyz1',//views.measureOrder.verify
-            submitLine:'18MRBQhoaGstGJh6axx_SKvtBWk85gu-aWHpZBG7sWb',//views.measureOrder.submitLine
-            submit:'TFbGSX9MSLI2ULWFuRNJ9go482nrYrlKHoY8wf0',//views.measureOrder.submit
-            createOrder:'cruVsh1_QtfeIjiqU5sdWBxe2c2TqM2hJH6MTE2bKU3',//views.measureOrder.createOrder
-            queryProject:'HQcibtLtWP9ZU2ArRO6cD9SwBmECwS_BxTyCpnUj_NbU9-2',//views.measureOrder.queryProject
+            verify: '9JcXD_r6hRK3BBJmz3lOFzSP4zU_VMbQIFTNyz1',//views.measureOrder.verify
+            submitLine: '18MRBQhoaGstGJh6axx_SKvtBWk85gu-aWHpZBG7sWb',//views.measureOrder.submitLine
+            submit: 'TFbGSX9MSLI2ULWFuRNJ9go482nrYrlKHoY8wf0',//views.measureOrder.submit
+            createOrder: 'cruVsh1_QtfeIjiqU5sdWBxe2c2TqM2hJH6MTE2bKU3',//views.measureOrder.createOrder
+            queryProject: 'HQcibtLtWP9ZU2ArRO6cD9SwBmECwS_BxTyCpnUj_NbU9-2',//views.measureOrder.queryProject
 
-            queryProperty:'XxxbXTEVmVQZtiuyi9jNEskSLsYw9vTbV_LUPU5VNP9p9eN',//views.measureOrder.queryProperty-列表页测量人类型
+            queryProperty: 'XxxbXTEVmVQZtiuyi9jNEskSLsYw9vTbV_LUPU5VNP9p9eN',//views.measureOrder.queryProperty-列表页测量人类型
             processDetail: 'MiqneK67gZqIVmY4WzKE_hVLXfOW3zLXO1VIKgI4EvhE2-oM4DbbF8B', //views.measureOrder.queryProcessDetail
             getDetailByProcessId: 'pCEy7Sq5nek1p6_x6zuU-1liQmEoxlkZDliNDp1bVVzaUnK2Bh788Ds'//views.measureOrder.getDetailByProcessId
         }
@@ -372,59 +384,69 @@ let Services = {
             COMPLAINTOBJECTSTATUSUPDATE: "0124g2ffDuM87zYzzrX44LiHctYpiKhmbHLqZjGdxQEtZUgwbqW",//views.complaintObject.status.update
             COMPLAINTOBJECTUPDATE: "xI48HJjU_KmB-v_E137t9iI1JgUrtzbfQpSCZZHA5Ui",//views.complaintObject.update
             COMPLAINTCONTENTQUERYLIST: "99xuMoEmJhUGGp5R79khZUnCG5qgw37LSOogyx8p0RAoAbN",//views.complaintContent.queryList
-            COMPLAINTCONTENTQUERYPAGE:"YdxsTctF3R736hS4okPDvHCEkT_en0i8G2pdFc8Xf8Yl9K2",//views.complaintContent.queryPage
+            COMPLAINTCONTENTQUERYPAGE: "YdxsTctF3R736hS4okPDvHCEkT_en0i8G2pdFc8Xf8Yl9K2",//views.complaintContent.queryPage
             COMPLAINTMANACREATE: "jqYX8TtTzMsywPHoRTEker6XJ3kOZ-XSbYUe9GK",//views.complaintMana.create
             COMPLAINTMANAQUERYLIST: "v825-asVpbfVyaVI85TglGpnZP7ygCC49Iy4YL_4eiW",//views.complaintMana.queryList
             COMPLAINTMANAQUERYPAGE: "ntZZo_XxO_0yghNml27OgE-aK55gd8nmNa2lKFVjBeH",//views.complaintMana.queryPage
-            COMPLAINTMANAFINDBYID:  "LFFISZkteIVsuMR8kT25Imiy2ojFzpW5FYZGaXoLtuf",//views.complaintMana.findById
+            COMPLAINTMANAFINDBYID: "LFFISZkteIVsuMR8kT25Imiy2ojFzpW5FYZGaXoLtuf",//views.complaintMana.findById
             COMPLAINTMANASTATUSUPDATE: "chVWd1MccGx-vaI0dIW4zOG2uWSnhoYHHyfaHIcdWAfIIRj",//views.complaintMana.status.update
             COMPLAINTMANAUPDATE: "4UAO0fjYuejZJz0cg4A-UPBxuFApjLEs9M4Lxrm",//views.complaintMana.update
             COMPLAINTSTAFFQUERYLIST: "zsv72TnLgAJH3zbG9hocQKaBn61B12mhf8x8BTgujz6",//views.complaintStaff.queryList
-            COMPLAINTSTAFFQUERYPAGE:"tI2JBWq81YZNPAXAC_ilbE2I1F4EmL_n3Jty2G1n4tH",//views.complaintStaff.queryPage
-            COMPLAINTSORDERASSIGNTYPE:"VbcnU_CkeuGyiOq2ZiaDsRr_phO8L4DvK5k7advfvJuTILI",//views.complaintsOrder.assignType
-            COMPLAINTSITEMQUERYPAGE:"90uypB5o44Pc65URAkp1aUq9yAjy-O12iCqHEa339zG",//views.complaintsItem.queryPage
-            COMPLAINTSORDERCREATE:"AVFG6-lujImgP-qlPME.MbXLUeTHoKi7JvU9KzmPyjv",//views.complaintsOrder.create
-            COMPLAINTSORDERFINDBYID:"HRebrYzykPezrHDZbXW_3eHEtztVsLpzcXUYOL_HSPP",//views.complaintsOrder.findById
-            COMPLAINTSORDERFINDBYPROCESSID:"4BwEIsIaM44Fc54pAB72VP3TgBqUzSaFlF-1xj-xcN6Zc2qVtYD4Mcj",//views.complaintsOrder.findByProcessId
-            COMPLAINTSORDERHANDUPGRADE:"VihxsxkT4Tt13jVroWQGsYwJBTNftCeroqgYsRWTVuUigGf",//views.complaintsOrder.handUpgrade
-            COMPLAINTSORDERQUERYPAGE:"C6EGFLJ0_pgKhQvaUy_3fZwTeatumDfLoIt6Gae1sq74xoU",//views.complaintsOrder.queryPage
-            COMPLAINTSORDERUPDATE:"odcsX0xE8T-0y2V9rrvTcx_TrEsT-jtTeepQAPtfIL3",//views.complaintsOrder.update
-            UPDATEHANDLERANDVISTOR:"Z3zivzbR5eUUiZmj1ea50ds0O-VwmUCY5PXppdHuKER",//views.update.handlerAndVistor
-            COMPLAINTSORDERPROTECT:"VNkMIg1XvRgkmZEaZWmV1sDzkdCv-r1O6vZgJhXxzIn",//views.complaintsOrder.protect
-            COMPLAINTCONTENTFINDCONTENT:"zY3lqfBIkwt5B9zdJ1fGqPKh2CwueXDgGJ9xuNpkMT_dLX_1CVD",//views.complaintContent.findContent
-            COMPLAINTSORDERSPECIFICNAME:"dlighNm6waiAecKvebClm0Yv5iI0X03q-wdUKqBFTlfOi1cHSCs",//views.complaintsOrder.specificName
-            VISTORORHANDLEQUERY:"SrrWqh6_0TZvpjJyD3I9A9dc5-oe5akPhLrfcp1",//views.vistorOrHandle.query
-            COMPLAINTSORDERPICTURE:"kxCsmRq0fQS0jAOL5wYzE7nREN7zkb5l8IwgRpL5xbL",//views.complaintsOrder.picture
-            COMPLAINTORDERTEMPCREATE:"mwmslXpFV2c4Fyh57phM79d4QsLgQyfOayPO1V5PYO-aXIy",//views.complaintOrder.tempCreate
-            COMPLAINTORDERTEMPUPDATE:"omi3azXCYyQ7ta_vZlF_T0rbhVWicuZZj-wTajvoSQ0Wi98",//views.complaintOrder.tempUpdate
-            COMPLAINTORDERSUBMITCREATE:"ZURkKnHwIntue0gkZCU3w3BjIRJSKeNnWkJF.oz81FTEW-V",//views.complaintOrder.submitCreate
-            COMPLAINTORDERSUBMITUPDATE:"kYVlR3SdM9vwmaJlfhZ-7FnJYZd3ijpYgeKjM7YccIWIXFl",//views.complaintOrder.submitUpdate
-            COMPLAINTORDERAPPROVE:"WeQIhYiItRCu4rDBsYtXOltLiFfETHYQS_XXh0zR854",//views.complaintOrder.approve
-            COMPLAINTORDERHANDLE:"cTupoOkNdJbjreczCgdWYqzA7MVGY3fH02uG1th",//views.complaintOrder.handle
-            UPDATEVISTOR:"oE77mRX31vbyqvybumxi06KNn42rJpY",//views.update.vistor
-            UPDATEHANDLER:"_ZMnYUqvhVQlI_IJY9dWDONEjM67g64",//views.update.handler
-            COMPLAINTORDERGETPROCESSDETAILBYID:"umBst6Qoz2g7Tz4fM3hfR9u-RByzN2eMbQtif2hOeOj8u-5LNuxKlStAsXJ",//views.complaintOrder.getProcessDetailById
-            COMPLAINTSFOLLOW:"oA_s6PiKjQHI70dQqjvSl_2MADzMN3N1B3f",//views.complaints.follow
-            COMPLAINTSORDEREXPORTDETAIL:"8POPIRnMBQcbNiaR2wjuTFdndzhzbvlFDp4vtO3uwOGwwD2cepa",//views.complaintsOrder.exportDetail
+            COMPLAINTSTAFFQUERYPAGE: "tI2JBWq81YZNPAXAC_ilbE2I1F4EmL_n3Jty2G1n4tH",//views.complaintStaff.queryPage
+            COMPLAINTSORDERASSIGNTYPE: "VbcnU_CkeuGyiOq2ZiaDsRr_phO8L4DvK5k7advfvJuTILI",//views.complaintsOrder.assignType
+            COMPLAINTSITEMQUERYPAGE: "90uypB5o44Pc65URAkp1aUq9yAjy-O12iCqHEa339zG",//views.complaintsItem.queryPage
+            COMPLAINTSORDERCREATE: "AVFG6-lujImgP-qlPME.MbXLUeTHoKi7JvU9KzmPyjv",//views.complaintsOrder.create
+            COMPLAINTSORDERFINDBYID: "HRebrYzykPezrHDZbXW_3eHEtztVsLpzcXUYOL_HSPP",//views.complaintsOrder.findById
+            COMPLAINTSORDERFINDBYPROCESSID: "4BwEIsIaM44Fc54pAB72VP3TgBqUzSaFlF-1xj-xcN6Zc2qVtYD4Mcj",//views.complaintsOrder.findByProcessId
+            COMPLAINTSORDERHANDUPGRADE: "VihxsxkT4Tt13jVroWQGsYwJBTNftCeroqgYsRWTVuUigGf",//views.complaintsOrder.handUpgrade
+            COMPLAINTSORDERQUERYPAGE: "C6EGFLJ0_pgKhQvaUy_3fZwTeatumDfLoIt6Gae1sq74xoU",//views.complaintsOrder.queryPage
+            COMPLAINTSORDERUPDATE: "odcsX0xE8T-0y2V9rrvTcx_TrEsT-jtTeepQAPtfIL3",//views.complaintsOrder.update
+            UPDATEHANDLERANDVISTOR: "Z3zivzbR5eUUiZmj1ea50ds0O-VwmUCY5PXppdHuKER",//views.update.handlerAndVistor
+            COMPLAINTSORDERPROTECT: "VNkMIg1XvRgkmZEaZWmV1sDzkdCv-r1O6vZgJhXxzIn",//views.complaintsOrder.protect
+            COMPLAINTCONTENTFINDCONTENT: "zY3lqfBIkwt5B9zdJ1fGqPKh2CwueXDgGJ9xuNpkMT_dLX_1CVD",//views.complaintContent.findContent
+            COMPLAINTSORDERSPECIFICNAME: "dlighNm6waiAecKvebClm0Yv5iI0X03q-wdUKqBFTlfOi1cHSCs",//views.complaintsOrder.specificName
+            VISTORORHANDLEQUERY: "SrrWqh6_0TZvpjJyD3I9A9dc5-oe5akPhLrfcp1",//views.vistorOrHandle.query
+            COMPLAINTSORDERPICTURE: "kxCsmRq0fQS0jAOL5wYzE7nREN7zkb5l8IwgRpL5xbL",//views.complaintsOrder.picture
+            COMPLAINTORDERTEMPCREATE: "mwmslXpFV2c4Fyh57phM79d4QsLgQyfOayPO1V5PYO-aXIy",//views.complaintOrder.tempCreate
+            COMPLAINTORDERTEMPUPDATE: "omi3azXCYyQ7ta_vZlF_T0rbhVWicuZZj-wTajvoSQ0Wi98",//views.complaintOrder.tempUpdate
+            COMPLAINTORDERSUBMITCREATE: "ZURkKnHwIntue0gkZCU3w3BjIRJSKeNnWkJF.oz81FTEW-V",//views.complaintOrder.submitCreate
+            COMPLAINTORDERSUBMITUPDATE: "kYVlR3SdM9vwmaJlfhZ-7FnJYZd3ijpYgeKjM7YccIWIXFl",//views.complaintOrder.submitUpdate
+            COMPLAINTORDERAPPROVE: "WeQIhYiItRCu4rDBsYtXOltLiFfETHYQS_XXh0zR854",//views.complaintOrder.approve
+            COMPLAINTORDERHANDLE: "cTupoOkNdJbjreczCgdWYqzA7MVGY3fH02uG1th",//views.complaintOrder.handle
+            UPDATEVISTOR: "oE77mRX31vbyqvybumxi06KNn42rJpY",//views.update.vistor
+            UPDATEHANDLER: "_ZMnYUqvhVQlI_IJY9dWDONEjM67g64",//views.update.handler
+            COMPLAINTORDERGETPROCESSDETAILBYID: "umBst6Qoz2g7Tz4fM3hfR9u-RByzN2eMbQtif2hOeOj8u-5LNuxKlStAsXJ",//views.complaintOrder.getProcessDetailById
+            COMPLAINTSFOLLOW: "oA_s6PiKjQHI70dQqjvSl_2MADzMN3N1B3f",//views.complaints.follow
+            COMPLAINTSORDEREXPORTDETAIL: "8POPIRnMBQcbNiaR2wjuTFdndzhzbvlFDp4vtO3uwOGwwD2cepa",//views.complaintsOrder.exportDetail
         }
     },
-    SYSDST:{
-        name:"_msMOVtqD6K_iUnbKU-22nNlgRP32O1",///biz/t8t-sys-dst/app
-        methods:{
+
+    dst: {
+        // /biz/t8t-sys-dst/app
+        name: '8YrgUXxW9ssENMmHroANBk_k0XR7iov',
+        methods: {
+            // configCity.list.get
+            city: 'nD6sOtmkmgGz1fT-JquoKDYjb5d__PQ',
+        }
+    },
+
+    SYSDST: {
+        name: "_msMOVtqD6K_iUnbKU-22nNlgRP32O1",///biz/t8t-sys-dst/app
+        methods: {
             //城市获取
-            CITYTREE:"2O671M7IF8ppyxoS4_oMw_u5I_g8d1H",//standardCity.tree.get
-            pctreeGetConfig:"vhErxe1cvalLLHx7492ZUEz-ZLhasDcOoJg5MnIyBtEg4ZI" //localDistrict.pctree.get.config
+            CITYTREE: "2O671M7IF8ppyxoS4_oMw_u5I_g8d1H",//standardCity.tree.get
+            pctreeGetConfig: "vhErxe1cvalLLHx7492ZUEz-ZLhasDcOoJg5MnIyBtEg4ZI" //localDistrict.pctree.get.config
         }
     },
-    OPL:{
-        name:"3eDfVL5cKE6pbwpPxyS3rcD8zYFDoy8",///biz/t8t-sys-opl/app
-        methods:{
-            queryPage:"kbLXOomJXhjkfRl"//queryPage
+    OPL: {
+        name: "3eDfVL5cKE6pbwpPxyS3rcD8zYFDoy8",///biz/t8t-sys-opl/app
+        methods: {
+            queryPage: "kbLXOomJXhjkfRl"//queryPage
         }
     },
-    PRSMDM:{
-        name: 'zp_cYavpA93VRqxX-wPvMOItwbU51Xy', // /biz/t8t-prs-mdm/app
-        methods:{
+    PRSMDM: {
+        name: 'iHN-g6Vkr5LBs_zXaIMr57sWSj0fAoP', // /biz/dsp-prs-mdm/app
+        methods: {
             decorationOrderFindOrderById: '50GvsFZ73Sv8A2ClvnkiALpFHBnTiQXA2EmLCfZ6Btz9uYHfjuM', // views.decorationOrder.findOrderById
             decorationOrderQueryDetailPage: 'L-T_3jjdGeawOySyQ0dSdzSXMFdjEfjCwM0A45QozDMGw_Yr1y_07Xb', // views.decorationOrder.queryDetailPage
             decorationOrderQuerySheetPage: 'u757FIyS5vqn84wdxFDIXIAw4Taqs5DsOaK__tflZy6tt5h-6uG', // views.decorationOrder.querySheetPage
@@ -432,9 +454,10 @@ let Services = {
             decorationOrderFindSheetById: '9bgZJPrCm6nEaQarSR9saPQYhkN8NTsVQe-ICHR71aRo7ztIOxh', // views.decorationOrder.findSheetById
             decorationOrderExportSheet: 'w84q3AUIsOe6g-Bcq3cpCx3CMiOvFTvs9jZGnMzJ7g-sbv9', // views.decorationOrder.exportSheet
             visitRecordStanDingBookQueryPage: 'MXCV5T3ZIIrRXXfK2tyEJ6eNDAK4i8VMYJU5yZSDTsg3lhREC9qGy1G1wrz', // views.visitRecord.stangdingBookQueryPage
+            decorationOrderQueryOrderPage: 'GlSkIz5uQ9LAAOZyEMZ8CgYaR8dVzVpCSwzUS01PyyjGW0MFWUc',//views.decorationOrder.queryOrderPage
         }
     },
-    FIRVM:{
+    FIRVM: {
         name: 'IGjySajBrs6AQWWfcadRWq4fusdu4Bs', // /biz/t8t-fi-rvm/app
         methods: {
             receiptOrderQuery: 'AC1xq6FRp8mdP7qI00swKV52jDCwhIf', // receipt.order.query
@@ -442,15 +465,15 @@ let Services = {
         }
     },
     COMPANYALLOCATION: {
-        name:"3OvR1cNjj7isVDwxOiFvf0Yl4HtvtFV",///biz/t8t-prs-ass/app
+        name: "3OvR1cNjj7isVDwxOiFvf0Yl4HtvtFV",///biz/t8t-prs-ass/app
         methods: {
-            COMPANYALLOCATIONVIEWSQUERYPAGE:"SJWdWPqBTRB2ZzPO6mjP6rhL-uVLM2i-sagRHaWDdCBVHHlT66EPYG0",//views.companyAllocation.viewsQueryPage
+            COMPANYALLOCATIONVIEWSQUERYPAGE: "SJWdWPqBTRB2ZzPO6mjP6rhL-uVLM2i-sagRHaWDdCBVHHlT66EPYG0",//views.companyAllocation.viewsQueryPage
         }
     },
     ITEM_ASSIGN: {
         // /biz/t8t-prs-ass/app
         name: 'kQCHV35uKPnjuOphj9WgkM2-L8oUbgZ',
-        methods:{
+        methods: {
             // assignPrincipal.assignRecordPage
             LIST_ASSIGN_RECORD: 'rrooIscgCpdPui7SxxeZ_fBaFi558xrOst7FDHxZU130LmG',
             assignPrincipalQueryPage: 'MItg5HDMeH6mLNrHOqVPo3g8HyUKG5sHjnZ6tsz', // assignPrincipal.queryPage
@@ -495,8 +518,8 @@ let Services = {
             settleInstallBillVerify: 'bhjnLdm7bcxY1ZEBzTJWlsX1ThK1eCVZyoGp8HjMmjhcSAv', // views.settle.installBill.verify
             settleInstallBillPrintById: '3uxA0nBTK2nRxS8R7sqJysIkDs4lNNN1yPLWxIRmdT8cC8TgcLb', // views.settle.installBill.printById
             settleInstallBillApplyRemit: 'DQ57zc3UyOrN0PxFXQfNN-UGLn3AxXYysKD26wEDfXjo8rSF9mY', // views.settle.installBill.applyRemit
-            settleBillExport:'UVIcBrtm8Z1W_-SUj1eIjIKnAFQXMO83DSTYU4Z',//views.settleBillBase.export
-            settleBillItemExport:'jqmaS8LvP1a4M3iGMhVDmqyfFapeV1hYcl1bn5n',//views.settleBillItem.export
+            settleBillExport: 'UVIcBrtm8Z1W_-SUj1eIjIKnAFQXMO83DSTYU4Z',//views.settleBillBase.export
+            settleBillItemExport: 'jqmaS8LvP1a4M3iGMhVDmqyfFapeV1hYcl1bn5n',//views.settleBillItem.export
         }
     },
     SYSSTI: {
@@ -506,31 +529,31 @@ let Services = {
             sensitvieInfoGetPhoneOfUser: 'vIKI-dfT_ZnC7e2F95GZ307cHBwFeK8plvCXOOs1PI66uLvFjjm', // views.sensitvieInfo.getPhoneOfUser
         }
     },
-    PSCSM:{
+    PSCSM: {
         name: 'CbwfGae90ZFB2mPvIiPqykwd7sY3l.3', // /biz/t8t-ps-csm/app
-        methods:{
+        methods: {
             callRecordGetByUuid: 'te2AAtZnQ6WVB54WMrI6GgCpdU37yzk-liSr4zi', // views.callRecord.getByUuid
-            MAKECALL:'m9CD55M-oD0sg23co55uMMJ'//views.makeCall
+            MAKECALL: 'm9CD55M-oD0sg23co55uMMJ'//views.makeCall
         }
     },
-    BROADCAST:{
-        name:"4i4AhI5ob6i4GFxcZEkDqOHBULzynRs",///biz/t8t-app-pam/app
-        methods:{
-            BROADCASTDURATIONCREATE:'WfmhH24YTgTEaEE_RGlXRMtKIRcXD7kUxk_HF3kaVGeMi3xFAAtU7su',//views.broadcastDurationService.create
-            BROADCASTDURATIONFINDBYID:'HjidHe2VTkjIuOUMiVTIeOENMc_B4kY14JXSXIzWR3iIeDQFNM_dTbi',//views.broadcastDurationService.findById
-            BROADCASTDURATIONQUERYPAGE:'UaaaYeBnvIVN_VSKMd-UDrF8Kt_MKmBsfNNSDcXMEZAcAcOQGNfKs_bUKm9',//views.broadcastDurationService.queryPage
-            BROADCASTDURATIONUPDATESTATUS:"HE_BHhoWHRjcDvtRZBG5evhxcC6z5YFQm-yz3fJC3DlD_a1u0ezC4N0F6kIalea",//views.broadcastDurationService.updateStatus
-            BROADCASTDURATIONITEMCREATE:"ZgPnMpxJaFYU0qDD-fETNwLxXhSU9pIh00KzRZQ2RsHboUdW-5QHhAOKCA8",//views.broadcastDurationItemService.create
-            BROADCASTDURATIONITEMUPDATE:"WRPlHuKpWpiDuYO7QQCFt8xVcPVMnWw4_JVwCl_uOdfHmPaXN3wWFRZHzMr",//views.broadcastDurationItemService.update
-            BROADCASTDURATIONITEMFINDBYID:"ozE9mBUM0GTK3ub-4xgX_bemt7ifvF6AUo1QwGdAg_8-uthwVFkxY8aC-USjLNf",//views.broadcastDurationItemService.findById
-            BROADCASTDURATIONITEMFINDBYDURATIONID:"1U__IenHzNkKFDqNx_F1M_hvd_yqEBRU2Kf_GCetg3AQK0rUM1xmRpRR-yFv373xMlK0_L_",//views.broadcastDurationItemService.findByDurationId
-            BROADCASTDURATIONITEMQUERYPAGE:"VTQeGvKbGi1nRONjrRAJs-yHObQV-XWixCVCVm9yNfIfWObX_nsJOOqaV6KVuBr",//views.broadcastDurationItemService.queryPage
-            BROADCASTDURATIONITEMDELETEBYIDS:"ViQkHwLoEgDZFAShXFAFsNyUcRWLVUwhj2QHHTa9uNuIlPcYMldTAePeECrWMhPba5_",//views.broadcastDurationItemService.deleteByIds
-            GETBROADCASTRECORDINFOFORPC:"dqXYe4KeHX52IXQWdYM0YYIkc15TEmcielYoaR5rLKSrD4aWsRJN9ibqWrTYWRhPnSHLVJfYW-xHJN_",//views.broadcastRecordService.getBroadcastRecordInfoForPC
-            GETCALENDARBYPROJECTIDFORSHARE:"gkjiekjQeEo5uYXCSFW63SkSkH75QVmUyeXUQpY_8lX-USvcGdmLlRiNT24BKHtXnBnNwmUQm-jDjgOfkS9",//views.broadcastRecordService.getCalendarByProjectIdForShare
-            GETCALENDARBYPROJECTID:"NaaD6quMGWqOICtzEIKukIbzAOZnSDX0iJIGTMzpbO1u26B0fU8FBNO-F5s139k4DIF7yUF",//views.broadcastRecordService.getCalendarByProjectId
-            QUERYBROADCASTRECORDPROJECTINFOFORPC:"cIoqpP3-vDbkFddHBThbJ6zWrZVbpKnRyD3OojmL_4ziaHyQVMvXkKVa0IlKELqco9kaI-uJ7anW6D2aoezDmvzXBIu",//views.broadcastRecordService.queryBroadcastRecordProjectInfoForPC
-            QUERYPAGE:'qhtcquTuUkNcB3iMYrdbEBbdaZS__ZAfN_PeFR-Y9SuQV23'//views.broadcastRecord.queryPage
+    BROADCAST: {
+        name: "4i4AhI5ob6i4GFxcZEkDqOHBULzynRs",///biz/t8t-app-pam/app
+        methods: {
+            BROADCASTDURATIONCREATE: 'WfmhH24YTgTEaEE_RGlXRMtKIRcXD7kUxk_HF3kaVGeMi3xFAAtU7su',//views.broadcastDurationService.create
+            BROADCASTDURATIONFINDBYID: 'HjidHe2VTkjIuOUMiVTIeOENMc_B4kY14JXSXIzWR3iIeDQFNM_dTbi',//views.broadcastDurationService.findById
+            BROADCASTDURATIONQUERYPAGE: 'UaaaYeBnvIVN_VSKMd-UDrF8Kt_MKmBsfNNSDcXMEZAcAcOQGNfKs_bUKm9',//views.broadcastDurationService.queryPage
+            BROADCASTDURATIONUPDATESTATUS: "HE_BHhoWHRjcDvtRZBG5evhxcC6z5YFQm-yz3fJC3DlD_a1u0ezC4N0F6kIalea",//views.broadcastDurationService.updateStatus
+            BROADCASTDURATIONITEMCREATE: "ZgPnMpxJaFYU0qDD-fETNwLxXhSU9pIh00KzRZQ2RsHboUdW-5QHhAOKCA8",//views.broadcastDurationItemService.create
+            BROADCASTDURATIONITEMUPDATE: "WRPlHuKpWpiDuYO7QQCFt8xVcPVMnWw4_JVwCl_uOdfHmPaXN3wWFRZHzMr",//views.broadcastDurationItemService.update
+            BROADCASTDURATIONITEMFINDBYID: "ozE9mBUM0GTK3ub-4xgX_bemt7ifvF6AUo1QwGdAg_8-uthwVFkxY8aC-USjLNf",//views.broadcastDurationItemService.findById
+            BROADCASTDURATIONITEMFINDBYDURATIONID: "1U__IenHzNkKFDqNx_F1M_hvd_yqEBRU2Kf_GCetg3AQK0rUM1xmRpRR-yFv373xMlK0_L_",//views.broadcastDurationItemService.findByDurationId
+            BROADCASTDURATIONITEMQUERYPAGE: "VTQeGvKbGi1nRONjrRAJs-yHObQV-XWixCVCVm9yNfIfWObX_nsJOOqaV6KVuBr",//views.broadcastDurationItemService.queryPage
+            BROADCASTDURATIONITEMDELETEBYIDS: "ViQkHwLoEgDZFAShXFAFsNyUcRWLVUwhj2QHHTa9uNuIlPcYMldTAePeECrWMhPba5_",//views.broadcastDurationItemService.deleteByIds
+            GETBROADCASTRECORDINFOFORPC: "dqXYe4KeHX52IXQWdYM0YYIkc15TEmcielYoaR5rLKSrD4aWsRJN9ibqWrTYWRhPnSHLVJfYW-xHJN_",//views.broadcastRecordService.getBroadcastRecordInfoForPC
+            GETCALENDARBYPROJECTIDFORSHARE: "gkjiekjQeEo5uYXCSFW63SkSkH75QVmUyeXUQpY_8lX-USvcGdmLlRiNT24BKHtXnBnNwmUQm-jDjgOfkS9",//views.broadcastRecordService.getCalendarByProjectIdForShare
+            GETCALENDARBYPROJECTID: "NaaD6quMGWqOICtzEIKukIbzAOZnSDX0iJIGTMzpbO1u26B0fU8FBNO-F5s139k4DIF7yUF",//views.broadcastRecordService.getCalendarByProjectId
+            QUERYBROADCASTRECORDPROJECTINFOFORPC: "cIoqpP3-vDbkFddHBThbJ6zWrZVbpKnRyD3OojmL_4ziaHyQVMvXkKVa0IlKELqco9kaI-uJ7anW6D2aoezDmvzXBIu",//views.broadcastRecordService.queryBroadcastRecordProjectInfoForPC
+            QUERYPAGE: 'qhtcquTuUkNcB3iMYrdbEBbdaZS__ZAfN_PeFR-Y9SuQV23'//views.broadcastRecord.queryPage
         }
     }
 };

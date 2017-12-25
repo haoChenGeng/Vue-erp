@@ -44,9 +44,9 @@ export default {
     // 查公司
     queryShop(args) {
         return axios({
-                method: Service.SUPPLY_CONFIGURE.methods.queryShop,
-                service: Service.SUPPLY_CONFIGURE.name,
-                args: args
+            method: Service.SUPPLY_CONFIGURE.methods.queryShop,
+            service: Service.SUPPLY_CONFIGURE.name,
+            args: args
         })
     },
     // 通过组织职能查询组织，暂时只支持或的关系
@@ -72,25 +72,29 @@ export default {
             args: args
         })
     },
-    queryChildrenByWholeCode(wholeCode,depth=3)
-    {
-         return axios({
+    queryTreeByType(args) {
+        return axios({
+            method: Service.ORGANIZATION.methods.QUERYTREEBYTYPE,
+            service: Service.ORGANIZATION.name,
+            args: args
+        })
+    },
+    queryChildrenByWholeCode(wholeCode, depth = 3) {
+        return axios({
             method: Service.SUPPLY_CONFIGURE.methods.queryChildrenByWholeCode,
             service: Service.SUPPLY_CONFIGURE.name,
-            args: {wholeCode:wholeCode,depth:depth}
+            args: { wholeCode: wholeCode, depth: depth }
         })
     },
-    queryChildrenByWholeCodes(wholeCodes,depth=3)
-    {
-         return axios({
+    queryChildrenByWholeCodes(wholeCodes, depth = 3) {
+        return axios({
             method: Service.SUPPLY_CONFIGURE.methods.queryChildrenByWholeCodes,
             service: Service.SUPPLY_CONFIGURE.name,
-            args: {wholeCodes:wholeCodes,depth:depth}
+            args: { wholeCodes: wholeCodes, depth: depth }
         })
     },
-    getAllQueue()
-    {
-         return axios({
+    getAllQueue() {
+        return axios({
             method: Service.EDA.methods.QUERY_QUEUE_QUERYQUEUES,
             service: Service.EDA.name,
             args: {}

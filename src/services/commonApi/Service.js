@@ -25,9 +25,9 @@ let Services = {
             // shop.query
             queryShop: '4VE-APqV_Fs13Cswfj8',
             //views.property.queryChildrenByWholeCode  通过全码查询辅助资料
-            queryChildrenByWholeCode:'sDE1BauR-rhu_AU-6F9VF952lJ_JIl-r1QOnscFpFYW0GFS9p3nAG1z',
+            queryChildrenByWholeCode: 'sDE1BauR-rhu_AU-6F9VF952lJ_JIl-r1QOnscFpFYW0GFS9p3nAG1z',
             //views.property.queryChildrenByWholeCodes
-            queryChildrenByWholeCodes:"CEGKxWt_AJmoqBtXoGEqET64657I2n7n39qadM-E_uX2b1O8X5k8Ii2vEnj"
+            queryChildrenByWholeCodes: "CEGKxWt_AJmoqBtXoGEqET64657I2n7n39qadM-E_uX2b1O8X5k8Ii2vEnj"
         }
     },
     // 组织架构
@@ -42,7 +42,9 @@ let Services = {
             // views.organization.queryTreeWithTypeAndFunction
             QUERY_TREE_FUNCTION: '-DB0-GqPoWXHozK4BKUV3yMPaFmC4lppJyYYIe9k-Gk5VCj84OEe2JBi24SnYuFqXHe',
             // organization.queryWithoutDel
-            ORG_QUERY_WITHOUTDEL: '9Ivp3_1e5zNZU_miVqa6YXq9Zg0sb1JBadatp4EuTiR'
+            ORG_QUERY_WITHOUTDEL: '9Ivp3_1e5zNZU_miVqa6YXq9Zg0sb1JBadatp4EuTiR',
+            QUERYTREEBYTYPE: 'IefMV_-kDFPfZ-shDibTaiAtug9yEjMCuudrr6HFltn', // organization.queryTreeByType
+
         }
     },
     // 商品
