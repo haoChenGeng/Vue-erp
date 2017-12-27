@@ -9,6 +9,7 @@
             :searchOptions="searchOptions"
             :showSearchToggleBtn="true"
             :tableColumns="tableColumns"
+            :tablePageSize="50"
             :tableService="service"
             :tableArgs="tableArgs"
             :tableMethod="method"
@@ -20,18 +21,14 @@
 </template>
 
 <script>
-    import T8tListView from 'src/components/t8t-list-view/index.vue'
     import commonApi from 'src/services/commonApi/commonApi.js'
     import itemAssignApi from 'src/services/itemAssign/API.js'
     import itemAssignService from 'src/services/itemAssign/Service.js'
 
     export default {
-        components: { T8tListView },
         created () {
-            // 组织加载(分公司)
-            this.loadOrganizations('001003006')
             // 派工类型
-            this.getCommonOptions('42101', 'assignTypes')
+            this.getCommonOptions('82301', 'assignTypes')
         },
         data () {
             return {
@@ -42,9 +39,8 @@
                 },
                 // 表头描述
                 tableColumns: [
-                    {prop: 'code', label: '单据编码'},
-                    {prop: 'subCompany', label: '组织'},
-                    {prop: 'projectId', label: '项目ID'},
+                    {prop: 'rootOrgName', label: '装修公司'},
+                    {prop: 'sourceProjectId', label: '项目ID'},
                     {prop: 'bizType', label: '业务类型'},
                     {prop: 'reason', label: '派工原因'},
                     {prop: 'assignType', label: '派工类型'},
@@ -55,10 +51,14 @@
                 ],
                 // 搜索项配置
                 searchFields: [
-                    {type: 'input', label: '单据编码', name: 'code'},
-                    {type: 'input', label: '项目ID', name: 'projectId'},
-                    {type: 'select', label: '组织（分公司）', name: 'subCompanyId', selectSourceKey: 'organizations'},
-                    {type: 'select', label: '派单类型', name: 'assignTypeId', selectSourceKey: 'assignTypes'}
+                    {type: 'input', label: '项目ID', name: 'sourceProjectId'},
+                    {type: 'select', label: '派单类型', name: 'typeId', selectSourceKey: 'assignTypes'},
+                    {
+                        type: 'datetime', label: '派单时间', name: 'checkTime', pickertype: 'datetimerange',
+                        startField: 'updateTime_gte',
+                        endField: 'updateTime_lte',
+                        inputWidth:'200'
+                    },
                 ],
                 // 面包屑
                 breadcrumbData: [
@@ -68,7 +68,8 @@
                 ],
                 // 搜索项对应值
                 searchOptions: {
-                    organizations: [],      // 分公司
+                    "updateTime_gte":null,
+                    "updateTime_lte":null,
                     assignTypes: [],
                     assignState: [
                         {value: 0, text: '未完成'},
@@ -80,41 +81,6 @@
         },
         methods: {
             onSearchSubmit: function () {
-            },
-            // 查询组织信息
-            loadOrganizations: function(typeCode) {
-                commonApi.queryAll({'search': {'typeCode': typeCode}})
-                    .then((res => {
-                        let list = []
-                        if (res.data.status === 200) {
-                            res.data.result.rows.forEach((item) => {
-                                if (item.isDel===0) {
-                                    list.push({
-                                        value: item.id,
-                                        text: item.name
-                                    })
-                                };
-                            })
-                            this.searchOptions['organizations'] = list
-                        }
-                    }))
-            },
-            loadProductInfo: function () {
-                var args = {}
-                itemAssignApi.loadProductInfo(args).then((res) => {
-                    let list = []
-                    if (res.data.status === 200) {
-                        res.data['result'].forEach((item) => {
-                            list.push({
-                                value: item.id,
-                                text: item.pkgName
-                            })
-                        })
-                        this.searchOptions['productPkgs'] = list
-                    } else {
-                        this.showMsg('error', '加载产品包信息失败！')
-                    }
-                })
             },
             // 调用辅助资料接口
             getCommonOptions: function(fatherCode, selectName) {

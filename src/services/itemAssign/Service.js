@@ -2,8 +2,8 @@
 let Services = {
     // 项目执行服务
     ITEM_ASSIGN: {
-        // /biz/t8t-prs-ass/app
-        name: 'kQCHV35uKPnjuOphj9WgkM2-L8oUbgZ',
+        // /biz/dsp-prs-ass/app
+        name: 'UAR17K-aC6TYYJ0STNnwk8m6J-4keFe',
         methods: {
             // 项目经理接单配置
             // principalSetting.listPage  （项目经理接单配置列表页）
@@ -68,17 +68,25 @@ let Services = {
 
             // assignPrincipal.itemList (派单列表页-项目经理)
             LIST_ITEM_ASSIGN: 'nOH7nfYlMSA2hgZzkRM78CgtBiRsGEUlOa6',
-
-
-            // assignPrincipalProject.pc.page
-            LIST_ASSIGN_PROJECT: 'MABSDnQ9XmPBBORiHkuQAqg979lBgNeX6emUs0kS7RO',
+                /**============================================================================= **/
+            // views.assignPrincipalProject.pc.page
+            LIST_ASSIGN_PROJECT: '1ABz-UY85juUo3p2IiTjpB1CbK5STNgoq97yPvxpiRK0AaNkk-x',
             // assignPrincipalProject.pc.assignPage
             PAGE_ASSIGN_PRINCIPAL: 'N5_SM1Nl41raQFIvXPoo7h25oh5WMHLkql3UnU-tCOLLVrvINBT',
 
-            // assignPrincipal.assignRecordPage
-            LIST_ASSIGN_RECORD: 'rrooIscgCpdPui7SxxeZ_fBaFi558xrOst7FDHxZU130LmG',
+            // views.assignPrincipal.assignRecordPage
+            LIST_ASSIGN_RECORD: 'nCw7zQlJ0xTWIzzm1bgRXz3xj7_1fgIlvaM5_su0tTBjMTLygd7iLtd',
+            //views.principal.getAssignPrincipalList
+            GET_ASSIGN_PRINCIPAL_LIST:'x77jc6zPwxkVdqd4f6sYTAg8bkgHHIqKmpt3SGCskN4wVAkeGG3w4SS',
 
+            //views.assignPrincipal.assignConfig
+            ASSIGN_CONFIG:'z284s2jxcbia1ws0upI9L_r9g4bdHIwP7HJyNl8cmj_y5oowzEE',
 
+            //views.assignPrincipal.pc.assign
+            ASSIGN:'0x7_7Up6gusoO5t5NulRAm8nH5jR0iCcCiCkKN6-8yx6edw',
+
+            //views.principal.getDecorationInfo
+            GET_DECORATION_INFO:'3s-o4KRIubMswqfbDuOMGR_gAwJrK3s5AHcp9r7j9TP0p0C',
 
         }
     },
@@ -128,7 +136,18 @@ let Services = {
             // views.product.package.query
             LOAD_PRODUCT_INFO: '05p2eQSHejbaBsgrJ7gbOHraesxc2nf4XIyth08'
         }
-    }
+    },
+        PROPERTY: {
+            ///biz/supply-chain/app.supply-server
+            name: '1tDSHZmpwHN3cE-fZAxlLLRQhYPA-aBd5eTCtU4Z8fqTAytCUy2',
+            methods: {
+                propertyQueryPage: 'xxyFxYonI0x3Fv7Po3D98lC_z76', //property.queryPage
+                propertyQueryBatchByCodeAndPcode: '0wkcHzF4iIw08WJGyNJA9aBy-OH05k5OlRIxLtbydZM2j8S', // property.queryBatchByCodeAndPcode
+                QUERYP_ROPERTY_UNION: 'VzzwJAbDde1OZIVPsjbnRJIQ-dTF0B1M_AaYQ7t', //property.queryPropertyUnion
+                queryUnionParent:'vWcCqRRuqavrv2SkNxuXiloq549mh9uvxSBYPMS',//property.queryUnionParent
+            }
+        }
 }
+
 
 export default Services

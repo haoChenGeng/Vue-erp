@@ -5,7 +5,14 @@ export default {
     // 辅助资料配置接口
     assignPage (args) {
         return axios({
-            method: Service.ITEM_ASSIGN.methods.PAGE_ASSIGN_PRINCIPAL,
+            method: Service.ITEM_ASSIGN.methods.GET_ASSIGN_PRINCIPAL_LIST,
+            service: Service.ITEM_ASSIGN.name,
+            args: args
+        })
+    },
+    getDecorationInfo (args) {
+        return axios({
+            method: Service.ITEM_ASSIGN.methods.GET_DECORATION_INFO,
             service: Service.ITEM_ASSIGN.name,
             args: args
         })
@@ -117,6 +124,34 @@ export default {
         return axios({
             method: Service.PRS_PQM.methods.LOAD_PRODUCT_INFO,
             service: Service.PRS_PQM.name,
+            args: args
+        })
+    },
+    queryPropertyUnion (args) {
+        return axios({
+            method: Service.PROPERTY.methods.QUERYP_ROPERTY_UNION,
+            service: Service.PROPERTY.name,
+            args: args
+        })
+    },
+    getAssignPrincipalList (args) {
+        return axios({
+            method: Service.ITEM_ASSIGN.methods.GET_ASSIGN_PRINCIPAL_LIST,
+            service: Service.ITEM_ASSIGN.name,
+            args: args
+        })
+    },
+    assign (args) {
+        return axios({
+            method: Service.ITEM_ASSIGN.methods.ASSIGN,
+            service: Service.ITEM_ASSIGN.name,
+            args: args
+        })
+    },
+    assignConfig (args) {
+        return axios({
+            method: Service.ITEM_ASSIGN.methods.ASSIGN_CONFIG,
+            service: Service.ITEM_ASSIGN.name,
             args: args
         })
     },
