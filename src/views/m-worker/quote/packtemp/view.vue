@@ -68,6 +68,16 @@
                                 </el-date-picker>
                             </template>
 
+                            <template slot="wholeCode" scope="scope">
+                                <el-select v-model="tempHeadFormData[scope.field.prop]" filterable placeholder="请选择">
+                                    <el-option
+                                        v-for="item in tempHeadFormCommonData.orderTypes"
+                                        :label="item.text"
+                                        :value="item.value">
+                                    </el-option>
+                                </el-select>
+                            </template>
+
                         </t8t-form-panel>
                     </div>
 
@@ -232,7 +242,8 @@
                     organizes:[],
                     mould_status:config.datas.mould_status,
                     productPackages:[],
-                    canEditOrg: !this.canEditOrg
+                    canEditOrg: !this.canEditOrg,
+                    orderTypes:[],
                 },
                 isTopHide: false,
                 tempHeadFormFields:[
@@ -267,10 +278,9 @@
                         rules: [
                             {
                                 type: "number",
-                                required: true,
                                 message: '请选择组织'
                             },
-                            {type: "number",min: 1 ,max:1000000, message: "请选择组织",trigger: 'change'},
+                            {type: "number",min: 0 ,max:1000000, message: "请选择组织",trigger: 'change'},
                         ]
                     },
                     {
@@ -281,50 +291,61 @@
                         disabled: true
                     },
                     {
-                        prop: 'scheduleModuleId',
-                        label: '排期模板头ID',
-                        type: 'input',
-                        defaultValue: {
-                        },
-                        textValue: 'name',
-                        filedValue: 'id',
-                        disabled:true,
-                        /*dialog: {
-                            title: "查询排期模板",
-                            size: 'large',
-                            searchForm: {
-                                fields: [
-                                    {type: 'input', label: '模板名', name: 'name_like'},
-                                ],
-                                resetBtnVisible: false,
-                                showToggleBtn: false
-                            },
-                            table: {
-                                //表格
-                                columns: [{
-                                    prop: 'name',
-                                    label: '模板名'
-                                }],
-                                radioCol: true,
-                                //请求参数配置
-                                service: packtempServices.schedule.name,
-                                method: packtempServices.schedule.methods.module,
-                                args: {}
-                            },
-                            onConfirm: function (){}
-                        },
-                        //自动补全
-                        remote:true,
-                        service:packtempServices.schedule.name,
-                        method:packtempServices.schedule.methods.module,
-                        remoteQueryKey:"name_like",
-                        remoteArgs:{'page':1, 'size':20},
-                        rules: [{
-                            required: true,
-                            message: '不能为空'
-                        }]
-                        */
+                        prop: 'wholeCode',
+                        label: '打印模板',
+                        //type: 'select',
+                        list: 'orderTypes',
+                        disabled: false,
+                        rules: [
+                            {required: true ,message: "请选择打印模板",trigger: 'change'},
+                        ]
                     },
+                    /**
+                     {
+                         prop: 'scheduleModuleId',
+                         label: '排期模板头ID',
+                         type: 'input',
+                         defaultValue: {
+                         },
+                         textValue: 'name',
+                         filedValue: 'id',
+                         disabled:true,
+                         dialog: {
+                             title: "查询排期模板",
+                             size: 'large',
+                             searchForm: {
+                                 fields: [
+                                     {type: 'input', label: '模板名', name: 'name_like'},
+                                 ],
+                                 resetBtnVisible: false,
+                                 showToggleBtn: false
+                             },
+                             table: {
+                                 //表格
+                                 columns: [{
+                                     prop: 'name',
+                                     label: '模板名'
+                                 }],
+                                 radioCol: true,
+                                 //请求参数配置
+                                 service: packtempServices.schedule.name,
+                                 method: packtempServices.schedule.methods.module,
+                                 args: {}
+                             },
+                             onConfirm: function (){}
+                         },
+                         //自动补全
+                         remote:true,
+                         service:packtempServices.schedule.name,
+                         method:packtempServices.schedule.methods.module,
+                         remoteQueryKey:"name_like",
+                         remoteArgs:{'page':1, 'size':20},
+                         rules: [{
+                             required: true,
+                             message: '不能为空'
+                         }]
+                     },
+                     */
                     {
                         //TODO 填写时，填写时间必须晚于等于当前时间，早于已填写的冻结时间和禁用时间；
                         prop: 'effectTime',
@@ -1138,6 +1159,37 @@
                     }
                 }
             })
+
+            //动态获取辅助资料 单据类型
+            apiCommon.queryUnionParent({
+                page: 1,
+                search: {
+                    pPropertyCode: 11605, //辅助资料，供应链=》库存=》单据类型
+                    propertyStatus:1,//状态：0不启用（默认值） 1启用
+                },
+                size: 1000
+            }).then((res) => {
+                if (res.data.status === 200) {
+                    let list = []
+                    if (res.data.result.length > 0) {
+                        res.data.result.forEach((item) => {
+                            list.push({
+                                value: item.wholeCode,
+                                text: item.propertyName,
+                            })
+                        })
+
+                        this.tempHeadFormCommonData['orderTypes'] =list
+                    }
+                }else{
+                    return this.$msgbox({
+                        title:'',
+                        type:'error',
+                        message:'出错：没有查询到单据类型的辅助资料'
+                    })
+                }
+            })
+
         },
         methods: {
             onTopHide(){
@@ -1584,66 +1636,68 @@
 
                                 let tableData3 = this.formatTableData(table3, 2)
 
-                            if( !tableData1 || !tableData2 || !tableData3 ){
-                                return false
-                            }
-
-                            createTempItems = [].concat(tableData1.createTempItems,tableData2.createTempItems,tableData3.createTempItems)
-                            updateTempItems = [].concat(tableData1.updateTempItems,tableData2.updateTempItems,tableData3.updateTempItems)
-
-                            let args = {
-                                id : this.tempId,
-                                tempName: tempData.tempName, //产品包模板名称
-                                effectTime: this.floorDateFromStr(tempData.effectTime), //生效时间
-                                orgId: tempData.orgId, //组织id，
-                                scheduleModuleId: tempData.scheduleModuleId, //排期模板头ID
-                                freezeTime: this.floorDateFromStr(tempData.freezeTime), //冻结时间
-                                forbiddenTime: this.floorDateFromStr(tempData.forbiddenTime), //禁用时间
-                                updateUser: this.accountId //修改人id
-                            };
-
-                            this.disabledSymbolsTop.push('TEMP-SAVE')
-                            packtemp.updateTemp(args, createTempItems, updateTempItems).then((res) => {
-
-
-                                if (res.data.status === 200) {
-
-                                    this.$message({
-                                        type: 'success',
-                                        message: '暂存成功！'
-                                    })
-                                    //this.$refs[this.activeTableRef].reloadTable()
-                                    table.reloadTable()
-                                    table2.reloadTable()
-                                    table3.reloadTable()
-                                    table.resetActionLog()
-                                    table2.resetActionLog()
-                                    table3.resetActionLog()
-                                    this.activeTabName = this.activeTabName
-                                    this.disabledSymbolsTop.shift(this.disabledSymbolsTop.indexOf('TEMP-SAVE'))
-                                    return true
-                                    //this.closeDialog()
-                                    /*this.$msgbox({
-                                     title:'提示',
-                                     message:'暂存成功',
-                                     type:'success',
-                                     callback:function (){
-                                     this.$refs['maintable'].reloadTable()
-                                     _this.closeDialog()
-                                     }
-                                     })*/
-                                } else {
-                                    this.disabledSymbolsTop.shift(this.disabledSymbolsTop.indexOf('TEMP-SAVE'))
-                                    this.$message({
-                                        type: 'error',
-                                        message: res.data.result
-                                    })
+                                if( !tableData1 || !tableData2 || !tableData3 ){
                                     return false
-
                                 }
+
+                                createTempItems = [].concat(tableData1.createTempItems,tableData2.createTempItems,tableData3.createTempItems)
+                                updateTempItems = [].concat(tableData1.updateTempItems,tableData2.updateTempItems,tableData3.updateTempItems)
+
+                                let args = {
+                                    id : this.tempId,
+                                    tempName: tempData.tempName, //产品包模板名称
+                                    effectTime: this.floorDateFromStr(tempData.effectTime), //生效时间
+                                    orgId: tempData.orgId, //组织id，
+                                    scheduleModuleId: tempData.scheduleModuleId, //排期模板头ID
+                                    wholeCode: tempData.wholeCode, //属性全码，单据类型编码，用于报价产品包模板打印
+                                    freezeTime: this.floorDateFromStr(tempData.freezeTime), //冻结时间
+                                    forbiddenTime: this.floorDateFromStr(tempData.forbiddenTime), //禁用时间
+                                    updateUser: this.accountId //修改人id
+                                };
+                                //debugger
+
+                                this.disabledSymbolsTop.push('TEMP-SAVE')
+                                packtemp.updateTemp(args, createTempItems, updateTempItems).then((res) => {
+
+
+                                    if (res.data.status === 200) {
+
+                                        this.$message({
+                                            type: 'success',
+                                            message: '暂存成功！'
+                                        })
+                                        //this.$refs[this.activeTableRef].reloadTable()
+                                        table.reloadTable()
+                                        table2.reloadTable()
+                                        table3.reloadTable()
+                                        table.resetActionLog()
+                                        table2.resetActionLog()
+                                        table3.resetActionLog()
+                                        this.activeTabName = this.activeTabName
+                                        this.disabledSymbolsTop.shift(this.disabledSymbolsTop.indexOf('TEMP-SAVE'))
+                                        return true
+                                        //this.closeDialog()
+                                        /*this.$msgbox({
+                                         title:'提示',
+                                         message:'暂存成功',
+                                         type:'success',
+                                         callback:function (){
+                                         this.$refs['maintable'].reloadTable()
+                                         _this.closeDialog()
+                                         }
+                                         })*/
+                                    } else {
+                                        this.disabledSymbolsTop.shift(this.disabledSymbolsTop.indexOf('TEMP-SAVE'))
+                                        this.$message({
+                                            type: 'error',
+                                            message: res.data.result
+                                        })
+                                        return false
+
+                                    }
+                                })
                             })
                         })
-                            })
 
 
                     })
@@ -1902,8 +1956,8 @@
                 }
 
                 /*if( column.property == 'effectTimeVO' && !this.isCanEditEffectTime(row) ){
-                    this.$refs['t8ttable'].handleFormItemBlur()
-                }*/
+                 this.$refs['t8ttable'].handleFormItemBlur()
+                 }*/
             },
 
             closeSelectQuoteItemDialog(){
@@ -1947,15 +2001,15 @@
                             //组织的可编辑状态设置
                             mainForm.fields[this.formIndexOfFields(mainForm,'orgId')].disabled = !this.canEditOrg
 
-/*
-                            //生效时间的可编辑状态校验
-                            mainForm.fields[this.formIndexOfFields(mainForm,'effectTime')].disabled =  !this.isEffectTimeCanEdit(this.tempHeadFormData)
+                            /*
+                             //生效时间的可编辑状态校验
+                             mainForm.fields[this.formIndexOfFields(mainForm,'effectTime')].disabled =  !this.isEffectTimeCanEdit(this.tempHeadFormData)
 
-                            //冻结时间的可编辑状态校验
-                            mainForm.fields[this.formIndexOfFields(mainForm,'freezeTime')].disabled = !this.isFreezeTimeCanEdit(this.tempHeadFormData)
+                             //冻结时间的可编辑状态校验
+                             mainForm.fields[this.formIndexOfFields(mainForm,'freezeTime')].disabled = !this.isFreezeTimeCanEdit(this.tempHeadFormData)
 
-                            //禁用时间的可编辑状态校验
-                            mainForm.fields[this.formIndexOfFields(mainForm,'forbiddenTime')].disabled = !this.isForbiddenTimeCanEdit(this.tempHeadFormData)*/
+                             //禁用时间的可编辑状态校验
+                             mainForm.fields[this.formIndexOfFields(mainForm,'forbiddenTime')].disabled = !this.isForbiddenTimeCanEdit(this.tempHeadFormData)*/
                             //生效时间的可编辑状态校验
                             this.canEditEffectTime =  this.isEffectTimeCanEdit(this.tempHeadFormData)
 
@@ -2226,7 +2280,7 @@
 
 
     .el-table__body-wrapper{
-    	/*display: flex;*/
+        /*display: flex;*/
     }
 
     .toolbar-white .full-dialog-toolbar-container{

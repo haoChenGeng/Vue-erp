@@ -4,6 +4,25 @@
  */
 let config = {
     datas:{
+        //水电增项状态：0.待确认；1.已确认: 2.装修公司申请：3.业主驳回
+        statusConfirms: [
+            {
+                'text': '待确认',
+                'value': 0
+            },
+            {
+                'text': '已确认',
+                'value': 1
+            },
+            {
+                'text': '装修公司申请',
+                'value': 2
+            },
+            {
+                'text': '业主驳回',
+                'value': 3
+            },
+        ],
         //变更单状态 0-完成初稿 1-审核中 2-审核驳回 3-报价已出 4-核算中 5-核算驳回 6-报价完成
         order_status: [
             {
@@ -56,28 +75,22 @@ let config = {
     },
     formFields:[
         {
-            prop: 'yid',
-            label: '项目ID',
+            prop: 'sourceProjectId',
+            label: '原项目ID',
             type: 'input',
             disabled:true
         },
         {
             prop: 'projectAddress',
-            label: '工程地址',
+            label: '项目地址',
             type: 'input',
             disabled:true
         },
         {
-            prop: 'owner',
-            label: '业主称呼',
+            prop: 'ownerName',
+            label: '业主姓名',
             type: 'input',
             disabled:true
-        },
-        {
-            prop: 'area',
-            label: '计价面积',
-            type:'input',
-            disabled:true,
         },
         {
             prop: 'houseTypeName',
@@ -86,23 +99,23 @@ let config = {
             disabled:true,
         },
         {
-            prop: 'tempName',
-            label: '模板名称',
+            prop: 'lbfy',
+            label: '水电增项金额',
             type: 'input',
             disabled:true
         },
         {
-            prop: 'totalPrice',
-            label: '变更单金额',
+            prop: 'realSignedTime',
+            label: '签约时间',
             type: 'input',
             disabled:true
         },
         {
-            prop: 'orderStatus',
-            label: '变更单状态',
+            prop: 'statusConfirm',
+            label: '水电增项状态',
             type: 'select',
-            list:'order_status',
-            disabled:true
+            list: 'statusConfirms',
+            disabled: true
         },
     ],
     mainTableColumns:[
@@ -112,30 +125,12 @@ let config = {
             resizable:false,
             required: true,
             list:'spaces',
-            editor:{
-                type:'select',
-                rules:[
-                    {
-                        type:'number',
-                        required: true,
-                        min: 0,
-                        message: '请选择使用空间'
-                    }
-                ]
-            }
         },
         {
             prop: 'placeId',
             label: '位置',
             resizable:false,
             list:'places',
-            /*editor:{
-                type: 'select',
-                list:'places',
-                disabled: function (row,a,b,c,d){
-                    return false
-                },
-            }*/
         },
         {
             prop: 'qiName',
@@ -146,46 +141,6 @@ let config = {
             prop: 'amount',
             label: '数量',
             resizable:false,
-            required: true,
-            trigger:'blur',
-            editor:{
-                type:'input',
-                rules:
-                    function(val, row , col, tab){
-                        //匹配多于两位的小数
-                        let exp = new RegExp('^[0-9]+(\\.\\d{3,})$')
-                        let upperLimit = row.upperLimit || 10000
-
-                        let includeLowerLimitWord = row.lowerLimit == 0 ? '不含' : '包含'
-                        let includeUpperLimitWord = upperLimit == 0 ? '不含' : '包含'
-                        return [
-                            {
-                                type:'number',
-                                'validator': (rule, value, callback, source, options) => {
-
-                                    //最多精确到两位小数
-                                    if(exp.test(+value)){
-                                        callback(false)
-                                    }
-                                    else if(+value <= 0){
-                                        callback(false)
-                                    }
-                                    else if( (+value >=row.lowerLimit && +value <= upperLimit) || +value === 0){
-                                        callback()
-                                    }else{
-                                        callback(false)
-                                    }
-                                },
-                                message: `请输入${row.lowerLimit}(${includeLowerLimitWord})-${upperLimit}(${includeUpperLimitWord})之间的数字, 精确到两位小数`,
-                                transform (val) {
-                                    return +val
-                                },
-                                trigger:'blur'
-                            },
-                            {type:'number',message:'必须为数值', trigger:'blur'},
-                        ]
-                    },
-            },
         },
         {
             prop: 'qiUnit',
@@ -198,12 +153,49 @@ let config = {
             resizable:false
         },
         {
-            prop: 'totalMoney',
+            prop: 'lbfy',
             label: '金额',
             resizable:false,
-            formatter(val, item){
-                return (+item.price * +item.amount).toFixed(2) * (item.addOrSubItemType == 1 ? 1 : -1)
-            }
+            required:true,
+            trigger:'blur',
+            editor: {
+                type:'input',
+                rules:
+                    function(val, row , col, tab){
+                        //匹配整数
+                        let exp = new RegExp('^[0-9]+$')
+                        let upperLimit = row.upperLimit || 1000000
+                        debugger
+
+                        let includeLowerLimitWord = 0
+                        let includeUpperLimitWord = upperLimit
+                        return [
+                            {
+                                type:'number',
+                                'validator': (rule, value, callback, source, options) => {
+
+                                    if(!exp.test(+value)){
+                                        callback(false)
+                                    }
+                                    else if(+value < 0){
+                                        callback(false)
+                                    }
+                                    else if( (+value >=includeLowerLimitWord && +value <= includeUpperLimitWord) || +value === 0){
+                                        callback()
+                                    }else{
+                                        callback(false)
+                                    }
+                                },
+                                message: `请输入${includeLowerLimitWord}-${includeUpperLimitWord}之间的整数`,
+                                transform (val) {
+                                    return +val
+                                },
+                                trigger:'blur'
+                            },
+                            {type:'number',message:'必须为数值', trigger:'blur'},
+                        ]
+                    },
+            },
         },
         {
             prop: 'addOrSubItemType',
@@ -217,7 +209,6 @@ let config = {
             "align": 'left',
             resizable:false
         },
-
     ],
 
     //汇总面板列

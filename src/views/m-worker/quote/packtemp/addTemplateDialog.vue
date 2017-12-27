@@ -9,15 +9,22 @@
                     <el-input :size="small" v-model="formData.tempName"></el-input>
                 </el-form-item>
 
-                <el-form-item label="组织：" prop="orgId">
-                    <el-select v-model="formData.orgId" placeholder="--请选择--">
-                        <el-option v-for="item in commonData.organizes" :label="item.text" :value="item.value"></el-option>
-                    </el-select>
-                </el-form-item>
-
                 <el-form-item label="产品包：" prop="pkgId">
                     <el-select v-model="formData.pkgId" placeholder="--请选择--">
                         <el-option v-for="item in commonData.productPackages" :label="item.text" :value="item.value"></el-option>
+                    </el-select>
+                </el-form-item>
+
+                <el-form-item label="产品包模板类型：" prop="tempType">
+                    <el-select v-model="formData.tempType" placeholder="--请选择--">
+                        <el-option v-for="item in commonData.tempTypes" :label="item.text" :value="item.value"></el-option>
+                    </el-select>
+                </el-form-item>
+
+
+                <el-form-item label="组织：" prop="orgId">
+                    <el-select v-model="formData.orgId" placeholder="--请选择--">
+                        <el-option v-for="item in commonData.organizes" :label="item.text" :value="item.value"></el-option>
                     </el-select>
                 </el-form-item>
 
@@ -100,10 +107,15 @@
                 commonData: {
                     organizes: this.organizes,
                     productPackages: this.productPackages,
+                    tempTypes:[
+                        {text:"通用", value:0},
+                        {text:"定制", value:1},
+                    ]
                 },
                 formData:{
                     'tempName': '',
                     'orgId': null,
+                    'tempType': null,
                     'pkgId': '',
                     'createUser':+Cookie.get('t8t-tc-uid'),
                     'scheduleModuleId':1,
@@ -114,8 +126,8 @@
                         {type: "string",min: 1 ,max:20, message: "产品包模板名称最多50个字符",trigger: 'change'},
                         //{type: "string",maxLength: 10 , message: "最多10个字符",trigger: 'change'}
                     ],
-                    orgId: [
-                        {type: "number",required: true , message: "请选择组织",trigger: 'change'}
+                    tempType: [
+                        {type: "number",required: true , message: "请选择产品包模板",trigger: 'change'}
                     ],
                     pkgId: [
                         {type: "number",required: true , message: "请选择产品包",trigger: 'change'}
@@ -143,16 +155,6 @@
                         }]
                     },
                     {
-                        prop: 'orgId',
-                        label: '组织',
-                        type: 'select',
-                        list: 'organizes',
-                        rules: [{
-                            required: true,
-                            message: '不能为空'
-                        }]
-                    },
-                    {
                         prop: 'pkgId ',
                         label: '产品包',
                         type: 'select',
@@ -161,6 +163,22 @@
                             required: true,
                             message: '不能为空'
                         }]
+                    },
+                    {
+                        prop: 'tempType',
+                        label: '产品包模板类型',
+                        type: 'select',
+                        list: 'tempTypes',
+                        rules: [{
+                            required: true,
+                            message: '不能为空'
+                        }]
+                    },
+                    {
+                        prop: 'orgId',
+                        label: '组织',
+                        type: 'select',
+                        list: 'organizes',
                     },
                 ],
                 canSubmit: true
@@ -187,6 +205,7 @@
                         packtemp.createTemp(formData).then((res) => {
                             if (res.data.status === 200) {
                                 let tempCode = res.data.result // 创建的insertid()
+                                this.cancel();
                                 this.$router.push({ path: '/tuchat-worker/quote-packtemp-view',query:{'tempCode':tempCode}})
                             } else {
                                 this.canSubmit = true

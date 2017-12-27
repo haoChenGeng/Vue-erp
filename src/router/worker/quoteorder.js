@@ -10,6 +10,7 @@ const quoteOrderPreview = resolve => require(['src/views/m-worker/quote/m-quoteo
 const projectSelectQuoteTemp = resolve => require(['src/views/m-worker/quote/m-projectlist/project-list/selectQuoteTemp.vue'], resolve)
 const selectionList = resolve => require(['src/views/m-worker/quote/m-quoteorder/selectionList.vue'], resolve)
 
+
 const routes = [
     {
         path: '/tuchat-worker',

@@ -4,7 +4,6 @@ const Console = resolve => require(['src/views/console/console.vue'], resolve)
 const ProjectListTemplateBase = resolve => require(['src/views/m-worker/quote/m-projectlist/project-list/show.vue'], resolve)
 const PreviewTemplateBase = resolve => require(['src/views/m-worker/quote/m-projectlist/project-list/preview.vue'], resolve)
 
-
 const routes = [
     //项目列表
     {

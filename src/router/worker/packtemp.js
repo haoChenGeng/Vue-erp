@@ -10,7 +10,6 @@ const groupDosageMappingSku = resolve => require(['src/views/m-worker/quote/pack
 const preview = resolve => require(['src/views/m-worker/quote/packtemp/previewTemp.vue'], resolve);
 const version = resolve => require(['src/views/m-worker/quote/packtemp/version.vue'], resolve);
 
-
 const routes = [{
         path: '/tuchat-worker',
         component: Console,

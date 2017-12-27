@@ -5,7 +5,6 @@ const ProductPackageTemplateBase = resolve => require(['src/views/m-worker/quote
 
 //const PageDeliveryTemplateRef = resolve => require(['src/views/m-worker/quote/m-productpackage/product-package/versionShow.vue'], resolve)
 
-
 const routes = [
     //交付
     {

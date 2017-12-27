@@ -3,6 +3,7 @@ const Console = resolve => require(['src/views/console/console.vue'], resolve)
 //选品维度
 const CategorySearchTemplateBase = resolve => require(['src/views/m-worker/quote/m-categorysearch/category-search/show.vue'], resolve)
 
+
 const routes = [
     //
     {

@@ -3,7 +3,6 @@ const Console = resolve => require(['src/views/console/console.vue'], resolve)
 //户型空间
 const ApartmentSpaceTemplateBase = resolve => require(['src/views/m-worker/quote/m-apartmentspace/apartment-space/show.vue'], resolve)
 
-
 const routes = [
     //
     {

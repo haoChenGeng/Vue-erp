@@ -10,6 +10,7 @@ import virtualCard from './virtualCard.js'
 import inventoryAccounting from './inventoryAccounting.js'
 import financialVoucher from './financialVoucher.js'
 import baseAccount from './baseAccount.js'
+import refundManage from './refundManage.js'
 
 
 let routes = [].concat(
@@ -23,7 +24,8 @@ let routes = [].concat(
     virtualCard,
     inventoryAccounting,
     financialVoucher,
-    baseAccount
+    baseAccount,
+    refundManage
 )
 
 export default routes

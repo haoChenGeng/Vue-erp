@@ -1,6 +1,38 @@
 import axios from 'src/utils/axios.js'
 import Service from './Service.js'
 export default {
+    /**
+     * 提交水电增项
+     * @param projectId
+     * @param accountId
+     */
+    submitDetail:function (dto, accountId){
+        return axios({
+            service: Service.order.name,
+            method: Service.order.methods.submitDetail,
+            args: {
+                "dto": dto,
+                "accountId": accountId
+            }
+        })
+    },
+
+    /**
+     * 水电增项详情
+     *
+     * @param projectId
+     * @param accountId
+     */
+    createdDetail:  function (projectId, accountId){
+        return axios({
+            service: Service.order.name,
+            method: Service.order.methods.createdDetail,
+            args: {
+                "projectId":projectId,//项目id
+                "accountId": accountId
+            }
+        })
+    },
 
     /**
      * 变更单信息

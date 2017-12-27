@@ -29,6 +29,16 @@ let Services = {
             unSubmit: 'vsp5y7fCyeAe5gqYIgJvQAZ7d5dqcD3v7AZxpdzzqiG', //变更单反审核  views.variationOrder.unSubmit
 
             completeTask: 'BdJURYr_NPtgaGvFtfOM0QQ7AZ25klNRj0k', //views.wkf.completeTask 处理流程接口(通过流程Id,taskId)-前端调用工作流转发接口 views.wkf.completeTask
+
+            submitDetail:'7J1SIAYs_A3XFszVH36YLM2HsH63ZRtJo04mD4R1UzXo5IN', //views.variationOrder.submitDetail 提交水电增项详情
+
+            createdDetail:'8U6HJ-Xsj9CI8nQ5liNCJ0NBZtF539O6u-b73_YM7wT_qmJ71gi', //views.variationOrder.createdDetail 查询水电增项详情
+
+            createdList:'9RGULiAMQSzR2ClU4DwOJ-Y4SELmhEUloBE3exDG3RU9m-r', //views.variationOrder.createdList 查询已创建的水电增项列表
+
+            unCreateList:'OIJaTXsgPe0VL42Y8gNef1b-a536gVFc0O-XR5DUnGu-MDU', // views.variationOrder.unCreateList 查询未创建的水电增项列表
+
+            list:'wm57r22Hfvg7VIfuBVNguUBo9a9pqJxyGrRynm6', //views.variationOrder.weList 查询水电增项列表
         }
     },
 

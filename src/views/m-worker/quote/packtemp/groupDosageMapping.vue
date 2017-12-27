@@ -109,15 +109,15 @@
 
                     //组合类型
                     {
-                        "prop": "gdType",
-                        "label": "组合类型",
+                        "prop": "deliveryType",
+                        "label": "交付项类型",
                         "list":'types',
                         "required":true,
                         editor:{
                             type:'select',
                             rules:[
                                 {
-                                    required: true, message: '请选择组合类型'
+                                    required: true, message: '请选择交付项类型'
                                 }
                             ],
                         },
@@ -125,20 +125,12 @@
                     },
                     //组合名称
                     {
-                        "prop": "gdmName",
+                        "prop": "gdmNameId",
                         "label": "组合名称",
                         "required":true,
                         'list':'goodCategories',
                         editor:{
-                            type:'select',
-                            rules:[
-                                {
-                                    required: true, message: '请填写组合名称'
-                                },
-                                {
-                                    max: 50, message: '长度不能超多50个字符'
-                                }
-                            ],
+                             select: true, type:'select',
                         },
 
                     },
@@ -322,7 +314,7 @@
                     categoryId:null,
                     skuId:null,
                     categoryName:null,
-                    gdmName:null,
+                    gdmNameId:null,
                 },
 
                 formData:{
@@ -406,13 +398,13 @@
 
         created() {
             this.init()
-            this.getCommonOptions('31003','types')
+            this.getCommonOptions('42202','types')
             this.getCategoryGoods()
             this.getGoodsCateGoryMapping()
             //获取辅助资料中的商品品类
             //11006
 
-            this.getCommonOptions('31004','goodCategories','propertyName','propertyName')
+            this.getCommonOptions('31004','goodCategories')
 
             //获取辅助资料中业务模块为‘设计’的id
             apiCommon.queryUnionParent({
@@ -548,13 +540,14 @@
             cellClick: function (row, column, cell, event) {
 
                 //选择品类时动态的根据选择的组合类型获取数据源
+//                debugger
                 if( column.property == 'categoryId' ){
-                    let gdType = row.gdType
-                    if( !gdType ){
+                    let deliveryType = row.deliveryType
+                    if( !deliveryType ){
                         this.$refs['t8ttable'].handleFormItemBlur()
                     }else{
                         //row.categoryId = null;
-                        let cateCode = this.gdTypeAndCateMapping[gdType]
+                        let cateCode = this.gdTypeAndCateMapping[deliveryType]
 
                         let cates = []
                         //工费
@@ -571,11 +564,11 @@
 
                 //选择公式时动态的根据选择的组合类型获取数据源
                 if( column.property == 'dosageEquationId' ){
-                    let gdType = row.gdType
-                    if( !gdType ){
+                    let deliveryType = row.deliveryType
+                    if( !deliveryType ){
                         this.$refs['t8ttable'].handleFormItemBlur()
                     }else{
-                        let cateCode = this.gdTypeAndCateMapping[gdType]
+                        let cateCode = this.gdTypeAndCateMapping[deliveryType]
 
                         let dosageEquationsEditor = []
 
@@ -629,10 +622,10 @@
 
             cellEditorChange:function (cell, val){
                 let column = cell.column
-                if( column.property == 'gdType' ){
-                    let gdType = cell.row.gdType
+                if( column.property == 'deliveryType' ){
+                    let deliveryType = cell.row.deliveryType
                     cell.row.categoryId = null;
-                   /* let cateCode = this.gdTypeAndCateMapping[gdType]
+                   /* let cateCode = this.gdTypeAndCateMapping[deliveryType]
                     let cates = this.goodsCategoryMapping[cateCode]
                     this.commonData.goodsCategoryEditor = cates*/
                 }
@@ -926,10 +919,10 @@
                                 addedRows.forEach((item) => {
                                     rows.push({
                                         itemCode: this.tempItemCode,
-                                        gdType: item.gdType,
-                                        gdmName: item.gdmName,
+                                        deliveryType: item.deliveryType,
+                                        gdmNameId: +item.gdmNameId,
                                         categoryId: item.categoryId,
-                                        categoryName:this.getCategoryNameByIdAndGdTypefunction(item.gdType, item.categoryId),
+                                        categoryName:this.getCategoryNameByIdAndGdTypefunction(item.deliveryType, item.categoryId),
                                         dosageTypeCode:'01',//用量关系类型, 此处类型为组合。
                                         dosageEquationId: item.dosageEquationId,
                                         dosagePercent: item.dosagePercent,
@@ -976,10 +969,10 @@
                                 editedRows.forEach((item) => {
                                     rows.push({
                                         id: item.id,
-                                        gdType: item.gdType,
-                                        gdmName: item.gdmName,
+                                        deliveryType: item.deliveryType,
+                                        gdmNameId: +item.gdmNameId,
                                         categoryId: item.categoryId,
-                                        categoryName: this.getCategoryNameByIdAndGdTypefunction(item.gdType, item.categoryId),
+                                        categoryName: this.getCategoryNameByIdAndGdTypefunction(item.deliveryType, item.categoryId),
                                         dosageTypeCode:'01',//用量关系类型, 此处类型为组合。
                                         dosageEquationId: item.dosageEquationId,
                                         dosagePercent: item.dosagePercent,
@@ -1055,7 +1048,7 @@
                 }
 
                 //选中行的组合类型的CODE
-                let propertyCode = this.gdTypeAndCateMapping[selection['gdType']]
+                let propertyCode = this.gdTypeAndCateMapping[selection['deliveryType']]
                 this.$router.push({path:'quote-packtemp-gdmsku',query:{'gdMappingId':selection.id, 'tempCode':this.tempItemCode,'propertyCode':propertyCode}})
             },
 
@@ -1095,7 +1088,7 @@
                 let arg =  {
                     page: 1,
                     search: {
-                        pPropertyCode: 31003
+                        pPropertyCode: 42202
                     },
                     size: 100
                 }
@@ -1118,6 +1111,7 @@
                                 //获取分类
                                 TemplateOperator.queryGroupsAndChilds(arg).then((res) => {
 
+//                                    debugger
                                     if (res.data.status === 200) {
                                         let cates = []
                                         res.data.result.forEach((item) => {
@@ -1151,7 +1145,7 @@
                 let arg =  {
                     page: 1,
                     search: {
-                        pPropertyCode: 31003
+                        pPropertyCode: 42202
                     },
                     size: 100
                 }
@@ -1250,10 +1244,10 @@
             },
 
             formatterCateGoryId: function(val,row,col,tab) {
-                if( row.hasOwnProperty('gdType') && row.hasOwnProperty('categoryId') ){
-                    let gdType = row.gdType
+                if( row.hasOwnProperty('deliveryType') && row.hasOwnProperty('categoryId') ){
+                    let deliveryType = row.deliveryType
 
-                    let cate = this.getCategoryByIdAndGdType(gdType, val)
+                    let cate = this.getCategoryByIdAndGdType(deliveryType, val)
 
                     if( cate.length > 0 ){
                         return cate[0].text
@@ -1264,8 +1258,8 @@
             },
 
             //获取品类信息（兼容主辅材品类和工费中的工种）
-            getCategoryByIdAndGdType: function (gdType, categoryId){
-                let cateCode = this.gdTypeAndCateMapping[gdType]
+            getCategoryByIdAndGdType: function (deliveryType, categoryId){
+                let cateCode = this.gdTypeAndCateMapping[deliveryType]
                 let cate = [{ "value": '', "text": "" }];
 
                 if( ['01','02'].indexOf(cateCode) > -1 ){
@@ -1277,9 +1271,9 @@
                 return cate
             },
 
-            getCategoryNameByIdAndGdTypefunction (gdType, categoryId){
+            getCategoryNameByIdAndGdTypefunction (deliveryType, categoryId){
                 let name = ''
-                let cate = this.getCategoryByIdAndGdType(gdType, categoryId)
+                let cate = this.getCategoryByIdAndGdType(deliveryType, categoryId)
                 if(cate.length){
                     name = cate[0].text
                 }
@@ -1288,11 +1282,11 @@
 
             dataLoaded(data){
                 data.map(item => {
-                    if(!item.hasOwnProperty('gdType')){
-                        this.$set(item,'gdType',0)
+                    if(!item.hasOwnProperty('deliveryType')){
+                        this.$set(item,'deliveryType',0)
                     }
-                    if(!item.hasOwnProperty('gdmName')){
-                        this.$set(item,'gdmName','')
+                    if(!item.hasOwnProperty('gdmNameId')){
+                        this.$set(item,'gdmNameId',0)
                     }
                     if(!item.hasOwnProperty('categoryId')){
                         this.$set(item,'categoryId',0)

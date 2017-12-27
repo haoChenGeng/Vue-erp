@@ -4,6 +4,7 @@ const SignManage = resolve => require(['src/views/m-worker/solution/sign-manage/
 const SignManageAdd = resolve => require(['src/views/m-worker/solution/sign-manage/sign-manage-add.vue'], resolve)
 const SignManagePreview = resolve => require(['src/views/m-worker/solution/sign-manage/agreenment-preview.vue'], resolve)
 
+
 const routes = [{
     path: '/tuchat-worker',
     component: Console,

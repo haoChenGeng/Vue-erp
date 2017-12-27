@@ -10,7 +10,7 @@ import apartmentspace from './apartmentspace.js'
 import quoteorder from './quoteorder.js'
 import projectlist from './projectlist.js'
 import signManage from './signManage.js'
-import quoteChangeOrder from 'src/router/worker/quoteChangeOrder.js'
+import quoteChangeOrder from './quoteChangeOrder.js'
 
 let routes = [].concat(
     packtemp,

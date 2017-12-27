@@ -6,6 +6,7 @@
 const Console = resolve => require(['src/views/console/console.vue'], resolve)
 const detail = resolve => require(['src/views/m-worker/quote/quoteChangeOrder/detail.vue'], resolve)
 const list = resolve => require(['src/views/m-worker/quote/quoteChangeOrder/list.vue'], resolve)
+
 const routes = [
     {
         path: '/tuchat-worker',

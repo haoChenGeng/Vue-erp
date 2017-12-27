@@ -1,5 +1,28 @@
 // 财务模块
 let Services = {
+
+    //款项管理
+    REFUND_MANAGE_CONFIG: {
+        // /biz/dsp-prs-fdm/app
+        name: 'd5Ntj1SDGmf5W_hdZIOup2eWBmvNCID',
+        methods: {
+            // views.roundOrder.refunds 返轮单费列表
+            ROUND_ORDER_REFUNDS: 'z7o7hMT2i6FQwpZm19o7xlPZ2uydh7XvusI',
+
+            // views.roundOrder.backRoundOrder  返轮单费申请返款
+            BACK_ROUND_ORDER_REFOUNDS: 'dzvgfnCYtu37Ea4kMYkdlps0sjiM9lkM30t5EOLayRymbKL',
+
+            // views.trusteeFee.refunds 返托管款列表
+            TRUSTEE_FEE_REFUND: 'fm3o1PeuvdbLh3nmbrqnZk8KZxMoZH6x4n4',
+
+            // views.trusteeFee.trustFeeInfo 项目托管款信息列表
+            TRUSTEE_FEE_INFO: '29Q_1WR0GDwxjCdAPwbsI-w9TM2PFtZGsHL_DPFxVVX',
+
+            // views.trusteeFee.backTrusteeFee 返托管款申请返款
+            BACK_TRUSTEE_FEE_REFUND: '9FDBOmpaQznn4VuD6SwHF4wVRTHz5eBl7R6UYvG1C5E3sxv',
+        }
+    },
+
     DEBITCHANNEL: {
         // /biz/t8t-fi-fcm/app
         name: 'niz-D89-bg7zuH4V_XEQ5J3gfP4es_t',

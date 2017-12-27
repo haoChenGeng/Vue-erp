@@ -6,6 +6,7 @@ const QuoteConfigTemplateBase = resolve => require(['src/views/m-worker/quote/m-
 const QuoteConfigTemplateRef = resolve => require(['src/views/m-worker/quote/m-quoteconfig/quoteconfig/versionShow.vue'], resolve)
 // const PageDeliveryNodeAttribute = resolve => require(['src/views/m-delivery/schedule-template/node-attribute.vue'], resolve)
 
+
 const routes = [
     //交付
     {

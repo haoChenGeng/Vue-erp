@@ -28,7 +28,7 @@
                 :pageBar="true"
             >
                 <template slot="tempName" scope="scope">
-                    <a :href="'#/worker/quote-packtemp-view?tempCode=' + scope.row['tempCode']" style="text-decoration: none;">{{ scope.row['tempName'] }}</a>
+                    <a :href="'#/tuchat-worker/quote-packtemp-view?tempCode=' + scope.row['tempCode']" style="text-decoration: none;">{{ scope.row['tempName'] }}</a>
                 </template>
             </t8t-table>
         </div>

@@ -424,7 +424,7 @@
                     dosageEquationId:null,
                     dosagePercent:null,
                     floatPercent:null,
-                    gdmName:'',
+                    gdmNameId: 0,
                     bomGdmId:0
                 },
 
@@ -1109,7 +1109,7 @@
                                         gdMappingId: that.gdMappingId,
                                         skuId: skuId,
                                         goodsId: goodsId || '',
-                                        gdmName:item.gdmName || '',
+                                        gdmNameId:item.gdmNameId || 0,
                                         dosagePercent: item.dosagePercent,
                                         floatPercent: item.floatPercent,
                                         dosageEquationId: item.dosageEquationId,
@@ -1186,7 +1186,7 @@
                                         gdMappingId: that.gdMappingId,
                                         skuId: skuId,
                                         goodsId: goodsId,
-                                        gdmName:item.gdmName || '',
+                                        gdmNameId:item.gdmNameId || 0,
                                         dosagePercent: item.dosagePercent,
                                         floatPercent: item.floatPercent,
                                         dosageEquationId: item.dosageEquationId,
