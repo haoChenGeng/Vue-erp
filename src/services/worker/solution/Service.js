@@ -30,9 +30,12 @@ const Services = {
         name: 'ZaoMvDiDgkgR5WWIEqkkB_xJgy9sPOS',
         methods: {
             // views.esm.can.createContract  判断是否成功发起合同
-            CONTRACT_IS_SUCC: '1b6jygJhuasf9oZ6NuAe2JhwkikvbVEwIJCwmSmxQ-U',            
+            CONTRACT_IS_SUCC: '1b6jygJhuasf9oZ6NuAe2JhwkikvbVEwIJCwmSmxQ-U',
             //views.new.sign.getPreviewContract 获取预览pdf
             GETPREVIEW:'7M00-WfNCGs3YyNh59WfM_FkVzaoM9IGMDId4T7OvYnluTK',
+
+            //views.new.sign.getEsmPdfByContractCode 根据合同编号获取合同pdf
+            getEsmPdfByContractCode:'lCtE4QpG3AWySXxZziOW21-j0Pq0lJujsyazvtMzUBQkFg86cpJ2hgK',
         }
     }
 }
