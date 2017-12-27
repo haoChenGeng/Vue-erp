@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import api from 'src/utils/api.js'
 import Cookie from 'js-cookie'
+import Utils from 'src/utils/Utils.js'
 
 Vue.use(VueRouter)
 // 判断是否生产环境
@@ -48,29 +49,48 @@ router.beforeEach((to, from, next) => {
         //认证成功后跳转的链接地址
         var query = to.query
         var uid = to.query.uid
-        delete query['uid']
+       /* delete query['uid']
         delete query['from']
         delete query['certificate']
         let jumpUrl = {
             path:to.path,
             query:query,
             replace: true
-        }
+        }*/
 
+       let jumpUrl = {
+           path: query['url'] ? decodeURI(query['url']) : '/index',
+           //query:query,
+           replace: true
+       }
+
+       let args = {
+           'local':'tuchat-pc',
+           uid:_args['uid'],
+           certificate:_args['certificate'],
+           from: _args['from']
+       }
         if (Cookie.get('t8t-tc-uid') && Cookie.get('t8t-tc-uid') != uid ) {
             Vue.prototype.$confirm(`警告：${Cookie.get('t8t-tc-username')}已登录系统，继续登录将使${Cookie.get('t8t-tc-username')}下线`, '警告', {
                 confirmButtonText: '继续登录',
                 cancelButtonText: '取消登录',
                 type: 'warning'
             }).then(_ => {
-                routerCheckCertificate(_args, jumpUrl)
+                routerCheckCertificate(args, jumpUrl)
             }).catch(_ => {
                 console.log("取消")
             })
         } else {
-            routerCheckCertificate(_args, jumpUrl)
+            routerCheckCertificate(args, jumpUrl)
         }
     }else{
+
+        //未登录则重定向到登录页, 排除login页面防止死循环
+        if( (!Cookie.get('t8t-tc-ticket') || !Cookie.get('t8t-tc-uid') ) && !['/login/','/login'].includes(to.path) ) {
+            Utils.redirectLoginPage(router)
+            return
+        }
+
         if (to.meta.auth === false || debug === true) {
             return next()
         }
@@ -99,9 +119,9 @@ router.beforeEach((to, from, next) => {
 router.afterEach(route => {
     let title
     if (route.meta.title) {
-        title = route.meta.title + ' - 土巴兔装修公司'
+        title = route.meta.title + ' - 土巴兔商家后台'
     } else {
-        title = '土巴兔装修公司'
+        title = '土巴兔商家后台'
     }
     document.title = title
     // 本地开发路由弹窗提示
@@ -127,16 +147,17 @@ function routerAlert(route) {
 }
 
 function routerCheckCertificate(_args, jumpUrl) {
+    var domain = debug === true ? 'localhost' : '.to8to.com'
     api.newaccount.checkCertificate(_args)
         .then(res => {
             if (res.data.status == 200) {
                 Vue.prototype.$message.success("登录成功")
-                Cookie.set('t8t-tc-ticket', res.data.result.tickets['tuchat-pc'].value)
-                Cookie.set('t8t-tc-uid', res.data.result.user.id)
-                Cookie.set('t8t-tc-username', res.data.result.user.name)
+                Cookie.set('t8t-tc-ticket', res.data.result.tickets['tuchat-pc'].value, { domain: domain })
+                Cookie.set('t8t-tc-uid', res.data.result.user.id, { domain: domain })
+                Cookie.set('t8t-tc-username', res.data.result.user.name, { domain: domain })
 
                 //装修公司id
-                let comid = ( res.data.result.bounds.length > 1 ? res.data.result.bounds[0].extId : 0 )
+                let comid = ( res.data.result.bounds.length >= 1 ? res.data.result.bounds[0].extId : 0 )
                 //获取登录的装修公司信息
 
                 if(comid){
@@ -147,7 +168,7 @@ function routerCheckCertificate(_args, jumpUrl) {
                         }
                     ).then((res) => {
                         if( res.data.status == 200 ){
-                            Cookie.set('t8t-tc-comname', res.data.result && res.data.result.name ? res.data.result.name : '' )
+                            Cookie.set('t8t-tc-comname', res.data.result && res.data.result.name ? res.data.result.name : '', { domain: domain } )
                         }
                         router.replace(jumpUrl)
                     })

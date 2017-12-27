@@ -3,7 +3,7 @@
         <div class="login-container">
             <div class="login-inner">
                 <div class="logo-container">
-                    <img src="./img/logo-login.png" class="login-logo">
+                    <!--<img src="./img/logo-login.png" class="login-logo">-->
                 </div>
                 <div class="login-res-msg" v-if="resMsg">{{resMsg}}</div>
                 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" @keyup.enter.native="submitForm('ruleForm')">
@@ -52,7 +52,7 @@
     import axios from 'axios'
     import qs from 'qs'
     import Utils from 'src/utils/Utils.js'
-
+    let debug = process.env.NODE_ENV !== 'production'
     export default {
         name: 'login',
         data() {
@@ -87,9 +87,10 @@
         },
         methods: {
             onLogin() {
-                Utils.redirectIndex()
+                Utils.redirectIndex(this.$router)
             },
             submitForm(formName) {
+                let domain = debug ? 'localhost' : '.to8to.com'
                 this.$refs[formName].validate((isValid) => {
                     if (!isValid) return false
                     var args = {
@@ -101,9 +102,9 @@
                         .then((res) => {
                            if (res.data.status === 200) {
                                 // 设置用户cookie
-                                Cookie.set('t8t-tc-ticket', res.data.result.tickets['tuchat-pc'].value)
-                                Cookie.set('t8t-tc-uid', res.data.result.user.id)
-                                Cookie.set('t8t-tc-username', res.data.result.user.name)
+                                Cookie.set('t8t-tc-ticket', res.data.result.tickets['tuchat-pc'].value, { domain: domain })
+                                Cookie.set('t8t-tc-uid', res.data.result.user.id, { domain: domain })
+                                Cookie.set('t8t-tc-username', res.data.result.user.name, { domain: domain })
                                 // 跳转登录
                                 this.onLogin()
                             } else {
@@ -120,7 +121,7 @@
                 this[arg] = false
             },
             getCaptCha(){
-                let url =  'http://erp.to8to.com/index.php/admin/captcha?refresh=1&_='+new Date().getTime();
+                /*let url =  'http://erp.to8to.com/index.php/admin/captcha?refresh=1&_='+new Date().getTime();
                 return axios({
                     method: 'get',
                     url: url
@@ -131,7 +132,7 @@
                     }
                 }).catch(e => {
 
-                })
+                })*/
             }
         }
     }
@@ -159,6 +160,7 @@
     }
 
     .login-inner {
+        margin: auto;/*logo暂时不展示，设置表单顶部边距*/
         width: 320px;
         font-size: 14px;
     }
@@ -244,6 +246,7 @@
     }
 
     .login-res-msg {
+
         color: #b94a48;
         background-color: #f2dede;
         height: 46px;

@@ -1,5 +1,6 @@
 import axios from './axios.js'
 import Service from './Service.js'
+import http from 'src/utils/http.js'
 // 历史文件，不要在这里加东西了 新接口写在src/services里
 let account = {
     login(args) {
@@ -243,11 +244,10 @@ let baseData = {
 }
 let newaccount = {
     checkCertificate(args) {
-        return axios({
-            method: Service.NEWACCOUNT.methods.CHECK_CERTIFICATE,
-            service: Service.NEWACCOUNT.name,
-            args: args
-        })
+        return http.fetch(
+            'account/checkCertificate',
+            args
+        )
     }
 }
 

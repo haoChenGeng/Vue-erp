@@ -272,7 +272,8 @@
                 if (path[0] === '#') {
                     this.$router.push(path.slice(1))
                 } else {
-                    window.location.href = 'http://erp.to8to.com/index.php/' + path
+                    //window.location.href = 'http://www.to8to.com/' + path.replace(new RegExp('^\\/+', 'g'), '');
+                    window.location.href = path//直接跳转完整路径
                 }
             },
             onHide() {

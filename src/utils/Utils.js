@@ -10,11 +10,32 @@ import Cookie from 'js-cookie'
 import axios from 'axios'
 
 let Utils = {
-    redirectLoginPage() {
-        location.href = '/#/login/'
+
+    //外部传入router
+    redirectLoginPage(router = 0) {
+        if(router){
+            router.push(
+                {
+                    path:'/login/'
+                }
+            )
+        } else{
+            location.href = '/#/login/'
+        }
+
     },
-    redirectIndex() {
-       location.href = '/#/index/'
+
+    //外部传入router
+    redirectIndex(router) {
+        if(router){
+            router.push(
+                {
+                    path:'/index/'
+                }
+            )
+        } else{
+            location.href = '/#/index/'
+        }
     },
     // 上传url处理
     getUploadURL() {
