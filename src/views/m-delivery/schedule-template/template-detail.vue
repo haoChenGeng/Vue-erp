@@ -1,215 +1,195 @@
 <template>
-    <el-dialog @close="closeDialog" v-model="isDialogShow" size="full" class="t8t-full-dialog2" :class="{'isHide': isTopHide}">
-         <div class="t8t-full-dialog2-container">
-                <!-- 顶部按钮区 -->
-             <div class="full-dialog-toolbar-container">
-                 <div class="toolbar-container">
-                 </div>
-             </div>
-             <div class="dialog2-main-container">
-                 <!-- 收缩按钮 -->
-                 <div class="top-hide el-icon-d-arrow-left" @click="onTopHide"></div>
-                 <!-- 表单区 -->
-                 <div class="full-dialog-form-container">
-                     <el-tabs v-model="tab_info" @tab-click="handleClick">
-                         <el-tab-pane label="基本信息" name="base">
-                             <el-row :gutter="20">
-                                 <el-col :span="4">
-                                     <div class="grid-content">ID：</div>
-                                 </el-col>
-                                 <el-col :span="8">
-                                     <div class="grid-content">{{detailInfo.id}}</div>
-                                 </el-col>
-                                 <el-col :span="4">
-                                     <div class="grid-content">名称：</div>
-                                 </el-col>
-                                 <el-col :span="8">
-                                     <div class="grid-content">{{detailInfo.name}}</div>
-                                 </el-col>
-                                 <el-col :span="4">
-                                     <div class="grid-content">内部工期：</div>
-                                 </el-col>
-                                 <el-col :span="8">
-                                     <div class="grid-content">{{detailInfo.insideSchdule}}天</div>
-                                 </el-col>
-                                 <el-col :span="4">
-                                     <div class="grid-content">外部工期：</div>
-                                 </el-col>
-                                 <el-col :span="8">
-                                     <div class="grid-content">{{detailInfo.outsideSchdule}}天</div>
-                                 </el-col>
-                                 <el-col :span="4">
-                                     <div class="grid-content">节点总数：</div>
-                                 </el-col>
-                                 <el-col :span="8">
-                                     <div class="grid-content">{{detailInfo.nodeNumber}}个</div>
-                                 </el-col>
-                                 <el-col :span="4">
-                                     <div class="grid-content">状态：</div>
-                                 </el-col>
-                                 <el-col :span="8">
-                                     <div class="grid-content">{{detailInfo.moduleStatus == 1 ? '启用' : '禁用'}}</div>
-                                 </el-col>
-                             </el-row>
-                         </el-tab-pane>
-                         <el-tab-pane label="编辑信息" name="other">
-                             <el-row :gutter="20">
-                                 <el-col :span="5">
-                                     <div class="grid-content">创建人：</div>
-                                 </el-col>
-                                 <el-col :span="7">
-                                     <div class="grid-content">{{detailInfo.createUserName}}</div>
-                                 </el-col>
-                                 <el-col :span="5">
-                                     <div class="grid-content">创建时间：</div>
-                                 </el-col>
-                                 <el-col :span="7">
-                                     <div class="grid-content">{{detailInfo.createTime | dateParser}}</div>
-                                 </el-col>
-                                 <el-col :span="5">
-                                     <div class="grid-content">最后变更人：</div>
-                                 </el-col>
-                                 <el-col :span="7">
-                                     <div class="grid-content">{{detailInfo.updateUserName}}</div>
-                                 </el-col>
-                                 <el-col :span="5">
-                                     <div class="grid-content">最后变更时间：</div>
-                                 </el-col>
-                                 <el-col :span="7">
-                                     <div class="grid-content">{{detailInfo.updateTime | dateParser}}</div>
-                                 </el-col>
-                             </el-row>
-                         </el-tab-pane>
-                     </el-tabs>
-                 </div>
-                 <div class="full-dialog-tabs-container">
-                     <el-tabs v-model="tab_list" @tab-click="handleClick">
-                         <el-tab-pane label="节点信息" name="attr">
+    <el-dialog @close="closeDialog"
+        v-model="isDialogShow"
+        size="full"
+        class="t8t-full-dialog2"
+        :class="{'isHide': isTopHide}">
+        <div class="t8t-full-dialog2-container">
+            <!-- 顶部按钮区 -->
+            <div class="full-dialog-toolbar-container">
+                <div class="toolbar-container">
+                </div>
+            </div>
+            <div class="dialog2-main-container">
+                <!-- 收缩按钮 -->
+                <div class="top-hide el-icon-d-arrow-left"
+                    @click="onTopHide"></div>
+                <!-- 表单区 -->
+                <div class="full-dialog-form-container">
+                    <el-tabs v-model="tab_info"
+                        @tab-click="handleClick">
+                        <el-tab-pane label="基本信息"
+                            name="base">
+                            <el-row :gutter="20">
+                                <el-col :span="4">
+                                    <div class="grid-content">ID：</div>
+                                </el-col>
+                                <el-col :span="8">
+                                    <div class="grid-content">{{detailInfo.id}}</div>
+                                </el-col>
+                                <el-col :span="4">
+                                    <div class="grid-content">名称：</div>
+                                </el-col>
+                                <el-col :span="8">
+                                    <div class="grid-content">{{detailInfo.name}}</div>
+                                </el-col>
+                                <el-col :span="4">
+                                    <div class="grid-content">内部工期：</div>
+                                </el-col>
+                                <el-col :span="8">
+                                    <div class="grid-content">{{detailInfo.insideSchdule}}天</div>
+                                </el-col>
+                                <el-col :span="4">
+                                    <div class="grid-content">外部工期：</div>
+                                </el-col>
+                                <el-col :span="8">
+                                    <div class="grid-content">{{detailInfo.outsideSchdule}}天</div>
+                                </el-col>
+                                <el-col :span="4">
+                                    <div class="grid-content">节点总数：</div>
+                                </el-col>
+                                <el-col :span="8">
+                                    <div class="grid-content">{{detailInfo.nodeNumber}}个</div>
+                                </el-col>
+                                <el-col :span="4">
+                                    <div class="grid-content">状态：</div>
+                                </el-col>
+                                <el-col :span="8">
+                                    <div class="grid-content">{{detailInfo.moduleStatus == 1 ? '启用' : '禁用'}}</div>
+                                </el-col>
+                            </el-row>
+                        </el-tab-pane>
+                        <el-tab-pane label="编辑信息"
+                            name="other">
+                            <el-row :gutter="20">
+                                <el-col :span="5">
+                                    <div class="grid-content">创建人：</div>
+                                </el-col>
+                                <el-col :span="7">
+                                    <div class="grid-content">{{detailInfo.createUserName}}</div>
+                                </el-col>
+                                <el-col :span="5">
+                                    <div class="grid-content">创建时间：</div>
+                                </el-col>
+                                <el-col :span="7">
+                                    <div class="grid-content">{{detailInfo.createTime | dateParser}}</div>
+                                </el-col>
+                                <el-col :span="5">
+                                    <div class="grid-content">最后变更人：</div>
+                                </el-col>
+                                <el-col :span="7">
+                                    <div class="grid-content">{{detailInfo.updateUserName}}</div>
+                                </el-col>
+                                <el-col :span="5">
+                                    <div class="grid-content">最后变更时间：</div>
+                                </el-col>
+                                <el-col :span="7">
+                                    <div class="grid-content">{{detailInfo.updateTime | dateParser}}</div>
+                                </el-col>
+                            </el-row>
+                        </el-tab-pane>
+                    </el-tabs>
+                </div>
+                <div class="full-dialog-tabs-container">
+                    <el-tabs v-model="tab_list"
+                        @tab-click="handleClick">
+                        <el-tab-pane label="节点信息"
+                            name="attr">
 
-                                 <div class="g-main-container">
-                                     <t8t-tree
-                                         ref="my-tree"
-                                         :data="treeData"
-                                         :props="treeProps"
-                                         :default-expanded-keys="[1]"
-                                         @node-click="onTreeClick"
-                                     >
-                                     </t8t-tree>
-                                     <div class="g-main-container-column">
-                                         <div class="my-toolbar">
-                                             <div class="btn-container">
-                                                 <el-button
-                                                     type="primary"
-                                                     size="small"
-                                                     icon="plus"
-                                                     @click="addNode"
-                                                 >新增节点
-                                                 </el-button>
-                                                 <el-button
-                                                     type="danger"
-                                                     size="small"
-                                                     icon="close"
-                                                     @click="delNode"
-                                                 >删除节点
-                                                 </el-button>
-                                                 <el-button
-                                                     type="primary"
-                                                     size="small"
-                                                     class="el-icon-check"
-                                                     @click="saveNode"
-                                                 > 保存
-                                                 </el-button>
-                                             </div>
-                                         </div>
-                                         <t8t-table
-                                             ref="infoTable"
-                                             :columns="infoColumns"
-                                             :service="infoService"
-                                             :method="infoMethod"
-                                             :args="infoArgs"
-                                             :isLoading="isLoading"
-                                             :commonData="commonOptionsConfig"
-                                             :templateData="infoTemplateData"
-                                             :pageBar="true"
-                                             :editable="true"
-                                             @selection-change="selectionChange"
-                                             @cell-form-item-change="handleInfoItemChange"
-                                             @cell-click="handleCellClick"
-                                         >
-                                             <template slot="id" scope="scope">
-                                                 <a href="javascript:;"
-                                                    @click="showDetail(scope.row['id'],scope.row['nodeTypeName'])">{{scope.row['id']}}</a>
-                                             </template>
-                                         </t8t-table>
-                                     </div>
-                                 </div>
+                            <div class="g-main-container">
+                                <t8t-tree ref="my-tree"
+                                    :data="treeData"
+                                    :props="treeProps"
+                                    :default-expanded-keys="[1]"
+                                    @node-click="onTreeClick">
+                                </t8t-tree>
+                                <div class="g-main-container-column">
+                                    <div class="my-toolbar">
+                                        <div class="btn-container">
+                                            <el-button type="primary"
+                                                size="small"
+                                                icon="plus"
+                                                @click="addNode">新增节点
+                                            </el-button>
+                                            <el-button type="danger"
+                                                size="small"
+                                                icon="close"
+                                                @click="delNode">删除节点
+                                            </el-button>
+                                            <el-button type="primary"
+                                                size="small"
+                                                class="el-icon-check"
+                                                @click="saveNode"> 保存
+                                            </el-button>
+                                        </div>
+                                    </div>
+                                    <t8t-table ref="infoTable"
+                                        :columns="infoColumns"
+                                        :service="infoService"
+                                        :method="infoMethod"
+                                        :args="infoArgs"
+                                        :isLoading="isLoading"
+                                        :commonData="commonOptionsConfig"
+                                        :templateData="infoTemplateData"
+                                        :pageBar="true"
+                                        :editable="true"
+                                        @selection-change="selectionChange"
+                                        @cell-form-item-change="handleInfoItemChange"
+                                        @cell-click="handleCellClick">
+                                        <template slot="id"
+                                            scope="scope">
+                                            <a href="javascript:;"
+                                                @click="showDetail(scope.row['id'],scope.row['nodeTypeName'])">{{scope.row['id']}}</a>
+                                        </template>
+                                    </t8t-table>
+                                </div>
+                            </div>
 
-                         </el-tab-pane>
-                         <el-tab-pane label="节点关系" name="relation">
+                        </el-tab-pane>
+                        <el-tab-pane label="节点关系"
+                            name="relation">
 
-                                 <div class="my-toolbar">
-                                     <el-button
-                                         type="primary"
-                                         size="small"
-                                         icon="plus"
-                                         @click="addNodeRel"
-                                     >新增关系
-
-
-                                     </el-button>
-                                     <el-button
-                                         type="danger"
-                                         size="small"
-                                         icon="close"
-                                         @click="delNodeRel"
-                                     >删除关系
+                            <div class="my-toolbar">
+                                <el-button type="primary"
+                                    size="small"
+                                    icon="plus"
+                                    @click="addNodeRel">新增关系
 
 
-                                     </el-button>
-                                     <el-button
-                                         type="primary"
-                                         size="small"
-                                         class="el-icon-check"
-                                         @click="saveNodeRel"
-                                     >保存关系
+                                </el-button>
+                                <el-button type="danger"
+                                    size="small"
+                                    icon="close"
+                                    @click="delNodeRel">删除关系
 
 
-                                     </el-button>
-                                 </div>
-                                 <t8t-table
-                                     ref="relNodeTable"
-                                     :columns="relationColumns"
-                                     :templateData="relationTmpData"
-                                     :service="relationService"
-                                     :method="relationMethod"
-                                     :args="relationArgs"
-                                     :pageBar="true"
-                                     :editable="true"
-                                     :commonData="commonOptionsConfig"
-                                     @cell-form-item-change="nodeRelRowChange"
-                                 >
-                                 </t8t-table>
+                                </el-button>
+                                <el-button type="primary"
+                                    size="small"
+                                    class="el-icon-check"
+                                    @click="saveNodeRel">保存关系
 
-                         </el-tab-pane>
-                         <el-tab-pane label="引用关系" name="reference">
-                             <t8t-table
-                                 :style="{marginTop:'15px'}"
-                                 :selectCol="false"
-                                 ref="relationTable"
-                                 :columns="referenceColumns"
-                                 :service="referenceService"
-                                 :method="referenceMethod"
-                                 :args="referenceArgs"
-                                 :pageBar="true"
-                                 :commonData="commonOptionsConfig"
-                             >
-                             </t8t-table>
-                         </el-tab-pane>
-                     </el-tabs>
-                 </div>
-             </div>
-         </div>
-     </el-dialog>
+
+                                </el-button>
+                            </div>
+                            <t8t-table ref="relNodeTable"
+                                :columns="relationColumns"
+                                :templateData="relationTmpData"
+                                :service="relationService"
+                                :method="relationMethod"
+                                :args="relationArgs"
+                                :pageBar="true"
+                                :editable="true"
+                                :commonData="commonOptionsConfig"
+                                @cell-form-item-change="nodeRelRowChange">
+                            </t8t-table>
+
+                        </el-tab-pane>
+                    </el-tabs>
+                </div>
+            </div>
+        </div>
+    </el-dialog>
 </template>
 
 <script>
@@ -260,9 +240,9 @@
                         "editor": {
                             "type": "input",
                             "rules": [{
-                                "pattern": /^\d+$/,
+                                "pattern": /^0$|^[1-9]\d{0,6}$/,
                                 "required": true,
-                                "message": "行号不能为空且只能是正整数"
+                                "message": "请输入合法的行号"
                             }]
                         }
                     },
@@ -346,23 +326,14 @@
                         }
                     },
                     {
-                        "prop": "esmModelId",
-                        "label": "合同模板",
-                        "list": "esmModelList",
-                        "editor": {
-                            "type": "select",
-                            "filterable": true
-                        }
-                    },
-                    {
                         "prop": "offset",
                         "label": "偏移量",
                         "editor": {
                             "type": "input",
                             "rules": [{
-                                "pattern": /^\d+$/,
+                                "pattern": /^0$|^[1-9]\d{0,6}$/,
                                 "required": true,
-                                "message": "偏移量不能为空且只能是正整数"
+                                "message": "请输入合法的偏移量"
                             }]
                         }
                     },
@@ -391,70 +362,6 @@
                                 "message": "不能为空"
                             }]
                         }
-                    },
-                    {
-                        "prop": "wkfCreateUrl",
-                        "label": "处理页面url",
-                        "editor": {
-                            "type": "input",
-                            "rules": [{
-                                "type": 'url',
-                                "message": "请输入合法的url"
-                            }]
-                        }
-                    },
-                    {
-                        prop: "dutyRoleCode",
-                        label: "责任角色编码",
-                        show: false
-                    },
-                    {
-                        prop: "dutyRoleName",
-                        label: "责任角色",
-                        editor:{
-                            type: 'lookup',
-                            service: 'S-QiYaG_GRJx7l-upQPNsZjZ2bUQLL4', // /biz/t8t-sys-pem/app
-                            method: '4UaXLL-ZYHv0A.i', // role.list
-                            args:{ page:1, size: 20, condition: { isDel: 0 } },
-                            columns: [
-                                {
-                                    prop: 'code',
-                                    label: '角色编码',
-                                },
-                                {
-                                    prop: 'name',
-                                    label: '角色名称'
-                                }
-                            ],
-                            placeholder: '责任角色',
-                            rules:[],
-                            filterMethod:(val,args)=>{
-                                args['condition'] = {
-                                    'isDel': 0,
-                                    'name': val
-                                }
-                                return args
-                            }
-                        },
-                        onChange(val,row,col,table){
-                            table.$nextTick(() => {
-                                row.dutyRoleCode = val.code;
-                                row.dutyRoleName = val.name;
-                            })
-                        }
-                    },
-                    {
-                        "prop": "dutyType",
-                        "label": "责任角色类型",
-                        "list": "dutyType",
-                        "editor": {
-                            "type": "select",
-                            "filterable": true,
-                            "rules": [{
-                                "required": false,
-                                "message": "不能为空"
-                            }]
-                        }
                     }
                 ],
                 infoTemplateData: {
@@ -466,14 +373,13 @@
                     "lastNode": null,
                     "billType": null,
                     "createMoment": null,
-                    "esmModelList": null,
                     "offset": "",
                     "itemStatus": null,
                     "effectTime": null
                 },
                 relationColumns: [
-                    {"prop": "id", "label": "ID"},
-                    {"prop": "headId", "label": "头节点ID"},
+                    { "prop": "id", "label": "ID" },
+                    { "prop": "headId", "label": "头节点ID" },
                     {
                         "prop": "headId",
                         "label": "头节点类型",
@@ -484,7 +390,7 @@
                             "showDetail": true
                         }
                     },
-                    {"prop": "tailId", "label": "尾节点ID"},
+                    { "prop": "tailId", "label": "尾节点ID" },
                     {
                         "prop": "tailId",
                         "label": "尾节点类型",
@@ -497,13 +403,13 @@
                     },
                     {
                         "prop": "advance", "label": "提前量", editor: {
-                        type: 'input',
-                        rules: [{
-                            pattern: /^[0-9]*$/,
-                            required: true,
-                            message: "请填写正确的提前量"
-                        }]
-                    }
+                            type: 'input',
+                            rules: [{
+                                pattern: /^0$|^[1-9]\d{0,6}$/,
+                                required: true,
+                                message: "请填写正确的提前量"
+                            }]
+                        }
                     },
                     {
                         "prop": "relationType",
@@ -520,12 +426,12 @@
                     },
                     {
                         "prop": "relationStatus", "label": "启用状态", "list": "nodeRelStatus", editor: {
-                        type: 'select',
-                        rules: [{
-                            required: true,
-                            message: "启用状态不能为空"
-                        }]
-                    }
+                            type: 'select',
+                            rules: [{
+                                required: true,
+                                message: "启用状态不能为空"
+                            }]
+                        }
                     }, {
                         "prop": "triggerType", "label": "触发类型", "list": "triggerTypes", editor: {
                             type: 'select',
@@ -537,12 +443,12 @@
                     },
                     {
                         "prop": "effectTime", "label": "生效日期", "formatter": this.dateParser, editor: {
-                        type: 'date', endFormater: 'timestamp',
-                        rules: [{
-                            required: true,
-                            message: "生效日期不能为空"
-                        }]
-                    }
+                            type: 'date', endFormater: 'timestamp',
+                            rules: [{
+                                required: true,
+                                message: "生效日期不能为空"
+                            }]
+                        }
                     }
                 ],
                 relationTmpData: {
@@ -559,12 +465,12 @@
 
                 },
                 referenceColumns: [
-                    {"prop": "scheduleId", "label": "排期模板ID"},
-                    {"prop": "scheduleId", "label": "排期模板名称", "list": "scheduleInfo"},
-                    {"prop": "quotationId", "label": "报价模板ID"},
-                    {"prop": "quotationName", "label": "报价模板名称"},
-                    {"prop": "quotationStatus", "label": "报价模板状态", "list": "mouldStatus"},
-                    {"prop": "quotationEffectime", "label": "报价模板生效日期", "formatter": this.dateParser}
+                    { "prop": "scheduleId", "label": "排期模板ID" },
+                    { "prop": "scheduleId", "label": "排期模板名称", "list": "scheduleInfo" },
+                    { "prop": "quotationId", "label": "报价模板ID" },
+                    { "prop": "quotationName", "label": "报价模板名称" },
+                    { "prop": "quotationStatus", "label": "报价模板状态", "list": "mouldStatus" },
+                    { "prop": "quotationEffectime", "label": "报价模板生效日期", "formatter": this.dateParser }
                 ],
                 commonOptionsConfig: {
                     nodeType: [], // 类型
@@ -572,15 +478,14 @@
                     refNodeList: [],
                     relationType: [], //父子关系类型
                     isLast: [
-                        {value: 1, text: '是'},
-                        {value: 0, text: '否'}
+                        { value: 1, text: '是' },
+                        { value: 0, text: '否' }
                     ], //是否为末级
                     createMoment: [], //创建时机
-                    esmModelList: [],//合同模板
                     billType: [], //单据类型
                     itemStatus: [
-                        {value: 1, text: '启用'},
-                        {value: 0, text: '禁用'}
+                        { value: 1, text: '启用' },
+                        { value: 0, text: '禁用' }
                     ], //行状态
                     nodeRelStatus: [
                         {
@@ -606,55 +511,43 @@
                         value: Number.parseInt(this.$route.query.id)
                     }
                     ],
-                    dutyType:[], //责任角色类型
-                    mouldStatus:[
+                    mouldStatus: [
                         {
-                            text:'待启用',
-                            value:0
+                            text: '待启用',
+                            value: 0
                         },
                         {
-                            text:'审核中',
-                            value:1
+                            text: '审核中',
+                            value: 1
                         },
                         {
-                            text:'已启用',
-                            value:2
+                            text: '已启用',
+                            value: 2
                         },
                         {
-                            text:'已驳回',
-                            value:3
+                            text: '已驳回',
+                            value: 3
                         }
                     ]
                 },
                 infoService: Service.TEMPLATE.name,
                 infoMethod: Service.TEMPLATE.methods.queryPageModeuleItemByNode,
-                infoArgs: {moduleId: this.$route.query.id, sort:["lineNo_asc"]},
+                infoArgs: { moduleId: this.$route.query.id, sort: ["lineNo_asc"] },
                 infoSelectedRows: [],
                 relationService: Service.TEMPLATE.name,
-                relationArgs: {search: {moduleId_eq: this.$route.query.id}},
+                relationArgs: { search: { moduleId_eq: this.$route.query.id } },
                 relationMethod: Service.TEMPLATE.methods.NodeRelation,
                 referenceService: Service.TEMPLATE.name,
                 referenceMethod: Service.TEMPLATE.methods.referenceRelation,
-                referenceArgs: {moduleId: this.$route.query.id},
+                referenceArgs: { moduleId: this.$route.query.id },
                 nodeList: []
 
             };
         },
-        created (){
-            TemplateOperator.queryTreeBySchduleModule({moduleId: this.$route.query.id}).then((res) => {
+        created() {
+            TemplateOperator.queryTreeBySchduleModule({ moduleId: this.$route.query.id }).then((res) => {
                 if (res.data.status === 200) {
                     this.treeData = res.data.result;
-                }
-            });
-            TemplateOperator.queryEsmModelNameList({search : {state: 1}}).then((res) => {
-                if (res.data.status === 200) {
-//                    this.esmModelList = res.data.result;
-                    let list = [];
-                    let rows = res.data.result;
-                    for (let i in rows) {
-                        list.push({text: rows[i]['contractName'], value: rows[i]['id']});
-                    }
-                    this.commonOptionsConfig.esmModelList = list;
                 }
             });
 
@@ -670,18 +563,17 @@
                 });
                 return false;
             }
-            TemplateOperator.getById({id: this.$route.query.id})
+            TemplateOperator.getById({ id: this.$route.query.id })
                 .then((res) => {
                     if (res.data.status === 200) {
                         this.detailInfo = res.data.result
                     }
                 });
-            this.getCommonOptions('41101', 'nodeType');
-            this.getCommonOptions('41102', 'relationType');
-            this.getCommonOptions('41103', 'createMoment');
+            this.getCommonOptions('82001', 'nodeType');
+            this.getCommonOptions('82002', 'relationType');
+            this.getCommonOptions('82003', 'createMoment');
             this.getCommonOptions('11605', 'billType');
-            this.getCommonOptions('41104', 'nodeRelTypes');
-            this.getCommonOptions('41107', 'dutyType');
+            this.getCommonOptions('82004', 'nodeRelTypes');
             this.getNodeList(this.$route.query.id);
         },
         filters: {
@@ -715,7 +607,7 @@
                 }
                 return dateString
             },
-            handleInfoItemChange(cell, val){
+            handleInfoItemChange(cell, val) {
                 if (cell.column.property == "lastNode") {
                     if (val == 0) {
                         cell.row.billType = null;
@@ -735,7 +627,7 @@
                     }
                 }
             },
-            handleCellClick(row, column, cell, event){
+            handleCellClick(row, column, cell, event) {
                 if (column.property == "parentId") {
                     let id = row.id;
                     let nodeList = this.commonOptionsConfig.nodeList;
@@ -770,14 +662,14 @@
                         if (res.data.status === 200) {
                             res.data.result.forEach((item) => {
                                 // if (item.propertyStatus === 1) {
-                                    list.push({
-                                        value: item.id,
-                                        text: item.propertyName
-                                    })
+                                list.push({
+                                    value: item.id,
+                                    text: item.propertyName
+                                })
                                 // }
                             });
                             this.commonOptionsConfig[selectName] = list;
-                            this.commonOptionsConfig[selectName].unshift({value: 0, text: '请选择'});
+                            this.commonOptionsConfig[selectName].unshift({ value: 0, text: '请选择' });
                             let type = typeof default_options;
                             if (type !== undefined && type !== null && type === 'object') {
                                 this.commonOptionsConfig[selectName].unshift(default_options);
@@ -787,7 +679,7 @@
             },
 
             //行变化事件
-            selectionChange (rows){
+            selectionChange(rows) {
                 //已选择行
                 this.infoSelectedRows = rows;
             },
@@ -808,7 +700,7 @@
                 }
             },
             saveNode() {
-                let rows = this.$refs['infoTable'].getActionLog(false,true);
+                let rows = this.$refs['infoTable'].getActionLog(false, true);
                 let data = {};
                 data.addModuleItems = this.formatRowData(rows.addedRows);
                 data.updateModuleItems = this.formatRowData(rows.editedRows);
@@ -839,7 +731,7 @@
                                     this.getNodeList(this.$route.query.id);
                                     this.$refs['infoTable'].reloadTable();
 
-                                    TemplateOperator.queryTreeBySchduleModule({moduleId: this.$route.query.id}).then((res) => {
+                                    TemplateOperator.queryTreeBySchduleModule({ moduleId: this.$route.query.id }).then((res) => {
                                         if (res.data.status === 200) {
                                             this.treeData = res.data.result;
                                         }
@@ -863,7 +755,7 @@
                     }
                 });
             },
-            formatRowData (rowData){
+            formatRowData(rowData) {
 
                 for (let i in rowData) {
                     if (rowData[i].parentId == '') {
@@ -911,16 +803,16 @@
                 }
                 return rowData;
             },
-            addNodeRel(){
+            addNodeRel() {
                 this.$refs['relNodeTable'].addNewRow()
             },
-            delNodeRel(){
+            delNodeRel() {
                 if (this.$refs['relNodeTable'].selectedRows.length < 1) {
                     this.$message.error('请选择需要删除的关系！')
                 }
                 let flage = true;
                 this.$refs['relNodeTable'].selectedRows.forEach((item) => {
-                    if (typeof(item.id) !== 'undefined' && item.id > 0) {
+                    if (typeof (item.id) !== 'undefined' && item.id > 0) {
                         this.$message.error('已保存的节点不能被删除！')
                         flage = false;
                     }
@@ -928,10 +820,10 @@
 
                 if (flage) this.$refs['relNodeTable'].delRows()
             },
-            getNodeList(moduleId){
+            getNodeList(moduleId) {
                 let args = {
-                    search: {moduleId_eq: Number.parseInt(moduleId)},
-                    fields: ['id', 'nodeTypeName', 'nodeType', 'lastNode', 'esmModelId'],
+                    search: { moduleId_eq: Number.parseInt(moduleId) },
+                    fields: ['id', 'nodeTypeName', 'nodeType', 'lastNode'],
                     page: 1,
                     size: 500
                 }
@@ -942,8 +834,8 @@
                 }).then((res) => {
                     if (res.data.status === 200) {
                         this.nodeList = [];
-                        this.commonOptionsConfig.nodeList = [{value: 0, text: '无'}];
-                        this.commonOptionsConfig.refNodeList = [{value: 0, text: '无'}];
+                        this.commonOptionsConfig.nodeList = [{ value: 0, text: '无' }];
+                        this.commonOptionsConfig.refNodeList = [{ value: 0, text: '无' }];
                         let list = res.data.result.rows;
                         list.forEach((item) => {
                             let refNode = {
@@ -962,9 +854,9 @@
                     }
                 })
             },
-            nodeRelRowChange(cell, val){
+            nodeRelRowChange(cell, val) {
             },
-            saveNodeRel(){
+            saveNodeRel() {
                 let list = this.$refs['relNodeTable'].dataSource
                 let addItems = []
                 let udpItems = []
@@ -1052,36 +944,37 @@
             showDetail: function (id, nodeType) {
                 this.$router.push({
                     path: '/tuchat-delivery/node-attribute',
-                    query: {id: id, nodeType: nodeType}
+                    query: { id: id, nodeType: nodeType }
                 })
             },
             //点击树节点
             onTreeClick(data) {
                 this.nodeId = data.id;
-                this.infoArgs = {moduleId: this.$route.query.id, nodeId: this.nodeId, sort:["lineNo_asc"]};
+                this.infoArgs = { moduleId: this.$route.query.id, nodeId: this.nodeId, sort: ["lineNo_asc"] };
             }
         }
     };
 
 </script>
 
-<style lang="css" scoped>
+<style lang="css"
+    scoped>
     .t8t-full-dialog2 .my-toolbar {
         margin-bottom: 15px;
         margin-left: 30px;
         margin-top: 12px;
     }
+
     .el-row {
         padding-left: 20px;
         padding-top: 20px;
         width: 600px;
 
-    &
-    :last-child {
-        margin-bottom: 0;
+        & :last-child {
+            margin-bottom: 0;
+        }
     }
 
-    }
     .el-col {
         border-radius: 4px;
     }
@@ -1103,4 +996,3 @@
         min-height: 36px;
     }
 </style>
-

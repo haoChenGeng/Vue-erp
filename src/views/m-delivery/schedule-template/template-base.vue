@@ -1,49 +1,36 @@
 <template>
     <div>
         <t8t-breadcrumb :data="breadcrumbData"></t8t-breadcrumb>
-        <t8t-search
-            :fields="fields"
+        <t8t-search :fields="fields"
             :selectSource="selectSource"
-            @submit="submitSearch"
-        >
+            @submit="submitSearch">
         </t8t-search>
 
         <div class="g-main-container">
-            <t8t-tree
-                :data="treeData"
-                :props="treeProps"
-                :default-expanded-keys="[1]"
-                @node-click="onTreeClick"
-            >
-            </t8t-tree>
             <div class="g-main-container-column">
-                <t8t-toolbar
-                    @ENABLE="enabled"
+                <t8t-toolbar @ENABLE="enabled"
                     @DISABLE="disabled"
                     @ADD="add"
                     @EDIT="edit"
-                    @SHOW_REF="showRef"
-                    ref="toolbar"
-                >
+                    ref="toolbar">
                 </t8t-toolbar>
-                <t8t-table
-                    :columns="columns"
+                <t8t-table :columns="columns"
                     :service="service"
                     :method="method"
                     :args="args"
                     :pageBar="true"
                     :commonData="commonData"
                     ref="t8tTable"
-                    @selection-change="selectionChange"
-                >
-                    <template slot="id" scope="scope">
-                        <a href="javascript:;" @click="showDetail(scope.row['id'], scope.row['name'])">{{scope.row['id']}}</a>
+                    @selection-change="selectionChange">
+                    <template slot="id"
+                        scope="scope">
+                        <a href="javascript:;"
+                            @click="showDetail(scope.row['id'], scope.row['name'])">{{scope.row['id']}}</a>
                     </template>
                 </t8t-table>
             </div>
         </div>
-        <edit-template
-            v-if="dialogVisible"
+        <edit-template v-if="dialogVisible"
             :rowId="rowId"
             :editType="editType"
             :title="dialogTitle"
@@ -64,9 +51,9 @@
         components: {
             EditTemplate
         },
-        data () {
+        data() {
             return {
-                breadcrumbData: [{ title: '交付' },{ title: '交付基础数据' },{ title: '排期模板维护' }],
+                breadcrumbData: [{ title: '交付' }, { title: '交付基础数据' }, { title: '排期模板维护' }],
                 treeData: [],
                 treeProps: {
                     label: 'name',
@@ -74,12 +61,12 @@
                 },
                 //搜索表单项配置
                 fields: [
-                    {type: 'input',label: 'ID',name: 'id'},
-                    {type: 'input',label: '名称',name: 'name_like'},
-                    {type: 'select',label: '报价模板',name: 'quotationId',selectSourceKey:'quotations',filterable:true},
-                    {type: 'select',label: '状态',name: 'moduleStatus', selectSourceKey:'module_status_arr',filterable:true},
-                    {type: 'datetime',label: '生效日期',name: 'effectTime_gt'},
-                    {type: 'datetime',label: '生效日期至',name: 'effectTime_lte'}
+                    { type: 'input', label: 'ID', name: 'id' },
+                    { type: 'input', label: '名称', name: 'name_like' },
+                    // { type: 'select', label: '报价模板', name: 'quotationId', selectSourceKey: 'quotations', filterable: true },
+                    { type: 'select', label: '状态', name: 'moduleStatus', selectSourceKey: 'module_status_arr', filterable: true },
+                    { type: 'datetime', label: '生效日期', name: 'effectTime_gt' },
+                    { type: 'datetime', label: '生效日期至', name: 'effectTime_lte' }
                 ],
                 //搜索select类型下拉列表数据，对应fields的selectSourceKey
                 selectSource: {
@@ -93,87 +80,84 @@
                             value: 0
                         }
                     ],
-                    quotations: [] //报价模板list
+
                 },
                 columns:
-                    [
-                        { "prop": "id", "label": "ID" },
-                        { "prop": "name", "label": "名称" },
-                        { "prop": "insideSchdule", "label": "内部工期" },
-                        { "prop": "outsideSchdule", "label": "外部工期" },
-                        { "prop": "moduleStatus", "label": "状态" , "list":"moduleStatus"},
-                        { "prop": "effectTime", "label": "生效日期", "formatter": "dateParser"}
-                    ],
+                [
+                    { "prop": "id", "label": "ID" },
+                    { "prop": "moduleType", "label": "模板类型", "list": "moduleType" },
+                    { "prop": "moduleCode", "label": "模板编码" },
+                    { "prop": "name", "label": "名称" },
+                    { "prop": "insideSchdule", "label": "内部工期" },
+                    { "prop": "outsideSchdule", "label": "外部工期" },
+                    { "prop": "moduleStatus", "label": "状态", "list": "moduleStatus" },
+                    { "prop": "effectTime", "label": "生效日期", "formatter": "dateParser" }
+                ],
                 commonData: {
+                    moduleType: [
+                        {
+                            text: '售前',
+                            value: 1
+                        },
+                        {
+                            text: '交付',
+                            value: 2
+                        },
+                    ],
                     moduleStatus: [
+                        {
+                            text: '禁用',
+                            value: 0
+                        },
                         {
                             text: '启用',
                             value: 1
                         },
-                        {
-                            text: '禁用',
-                            value: 0
-                        }
                     ]
                 },
                 service: Service.TEMPLATE.name,
-                method:  Service.TEMPLATE.methods.QUERY,
+                method: Service.TEMPLATE.methods.QUERY,
                 args: {},
                 //弹窗dialog配置
                 editType: 'add',
                 dialogVisible: false,
                 rowId: null,
-                dialogTitle : '',
+                dialogTitle: '',
                 tableData: [],
-                selectedRows:[],
+                selectedRows: [],
             }
         },
-        created (){
-            TemplateOperator.queryQuoteList({page:1,size:200,optType:1}).then((res) => {
-                if(res.data.status === 200){
-                    let list = [];
-                    let rows = res.data.result.rows;
-                    for(let i in rows){
-                        list.push({text:rows[i]['tempName'], value: rows[i]['id']});
-                    }
-                    this.selectSource.quotations = list;
-                }
-            });
-            TemplateOperator.queryTreeByType({typeCodes:['001003010']}).then((res) => {
-                if(res.data.status === 200){
-                    this.treeData = [res.data.result];
-                }
-            })
+        created() {
         },
         methods: {
             //搜素
             submitSearch(obj) {
                 this.args = { search: obj }
             },
-            onTreeClick (nodeData){
-                this.args = {page:1, size:20, search: { organizeId: nodeData.id }}
+            onTreeClick(nodeData) {
+                this.args = { page: 1, size: 20, search: { organizeId: nodeData.id } }
             },
             //查看详情
-            showDetail: function(id, name){
+            showDetail: function (id, name) {
                 this.$router.push({
                     path: '/tuchat-delivery/template-detail',
-                    query:{id: id, name:name}
+                    query: { id: id, name: name }
                 })
             },
             //启用
-            enabled: function(){
+            enabled: function () {
                 let selections = this.selectedRows;
                 if (selections.length === 0) {
                     this.$message.error('请选择要启用的行！');
-                } else{
+                } else {
                     let ids = [];
-                    for(let i in selections){
+                    for (let i in selections) {
                         selections[i].id && ids.push(selections[i].id);
                     }
-                    if(ids.length == 0){
+                    if (ids.length == 0) {
                         this.$message.error('请选择要启用的行！');
                     }
-                    let data = {ids: ids, status:1 ,optType: 1, updateUser: +Cookie.get('t8t-tc-uid')};
+                    let data = { ids: ids, status: 1, optType: 1, updateUser: +Cookie.get('t8t-tc-uid') };
                     TemplateOperator.setModuleStatus(data).then((res) => {
                         if (res.data.status === 200) {
                             this.$message({
@@ -181,7 +165,7 @@
                                 message: '启用成功！'
                             });
                             this.getTableData();
-                        }else{
+                        } else {
                             this.$message({
                                 type: 'error',
                                 message: res.data.message
@@ -190,19 +174,19 @@
                     })
                 }
             },
-            disabled: function(){
+            disabled: function () {
                 let selections = this.$refs['t8tTable'].getSelectRows();
                 if (selections.length === 0) {
                     this.$message.error('请选择要禁用的行！')
-                } else{
+                } else {
                     let ids = [];
-                    for(let i in selections){
+                    for (let i in selections) {
                         selections[i].id && ids.push(selections[i].id);
                     }
-                    if(ids.length == 0){
+                    if (ids.length == 0) {
                         this.$message.error('请选择要禁用的行！');
                     }
-                    let data = {ids: ids, status:0 ,optType: 2, updateUser: +Cookie.get('t8t-tc-uid')}
+                    let data = { ids: ids, status: 0, optType: 2, updateUser: +Cookie.get('t8t-tc-uid') }
                     TemplateOperator.setModuleStatus(data).then((res) => {
                         console.log(res)
                         if (res.data.status === 200) {
@@ -211,7 +195,7 @@
                                 message: '禁用成功！'
                             });
                             this.getTableData();
-                        }else{
+                        } else {
                             this.$message({
                                 type: 'error',
                                 message: res.data.message
@@ -220,36 +204,37 @@
                     })
                 }
             },
-            add () {
+            add() {
                 this.dialogTitle = '新增排期模板'
                 this.editType = 'add'
                 this.dialogVisible = true
                 this.rowId = null
             },
-            edit (){
+            edit() {
                 let selections = this.$refs['t8tTable'].getSelectRows();
+                console.log(selections[0].id)
                 if (selections.length === 0) {
                     this.$message.error('请选择要编辑的行！')
-                }else if(selections.length > 1){
+                } else if (selections.length > 1) {
                     this.$message.error('只能选择一行进行编辑！')
-                } else{
+                } else {
                     this.dialogTitle = '编辑排期模板'
                     this.editType = 'edit'
                     this.dialogVisible = true
                     this.rowId = selections[0].id
                 }
             },
-            showRef (){
+            showRef() {
                 let rows = this.$refs['t8tTable'].getSelectRows();
-                if(rows.length < 1){
+                if (rows.length < 1) {
                     this.$message.error('请选择要处理的行！')
                     return
                 }
-                if(rows.length > 1){
+                if (rows.length > 1) {
                     this.$message.error('只能查看一行！')
                     return
                 }
-                this.$router.push({path: '/tuchat-delivery/template-ref', query:{refId:rows[0]['id'], scheduleName:rows[0]['name']}})
+                this.$router.push({ path: '/tuchat-delivery/template-ref', query: { refId: rows[0]['id'], scheduleName: rows[0]['name'] } })
                 // this.$msgbox({
                 //     title: '消息',
                 //     type: 'success',
@@ -263,35 +248,36 @@
                 this.$refs['t8tTable'].reloadTable()
             },
             //行变化事件
-            selectionChange (rows){
+            selectionChange(rows) {
                 //已选择行
                 this.selectedRows = rows;
                 //启用禁用按钮交互
                 let enableStatus = false;
                 let disableStatus = false;
-                if(rows.length > 0){
-                    for(let i in rows){
-                        if(rows[i].moduleStatus == 1){
+                if (rows.length > 0) {
+                    for (let i in rows) {
+                        if (rows[i].moduleStatus == 1) {
                             enableStatus = true;
                         }
-                        if(rows[i].moduleStatus == 0){
+                        if (rows[i].moduleStatus == 0) {
                             disableStatus = true;
                         }
                     }
                 }
-                if(enableStatus){
+                if (enableStatus) {
                     this.$refs['toolbar'].disableBySymbol('ENABLE');
-                }else{
+                } else {
                     this.$refs['toolbar'].unDisableBySymbol('ENABLE');
                 }
-                if(disableStatus){
+                if (disableStatus) {
                     this.$refs['toolbar'].disableBySymbol('DISABLE');
-                }else{
+                } else {
                     this.$refs['toolbar'].unDisableBySymbol('DISABLE');
                 }
             }
         }
     }
+
 </script>
 
 <style>

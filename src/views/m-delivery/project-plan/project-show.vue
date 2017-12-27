@@ -1,7 +1,10 @@
 <template>
     <div>
-        <el-dialog @close="closeDialog" v-model="isDialogShow" size="full" class="t8t-full-dialog"
-                   :class="{'isHide': isTopHide}">
+        <el-dialog @close="closeDialog"
+            v-model="isDialogShow"
+            size="full"
+            class="t8t-full-dialog"
+            :class="{'isHide': isTopHide}">
             <div class="t8t-full-dialog-container">
                 <!-- 顶部按钮区 -->
                 <div class="full-dialog-toolbar-container">
@@ -10,13 +13,16 @@
                 </div>
                 <div class="full-dialog-form-container container-center">
                     <el-tabs v-model="tab_info">
-                        <el-tab-pane label="基础信息" name="base">
+                        <el-tab-pane label="基础信息"
+                            name="base">
                             <el-row :gutter="24">
                                 <el-col :span="2">
                                     <div class="grid-content">业主姓名：</div>
                                 </el-col>
                                 <el-col :span="4">
-                                    <div class="grid-content">{{projectInfo.ownerName}}<!--<el-button size="small">拨打</el-button>--></div>
+                                    <div class="grid-content">{{projectInfo.ownerName}}
+                                        <!--<el-button size="small">拨打</el-button>-->
+                                    </div>
                                 </el-col>
                                 <el-col :span="2">
                                     <div class="grid-content">装修产品：</div>
@@ -31,81 +37,81 @@
                                     <div class="grid-content">{{projectInfo.cityName}}{{projectInfo.townName}}{{projectInfo.estateName}}{{projectInfo.houseAddress}}</div>
                                 </el-col>
                                 <!--<el-col :span="2">-->
-                                    <!--<div class="grid-content">转入日期：</div>-->
+                                <!--<div class="grid-content">转入日期：</div>-->
                                 <!--</el-col>-->
                                 <!--<el-col :span="4">-->
-                                    <!--<div class="grid-content">2017-01-01</div>-->
+                                <!--<div class="grid-content">2017-01-01</div>-->
                                 <!--</el-col>-->
                                 <!--<el-col :span="2">-->
-                                    <!--<div class="grid-content">签约日期：</div>-->
+                                <!--<div class="grid-content">签约日期：</div>-->
                                 <!--</el-col>-->
                                 <!--<el-col :span="4">-->
-                                    <!--<div class="grid-content">2017-01-01</div>-->
+                                <!--<div class="grid-content">2017-01-01</div>-->
                                 <!--</el-col>-->
                                 <!--<el-col :span="2">-->
-                                    <!--<div class="grid-content">开工日期：</div>-->
+                                <!--<div class="grid-content">开工日期：</div>-->
                                 <!--</el-col>-->
                                 <!--<el-col :span="10">-->
-                                    <!--<div class="grid-content">2017-01-01</div>-->
+                                <!--<div class="grid-content">2017-01-01</div>-->
                                 <!--</el-col>-->
                                 <!--<el-col :span="2">-->
-                                    <!--<div class="grid-content">竣工日期：</div>-->
+                                <!--<div class="grid-content">竣工日期：</div>-->
                                 <!--</el-col>-->
                                 <!--<el-col :span="4">-->
-                                    <!--<div class="grid-content">2017-01-01</div>-->
+                                <!--<div class="grid-content">2017-01-01</div>-->
                                 <!--</el-col>-->
                                 <!--<el-col :span="3">-->
-                                    <!--<div class="grid-content">项目结束日期：</div>-->
+                                <!--<div class="grid-content">项目结束日期：</div>-->
                                 <!--</el-col>-->
                                 <!--<el-col :span="3">-->
-                                    <!--<div class="grid-content">2017-01-01</div>-->
+                                <!--<div class="grid-content">2017-01-01</div>-->
                                 <!--</el-col>-->
                                 <!--<el-col :span="3">-->
-                                    <!--<div class="grid-content">项目完结类型：</div>-->
+                                <!--<div class="grid-content">项目完结类型：</div>-->
                                 <!--</el-col>-->
                                 <!--<el-col :span="9">-->
-                                    <!--<div class="grid-content">竣工</div>-->
+                                <!--<div class="grid-content">竣工</div>-->
                                 <!--</el-col>-->
                             </el-row>
                         </el-tab-pane>
                     </el-tabs>
                 </div>
                 <div class="full-dialog-tabs-container">
-                    <div class="top-hide el-icon-d-arrow-left" @click="onTopHide"></div>
+                    <div class="top-hide el-icon-d-arrow-left"
+                        @click="onTopHide"></div>
                     <el-tabs v-model="tab_list">
-                        <el-tab-pane label="负责人信息" name="charge">
+                        <el-tab-pane label="负责人信息"
+                            name="charge">
                             <div class="my-container">
-                                <t8t-table
-                                    ref="chargeTable"
+                                <t8t-table ref="chargeTable"
                                     :columns="chargeColumns"
                                     :service="chargeService"
                                     :method="chargeMethod"
                                     :args="chargeArgs"
                                     :isLoading="isLoading"
                                     :commonData="commonOptionsConfig"
-                                    :pageBar="true"
-                                >
+                                    :pageBar="true">
                                 </t8t-table>
                             </div>
                         </el-tab-pane>
                         <el-tab-pane label="进度信息">
-                            <t8t-table
-                                ref="NodeListTable"
+                            <t8t-table ref="NodeListTable"
                                 :columns="listColumns"
                                 :service="listService"
                                 :method="listMethod"
                                 :args="listArgs"
                                 :pageBar="true"
                                 :editable="true"
-                                :commonData="commonOptionsConfig"
-                            >
-                                <template slot="nodeRelationCount" scope="scope">
+                                :commonData="commonOptionsConfig">
+                                <template slot="nodeRelationCount"
+                                    scope="scope">
                                     <a href="javascript:;"
-                                       @click="showNodeRef(scope.row.id)">{{scope.row['nodeRelationCount']}}</a>
+                                        @click="showNodeRef(scope.row.id)">{{scope.row['nodeRelationCount']}}</a>
                                 </template>
-                                <template slot="nodePropertyCount" scope="scope">
+                                <template slot="nodePropertyCount"
+                                    scope="scope">
                                     <a href="javascript:;"
-                                       @click="showNodeAttr(scope.row.id)">{{scope.row['nodePropertyCount']}}</a>
+                                        @click="showNodeAttr(scope.row.id)">{{scope.row['nodePropertyCount']}}</a>
                                 </template>
                             </t8t-table>
                         </el-tab-pane>
@@ -125,30 +131,32 @@
                 </div>
             </div>
         </el-dialog>
-        <el-dialog title="节点关系" v-model="nodeListRefDataDialog" size="large" class="safsadacfac_node-dialog">
-            <t8t-table
-                :columns="listRefColumns"
+        <el-dialog title="节点关系"
+            v-model="nodeListRefDataDialog"
+            size="large"
+            class="safsadacfac_node-dialog">
+            <t8t-table :columns="listRefColumns"
                 :pageBar="true"
                 :editable="false"
                 :selectCol="false"
                 :service="nodeListRefDialogService"
                 :method="nodeListRefDialogMethod"
                 :args="nodeListRefDialogArgs"
-                :commonData="commonOptionsConfig"
-            >
+                :commonData="commonOptionsConfig">
             </t8t-table>
         </el-dialog>
-        <el-dialog title="节点属性" v-model="nodeListAttrDataDialog" size="large" class="safsasfsadffacfac_node-dialog">
-            <t8t-table
-                :columns="listAttributeColumns"
+        <el-dialog title="节点属性"
+            v-model="nodeListAttrDataDialog"
+            size="large"
+            class="safsasfsadffacfac_node-dialog">
+            <t8t-table :columns="listAttributeColumns"
                 :pageBar="true"
                 :editable="false"
                 :selectCol="false"
                 :service="nodeListAttrDialogService"
                 :method="nodeListAttrDialogMethod"
                 :args="nodeListAttrDialogArgs"
-                :commonData="commonOptionsConfig"
-            >
+                :commonData="commonOptionsConfig">
             </t8t-table>
         </el-dialog>
     </div>
@@ -159,7 +167,7 @@
     import axios from 'src/utils/axios.js'
     export default {
         name: 'project-show',
-        data(){
+        data() {
             return {
                 isDialogShow: true,
                 isLoading: false,
@@ -198,55 +206,55 @@
                 chargeArgs: {},
                 commonOptionsConfig: {
                     isLast: [
-                        {value: 1, text: '是'},
-                        {value: 0, text: '否'}
+                        { value: 1, text: '是' },
+                        { value: 0, text: '否' }
                     ],
                     nodeStatusList: [
-                        {value: 2, text: '已完成'},
-                        {value: 1, text: '进行中'},
-                        {value: 0, text: '待开始'}
+                        { value: 2, text: '已完成' },
+                        { value: 1, text: '进行中' },
+                        { value: 0, text: '待开始' }
                     ],
                     relationStatus: [
-                        {value: 0, text: '禁用'},
-                        {value: 1, text: '启用'}
+                        { value: 0, text: '禁用' },
+                        { value: 1, text: '启用' }
                     ]
                 },
                 listColumns: [
-                    {"prop": "id", "label": "ID"},
-                    {"prop": "nodeTypeName", "label": "节点类型"},
-                    {"prop": "parentId", "label": "父节点ID"},
-                    {"prop": "parentNodeTypeName", "label": "父节点类型"},
-                    {"prop": "relationTypeName", "label": "父子关系类型"},
-                    {"prop": "lastNode", "label": "是否为末级", "list": "isLast"},
-                    {"prop": "nodeRelationCount", "label": "前置条件"},
-                    {"prop": "billTypeName", "label": "单据类型"},
-                    {"prop": "nodePropertyCount", "label": "属性"},
-                    {"prop": "headId", "label": "单据编码"},
-                    {"prop": "predictCompleteTime", "label": "预计完成时间", "formatter": "dateParser"},
-                    {"prop": "actualCompleteTime", "label": "实际完成时间", "formatter": "dateParser"},
-                    {"prop": "nodeStatus", "label": "状态", "list": "nodeStatusList"},
-                    {"prop": "updateUserName", "label": "编辑人"},
-                    {"prop": "updateTime", "label": "编辑时间", "formatter": "dateParser"}
+                    { "prop": "id", "label": "ID" },
+                    { "prop": "nodeTypeName", "label": "节点类型" },
+                    { "prop": "parentId", "label": "父节点ID" },
+                    { "prop": "parentNodeTypeName", "label": "父节点类型" },
+                    { "prop": "relationTypeName", "label": "父子关系类型" },
+                    { "prop": "lastNode", "label": "是否为末级", "list": "isLast" },
+                    { "prop": "nodeRelationCount", "label": "前置条件" },
+                    { "prop": "billTypeName", "label": "单据类型" },
+                    { "prop": "nodePropertyCount", "label": "属性" },
+                    { "prop": "headId", "label": "单据编码" },
+                    { "prop": "predictCompleteTime", "label": "预计完成时间", "formatter": "dateParser" },
+                    { "prop": "actualCompleteTime", "label": "实际完成时间", "formatter": "dateParser" },
+                    { "prop": "nodeStatus", "label": "状态", "list": "nodeStatusList" },
+                    { "prop": "updateUserName", "label": "编辑人" },
+                    { "prop": "updateTime", "label": "编辑时间", "formatter": "dateParser" }
                 ],
                 listRefColumns: [
-                    {"prop": "headId", "label": "前置节点ID"},
-                    {"prop": "headTypeName", "label": "节点类型"},
-                    {"prop": "advance", "label": "提前量"},
-                    {"prop": "relationTypeName", "label": "关系类型"},
-                    {"prop": "relationStatus", "label": "启用状态", "list": "relationStatus"}
+                    { "prop": "headId", "label": "前置节点ID" },
+                    { "prop": "headTypeName", "label": "节点类型" },
+                    { "prop": "advance", "label": "提前量" },
+                    { "prop": "relationTypeName", "label": "关系类型" },
+                    { "prop": "relationStatus", "label": "启用状态", "list": "relationStatus" }
                 ],
                 listAttributeColumns: [
-                    {"prop": "id", "label": "ID"},
-                    {"prop": "nodeId", "label": "节点ID"},
-                    {"prop": "nodeTypeName", "label": "节点类型"},
-                    {"prop": "assistCode", "label": "辅助资料编码"},
-                    {"prop": "assistName", "label": "辅助资料名称"},
-                    {"prop": "assistValueCode", "label": "辅助资料值编码"},
-                    {"prop": "assistValueName", "label": "辅助资料值名称"}
+                    { "prop": "id", "label": "ID" },
+                    { "prop": "nodeId", "label": "节点ID" },
+                    { "prop": "nodeTypeName", "label": "节点类型" },
+                    { "prop": "assistCode", "label": "辅助资料编码" },
+                    { "prop": "assistName", "label": "辅助资料名称" },
+                    { "prop": "assistValueCode", "label": "辅助资料值编码" },
+                    { "prop": "assistValueName", "label": "辅助资料值名称" }
                 ],
                 listMethod: Service.PLAN.methods.projectDetailList,
                 listService: Service.PLAN.name,
-                listArgs: {search: {projectId: Number.parseInt(this.$route.query.id)}},
+                listArgs: { search: { projectId: this.$route.query.id } },
                 nodeListRefDataDialog: false,
                 nodeListRefDialogService: null,
                 nodeListRefDialogMethod: null,
@@ -258,8 +266,8 @@
                 projectInfo: {},
             }
         },
-        created(){
-            if (!Number.parseInt(this.$route.query.id)) {
+        created() {
+            if (!this.$route.query.id) {
                 this.$msgbox({
                     title: '消息',
                     type: 'error',
@@ -274,13 +282,13 @@
             axios({
                 method: Service.PLAN.methods.findProjectDetail,
                 service: Service.PLAN.name,
-                args: {projectId: Number.parseInt(this.$route.query.id)}
+                args: { projectId: this.$route.query.id }
             }).then((res) => {
-                    if (res.data.status === 200) {
-                        this.projectInfo = res.data.result;
-                    }
+                if (res.data.status === 200) {
+                    this.projectInfo = res.data.result;
                 }
-            )
+            }
+                )
         },
         methods: {
             closeDialog() {
@@ -289,23 +297,25 @@
             onTopHide() {
                 this.isTopHide = !this.isTopHide
             },
-            showNodeRef(nodeId){
+            showNodeRef(nodeId) {
                 this.nodeListRefDataDialog = true;
                 this.nodeListRefDialogService = Service.PLAN.name;
                 this.nodeListRefDialogMethod = Service.PLAN.methods.nodeRelationQueryPage;
-                this.nodeListRefDialogArgs = {search: {tailId: nodeId}};
+                this.nodeListRefDialogArgs = { search: { tailId: nodeId } };
             },
-            showNodeAttr(nodeId){
+            showNodeAttr(nodeId) {
                 this.nodeListAttrDataDialog = true;
                 this.nodeListAttrDialogService = Service.PLAN.name;
                 this.nodeListAttrDialogMethod = Service.PLAN.methods.nodePropertyQueryPage;
-                this.nodeListAttrDialogArgs = {search: {nodeId: nodeId}};
+                this.nodeListAttrDialogArgs = { search: { nodeId: nodeId } };
             }
         }
     }
+
 </script>
 
-<style lang="css" scoped>
+<style lang="css"
+    scoped>
     .t8t-full-dialog .my-container {
         display: flex;
         flex: 1;
@@ -447,7 +457,7 @@
         height: 1px;
     }
 
-    .t8t-full-dialog .el-tabs__item + .el-tabs__item {
+    .t8t-full-dialog .el-tabs__item+.el-tabs__item {
         border-left: 1px solid #d4dce7;
     }
 
@@ -469,8 +479,8 @@
         flex-wrap: wrap;
         overflow: auto;
     }
-
     /* 顶部tab */
+
     .t8t-full-dialog .full-dialog-form-container .el-tabs__item {
         font-size: 12px;
         height: 22px;
@@ -488,12 +498,11 @@
         padding-left: 20px;
         width: 100%;
 
-    &
-    :last-child {
-        margin-bottom: 0;
+        & :last-child {
+            margin-bottom: 0;
+        }
     }
 
-    }
     .el-col {
         border-radius: 4px;
     }
