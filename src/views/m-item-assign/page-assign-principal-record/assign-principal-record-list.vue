@@ -15,6 +15,7 @@
             :tableMethod="method"
             :tableCommonData="searchOptions"
             @search-submit="onSearchSubmit"
+            @list-assign-export="assignExport"
         >
         </t8t-list-view>
     </div>
@@ -24,6 +25,7 @@
     import commonApi from 'src/services/commonApi/commonApi.js'
     import itemAssignApi from 'src/services/itemAssign/API.js'
     import itemAssignService from 'src/services/itemAssign/Service.js'
+    import exportUtils from 'src/utils/export.js'
 
     export default {
         created () {
@@ -36,6 +38,7 @@
                 service: itemAssignService.ITEM_ASSIGN.name,
                 method: itemAssignService.ITEM_ASSIGN.methods.LIST_ASSIGN_RECORD,
                 tableArgs: {
+                    search:{}
                 },
                 // 表头描述
                 tableColumns: [
@@ -80,7 +83,19 @@
             }
         },
         methods: {
-            onSearchSubmit: function () {
+            onSearchSubmit: function (obj) {
+                this.tableArgs = {...this.tableArgs,...{search:obj}}
+            },
+            assignExport: function () {
+//                this.$TCS.addTag('tuchat_prs_015004001002');//todo:!!!!
+                let exportArgs = this.tableArgs.search
+                exportUtils({
+                    service: itemAssignService.ITEM_ASSIGN.name,
+                    method: itemAssignService.ITEM_ASSIGN.methods.EXPORT_ASSIGN_RECORD,
+                    args: {search:exportArgs},
+                    headers: '装修公司,项目ID,业务类型,派工原因,派工类型,负责人,单据状态,操作人,操作时间',
+                    sorts: "rootOrgName,sourceProjectId,bizType,reason,assignType,principalName,stateName,assignerName,assignTimeName"
+                })
             },
             // 调用辅助资料接口
             getCommonOptions: function(fatherCode, selectName) {

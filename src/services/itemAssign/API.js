@@ -155,6 +155,13 @@ export default {
             args: args
         })
     },
+    exportAssignRecord (args) {
+        return axios({
+            method: Service.ITEM_ASSIGN.methods.EXPORT_ASSIGN_RECORD,
+            service: Service.ITEM_ASSIGN.name,
+            args: args
+        })
+    },
     assessObjectVoid (args) {
         return axios({
             method: Service.ITEM_ASSIGN.methods.ASSESS_OBJECT_VOID,

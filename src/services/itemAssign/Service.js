@@ -88,6 +88,8 @@ let Services = {
             //views.principal.getDecorationInfo
             GET_DECORATION_INFO:'3s-o4KRIubMswqfbDuOMGR_gAwJrK3s5AHcp9r7j9TP0p0C',
 
+            //views.assignPrincipal.exportAssignRecord
+            EXPORT_ASSIGN_RECORD: 'x9q5kAS2ihuoPgzzDuQS9yrhwlMN2iBx-5lcSMmeNZKhKswhtT8zSDPvVaJ',
         }
     },
     PERMISSION: {   // 权限服务
