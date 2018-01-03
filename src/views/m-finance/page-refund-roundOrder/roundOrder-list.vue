@@ -8,17 +8,17 @@
             @submit="submitSearch"
         >
         </t8t-search>
-        <el-alert
-            type="warning"
-            style="color: black; background: #fffdee; margin: 20px; width: 98%;">
-        <dl>
-        <dt>有效项目扣费定义:</dt>
-        <dt>1、在自派出项目的二个半月内，有装修公司与业主见面或量房，正常扣费；</dt>
-        <dt>2、因装修公司自身原因（如联系不及时，口头报价等）造成未能见面，正常扣费；</dt>
-        <dt> &nbsp; </dt>
-        <dt>注明：若对扣除款项有疑义，请提交 “申请返款” 申请，提交申请期限为项目发布后的2个半月之内，逾期提交据不受理返款操作。如有问题，请联系运营人员。</dt>
-        </dl>
-        </el-alert>
+
+        <el-collapse accordion>
+            <el-collapse-item name="1">
+                <template slot="title"> 有效项目扣费定义: <i class="header-icon el-icon-information"></i>
+                </template>
+                    <div>1、在自派出项目的二个半月内，有装修公司与业主见面或量房，正常扣费；</div>
+                    <div>2、因装修公司自身原因（如联系不及时，口头报价等）造成未能见面，正常扣费；</div>
+                    <div> &nbsp; </div>
+                    <div>注明：若对扣除款项有疑义，请提交 “申请返款” 申请，提交申请期限为项目发布后的2个半月之内，逾期提交据不受理返款操作。如有问题，请联系运营人员。</div>
+            </el-collapse-item>
+        </el-collapse>
         <div class="g-main-container">
             <t8t-table
                 :columns="columns"
@@ -32,7 +32,7 @@
                 @cell-click="cellClick"
             >
                 <template scope="scope" slot="applyAble">
-                    <el-button type="primary" :disabled="scope.row.applyAble === 0">申请返款</el-button>
+                    <el-button type="primary" :disabled="scope.row.applyAble === 0" size="small">申请返款</el-button>
                     <!-- <a v-if="scope.row.applyAble ===1" style="color:blue;cursor: pointer;"> 申请返款 </a> -->
                     <!-- <a v-if="scope.row.applyAble ===0" style="color:gray;cursor: pointer;"> 不可申请返款 </a> -->
                 </template>
@@ -62,13 +62,8 @@
 <script>
 
     import Service from 'src/services/finance/Service.js'
-    import supplyService from 'src/services/supply/purchase.js'
-    import reportService from 'src/services/supply/report.js'
-    import commonApi from 'src/services/commonApi/commonApi.js'
-    import apiInventoryAccounting from 'src/services/finance/inventoryAccountingItem.js'
     import Cookie from 'js-cookie'
     import * as config from './config.js'
-    import exportUtils from 'src/utils/export.js'
     import TemplateOperator1 from 'src/services/delivery/pcm.js'
     import Methods from 'src/services/finance/refundOrder.js'
 
