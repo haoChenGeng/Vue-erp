@@ -32,7 +32,7 @@ export default {
                     {
                         type: 'input',
                         label: '项目',
-                        prop: 'projectId',
+                        prop: 'sourceProjectId',
                         disabled: true
                     },
                     {
