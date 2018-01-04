@@ -90,6 +90,7 @@
                 Utils.redirectIndex(this.$router)
             },
             submitForm(formName) {
+                let that = this
                 let domain = debug ? 'localhost' : '.to8to.com'
                 this.$refs[formName].validate((isValid) => {
                     if (!isValid) return false
@@ -101,14 +102,16 @@
                     api.account.login(args)
                         .then((res) => {
                            if (res.data.status === 200) {
+                               let comid = ( res.data.result.bounds.length >= 1 ? res.data.result.bounds[0].extId : 0 )
                                 // 设置用户cookie
                                 Cookie.set('t8t-tc-ticket', res.data.result.tickets['tuchat-pc'].value, { domain: domain })
                                 Cookie.set('t8t-tc-uid', res.data.result.user.id, { domain: domain })
                                 Cookie.set('t8t-tc-username', res.data.result.user.name, { domain: domain })
-                                // 跳转登录
-                                this.onLogin()
+                                that.setComName(comid,domain,_=>{
+                                    that.onLogin()
+                                })
                             } else {
-                                this.resMsg = res.data.message || 'no response!'
+                                that.resMsg = res.data.message || 'no response!'
                             }
                         })
                })
@@ -133,7 +136,21 @@
                 }).catch(e => {
 
                 })*/
-            }
+            },
+            setComName(comid,domain,cb){
+                    this.$http.fetch(
+                        'fcominfo/getbyId',{id:comid}
+                    ).then((res) => {
+                        if( res.data.status == 200 ){
+                            Cookie.set('t8t-tc-comname', res.data.result && res.data.result.name || '', { domain: domain} )
+                            cb()
+                        }else{
+                            cb()
+                        }
+                    }).catch(err => {
+                        cb()
+                    })
+                }
         }
     }
 

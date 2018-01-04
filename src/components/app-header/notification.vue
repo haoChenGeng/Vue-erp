@@ -134,7 +134,7 @@
                 this.getListNumbers()
             },
             showMessages:function (){
-                window.location.href  = 'http://www.to8to.com/my/message_list_fcom.php'
+                window.open('http://www.to8to.com/my/message_list_fcom.php')
             }
         },
         watch: {

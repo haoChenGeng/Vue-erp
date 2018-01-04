@@ -210,11 +210,6 @@
                     if (res.data.status === 200) {
                         let temp = res.data.result || []
 
-                        if(temp.length){
-                            //树的第一级是根节点不需要展示, 取其下的项目作为菜单
-                            temp = temp[0].items
-                        }
-
                         let item1 = {
                             index: "1-101",
                             url: {path: "#/index/"},
@@ -227,17 +222,11 @@
                             title: "帮助"
                         }
 
-                        let flag = false
-                        for (let i = 0; i < temp.length; i++) {
-                            temp[i] = temp[i] || {}
-                            if (temp[i].title === "工作台") {
-                                flag = true
-                                temp[i].items.push(item1, item2)
-                            }
-                        }
-
-                        if (!flag) {
-                            let workBentch = {
+                        if(temp.length && temp[0].items){
+                            //树的第一级是根节点不需要展示, 取其下的项目作为菜单
+                            temp = temp[0].items
+                        }else{
+                            temp[0] = {
                                 index: 100,
                                 title: '工作台',
                                 items: [
@@ -245,7 +234,6 @@
                                     item2
                                 ]
                             }
-                            temp.unshift(workBentch)
                         }
 
                         this.sidebarData = temp
@@ -273,7 +261,8 @@
                     this.$router.push(path.slice(1))
                 } else {
                     //window.location.href = 'http://www.to8to.com/' + path.replace(new RegExp('^\\/+', 'g'), '');
-                    window.location.href = path//直接跳转完整路径
+                    window.open(path)
+                    // window.location.href = path//直接跳转完整路径
                 }
             },
             onHide() {
@@ -281,15 +270,15 @@
             },
             iconSrc(title) {
                 if (title === '工作台') return img1
-                if (title === '工模售前') return img2
-                if (title === '施工包交付') return img3
-                if (title === '整装包交付') return img4
-                if (title === '供应链管理') return img5
-                if (title === '系统管理') return img6
+                if (title === '进度管理') return img2
+               // if (title === '运营管理') return img3
+                if (title === '项目管理') return img4
+                if (title === '公司管理') return img5
+                if (title === '功能设置') return img6
                 if (title === '交付管理') return img7
-                if (title === '商家后台') return img8
-                if (title === '财务') return img9
-                if (title === '流程中心') return img10
+                if (title === '运营管理') return img8
+                if (title === '财务管理') return img9
+                if (title === '数据中心') return img10
                 return img1
             },
             setDefaultActive(path) {

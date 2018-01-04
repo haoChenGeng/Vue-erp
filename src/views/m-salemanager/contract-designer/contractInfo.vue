@@ -28,6 +28,10 @@
 
             <el-tabs>
                 <el-tab-pane label="装修保合同">
+                    <div style="margin: 5px auto" v-if="pdfUrl != ''" >
+                        <el-button @click="showPdf" type="primary" size="small">全屏展示合同</el-button>
+                    </div>
+
                     <div id="pdf" class="contractInfoPdf"></div>
                 </el-tab-pane>
             </el-tabs>
@@ -63,6 +67,7 @@
                 resigning: false,//是否正在重新签署
                 contractChecked:false,//是否已阅读合同
                 isCanReCreate: false,//是否可以重新发起合同。 查询电子签合同异常,未发现有效的电子签合同时，允许重新发起，不然没法闭环
+                pdfUrl:''
             }
         },
         created () {
@@ -83,7 +88,6 @@
                         this.contractInfo.contractStatusName = contractStatus[0].text
                     }
 
-
                     if( this.contractInfo.orderImg && this.contractInfo.orderImg.split(';').length > 0 ){
                         this.contractInfo.orderImg.split(';').forEach((item,index) => {
                             this.galleryData.push({
@@ -91,6 +95,7 @@
                             })
                         })
                     }
+                    this.pdfUrl = Utils.getPreviewURL(res.pdfImg)
                     PDFObject.embed(Utils.getPreviewURL(res.pdfImg), "#pdf")
                 }).catch(e => {
                     this.isCanReCreate = true
@@ -166,6 +171,13 @@
                     })
                 })
             },
+
+            showPdf: function (){
+                let a = document.createElement('a')
+                a.href = this.pdfUrl
+                a.target = '_blank'
+                a.click()
+            }
         },
 
 
@@ -177,6 +189,6 @@
         height:100px;
     }*/
     .contractInfoPdf{
-        height:400px
+        height:300px
     }
 </style>

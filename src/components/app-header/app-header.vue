@@ -3,7 +3,7 @@
         <div class="erp-header-left">
             <a href="javascript: void 0;"
                 class="erp-logo">
-                <img src="./img/logo.png">
+                <img src="./img/Web_logo.png">
             </a>
         </div>
         <div class="erp-header-right">

@@ -30,6 +30,8 @@ import worker from './worker/index.js'
 import salemanager from './salemanager/index.js'
 
 import itemAssign from './item/index.js'
+// 帮助中心
+import helpcenter from './helpcenter/index'
 
 // 系统运营数据
 import om from './operationdata/index.js'
@@ -54,7 +56,8 @@ routes = routes.concat(
     worker,
     salemanager,
     om,
-    login
+    login,
+    helpcenter
 )
 
 // =========================================================================================
@@ -118,7 +121,7 @@ router.beforeEach((to, from, next) => {
 
         //未登录则重定向到登录页, 排除login页面防止死循环
         if( (!Cookie.get('t8t-tc-ticket') || !Cookie.get('t8t-tc-uid') ) && !['/login/','/login'].includes(to.path) ) {
-            Utils.redirectLoginPage(router)
+            Utils.redirectLoginPage()
             return
         }
 

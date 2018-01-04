@@ -11,31 +11,16 @@ import axios from 'axios'
 
 let Utils = {
 
-    //外部传入router
-    redirectLoginPage(router = 0) {
-        if(router){
-            router.push(
-                {
-                    path:'/login/'
-                }
-            )
-        } else{
-            location.href = '/#/login/'
-        }
+    redirectLoginPage() {
+        //跳转到装修公司登陆页面
+        //window.location = 'http://www.to8to.com/com_login.php'
 
+        window.location.href = window.location.origin + '/#/login/'
+        window.location.reload() //不然跳转不了，什么梗
     },
 
-    //外部传入router
-    redirectIndex(router) {
-        if(router){
-            router.push(
-                {
-                    path:'/index/'
-                }
-            )
-        } else{
-            location.href = '/#/index/'
-        }
+    redirectIndex() {
+        window.location = window.location.origin + '/#/index/'
     },
     // 上传url处理
     getUploadURL() {

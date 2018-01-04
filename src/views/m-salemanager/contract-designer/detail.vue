@@ -268,6 +268,9 @@
         <!--合同预览-->
         <el-dialog v-model="showPdfView" title="预览合同" size="full" class="g-pdf-dialog" :close-on-press-escape="false"
                    :show-close="false">
+            <div style="margin: 5px auto">
+                <el-button @click="showPdf" type="primary" size="small">全屏展示合同</el-button>
+            </div>
             <div id="pdf" v-loading.fullscreen.lock="!contractPdfUrl" element-loading-text="正在生成合同，请稍候 ..."></div>
             <div style="text-align: center; padding: 15px ">
                 <div style="margin: 5px;"><el-checkbox v-model="contractChecked">我已阅读完全部装修保合同，确定合同内容无误</el-checkbox></div>
@@ -624,7 +627,7 @@
                         //state 1创建中 2创建成功 3创建失败    //url 预览合同pdf
                         if( !_this.isEmpty(res) ){
                             clearInterval(_this.intervalPdf)
-                            _this.contractPdfUrl = res
+                            _this.contractPdfUrl = Utils.getPreviewURL(res)
                             //let _url = 'https://scmgw.to8to.com/?path=' +res.data.result.url+ '&uid=' + Cookie.get('t8t-tc-uid') + '&ticket=' + Cookie.get('t8t-tc-ticket')
                             PDFObject.embed(Utils.getPreviewURL(res), "#pdf")
                            //PDFObject.embed('http://wiki.we.com:8090/download/attachments/46107173/Java%E8%AF%AD%E8%A8%80%E8%A7%84%E8%8C%83%E4%B8%AD%E6%96%87%E7%89%88%28%E7%AC%AC%E4%B8%89%E7%89%88%29.pdf?version=1&modificationDate=1471436595000&api=v2', "#pdf")
@@ -655,6 +658,13 @@
 
                 })
             }, 3000)
+        },
+
+        showPdf: function (){
+            let a = document.createElement('a')
+            a.href = this.contractPdfUrl
+            a.target = '_blank'
+            a.click()
         },
 
         //校验用户
@@ -968,11 +978,11 @@
     .contractDesignerDetail .el-autocomplete{width: 100%}
     .contractDesignerDetail .el-input-group__append{border: none}
     .contractDesignerDetail #pdf{
-       height: 700px;
+       height: 660px;
     }
     @media screen and (max-height: 900px) {
         .contractDesignerDetail #pdf{
-            height: 400px;
+            height: 360px;
         }
     }
 </style>
