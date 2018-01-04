@@ -36,16 +36,16 @@ export default {
     // 根据名字和类型查公司
     queryShopUnion(args) {
         return axios({
-            method: Service.SUPPLY_CONFIGURE.methods.queryShopUnion,
-            service: Service.SUPPLY_CONFIGURE.name,
+            method: Service.SUPPLY_MASTERDATA.methods.queryShopUnion,
+            service: Service.SUPPLY_MASTERDATA.name,
             args: args
         })
     },
     // 查公司
     queryShop(args) {
         return axios({
-            method: Service.SUPPLY_CONFIGURE.methods.queryShop,
-            service: Service.SUPPLY_CONFIGURE.name,
+            method: Service.SUPPLY_MASTERDATA.methods.queryShop,
+            service: Service.SUPPLY_MASTERDATA.name,
             args: args
         })
     },

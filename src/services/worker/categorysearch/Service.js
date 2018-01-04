@@ -12,10 +12,9 @@ let Services = {
         }
     },
     PROPERTY:{
-        ///biz/supply-chain/app.supply-server
-        name: '8m7ufp84fb2V0f5Z0e1LiSKvI9wfWGyPcR5O8IydTmjLcK9YcKE',
+        // /biz/t8t-scm-mdm/app
+        name: '4kFXbl6g-G2AbInKo7VyRJOreftEsow',
         methods:{
-            propertyQueryPage:'xxyFxYonI0x3Fv7Po3D98lC_z76',//property.queryPage
             queryCategory :'fue2Bug7gAf8EzJAhQi-8IwMllaKWZlwhefb6kXUbX3', //sys.group.queryGroupTreeOfOne
             queryGroupsAndChilds:'MaZUrIPS5tH4QpWkLT635op0rqP_JhRGIZC_V_H9lBW', //sys.group.queryGroupsAndChilds
             queryList:'hQ5MO8vDt9bGHRuH3xra-osa-2zSRzS' //sys.group.queryList

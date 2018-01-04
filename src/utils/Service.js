@@ -8,7 +8,7 @@ let Services = {
 			// account相关
 			// account.login
 			//LOGIN: 'NMDtf8eMjm2vxjQ7iTtfWF1',
-            
+
             // views.user.login
             LOGIN: 'BaKVOtIClYCLEYCHaQPY_NPFwgx',
 			// account.findById
@@ -109,8 +109,8 @@ let Services = {
 	},
     //基础资料
     BASEDATA:{
-	    // /biz/supply-chain/app.supply-server
-        name: 'kOhVzKiY09mVCgMZBgLW6yuvkEA8mHxMyc1vtVI8OLxDee-8fum',
+	    // /biz/t8t-scm-mdm/app
+        name: '4kFXbl6g-G2AbInKo7VyRJOreftEsow',
         methods: {
             // goods.queryShopTreeByGroup  供应商树信息
             QUERYSHOPTREE: 'QsyoL-.BUNLHcCLI7494xnGL8CXQJvqFpAVB6lj',

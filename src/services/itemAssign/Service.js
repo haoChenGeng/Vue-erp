@@ -140,13 +140,10 @@ let Services = {
         }
     },
         PROPERTY: {
-            ///biz/supply-chain/app.supply-server
-            name: '1tDSHZmpwHN3cE-fZAxlLLRQhYPA-aBd5eTCtU4Z8fqTAytCUy2',
+            // /biz/t8t-scm-cfg/app
+            name: 'R8b7h4AHkMWAu5hFhrksUafEPkyKTyW',
             methods: {
-                propertyQueryPage: 'xxyFxYonI0x3Fv7Po3D98lC_z76', //property.queryPage
-                propertyQueryBatchByCodeAndPcode: '0wkcHzF4iIw08WJGyNJA9aBy-OH05k5OlRIxLtbydZM2j8S', // property.queryBatchByCodeAndPcode
                 QUERYP_ROPERTY_UNION: 'VzzwJAbDde1OZIVPsjbnRJIQ-dTF0B1M_AaYQ7t', //property.queryPropertyUnion
-                queryUnionParent:'vWcCqRRuqavrv2SkNxuXiloq549mh9uvxSBYPMS',//property.queryUnionParent
             }
         }
 }

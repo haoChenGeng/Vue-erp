@@ -2,7 +2,7 @@ import axios from 'src/utils/axios.js'
 import Service from './Service.js'
 
 export default {
-    
+
     create(args) {
         return axios({
             method: Service.TEMPLATE.methods.CREATE,
@@ -17,28 +17,20 @@ export default {
             args: args
         })
     },
-    
+
     queryModuleQuotaionById(args) {
         return axios({
             method: Service.TEMPLATE.methods.queryModuleQuotaionById,
             service: Service.TEMPLATE.name,
             args: args
         })
-    },   
-    
+    },
+
     moduleItemQueryPage(args) {
         return axios({
             method: Service.TEMPLATE.methods.QUERY,
             service: Service.TEMPLATE.name,
             args: args
         })
-    },
-    
-    queryCategory(args) {
-        return axios({
-            method: Service.PROPERTY.methods.queryCategory,
-            service: Service.PROPERTY.name,
-            args: args
-        })
-    },
+    }
 }

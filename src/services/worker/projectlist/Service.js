@@ -22,16 +22,6 @@ let Services = {
             queryPhotoInfosById: 'p47jyYze5rVqBqFMgl-yArUBpYp6g0krw2N', //views.photoesItem.query
 
         }
-    },
-
-
-
-    PROPERTY:{
-        ///biz/supply-chain/app.supply-server
-        name: '8m7ufp84fb2V0f5Z0e1LiSKvI9wfWGyPcR5O8IydTmjLcK9YcKE',
-        methods:{
-            propertyQueryPage:'xxyFxYonI0x3Fv7Po3D98lC_z76' //property.queryPage
-        }
     }
 };
 

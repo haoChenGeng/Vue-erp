@@ -30,8 +30,7 @@
                 <el-col :span="19">
                     <t8t-table
                         :columns="mainTableColumns"
-                        :service="mainTableService"
-                        :method="mainTableMethod"
+                        :path="mainTableServicePath"
                         :commonData="commonData"
                         :args="args"
                         :indexCol="false"
@@ -160,10 +159,7 @@
                         "label": "商家名称"
                     }*/
                 ],
-                mainTableService: '',
-                mainTableMethod: '',
-//                mainTableService:packtempServices.supply.name,
-//                mainTableMethod:packtempServices.supply.methods.queryGoodsForSetSku,
+                mainTableServicePath: '',
                 args:{search:null},
                 commonData: {
                 },
@@ -355,11 +351,8 @@
                                     this.getAllCates(this.goodsGroups,this.treedata[0].children)
 
                                     if(this.goodsGroups.length){
-
-                                        this.mainTableService = packtempServices.supply.name
-                                        this.mainTableMethod = packtempServices.supply.methods.queryEffectGoodsByCityAndSalePrice
+                                        this.mainTableServicePath = packtempServices.supply.methods.queryEffectGoodsByCityAndSalePrice
                                     }
-
 
                                     this.args = {
                                         'queryEffectGoodsByCityAndSalePriceDTO':{

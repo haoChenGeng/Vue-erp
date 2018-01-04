@@ -13,23 +13,32 @@ let Services = {
     },
     // 供应链辅助资料
     SUPPLY_CONFIGURE: {
-        // /biz/supply-chain/app.supply-server
-        name: 'qVq5B_KUuBzTC3kyP9TiuA53IS1kiBn5fR5JVjR7fUS6nsTm4Zc',
+        // /biz/t8t-scm-cfg/app
+        name: 'R8b7h4AHkMWAu5hFhrksUafEPkyKTyW',
         methods: {
             // property.queryPage
             QUERY_PAGE: 'Ewi6YId8aELgLHFBBSBMT4BvG3R',
             // property.queryUnionParent
             queryUnionParent: '5l6jR2KUJ4QdYxLFz0ZJGFy5XZkLajNNSEdLf0t',
-            // shop.queryShopUnion
-            queryShopUnion: 'zPrIoMCwO3geMqwnGH2Afs0w-7lpdva',
-            // shop.query
-            queryShop: '4VE-APqV_Fs13Cswfj8',
             //views.property.queryChildrenByWholeCode  通过全码查询辅助资料
             queryChildrenByWholeCode: 'sDE1BauR-rhu_AU-6F9VF952lJ_JIl-r1QOnscFpFYW0GFS9p3nAG1z',
             //views.property.queryChildrenByWholeCodes
             queryChildrenByWholeCodes: "CEGKxWt_AJmoqBtXoGEqET64657I2n7n39qadM-E_uX2b1O8X5k8Ii2vEnj"
         }
     },
+
+    //供应链基础资料
+    SUPPLY_MASTERDATA: {
+        // /biz/t8t-scm-mdm/app
+        name: '4kFXbl6g-G2AbInKo7VyRJOreftEsow',
+        methods: {
+            // shop.queryShopUnion
+            queryShopUnion: 'zPrIoMCwO3geMqwnGH2Afs0w-7lpdva',
+            // shop.query
+            queryShop: '4VE-APqV_Fs13Cswfj8'
+        }
+    },
+
     // 组织架构
     ORGANIZATION: {
         //  /biz/t8t-sys-acc/app
@@ -49,8 +58,8 @@ let Services = {
     },
     // 商品
     GOODS: {
-        // /biz/supply-chain/app.supply-server
-        name: 'qVq5B_KUuBzTC3kyP9TiuA53IS1kiBn5fR5JVjR7fUS6nsTm4Zc',
+        // /biz/t8t-scm-mdm/app
+        name: '4kFXbl6g-G2AbInKo7VyRJOreftEsow',
         methods: {
             // goods.queryPage
             QUERY_PAGE: 'ByoqRxHfrD8M7MGSNKC-qVN',

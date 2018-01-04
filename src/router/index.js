@@ -13,7 +13,6 @@ import login from './login/index.js'
 // 404
 import forbidden from './404/index.js'
 // 系统管理
-import system from './system/index.js'
 // 财务
 import finance from './finance/index.js'
 // workbench工作台
@@ -46,7 +45,6 @@ routes.push({
 
 routes = routes.concat(
     forbidden,
-    system,
     finance,
     workbench,
     procenter,

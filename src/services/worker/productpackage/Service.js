@@ -10,13 +10,6 @@ let Services = {
             queryModuleQuotaionById: 'NHGSRqrdMxo8kd8nvJTQztg536fL1MVsa6Y5L5s', //views.product.package.query
 
         }
-    },
-    PROPERTY:{
-        ///biz/supply-chain/app.supply-server
-        name: '8m7ufp84fb2V0f5Z0e1LiSKvI9wfWGyPcR5O8IydTmjLcK9YcKE',
-        methods:{
-            propertyQueryPage:'xxyFxYonI0x3Fv7Po3D98lC_z76' //property.queryPage
-        }
     }
 };
 

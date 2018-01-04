@@ -50,12 +50,6 @@
 <script>
     import axios from 'src/utils/axios.js'
     import Cookie from 'js-cookie'
-    // import T8tSearch from 'src/components/t8t-search/t8t-search.vue'
-    import quoteitem from 'src/services/worker/quoteitem/quoteitem.js'
-    import apiCommon from 'src/services/commonApi/commonApi.js'
-    import TemplateOperator from 'src/services/worker/categorysearch/base-method.js'
-    import quoteitemServices from 'src/services/worker/quoteitem/Service.js'
-    import packtempServices from 'src/services/worker/packtemp/Service.js'
     import config from './config.js'
     import expenseDictionary from 'src/services/delivery/expenseDictionary/Service.js'
     export default{

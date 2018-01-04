@@ -68,7 +68,7 @@
 
                             <template v-else-if="active=='1'">
                                  <p><span>您审批过的 </span>
-                                     <a :href="urlBuilder('http://erp.to8to.com/index.php/ProCenter/promanage/getApprovalProcess',{procInsId:task.procInsId,procDefId:task.procDefId})" target="_blank">{{task.procName}}
+                                     <a :href="urlBuilder('http://www.to8to.com/my/ProCenter/promanage/getApprovalProcess',{procInsId:task.procInsId,procDefId:task.procDefId})" target="_blank">{{task.procName}}
                                       <template v-if="task.businessKey">
                                          (编号:{{task.businessKey}})
                                        </template>
@@ -81,7 +81,7 @@
 
                             <template v-else-if="active=='2'">
                                 <p><span>您发起的 </span>
-                                    <a :href="urlBuilder('http://erp.to8to.com/index.php/ProCenter/promanage/getApprovalProcess',{procInsId:task.procInsId,procDefId:task.procDefId})" target="_blank">{{task.procName}}
+                                    <a :href="urlBuilder('http://www.to8to.com/my/ProCenter/promanage/getApprovalProcess',{procInsId:task.procInsId,procDefId:task.procDefId})" target="_blank">{{task.procName}}
                                         <template v-if="task.markKey">
                                         (编号:{{task.markKey}})
                                         </template>
@@ -314,7 +314,7 @@ showB: false,
                         count: 0,
                         active: true,
                         show: true,
-                        link: 'http://scm.to8to.com/#/procenter/page-pro-del',
+                        link: '/#/tuchat-procenter/page-pro-del',
                         lists: []
                     },
                     {
@@ -322,7 +322,7 @@ showB: false,
                         count: 0,
                         active: false,
                         show: true,
-                        link: 'http://scm.to8to.com/#/procenter/page-pro-already',
+                        link: '/#/tuchat-procenter/page-pro-already',
                         lists: []
                     },
                     {
@@ -330,7 +330,7 @@ showB: false,
                         count: 0,
                         active: false,
                         show: true,
-                        link: 'http://scm.to8to.com/#/procenter/page-pro-starter',
+                        link: '/#/tuchat-procenter/page-pro-starter',
                         lists: []
                     },
                     {

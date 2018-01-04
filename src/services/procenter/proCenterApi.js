@@ -7,6 +7,7 @@
 
 import axios from 'src/utils/axios.js'
 import Service from './Service.js'
+import commonApiService from 'src/services/commonApi/Service.js'
 
 export default{
 	listCategory(args){
@@ -170,8 +171,8 @@ export default{
 	//获取供应商人员列表
 	getSupperShop(args){
 		return axios({
-			method:Service.SUPPLIERSHOP.methods.GETSUPPSHOPPERSONS,
-			service:Service.SUPPLIERSHOP.name,
+			method:commonApiService.SUPPLY_MASTERDATA.methods.queryShop,
+			service:commonApiService.SUPPLY_MASTERDATA.name,
 			args:args
 		})
 	},

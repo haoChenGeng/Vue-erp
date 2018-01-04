@@ -11,14 +11,6 @@ let Services = {
             queryUserSpace:'zL7FIJrQ3YGaZJ7KpRIA47B9I8xBHDP', //views.space.queryPage
             querySpaceConfig:'BICJrUoNsiTmx8D707546J-EIPO'    //views.space.query
         }
-    },
-    PROPERTY:{
-        ///biz/supply-chain/app.supply-server
-        name: '8m7ufp84fb2V0f5Z0e1LiSKvI9wfWGyPcR5O8IydTmjLcK9YcKE',
-        methods:{
-            propertyQueryPage:'xxyFxYonI0x3Fv7Po3D98lC_z76',//property.queryPage
-            queryCategory :'fue2Bug7gAf8EzJAhQi-8IwMllaKWZlwhefb6kXUbX3', //sys.group.queryGroupTreeOfOne
-        }
     }
 };
 

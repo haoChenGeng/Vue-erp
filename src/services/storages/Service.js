@@ -18,8 +18,8 @@ let Services = {
         }
     },
      INVORGS: {
-        // /biz/supply-chain/app.supply-server
-        name: 'XAgCY5Yu3vtfJ5mOz6l1EatklIpkR9ATvWAjWO5sLB9onDCTTYI',
+        // /biz/t8t-scm-sup/app
+        name: 'i9P9z6BOXNYAxzSlIitWMIjIR20LaqJ',
         methods: {
              //仓库分组分页查询 inventory.organization.queryPage
             orgQueryPage:'9C7rcd65dU6JnNd4kGqUpR_6QCAqFOtANDv9BpD85kG8d1j',

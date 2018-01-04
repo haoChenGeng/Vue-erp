@@ -40,14 +40,6 @@ export default {
         })
     },
 
-    queryCategory(args) {
-        return axios({
-            method: Service.PROPERTY.methods.queryCategory,
-            service: Service.PROPERTY.name,
-            args: args
-        })
-    },
-
     queryUserSpace(args){
         return axios({
             method:Service.TEMPLATE.methods.queryUserSpace,

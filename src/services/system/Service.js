@@ -143,18 +143,6 @@ let Services = {
         }
     },
 
-    // 供应链辅助资料
-    SUPPLY_CONFIGURE: {
-        // /biz/supply-chain/app.supply-server
-        name: 'qVq5B_KUuBzTC3kyP9TiuA53IS1kiBn5fR5JVjR7fUS6nsTm4Zc',
-        methods: {
-            // property.queryPage
-            QUERY_PAGE: 'Ewi6YId8aELgLHFBBSBMT4BvG3R',
-            // property.queryUnionParent
-            queryUnionParent: '5l6jR2KUJ4QdYxLFz0ZJGFy5XZkLajNNSEdLf0t',
-
-        }
-    },
     CONDITION: {
         // /biz/t8t-wkf-bpm/app
         name: '-UmWIPvUtA1rb5RIFn7E8j5vqLJ5gmy',

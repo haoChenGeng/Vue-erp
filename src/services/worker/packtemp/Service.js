@@ -53,17 +53,17 @@ let  Services = {
     },
 
     supply: {
-        // /biz/supply-chain/app.supply-server
-        name: '8m7ufp84fb2V0f5Z0e1LiSKvI9wfWGyPcR5O8IydTmjLcK9YcKE',
+        // /biz/t8t-scm-mdm/app
+        name: '4kFXbl6g-G2AbInKo7VyRJOreftEsow',
         methods:{
             //报价配置sku查询商品信息 views.goods.queryGoodsForSetSku
             queryGoodsForSetSku : '1yvDQ5-lGkBG40OpMk61e9oxDjiPVvn9iKjCyrD7Ol3nucH',
 
             //按组织查询供应链有效的sku信息, 打包解决了商品状态过滤(已审核、非已淘汰、未禁用)以及城市分配等  goods.queryEffectGoodsByCity
-            queryEffectGoodsByCity: '8PoySH4qiMN2F8IS6OYE5bKs0p1MUxUSVpZxjap8w2y',
+            queryEffectGoodsByCity: 'mdm/queryEffectGoodsByCity',
 
             //按组织查询供应链有效的sku信息, 打包解决了商品状态过滤(已审核、非已淘汰、未禁用)以及城市分配是否有工长价、业主价等 goods.queryEffectGoodsByCityAndSalePrice
-            queryEffectGoodsByCityAndSalePrice: 'HSmeFx6Fz1ztAEC-cwOBT0gAzFkU74kMkhrP8LG8zKC05LJdss0BN-dynXo',
+            queryEffectGoodsByCityAndSalePrice: 'mdm/queryEffectGoodsByCityAndSalePrice',
         }
     },
 

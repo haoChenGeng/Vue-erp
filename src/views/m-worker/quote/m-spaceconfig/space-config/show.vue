@@ -51,7 +51,6 @@
 
     import EditTemplate from './edit.vue'
     import Service from 'src/services/worker/spaceconfig/Service.js'
-    import TemplateOperator from 'src/services/worker/spaceconfig/base-method.js'
     import api from 'src/utils/api.js'
     import Cookie from 'js-cookie'
 

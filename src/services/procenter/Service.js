@@ -106,15 +106,6 @@ let Services = {
 		}
 
 	},
-	//供应商人员列表
-	SUPPLIERSHOP:{
-		// /biz/supply-chain/app.supply-server
-		name:'a4huh3BDf-pU0emKmyu7Fiwcu9ytbRyd6R4fJGCtTE1xcMLdnKS',
-		methods:{
-			// shop.query 供应商人员列表
-			GETSUPPSHOPPERSONS:'CxHWEqtWE6yKZEE5n1c'
-		}
-	},
 	//授权功能
 	IMPOWERSERVICE:{
 		// /biz/t8t-wkf-ctl/app

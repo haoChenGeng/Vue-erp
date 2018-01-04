@@ -9,7 +9,6 @@ import categorysearch from './categorysearch.js'
 import apartmentspace from './apartmentspace.js'
 import quoteorder from './quoteorder.js'
 import projectlist from './projectlist.js'
-import signManage from './signManage.js'
 import quoteChangeOrder from './quoteChangeOrder.js'
 
 let routes = [].concat(
@@ -21,7 +20,6 @@ let routes = [].concat(
     apartmentspace,
     quoteorder,
     projectlist,
-    signManage,
     quoteChangeOrder
 )
 
