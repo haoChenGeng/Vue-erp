@@ -627,6 +627,153 @@ export default {
             ]
         }
     ],
+    assignForm: [{
+        label: '项目信息',
+        name: 'mainInfo',
+        type: 'form',
+        fields: [
+            {
+                type: 'input',
+                label: '项目ID',
+                disabled: 'disabled',
+                prop: 'sourceProjectId',
+            },
+            {
+                type: 'input',
+                label: '项目地区',
+                disabled: 'disabled',
+                prop: 'cityTownName',
+            },
+            {
+                type: 'input',
+                label: '楼盘',
+                disabled: 'disabled',
+                prop: 'estateName',
+            },
+            {
+                type: 'input',
+                label: '详细地址',
+                disabled: 'disabled',
+                prop: 'houseAddress',
+            },
+            {
+                type: 'input',
+                label: '项目状态',
+                disabled: 'disabled',
+                prop: 'orderSubStatusName',
+            },
+            {
+                type: 'input',
+                label: '家装公装',
+                disabled: 'disabled',
+                prop: 'decorateTypeName',
+            },
+            {
+                type: 'input',
+                label: '整改局改',
+                disabled: 'disabled',
+                prop: 'decorateRangeName',
+            },
+            {
+                type: 'input',
+                label: '装修风格',
+                disabled: 'disabled',
+                prop: 'preferStyleName',
+            },
+            {
+                type: 'input',
+                label: '新旧房',
+                disabled: 'disabled',
+                prop: 'houseStatusName',
+            },
+            {
+                type: 'input',
+                label: '房屋类型',
+                disabled: 'disabled',
+                prop: 'houseTypeName',
+            },
+            {
+                type: 'input',
+                label: '户型',
+                disabled: 'disabled',
+                prop: 'houseStyle',
+            },
+            {
+                type: 'input',
+                label: '套内面积',
+                disabled: 'disabled',
+                prop: 'houseArea',
+            },
+            {
+                type: 'input',
+                label: '房屋结构',
+                disabled: 'disabled',
+                prop: 'houseStructName',
+            }
+        ]
+    },
+    {
+        label: '业主信息',
+        name: 'suppliers',
+        type: 'form',
+        fields: [
+            {
+                type: 'input',
+                label: '业主ID',
+                disabled: 'disabled',
+                prop: 'ownerId',
+            },
+            {
+                type: 'input',
+                label: '业主电话',
+                disabled: 'disabled',
+                prop: 'phone',
+            },
+            {
+                type: 'input',
+                label: '业主姓名',
+                disabled: 'disabled',
+                prop: 'ownerName',
+            },
+            {
+                type: 'input',
+                label: '业主称呼',
+                disabled: 'disabled',
+                prop: 'appellation',
+            }
+        ]
+    },
+    {
+        label: '跟进记录',
+        name: 'followRecord',
+        type: 'table',
+        showPage: false,
+        fields: [
+            {
+                prop: "feedbackType",
+                label: "反馈类型",
+                list: 'feedbackTypeList'
+            },
+            {
+                prop: "feedbackStageName",
+                label: "反馈节点"
+            },
+            {
+                prop: "createTime",
+                label: "反馈时间",
+                formatter: 'dateParser'
+            },
+            {
+                prop: "feedbackContent",
+                label: "反馈内容"
+            },
+            {
+                prop: "createUserNameAndRole",
+                label: "反馈人"
+
+            }
+        ]
+    }],
     options: {
         feedbackTypeList: [
             { value: 1, text: "项目进度" },

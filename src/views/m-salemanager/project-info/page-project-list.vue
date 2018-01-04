@@ -35,6 +35,8 @@ export default {
     name: 'page-project-list',
     data() {
         return {
+            detailPath:'/tuchat-sale-manage/page-project-detail',
+            assignPath:'/tuchat-sale-manage/project-assign-detail',
             service: Service.PROJECT.name,
             method: Service.PROJECT.methods.QUERYSHEETBYPAGE,
             args: {
@@ -286,9 +288,10 @@ export default {
             this.$refs['projectTable'].reloadTable()
         },
         viewBtn(obj) {
+            const _path = (this.$router.currentRoute.path).match(/assign-list/g) ? this.assignPath : this.detailPath
             if (typeof obj === 'object') {
                 this.$router.push({
-                    path: '/tuchat-sale-manage/page-project-detail',
+                    path: _path,
                     query: { id: obj.id },
                 })
                 return
@@ -296,7 +299,7 @@ export default {
             let selectRow = this.$refs['projectTable'].states.currentRow
             if (selectRow) {
                 this.$router.push({
-                    path: '/tuchat-sale-manage/page-project-detail',
+                    path: _path,
                     query: { id: selectRow.id },
                 })
             } else {

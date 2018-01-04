@@ -6,105 +6,112 @@ export default {
         return axios({
             service: Service.ACCOUNT.name,
             method: Service.ACCOUNT.methods.ACCOUNTQUERY,
-            args: args
+            args: args,
         })
     },
     listAccountByRoleCode(args) {
         return axios({
             service: Service.SALES.name,
             method: Service.SALES.methods.LISTACCOUNTBYROLECODE,
-            args: args
+            args: args,
         })
     },
     decorationOrderQueryOrderPage(args) {
         return axios({
             service: Service.PROJECT.name,
             method: Service.PROJECT.methods.QUERYORDERPAGE,
-            args: args
+            args: args,
         })
     },
     decorationOrderFindCrmRecordById(args) {
         return axios({
             service: Service.PROJECT.name,
             method: Service.PROJECT.methods.FINDCRMRECORDBYID,
-            args: args
+            args: args,
         })
     },
     decorationOrderFindOrderDetailSheetById(args) {
         return axios({
             service: Service.PROJECT.name,
             method: Service.PROJECT.methods.FINDORDERDETAILSHEETBYID,
-            args: args
+            args: args,
         })
     },
     decorationOrderFindSaleAssignById(args) {
         return axios({
             service: Service.PROJECT.name,
             method: Service.PROJECT.methods.FINDSALEASSIGNBYID,
-            args: args
+            args: args,
         })
     },
     decorationOrderFindProjectAssignById(args) {
         return axios({
             service: Service.PROJECT.name,
             method: Service.PROJECT.methods.FINDPROJECTASSIGNBYID,
-            args: args
+            args: args,
         })
     },
     appointQuery(args) {
         return axios({
             service: Service.MEASURE.name,
             method: Service.MEASURE.methods.APPOINTQUERY,
-            args: args
+            args: args,
         })
     },
     measureQueryPage(args) {
         return axios({
             service: Service.PROJECT.name,
             method: Service.PROJECT.methods.QUERYPAGE,
-            args: args
+            args: args,
         })
     },
     measureQueryMeasureRecordPage(args) {
         return axios({
             service: Service.MEASURE.name,
             method: Service.MEASURE.methods.QUERYMEASURERECORDPAGE,
-            args: args
+            args: args,
         })
     },
     measureOrderQueryPunchPage(args) {
         return axios({
             service: Service.MEASURE.name,
             method: Service.MEASURE.methods.QUERYPUNCHPAGE,
-            args: args
+            args: args,
         })
     },
     platCheckQueryPage(args) {
         return axios({
             service: Service.PLATCHECK.name,
             method: Service.PLATCHECK.methods.QUERYPAGE,
-            args: args
+            args: args,
         })
     },
     contractPreview(args) {
         return axios({
             service: Service.CONSTRACT.name,
             method: Service.CONSTRACT.methods.PREVIEW,
-            args: args
+            args: args,
         })
     },
     goodsQueryPage(args) {
         return axios({
             service: Service.GOODS.name,
             method: Service.GOODS.methods.QUERYPAGE,
-            args: args
+            args: args,
         })
     },
     orderGetProjectMoneyInfo(args) {
         return axios({
             service: Service.MONEYINFO.name,
             method: Service.MONEYINFO.methods.GETPROJECTMONEYINFO,
-            args: args
+            args: args,
+        })
+    },
+    getCall(args) {
+        return axios({
+            service: Service.CAll.name,
+            method: Service.CAll.methods.GETCALL,
+            args: args,
         })
     },
 }
