@@ -13,6 +13,7 @@
                         <t8t-toolbar ref="toolbar"
                             @SHOUQIANSLH="projectInitProjectNode(1)"
                             @JIAOFUSLH="projectInitProjectNode(2)"
+                            @UPDATESTATUS="projectNodeStatusModify()"
                             class="t8t-dark">
                         </t8t-toolbar>
                     </div>
