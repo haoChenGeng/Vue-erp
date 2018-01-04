@@ -138,12 +138,11 @@ export default {
             let _dataSource = this.dataSource.assignForm
             if (
                 _dataSource.fid &&
-                _dataSource.sourceProjectId &&
-                _dataSource.uid
+                _dataSource.sourceProjectId
             ) {
                 const _args = {
                     fid: +_dataSource.fid,
-                    uid: +_dataSource.uid,
+                    uid: +Cookie.get('t8t-tc-uid'),
                     yid: +_dataSource.sourceProjectId,
                 }
                 projectApi

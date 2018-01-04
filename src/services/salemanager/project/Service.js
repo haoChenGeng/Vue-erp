@@ -83,8 +83,9 @@ let Services = {
         // /biz/t8t-dcp-ppm/app
         name: '6h1R2Knd7h7Y00i9anycfG-lZ5Expqt',
         methods: {
-            // com.app.call
-            GETCALL: '3Z3g-AyKZDEXe0r4ZL4',
+            // com.app.assign.call.tuxin
+            GETCALL: '5lvi9Ijf_xbXOY6W7PsXPJ5Ho6e9goXM5Xb8Nt2',
+
         },
     },
 }
