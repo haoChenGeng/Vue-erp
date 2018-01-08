@@ -42,7 +42,7 @@
                                                       :rules="field.rules || []">
                                             <el-input v-if="field.type==='input'"
                                                       v-model="userInfo[field.prop]"
-                                                      :disabled="userChecked && disabledFields.includes(field.prop)"
+                                                      :disabled="userChecked && (disabledFields.indexOf(field.prop) > -1)"
                                                       :icon="userChecked ? 'edit': ''"
                                                       @on-icon-click="handleIconClick(field.prop)"
                                             >
@@ -927,7 +927,7 @@
             return str == null || str == 0 || str == '' || str == undefined || str == '0'
         },
         handleIconClick: function (prop){
-            if( this.disabledFields.includes(prop) ){
+            if( this.disabledFields.indexOf(prop) > -1 ){
                 this.disabledFields.splice(this.disabledFields.indexOf(prop),1)
                 this.userChecked = false //重新验证用户信息 TODO 精细化控制需要编辑的文本域
             }

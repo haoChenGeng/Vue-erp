@@ -2225,7 +2225,7 @@
 
             //设置table的可编辑行列表
             editable: function (v,r,c,t){
-                return this.hotRow.includes(r) || this.isNewRow(t, r)
+                return this.hotRow.indexOf(r) > -1 || this.isNewRow(t, r)
             },
             dataLoaded(data){
                 data.map(item => {

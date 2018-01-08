@@ -87,7 +87,7 @@
         },
         methods: {
             onLogin() {
-                Utils.redirectIndex(this.$router)
+                Utils.redirectIndex()
             },
             submitForm(formName) {
                 let that = this

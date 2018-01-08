@@ -24,11 +24,11 @@
                 :selectCol="false"
             >
                 <template scope="scope" slot="projectId">
-                    <el-button v-if="[0,1,2,3,4].includes(scope.row.contractStatus)"
+                    <el-button v-if="[0,1,2,3,4].indexOf(scope.row.contractStatus) > -1"
                                @click="contractButton(scope.row)"
                                type="primary"
                                size="small"
-                               v-html="[0,1,4].includes(scope.row.contractStatus) ? '发起合同' :([2,3].includes(scope.row.contractStatus) ? '合同详情' : '')"></el-button>
+                               v-html="( [0,1,4].indexOf(scope.row.contractStatus)  > -1 ) ? '发起合同' :( ([2,3].indexOf(scope.row.contractStatus)  > -1) ? '合同详情' : '')"></el-button>
                 </template>
             </t8t-table>
         </div>
@@ -179,14 +179,14 @@
             }
 
             //待签，已签 查看合同详情
-            else if( [2,3].includes(row.contractStatus) ){
+            else if( [2,3].indexOf(row.contractStatus) > -1 ){
                 this.currentProjectId = row.projectId
                 this.currentsourceProjectId = row.sourceProjectId
                 this.contractInfoShow = true
             }
 
             //未签、暂存、作废 发起合同
-            else if( [0,1,4].includes(row.contractStatus) ){
+            else if( [0,1,4].indexOf(row.contractStatus) > -1 ){
 
                 methods.checkCreate(row.projectId, row.sourceProjectId, +Cookie.get('t8t-tc-uid')).then(res => {
                     this.contractInfoShow = false

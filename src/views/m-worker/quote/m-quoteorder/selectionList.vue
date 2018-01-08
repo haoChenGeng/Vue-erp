@@ -497,7 +497,11 @@
 
                 //获取当前成品所处的tab
                 let hotGdmIndex = null
-                this.gdmData.forEach((i,index) => { if(i.list.includes(row)){hotGdmIndex = index} })
+                this.gdmData.forEach(function(i,index){
+                    if(i.list.indexOf(row) > -1){
+                        hotGdmIndex = index
+                    }
+                })
 
                 if( hotGdmIndex !== null ){
                     let table = this.$refs.t8ttable[hotGdmIndex]

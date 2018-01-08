@@ -836,7 +836,10 @@
 
                 //同一空间中不能选择相同的报价项
 
-                let sameTempItem = quoteOrderItemList.filter(i => {return tempItemIds.includes(i.tempItemId)})
+                let sameTempItem  = quoteOrderItemList.filter(function(item){
+                    return tempItemIds.indexOf(item.tempItemId) > -1
+                }
+            )
                 if( sameTempItem.length ){
                     return this.$msgbox({
                         title:' ',
@@ -924,7 +927,7 @@
 
                 let quoteOrderItemList = this.spacesData[this.hotSpaceIndex]['quoteOrderItemList']
 
-                let sameTempItem = quoteOrderItemList.filter(i => {return tempItemId.includes(i.tempItemId)})
+                let sameTempItem = quoteOrderItemList.filter(function(i){return tempItemId.indexOf(i.tempItemId) > -1})
                 if( sameTempItem.length ){
                     return this.$msgbox({
                         title:' ',

@@ -86,7 +86,7 @@ router.beforeEach((to, from, next) => {
     }else{
 
         //未登录则重定向到登录页, 排除login页面防止死循环
-        if( (!Cookie.get('t8t-tc-ticket') || !Cookie.get('t8t-tc-uid') ) && !['/login/','/login'].includes(to.path) ) {
+        if( (!Cookie.get('t8t-tc-ticket') || !Cookie.get('t8t-tc-uid') ) && ['/login/','/login'].indexOf(to.path) < 0 ) {
             Utils.redirectLoginPage()
             return
         }
