@@ -353,34 +353,34 @@ export default {
                         item => item.name === 'orderSubStatus'
                     ).disabled = false
                 } else {
-                    this.$refs['searchBar']
-                        .getSearchInstance()
-                        .setFormData({ orderSubStatus: null })
                     this.searchFields.find(
                         item => item.name === 'orderSubStatus'
                     ).disabled = true
                 }
                 this.$refs['searchBar'].setFormData({ orderSubStatus: null })
                 this.searchOptions.search_subStatusCode = []
-                itemAssignApi
-                    .queryPropertyUnion({
-                        page: 1,
-                        size: 200,
-                        search: { pPropertyCode: val },
-                    })
-                    .then(res => {
-                        let searchList = []
-                        if (res.data.status === 200) {
-                            let rows = res.data.result
-                            for (let i in rows) {
-                                searchList.push({
-                                    text: rows[i]['propertyName'],
-                                    value: rows[i]['propertyCode'],
-                                })
+                if(val){
+                    itemAssignApi
+                        .queryPropertyUnion({
+                            page: 1,
+                            size: 200,
+                            search: { pPropertyCode: val },
+                        })
+                        .then(res => {
+                            let searchList = []
+                            if (res.data.status === 200) {
+                                let rows = res.data.result
+                                for (let i in rows) {
+                                    searchList.push({
+                                        text: rows[i]['propertyName'],
+                                        value: rows[i]['propertyCode'],
+                                    })
+                                }
                             }
-                        }
-                        this.searchOptions.search_subStatusCode = searchList
-                    })
+                            this.searchOptions.search_subStatusCode = searchList
+                        })
+                }
+
             }
         },
         // 调用辅助资料接口
