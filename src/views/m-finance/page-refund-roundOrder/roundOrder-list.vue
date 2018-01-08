@@ -86,8 +86,8 @@
 
                 columns: [
                     {'prop': 'sourceProjectId', 'label': '项目ID'},
-                    {'prop': 'houseAddress', 'label': '项目地址'},
                     {'prop': 'applyAble', 'label': '操作', 'width': "100"},
+                    {'prop': 'houseAddress', 'label': '项目地址'},
                     {'prop': 'appellation', 'label': '业主称呼'},
                     {'prop': 'decoratePatternName', 'label': '装修方式'},
                     {'prop': 'houseTypeName', 'label': '房屋类型'},

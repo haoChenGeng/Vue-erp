@@ -121,7 +121,7 @@
                 quoteColumns: [
                     /*原项目ID、业主姓名、项目地址（城市+行政区+楼盘+详细地址）、套内面积、设计师姓名、项目状态、签约时间  */
 
-                    {"prop": "sourceProjectId", "label": "原项目ID"},
+                    {"prop": "sourceProjectId", "label": "项目ID"},
                     {"prop": "ownerName", "label": "业主姓名"},
                     {"prop": "projectAddress", "label": "项目地址"},
                     {"prop": "houseArea", "label": "套内面积"},
@@ -232,8 +232,7 @@
                 }
                 let selection = selections[0]
                 // debugger
-                if("8100703" > selection.orderSubStatus || 10 !== selection.projectStar || selection.statusConfirm == 0 ||
-                '' == selection.filename || 'null' == selection.filename) {
+                if("8100703" > selection.orderSubStatus || 10 !== selection.projectStar || selection.statusConfirm == 0) {
                     return this.$message.error('无水电增项详情')
                 }
 

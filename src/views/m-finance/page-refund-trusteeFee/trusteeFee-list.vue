@@ -28,8 +28,10 @@
 
         <el-dialog title="申请返款" v-model="dialogFormVisible">
             <el-checkbox-group v-model="checkList" @change="handleCheckedCitiesChange">
-                <div v-for="trusteeFee in trusteeFees" style="text-align: center">
-                    <el-checkbox :label="trusteeFee.type" :disabled="!trusteeFee.enable">{{trusteeFee.content}}</el-checkbox>
+                <div v-for="trusteeFee in trusteeFees" style="margin:auto;width:80%">
+                    <el-checkbox :label="trusteeFee.type" :disabled="!trusteeFee.enable" >
+                            <span v-html="trusteeFee.content"></span>
+                        </el-checkbox>
                     <br><br>
                 </div>
             </el-checkbox-group>
