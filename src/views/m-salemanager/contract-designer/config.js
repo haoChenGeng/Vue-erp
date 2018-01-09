@@ -543,7 +543,6 @@ export default {
                 {
                     required:true,
                     validator: (rule, value, callback) => {
-                        debugger
                         if(value != '') {
                             callback()
                         }else{

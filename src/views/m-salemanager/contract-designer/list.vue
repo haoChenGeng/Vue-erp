@@ -98,13 +98,13 @@
                   textValue: 'sname',  //需要展示出来的名称
                   filedValue: 'id',    //选中那条数据的ID
                   defaultValue:"",
-                  remote: false,
+                  remote: true,
                   service: ServiceApi.name,
                   method: ServiceApi.methods.queryEstatePage,
                   remoteQueryKey: "estateName",
-                  fetchSuggestions:function (queryString,callback) {
+                  /*fetchSuggestions:function (queryString,callback) {
                       callback()
-                  },
+                  },*/
                   remoteArgs: {
                       page: 1,
                       size: 10

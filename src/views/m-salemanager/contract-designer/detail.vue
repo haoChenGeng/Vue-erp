@@ -183,45 +183,42 @@
 
                                 <div v-else-if='field.prop === "orderImg"'>
 
-                                            <div class="upload-box" @click="uploadBoxClick('cover')">
+                                            <div class="upload-box">
                                                 <el-upload
                                                     class="avatar-uploader"
                                                     :data="uploadParams"
                                                     :accept="acceptImg"
                                                     :action="uploadURL"
                                                     :show-file-list="false"
-                                                    :on-progress="onProgress"
-                                                    :on-success="handleUploadScucess"
+                                                    :on-success="handleUploadScucessCover"
                                                     :before-upload="beforeUpload">
                                                     <img width="100" height="100" v-if="contractInfo['orderImg']['cover']" :src="'http://pic.to8to.com/'+contractInfo['orderImg']['cover']" class="avatar">
                                                     <i v-else class="el-icon-plus uploader-icon"></i>
                                                 </el-upload>
                                                 <div>合同封面</div>
                                             </div>
-                                            <div class="upload-box" @click="uploadBoxClick('first')">
+                                            <div class="upload-box">
                                                 <el-upload
                                                     class="avatar-uploader"
                                                     :data="uploadParams"
                                                     :accept="acceptImg"
                                                     :action="uploadURL"
                                                     :show-file-list="false"
-                                                    :on-progress="onProgress"
-                                                    :on-success="handleUploadScucess"
+                                                    :on-success="handleUploadScucessFirst"
                                                     :before-upload="beforeUpload">
                                                     <img width="100" height="100" v-if="contractInfo['orderImg']['first']" :src="'http://pic.to8to.com/'+contractInfo['orderImg']['first']" class="avatar">
                                                     <i v-else class="el-icon-plus uploader-icon"></i>
                                                 </el-upload>
                                                 <div>合同第一页</div>
                                             </div>
-                                            <div class="upload-box" @click="uploadBoxClick('last')">
+                                            <div class="upload-box">
                                                 <el-upload
                                                     class="avatar-uploader"
                                                     :data="uploadParams"
                                                     :accept="acceptImg"
                                                     :action="uploadURL"
                                                     :show-file-list="false"
-                                                    :on-success="handleUploadScucess"
-                                                    :on-progress="onProgress"
+                                                    :on-success="handleUploadScucessLast"
                                                     :before-upload="beforeUpload">
                                                     <img width="100" height="100" v-if="contractInfo['orderImg']['last']" :src="'http://pic.to8to.com/'+contractInfo['orderImg']['last']" class="avatar">
                                                     <i v-else class="el-icon-plus uploader-icon"></i>
@@ -237,10 +234,9 @@
                                                     :accept="acceptZip"
                                                     :action="uploadURL"
                                                     :show-file-list="false"
-                                                    :on-success="handleUploadScucess"
-                                                    :on-progress="onProgress"
+                                                    :on-success="handleUploadScucessPqmImg"
                                                     :before-upload="beforeUploadZip">
-                                                    <el-button size="small" type="primary" @click="uploadBoxClick('pqmImg')">选择文件</el-button>
+                                                    <el-button size="small" type="primary">选择文件</el-button>
 
                                                     <a target="_blank" v-if="contractInfo.pqmImg" @click.stop="" :href="'http://pic.to8to.com/'+contractInfo.pqmImg" class="avatar">报价单</a>
                                                     &nbsp;<span slot="tip" class="el-upload__tip">请将报价单拍照后，上传zip，rar格式压缩包文件</span>
@@ -401,7 +397,6 @@
         submitting2:false,//正在提交合同
         signing:false,//正在签署
           resigning:false,//正在重新签署
-        uploadingImg: false,
         intervalPdf : '',
         contractDetailVisible: true//控制页面展示隐藏
       }
@@ -619,6 +614,11 @@
         //异步检测合同pdf是否生成
         pingContractPdf: function (){
 
+            //清除掉上一次生成的pdf对象
+            this.contractPdfUrl = null
+            if(document.getElementById('pdf') != null) {
+                document.getElementById('pdf').innerHTML = ''
+            }
             let _this = this
             _this.intervalPdf = setInterval(function (){
 
@@ -757,15 +757,52 @@
             })
         },
 
-        //上传时执行
-        onProgress:function (event, file, fileList){
-            this.uploadingImg = true
+
+        /////////上传成功回调。 每个图片回调分开写是为了实现独立上传互不影响
+
+        //封面上传成功回调
+        handleUploadScucessCover: function (response, file, fileList){
+            if( response.status == 200 ){
+                let file = response.result.filePath.replace('pic\/','')
+                this.contractInfo.orderImg['cover'] = file
+            }else{
+                return this.$message.error(response.result || response.message || '上传出错');
+            }
+        },
+
+        //第一张上传成功回调
+        handleUploadScucessFirst: function (response, file, fileList){
+            if( response.status == 200 ){
+                let file = response.result.filePath.replace('pic\/','')
+                this.contractInfo.orderImg['first'] = file
+            }else{
+                return this.$message.error(response.result || response.message || '上传出错');
+            }
+        },
+
+        //最后一张上传成功回调
+        handleUploadScucessLast: function (response, file, fileList){
+            if( response.status == 200 ){
+                let file = response.result.filePath.replace('pic\/','')
+                this.contractInfo.orderImg['last'] = file
+            }else{
+                return this.$message.error(response.result || response.message || '上传出错');
+            }
+        },
+
+        //报价单上传成功回调
+        handleUploadScucessPqmImg: function (response, file, fileList){
+            if( response.status == 200 ){
+                let file = response.result.filePath.replace('pic\/','')
+                this.contractInfo.pqmImg = file
+            }else{
+                return this.$message.error(response.result || response.message || '上传出错');
+            }
         },
 
         //上传成功回调
         handleUploadScucess: function (response, file, fileList){
             if( response.status == 200 ){
-                this.uploadingImg = false
                 let file = response.result.filePath.replace('pic\/','')
 
                 //报价单压缩包上传
@@ -775,17 +812,14 @@
                 else{
                     this.contractInfo.orderImg[this.uploadModel] = file
                 }
-                this.uploadingImg = false
             }else{
                 return this.$message.error(response.result || response.message || '上传出错');
             }
         },
+
         //上传前执行
         beforeUpload: function (file){
             let _this = this
-            if( this.uploadingImg ){
-                return false
-            }
             const inAllowType = [
                 'image/jpeg',
                 'image/jpg',
@@ -831,9 +865,6 @@
 
         //zip上传前执行
         beforeUploadZip: function (file){
-            if( this.uploadingImg ){
-                return false
-            }
             let ext = file.name.split('.').pop().toLowerCase();//文件后缀。 由于file.type无法获得压缩文件信息，这里直接用后缀处理(zip, rar 压缩包 mime：'application/x-zip-compressed', 'application/octet-stream','application/zip')
             const inAllowType = [
                 'rar', 'zip'
@@ -848,13 +879,6 @@
                 this.$message.error('上传文件大小不能超过 8MB!');
             }
             return inAllowType && lessThenMaxSize;
-        },
-
-        //选择文件时
-        uploadBoxClick: function (model){
-            if( !this.uploadingImg ){
-                this.uploadModel = model
-            }
         },
 
         //获取辅助资料

@@ -13,10 +13,9 @@ let Utils = {
 
     redirectLoginPage() {
         //跳转到装修公司登陆页面
-        //window.location = 'http://www.to8to.com/com_login.php'
-
-        window.location.href = window.location.origin + '/#/login/'
-        window.location.reload() //不然跳转不了，什么梗
+        window.location = 'http://www.to8to.com/com_login.php'
+        /*window.location.href = window.location.origin + '/#/login/'
+        window.location.reload() //不然跳转不了，什么梗*/
     },
 
     redirectIndex() {

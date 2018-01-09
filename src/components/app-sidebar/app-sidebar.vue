@@ -261,7 +261,7 @@
                     this.$router.push(path.slice(1))
                 } else {
                     //window.location.href = 'http://www.to8to.com/' + path.replace(new RegExp('^\\/+', 'g'), '');
-                    window.open(path)
+                    window.open(this.urlRewrite(path))
                     // window.location.href = path//直接跳转完整路径
                 }
             },
@@ -290,6 +290,24 @@
                 } catch (e) {
                     return null
                 }
+            },
+
+            //动态生成url @exp:  userid=:userId&uname=:userName
+           urlRewrite(path){
+
+                //在此处扩展支持的通配符列表
+                let params = {
+                    userId: +Cookie.get('t8t-tc-uid') || '',
+                    userName: Cookie.get('t8t-tc-username') || '',
+                    comName: Cookie.get('t8t-tc-comname')  || '',
+                    ticket: Cookie.get('t8t-tc-ticket') || '',
+                }
+
+               for(var item in params){
+                    path = path.replace(new RegExp(':'+item, 'g'), params[item]);
+                }
+
+               return path
             }
         }
     }

@@ -30,7 +30,8 @@
                                 <i class="icon icon-code" :class="{'active': isFocus3}"></i>
                             </div>
                             <div class="login-code-img">
-                                <img v-show="captchaSrc" :src="captchaSrc" alt="换一张" title="换一张" @click="getCaptCha()">
+                                <img id="captcha" :src="captchaUrl"
+                                     @click="refreshCaptcha($event)" alt="换一张" title="换一张">
                             </div>
                         </div>
                     </el-form-item>
@@ -52,11 +53,15 @@
     import axios from 'axios'
     import qs from 'qs'
     import Utils from 'src/utils/Utils.js'
+    import Client from 'vue-gateway-sdk'
+    import Captcha from 'vue-gateway-sdk/src/core/Captcha'
+    var captcha = new Captcha()
     let debug = process.env.NODE_ENV !== 'production'
     export default {
         name: 'login',
         data() {
             return {
+                captchaUrl: '',
                 isFocus1: false,
                 isFocus2: false,
                 isFocus3: false,
@@ -78,18 +83,20 @@
                         { required: true, message: '请输入验证码', trigger: 'blur' }
                     ]
                 },
-                captchaSrc:''
             }
 
         },
-        created(){
-            this.getCaptCha()
-        },
+        created(){},
         methods: {
+            // 刷新验证码
+            refreshCaptcha(event) {
+                captcha.refresh()
+            },
             onLogin() {
                 Utils.redirectIndex()
             },
             submitForm(formName) {
+                var client = new Client()
                 let that = this
                 let domain = debug ? 'localhost' : '.to8to.com'
                 this.$refs[formName].validate((isValid) => {
@@ -99,6 +106,7 @@
                         password: md5(this.ruleForm.password),
                         appName:'tuchat-pc'
                     }
+                    //client.login() TODO 接入新的登录SDK，其中字段名要改造
                     api.account.login(args)
                         .then((res) => {
                            if (res.data.status === 200) {
@@ -151,7 +159,11 @@
                         cb()
                     })
                 }
-        }
+        },
+        mounted() {
+            // 初始化绑定DOM
+            captcha.setTarget(document.getElementById('captcha'), true)
+        },
     }
 
 </script>
