@@ -3,26 +3,32 @@
         <el-dialog :title="title" class="add-plat-dialog" v-model="dialogVisible" @close="btnCancleClick()">
             <el-form v-loading.lock="formLoading" :label-position="labelPosition" :model="formData" :rules="rules" :label-width="formLabelWidth"
                 ref="form" @keyup.enter.native="btnOKClick()">
-                <el-form-item label="项目ID：" prop="sourceProjectId">
+                <el-form-item label="项目ID:" prop="sourceProjectId">
                     <el-input @blur="getProjectInfo()" v-model="formData.sourceProjectId"></el-input>
                 </el-form-item>
-                <el-form-item label="业主姓名：" prop="ownerName">
+                <el-form-item label="业主姓名:" prop="ownerName">
                     <el-input v-model="formData.ownerName" disabled></el-input>
                 </el-form-item>
-                <el-form-item label="详细地址：" prop="addressDetail">
+                <el-form-item label="详细地址:" prop="addressDetail">
                     <el-input type="textarea" rows="3" v-model="formData.addressDetail" disabled></el-input>
                 </el-form-item>
-                <el-form-item label="验收节点：" prop="sheduleNodeId">
+                <el-form-item label="验收节点:" prop="sheduleNodeId">
                     <el-select v-model="formData.sheduleNodeId" filterable :allow-create="false" placeholder="请选择验收节点">
                         <el-option v-for="item in projectNodeVOs" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="申请开始时间：" prop="expectStartTime">
+                <div v-if="inspectionNodeIds.indexOf(formData.sheduleNodeId)!=-1" class="isInspection">
+                    <el-checkbox v-model="isInspection">申请免检</el-checkbox>
+                </div>
+                <!-- <el-form-item class="">
+                    <el-checkbox v-model="isInspection">申请免检</el-checkbox>
+                </el-form-item> -->
+                <el-form-item v-if="isInspection==false" label="申请开始时间:" prop="expectStartTime">
                     <el-date-picker v-model="formData.expectStartTime" placeholder="" type="datetime">
                     </el-date-picker>
                 </el-form-item>
-                <el-form-item label="申请结束时间：" prop="expectCheckTime">
+                <el-form-item v-if="isInspection==false" label="申请结束时间:" prop="expectCheckTime">
                     <el-date-picker v-model="formData.expectCheckTime" placeholder="" type="datetime">
                     </el-date-picker>
                 </el-form-item>
@@ -87,13 +93,17 @@
                     ownerName: '',
                     addressDetail: '',
                     sheduleNodeId: null,
-                    expectStartTime: '',
-                    expectCheckTime: ''
+                    expectStartTime: null,
+                    expectCheckTime: null,
+                    projectStar: null,
                 },
                 isLoading: false,
                 projectNodeVOs: [],
+                inspectionNodeIds: [],
                 formLoading: false,
                 reminder: '',//温馨提示
+                isInspection: false,
+                //isShow: false,
             }
         },
         props: {
@@ -123,10 +133,12 @@
                 this.formData.ownerName = '';
                 this.formData.addressDetail = '';
                 this.formData.sheduleNodeId = null;
-                this.formData.expectStartTime = '';
-                this.formData.expectCheckTime = '';
+                this.formData.expectStartTime = null;
+                this.formData.expectCheckTime = null;
                 this.projectNodeVOs = [];
+                this.inspectionNodeIds = [];
                 this.reminder = '';
+                this.projectStar = null;
                 let sourceProjectId = this.formData.sourceProjectId
                 if (typeof sourceProjectId != 'string' || sourceProjectId.length < 1 || sourceProjectId.length > 64 || /^\d{1,64}$/.test(sourceProjectId) == false) {
                     // this.$message({
@@ -139,18 +151,36 @@
                 CheckCommon.getOrderInfo({ sourceProjectId: this.formData.sourceProjectId })
                     .then((res) => {
                         let resStatus = [211512, 211514, 211502];
+                        //let inspectionStages = ["水电验收", "泥木（中期）验收", "油漆验收"];
                         let message = '';
+                        //let inspectionFlag = false;
                         if (res.data.status === 200) {
                             this.projectNodeVOs = [];
+                            this.inspectionNodeIds = [];
                             let list = [];
+                            let inspectionsIds = [];
                             res.data.result.projectNodeVOs.forEach(function (item, i) {
                                 list.push({ label: item.nodeTypeName, value: item.id });
+                                if (item.inspectionFlag == true) {
+                                    // inspectionFlag = true;
+                                    inspectionsIds.push(item.id);
+                                }
                             });
                             this.projectNodeVOs = list;
-                            this.formData.sheduleNodeId = list.length > 0 ? list[0].value : "";
+                            this.inspectionNodeIds = inspectionsIds;
+                            let _this = this
+                            setTimeout(function(){
+                                _this.formData.sheduleNodeId = list.length > 0 ? list[0].value : "";
+                            },1)
+                           
                             this.formData = Object.assign(this.formData, res.data.result)
+                            let projectStar = this.formData.projectStar;
+                            // if (projectStar != null && 5 == projectStar && inspectionFlag) {
+                            //     //动态添加一个el-form-item
+                            //     this.isShow = true;
+                            // }
                         }
-                        else if (resStatus.includes(res.data.status)) {
+                        else if (resStatus.indexOf(res.data.status) != -1) {
                             message = res.data.result == null ? (res.data.message == null ? '系统异常,请稍后再试！' : res.data.message) : res.data.result
                         }
                         else {
@@ -189,9 +219,10 @@
                                 projectId: that.formData.projectId,
                                 sourceProjectId: that.formData.sourceProjectId,
                                 sheduleNodeId: that.formData.sheduleNodeId,
-                                expectStartTime: +Date.parse(that.formData.expectStartTime).toString().substr(0, 10),
-                                expectCheckTime: +Date.parse(that.formData.expectCheckTime).toString().substr(0, 10),
+                                expectStartTime: (that.formData.expectStartTime == null) ? Math.round(new Date().getTime() / 1000) : (+Date.parse(that.formData.expectStartTime).toString().substr(0, 10)),
+                                expectCheckTime: (that.formData.expectCheckTime == null) ? Math.round(new Date().getTime() / 1000) : +Date.parse(that.formData.expectCheckTime).toString().substr(0, 10),
                                 createUser: +Cookie.get('t8t-tc-uid'),
+                                isInspection: that.isInspection == true ? 1 : 0,
                             }
                             CheckCommon.createCheck({ check: platCheckCreateDTO })
                                 .then((res) => {
@@ -216,8 +247,8 @@
                                             reminder = result == null ? res.data.message : result;
                                         }
                                         that.reminder = reminder
-                                    } else if (resStatus.includes(res.data.status)) {
-                                        message: res.data.result == null ? (res.data.message == null ? '系统异常,请稍后再试！' : res.data.message) : res.data.result;
+                                    } else if (resStatus.indexOf(res.data.status) != -1) {
+                                        message = res.data.result == null ? (res.data.message == null ? '系统异常,请稍后再试！' : res.data.message) : res.data.result;
                                     } else {
                                         message = '系统异常,请稍后再试！';
                                     }
@@ -266,6 +297,13 @@
 
     .noteBox {
         margin-left: 2em;
+    }
+</style>
+<style lang="css" scoped>
+    .isInspection {
+        margin-left: 42px;
+        line-height: 15px;
+        margin-bottom: 12px;
     }
 </style>
 <!-- 样式尽量写上边, 必要时写下边 -->

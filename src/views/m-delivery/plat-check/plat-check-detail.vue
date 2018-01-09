@@ -24,7 +24,7 @@
                                     </div>
                                     <div class="dialog2-form-item-container">
                                         <el-form-item label="项目ID:">
-                                            <el-input v-model="detailInfo.projectId" disabled></el-input>
+                                            <el-input v-model="detailInfo.sourceProjectId" disabled></el-input>
                                         </el-form-item>
                                     </div>
                                     <div class="dialog2-form-item-container">

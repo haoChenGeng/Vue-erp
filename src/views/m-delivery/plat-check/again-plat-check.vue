@@ -105,7 +105,7 @@
                         if (res.data.status === 200) {
                             this.formData = Object.assign(this.formData, res.data.result);
                         }
-                        else if (resStatus.includes(res.data.status)) {
+                        else if (resStatus.indexOf(res.data.status) != -1) {
                             message = res.data.result == null ? (res.data.message == null ? '系统异常,请稍后再试！' : res.data.message) : res.data.result
                         }
                         else {
@@ -149,7 +149,7 @@
                                         })
                                         that.btnCancleClick()
                                         that.$emit('getTableData')
-                                    } else if (resStatus.includes(res.data.status)) {
+                                    } else if (resStatus.indexOf(res.data.status) != -1) {
                                         message = res.data.result == null ? (res.data.message == null ? '系统异常,请稍后再试！' : res.data.message) : res.data.result
                                     }
                                     else {

@@ -39,7 +39,7 @@
                         name: 'estateId',
                         textValue: 'estateName',
                         filedValue: 'estateId',
-                        triggerOnFocus: false,
+                        //triggerOnFocus: false,
                         remote: true,
                         service: Service.PRSMDM.name,
                         method: Service.PRSMDM.methods.decorationOrderQueryOrderPage,
@@ -86,10 +86,10 @@
                         name: 'projectManagerId',
                         textValue: 'name',
                         filedValue: 'accountId',
-                        triggerOnFocus: false,
+                        //triggerOnFocus: false,
                         remote: true,
-                        service: Service.ORGANIZATION.name,
-                        method: Service.ORGANIZATION.methods.queryCorpMember,
+                        service: Service.YANSHOU.name,
+                        method: Service.YANSHOU.methods.queryCorpMember,
                         remoteArgs: { sort: ['id_asc'], page: 1, size: 20 },
                         remoteQueryKey: "name_like",
                         dialog: {
@@ -102,8 +102,8 @@
                                 ]
                             },
                             table: {
-                                service: Service.ORGANIZATION.name,
-                                method: Service.ORGANIZATION.methods.queryCorpMember,
+                                service: Service.YANSHOU.name,
+                                method: Service.YANSHOU.methods.queryCorpMember,
                                 args: {},
                                 radioCol: true,
                                 columns: [

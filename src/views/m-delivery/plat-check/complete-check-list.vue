@@ -6,7 +6,7 @@
             <div class="g-main-container-column">
                 <t8t-toolbar :symbolList="symbolList" @DETAIL="detail" @AGAINCREATE="againCreate" ref="toolbar">
                 </t8t-toolbar>
-                <t8t-table :radioCol=true :columns="columns" :service="service" :method="method" :args="args" :pageBar="true" :commonData="commonData"
+                <t8t-table :radioCol="true" :columns="columns" :service="service" :method="method" :args="args" :pageBar="true" :commonData="commonData"
                     ref="t8tTable" @current-row-change="selectionChange">
                 </t8t-table>
             </div>
@@ -41,7 +41,7 @@
                         name: 'estateId',
                         textValue: 'estateName',
                         filedValue: 'estateId',
-                        triggerOnFocus: false,
+                        //triggerOnFocus: false,
                         remote: true,
                         service: Service.PRSMDM.name,
                         method: Service.PRSMDM.methods.decorationOrderQueryOrderPage,
@@ -90,10 +90,10 @@
                         name: 'projectManagerId',
                         textValue: 'name',
                         filedValue: 'accountId',
-                        triggerOnFocus: false,
+                        //triggerOnFocus: false,
                         remote: true,
-                        service: Service.ORGANIZATION.name,
-                        method: Service.ORGANIZATION.methods.queryCorpMember,
+                        service: Service.YANSHOU.name,
+                        method: Service.YANSHOU.methods.queryCorpMember,
                         remoteArgs: { sort: ['id_asc'], page: 1, size: 20 },
                         remoteQueryKey: "name_like",
                         dialog: {
@@ -106,8 +106,8 @@
                                 ]
                             },
                             table: {
-                                service: Service.ORGANIZATION.name,
-                                method: Service.ORGANIZATION.methods.queryCorpMember,
+                                service: Service.YANSHOU.name,
+                                method: Service.YANSHOU.methods.queryCorpMember,
                                 args: {},
                                 radioCol: true,
                                 columns: [
@@ -127,13 +127,23 @@
                             }
                         }
                     },
+                    { type: 'select', label: '是否免检:', name: 'source', selectSourceKey: 'sources' },
                     { type: 'date', pickertype: 'datetimerange', label: '申请验收时间:', startField: 'expectStartTime_gte', endField: 'expectCheckTime_lte', name: 'expectCheckTime', inputWidth: 330 },
                     { type: 'date', pickertype: 'datetimerange', label: '实际验收时间:', startField: 'checkStartTime_gte', endField: 'checkTime_lte', name: 'checkTime', inputWidth: 330 },
-
                 ],
                 //搜索select类型下拉列表数据，对应fields的selectSourceKey
                 selectSource: {
                     checkTypeCodes: [],
+                    sources: [
+                        {
+                            text: '是',
+                            value: 4
+                        },
+                        {
+                            text: '否',
+                            value: 1
+                        }
+                    ]
                 },
                 columns:
                 [
@@ -160,7 +170,10 @@
                         },
                         width: '265px'
                     },
-                    { "prop": "createTime", "label": "创建日期", "formatter": this.dateParser }
+                    { "prop": "createTime", "label": "创建日期", "formatter": this.dateParser },
+                    {
+                        "prop": "source", "label": "备注", "formatter": function (val, row) { return row.source == 4 ? '免检' : '' }
+                    }
                 ],
                 commonData: {
                     billStatuList: [
@@ -179,14 +192,14 @@
                 },
                 service: Service.YANSHOU.name,
                 method: Service.YANSHOU.methods.platCheckQueryPage,
-                args: { sort: ['createTime_desc'], search: { checkTypeCode_ne: '8!821!82101!1001', billStatus_in: [2, 3], source: 1 } },
+                args: { sort: ['createTime_desc'], search: { checkTypeCode_ne: '8!821!82101!1001', billStatus_in: [2, 3], source_in: [1, 4] } },
                 editType: 'add',
                 addDialogVisible: false,
                 selectedRows: [],
                 filterData: {
                     checkTypeCode_ne: '8!821!82101!1001',
                     billStatus_in: [2, 3],
-                    source: 1,
+                    source_in: [1, 4],
                 }
             }
         },
@@ -221,7 +234,7 @@
                 //     //search: Object.assign(obj,this.filterData), fields: fields
                 //     search: obj, fields: fields
                 // }
-                this.args = { sort: ['id_desc'], search: Object.assign({}, this.filterData, obj) }
+                this.args = { sort: ['createTime_desc'], search: Object.assign({}, this.filterData, obj) }
             },
             dateParser(text) {
                 let dateString;
@@ -243,6 +256,10 @@
                 } else if (selections.length > 1) {
                     this.$message.error('只能选择一行进行操作！')
                 } else {
+
+                    //this.$refs['t8tTable'].clearSelection()  TODO 清除选择的行
+                    this.$refs['t8tTable'].reloadTable();
+
                     this.$router.push({
                         path: '/tuchat-delivery/plat-check-detail',
                         query: { id: selections[0].id }
@@ -269,20 +286,20 @@
             //行变化事件
             selectionChange(curRow, oldRow) {
                 //已选择行
-                this.selectedRows = curRow;
+                this.selectedRows = [curRow];
 
                 //查看详情按钮交互
                 let ables = ['8!821!82101!1002', '8!821!82101!1006'];
-                if (ables.includes(curRow.checkTypeCode)) {
+                if (ables.indexOf(curRow.checkTypeCode) != -1) {
                     this.$refs['toolbar'].disableBySymbol('DETAIL');
-                } else if (curRow.billStatus == 2) {
+                } else if (curRow.billStatus == 2 && curRow.source == 1) {//外检的可看详情
                     this.$refs['toolbar'].unDisableBySymbol('DETAIL');
                 } else {
                     this.$refs['toolbar'].disableBySymbol('DETAIL');
                 }
 
                 //验收申请按钮交互
-                if (curRow.billStatus == 3) {//不合格
+                if (curRow.source == null || curRow.billStatus == 3 && curRow.source == 1) {//不合格而且是外检
                     this.$refs['toolbar'].unDisableBySymbol('AGAINCREATE');
                 } else {
                     this.$refs['toolbar'].disableBySymbol('AGAINCREATE');
@@ -290,7 +307,8 @@
 
             },
             closeAddDialog() {
-                this.addDialogVisible = false
+                this.addDialogVisible = false;
+                this.$refs['t8tTable'].reloadTable();
             }
         }
     }

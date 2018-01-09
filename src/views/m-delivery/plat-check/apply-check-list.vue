@@ -45,7 +45,7 @@
                         name: 'estateId',
                         textValue: 'estateName',
                         filedValue: 'estateId',
-                        triggerOnFocus: false,
+                        //triggerOnFocus: false,
                         remote: true,
                         service: Service.PRSMDM.name,
                         method: Service.PRSMDM.methods.decorationOrderQueryOrderPage,
@@ -94,10 +94,10 @@
                         name: 'projectManagerId',
                         textValue: 'name',
                         filedValue: 'accountId',
-                        triggerOnFocus: false,
+                        // triggerOnFocus: false,
                         remote: true,
-                        service: Service.ORGANIZATION.name,
-                        method: Service.ORGANIZATION.methods.queryCorpMember,
+                        service: Service.YANSHOU.name,
+                        method: Service.YANSHOU.methods.queryCorpMember,
                         remoteArgs: { sort: ['id_asc'], page: 1, size: 20 },
                         remoteQueryKey: "name_like",
                         dialog: {
@@ -110,8 +110,8 @@
                                 ]
                             },
                             table: {
-                                service: Service.ORGANIZATION.name,
-                                method: Service.ORGANIZATION.methods.queryCorpMember,
+                                service: Service.YANSHOU.name,
+                                method: Service.YANSHOU.methods.queryCorpMember,
                                 args: {},
                                 radioCol: true,
                                 columns: [
@@ -131,6 +131,7 @@
                             }
                         }
                     },
+                    { type: 'select', label: '是否免检:', name: 'source', selectSourceKey: 'sources' },
                     { type: 'date', pickertype: 'datetimerange', label: '申请验收时间:', startField: 'expectStartTime_gte', endField: 'expectCheckTime_lte', name: 'expectCheckTime', inputWidth: 330 },
                     { type: 'date', pickertype: 'datetimerange', label: '实际验收时间:', startField: 'checkStartTime_gte', endField: 'checkTime_lte', name: 'checkTime', inputWidth: 330 },
 
@@ -138,6 +139,16 @@
                 //搜索select类型下拉列表数据，对应fields的selectSourceKey
                 selectSource: {
                     checkTypeCodes: [],
+                    sources: [
+                        {
+                            text: '是',
+                            value: 4
+                        },
+                        {
+                            text: '否',
+                            value: 1
+                        }
+                    ]
                 },
                 columns:
                 [
@@ -164,7 +175,10 @@
                         },
                         width: '265px'
                     },
-                    { "prop": "createTime", "label": "创建日期", "formatter": this.dateParser }
+                    { "prop": "createTime", "label": "创建日期", "formatter": this.dateParser },
+                    {
+                        "prop": "source", "label": "备注", "formatter": function (val, row) { return row.source == 4 ? '免检' : '' }
+                    }
                 ],
                 commonData: {
                     billStatuList: [
@@ -179,18 +193,18 @@
                         {
                             text: '不合格',
                             value: 3
-                        }],
+                        }]
                 },
                 service: Service.YANSHOU.name,
                 method: Service.YANSHOU.methods.platCheckQueryPage,
-                args: { sort: ['createTime_desc'], search: { checkTypeCode_ne: '8!821!82101!1001', billStatus_in: [0, 1], source: 1 } },
+                args: { sort: ['createTime_desc'], search: { checkTypeCode_ne: '8!821!82101!1001', billStatus_in: [0, 1], source_in: [1, 4] } },
                 editType: 'add',
                 addDialogVisible: false,
                 selectedRows: null,
                 filterData: {
                     checkTypeCode_ne: '8!821!82101!1001',
                     billStatus_in: [0, 1],
-                    source: 1,
+                    source_in: [1, 4],
                 }
             }
         },
@@ -225,7 +239,8 @@
                 //     //search: Object.assign(obj,this.filterData), fields: fields
                 //     search: obj, fields: fields
                 // }
-                this.args = { sort: ['id_desc'], search: Object.assign({}, this.filterData, obj) }
+
+                this.args = { sort: ['createTime_desc'], search: Object.assign({}, this.filterData, obj) }
             },
             dateParser(text) {
                 let dateString;

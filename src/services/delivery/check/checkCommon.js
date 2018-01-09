@@ -50,5 +50,12 @@ export default {
             service: Service.YANSHOU.name,
             args: args
         })
+    },
+    verifyFit(args) {
+        return axios({
+            method: Service.YANSHOU.methods.verifyFit,
+            service: Service.YANSHOU.name,
+            args: args
+        })
     }
 }

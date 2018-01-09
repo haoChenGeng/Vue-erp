@@ -3,22 +3,22 @@
         <el-dialog :title="title" class="pay-dialog" v-model="dialogVisible" @close="btnCancleClick()">
             <el-form v-loading.lock="formLoading" :label-position="labelPosition" :model="formData" :rules="rules" :label-width="formLabelWidth"
                 ref="form" @keyup.enter.native="btnOKClick()">
-                <el-form-item label="项目ID：" prop="sourceProjectId">
+                <el-form-item label="项目ID:" prop="sourceProjectId">
                     <el-input v-model="formData.sourceProjectId" disabled></el-input>
                 </el-form-item>
-                <el-form-item label="业主姓名：" prop="ownerName">
+                <el-form-item label="业主姓名:" prop="ownerName">
                     <el-input v-model="formData.ownerName" disabled></el-input>
                 </el-form-item>
-                <el-form-item label="详细地址：" prop="addressDetail">
+                <el-form-item label="详细地址:" prop="addressDetail">
                     <el-input type="textarea" rows="3" v-model="formData.addressDetail" disabled></el-input>
                 </el-form-item>
-                <el-form-item label="验收节点：" prop="sheduleNodeId">
+                <el-form-item label="验收节点:" prop="sheduleNodeId">
                     <el-select v-model="formData.sheduleNodeId" filterable :allow-create="false" placeholder="请选择验收节点">
                         <el-option v-for="item in projectNodeVOs" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="开工时间" prop="startTime">
+                <el-form-item label="开工时间:" prop="startTime">
                     <el-date-picker v-model="formData.startTime" placeholder="" type="datetime">
                     </el-date-picker>
                 </el-form-item>
@@ -26,7 +26,7 @@
             <el-tabs v-model="activeName" @tab-click="handleClick">
                 <el-tab-pane label="上传图片" name="uploadPic">
                     <div class="list-container">
-                        <el-upload :action="uploadURL" :data="uploadParams" multiple list-type="picture-card" accept=".jpg,.jpeg,.png,.bmp" :file-list="imgList"
+                        <el-upload :action="uploadURL" :data="uploadParams" multiple list-type="picture-card" accept=".jpg,.jpeg,.png,.gif" :file-list="imgList"
                             :on-preview="handlePictureCardPreview" :on-success="handleSuccess" :on-remove="handleRemove" :before-upload="beforeUpload">
                             <i class="el-icon-plus"></i>
                         </el-upload>
@@ -42,6 +42,16 @@
         <el-dialog v-model="picDialogVisible" class="g-w-1000">
             <img width="100%" :src="dialogImageUrl" alt="">
         </el-dialog>
+        <!-- <el-dialog class="insurance-dialog" v-model="insuranceVisible" @close="cycleClick()">
+            <div v-if="fitMessage != ''" class='fitMessage'>
+                <span style="color:orangered;font-size: 16px;">温馨提示：</span>
+                <div class="noteBox" v-html="fitMessage"></div>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="cycleClick()">我要自行购买</el-button>
+                <el-button @click="onLineClick()">使用泰康在线</el-button>
+            </div>
+        </el-dialog> -->
     </div>
 </template>
 <script>
@@ -85,7 +95,9 @@
                 },
                 isLoading: false,
                 projectNodeVOs: [],
-                formLoading: false
+                formLoading: false,
+                //insuranceVisible: false,
+                //fitMessage: '',//温馨提示
             }
         },
         props: {
@@ -129,7 +141,8 @@
                             });
                             this.projectNodeVOs = list;
                             this.formData = Object.assign(this.formData, res.data.result);
-                        } else if (resStatus.includes(res.data.status)) {
+                        }
+                        else if (resStatus.indexOf(res.data.status) != -1) {
                             message = res.data.result == null ? (res.data.message == null ? '系统异常,请稍后再试！' : res.data.message) : res.data.result
                         }
                         else {
@@ -170,6 +183,8 @@
                                 .then((res) => {
                                     let resStatus = [211514, 211502, 211508, 211501, 211500];
                                     let reminder = '';
+                                    //let fitMessage = '';
+                                    //this.fitMessage = fitMessage;
                                     if (res.data.status === 200) {
                                         _this.$message({
                                             type: 'success',
@@ -177,14 +192,21 @@
                                         })
                                         _this.btnCancleClick()
                                         _this.$emit('getTableData')
-                                    } else if (resStatus.includes(res.data.status)) {
+                                    } else if (resStatus.indexOf(res.data.status) != -1) {
                                         if (res.data.result) {
                                             for (let index = 0; index < res.data.result.length; index++) {
                                                 reminder = reminder.concat(index + 1).concat(".").concat(res.data.result[index]);
                                             }
                                         }
                                         reminder = reminder == '' ? (res.data.message == null ? '系统异常,请稍后再试！' : res.data.message) : reminder
-                                    } else {
+                                    }
+                                    // else if (res.data.status === 211519)//泰康保险的条件
+                                    // {
+                                    //     //弹框
+                                    //     fitMessage = '请参照土巴兔推广服务合作合同工地保障条款购买建筑工程意外险，自行购买请联系BD，在线购买建议使用泰康在线。';
+                                    //     this.fitMessage = fitMessage;
+                                    // }
+                                    else {
                                         reminder = '系统异常,请稍后再试！';
                                     }
                                     if (reminder != '') {
@@ -200,8 +222,9 @@
                                             confirmButtonClass: 'is-plain'
                                         });
                                     }
-
-
+                                    // if (fitMessage != '') {
+                                    //     this.insuranceVisible = true;
+                                    // }
                                     _this.isLoading = false;
                                 })
                         }
@@ -235,7 +258,10 @@
                 }
             },
             handleSuccess(response, file, fileList) {
+                let _this = this;
                 if (response.status != 200) {
+                    fileList.pop();
+                    _this.fileList = fileList;
                     this.$msgbox({
                         title: '消息',
                         type: 'error',
@@ -245,7 +271,6 @@
                     });
                     return false;
                 }
-                let _this = this;
                 _this.fileList = fileList;
                 _this.attachRelation[file.uid] = response.result;
                 if (_this.fileList.length > 9) {
@@ -293,15 +318,33 @@
                         return obj;
                     }
                 })
-            }
+            },
+            // cycleClick()//取消
+            // {
+            //     this.insuranceVisible = false
+            // },
+            // onLineClick() {//跳转泰康在线
+            //     var link = "http://ecuat.taikang.com/channel/coop_test/tbt/index.html";
+            //     window.open(link);
+            // }
         }
     }
 
 </script>
 
-<style lang="css" scoped>
+<!-- <style lang="css" scoped>
+    .fitMessage {
+        color: black;
+        text-decoration: none;
+        margin-left: 10px;
+        line-height: 32px;
+        font-size: 14px;
+    }
 
-</style>
+    .noteBox {
+        margin-left: 2em;
+    }
+</style> -->
 <!-- 样式尽量写上边, 必要时写下边 -->
 <style lang="css">
     .pay-dialog .el-dialog {
