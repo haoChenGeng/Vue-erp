@@ -32,10 +32,10 @@ import Cookie from 'js-cookie'
 import CommonApi from 'src/services/commonApi/commonApi.js'
 
 export default {
-    name: 'page-project-list',
+    name: 'page-project-assign-list',
     data() {
         return {
-            detailPath:'/tuchat-sale-manage/page-project-detail',
+            detailPath:'/tuchat-sale-manage/project-assign-detail',
             service: Service.PROJECT.name,
             method: Service.PROJECT.methods.QUERYSHEETBYPAGE,
             args: {
