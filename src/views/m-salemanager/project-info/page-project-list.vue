@@ -176,6 +176,11 @@ export default {
                     label: '项目ID',
                 },
                 {
+                    prop: 'createTime',
+                    label: '发布时间',
+                    formatter: 'dateParser',
+                },
+                {
                     prop: 'cityTownName',
                     label: '区域',
                 },
@@ -210,11 +215,6 @@ export default {
                 {
                     prop: 'qualityControlName',
                     label: '质检',
-                },
-                {
-                    prop: 'createTime',
-                    label: '发布时间',
-                    formatter: 'dateParser',
                 },
                 {
                     prop: 'firstInviteTime',
