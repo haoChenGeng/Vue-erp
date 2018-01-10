@@ -153,6 +153,7 @@
                         let resStatus = [211512, 211514, 211502];
                         //let inspectionStages = ["水电验收", "泥木（中期）验收", "油漆验收"];
                         let message = '';
+                        let completeMessage = '';
                         //let inspectionFlag = false;
                         if (res.data.status === 200) {
                             this.projectNodeVOs = [];
@@ -169,16 +170,20 @@
                             this.projectNodeVOs = list;
                             this.inspectionNodeIds = inspectionsIds;
                             let _this = this
-                            setTimeout(function(){
+                            setTimeout(function () {
                                 _this.formData.sheduleNodeId = list.length > 0 ? list[0].value : "";
-                            },1)
-                           
+                            }, 1)
+
                             this.formData = Object.assign(this.formData, res.data.result)
                             let projectStar = this.formData.projectStar;
                             // if (projectStar != null && 5 == projectStar && inspectionFlag) {
                             //     //动态添加一个el-form-item
                             //     this.isShow = true;
                             // }
+                            if (null == this.projectNodeVOs || list.length <= 0) {
+                                completeMessage = "该项目所有阶段都已申请验收,请在验收管理页查看!";
+                            }
+
                         }
                         else if (resStatus.indexOf(res.data.status) != -1) {
                             message = res.data.result == null ? (res.data.message == null ? '系统异常,请稍后再试！' : res.data.message) : res.data.result
@@ -186,11 +191,21 @@
                         else {
                             message = '系统异常,请稍后再试！';
                         }
+
                         if (message != '') {
                             this.$msgbox({
                                 title: '消息',
                                 type: 'error',
                                 message: message,
+                                confirmButtonText: '知道了',
+                                confirmButtonClass: 'is-plain'
+                            });
+                        }
+                        if (completeMessage != '') {
+                            this.$msgbox({
+                                title: '消息',
+                                type: 'error',
+                                message: completeMessage,
                                 confirmButtonText: '知道了',
                                 confirmButtonClass: 'is-plain'
                             });
