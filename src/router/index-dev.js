@@ -158,6 +158,7 @@ function routerCheckCertificate(_args, jumpUrl) {
 
                 //装修公司id
                 let comid = ( res.data.result.bounds.length >= 1 ? res.data.result.bounds[0].extId : 0 )
+                Cookie.set('t8t-tc-comid', comid, { domain: domain })
                 //获取登录的装修公司信息
 
                 if(comid){

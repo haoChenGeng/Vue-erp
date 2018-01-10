@@ -115,6 +115,7 @@
                                 Cookie.set('t8t-tc-ticket', res.data.result.tickets['tuchat-pc'].value, { domain: domain })
                                 Cookie.set('t8t-tc-uid', res.data.result.user.id, { domain: domain })
                                 Cookie.set('t8t-tc-username', res.data.result.user.name, { domain: domain })
+                                Cookie.set('t8t-tc-comid', comid, { domain: domain })
                                 that.setComName(comid,domain,_=>{
                                     that.onLogin()
                                 })

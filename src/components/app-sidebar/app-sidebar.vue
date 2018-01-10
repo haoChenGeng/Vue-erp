@@ -301,6 +301,7 @@
                     userName: Cookie.get('t8t-tc-username') || '',
                     comName: Cookie.get('t8t-tc-comname')  || '',
                     ticket: Cookie.get('t8t-tc-ticket') || '',
+                    comId: Cookie.get('t8t-tc-comid')  || '',
                 }
 
                for(var item in params){
