@@ -13,7 +13,7 @@
 
         <div class="g-main-container-column">
 
-            <t8t-table
+            <t8t-grid
                 :columns="columns"
                 :service="service"
                 :method="method"
@@ -28,9 +28,9 @@
                                @click="contractButton(scope.row)"
                                type="primary"
                                size="small"
-                               v-html="( [0,1,4].indexOf(scope.row.contractStatus)  > -1 ) ? '发起合同' :( ([2,3].indexOf(scope.row.contractStatus)  > -1) ? '合同详情' : '')"></el-button>
+                               v-html="( [0,1,4].indexOf(scope.row.contractStatus)  > -1 ) ? (!scope.row.contractStatus && scope.row.orderSubStatus && parseInt(scope.row.orderSubStatus) > 8100602 ? '合同详情' :'发起合同') : ( ([2,3].indexOf(scope.row.contractStatus)  > -1) ? '合同详情' : '')"></el-button>
                 </template>
-            </t8t-table>
+            </t8t-grid>
         </div>
         <contract-info
             :projectId="currentProjectId"
@@ -78,7 +78,7 @@
               { "prop": "projectId", "label": "操作" },
               { "prop": "projectAddress", "label": "项目地址",width:250},
               { "prop": "owner", "label": "业主称呼" },
-              { "prop": "contractStatus", "label": "合同状态",width:80,list:'contractStatusFull' },
+              { "prop": "contractStatus", "label": "合同状态",width:80,list:'contractStatusFull',formatter(v,r,e,i){ if(!r.contractStatus && r.orderSubStatus && parseInt(r.orderSubStatus) > 8100602)return '已签';return i.commonData.contractStatusFull.find( item=> item.value===r.contractStatus ).text || '';}},
               { "prop": "decoratePatternName", "label": "装修方式 "  },
               { "prop": "houseStyle", "label": "房屋类型"  },
               { "prop": "contractOffer", "label": "合同金额"  },
@@ -165,14 +165,16 @@
     },
     created () {
     },
-    watch:{
-      $route: function () {
-          this.$refs['t8tTable'].reloadTable()
-      },
+    activated(){
+        this.$refs['t8tTable'].reloadTable()
     },
     methods: {
 
         contractButton: function (row){
+            if(!row.contractStatus && row.orderSubStatus && parseInt(row.orderSubStatus) > 8100602) {
+                this.$message.error("不支持线上查看，请找线下纸质合同信息")
+                return
+            }
 
             if(row.ispower != 1){
                 return this.$message.error('没有权限操作合同')
