@@ -76,8 +76,12 @@ let Services = {
 
             // views.assignPrincipal.assignRecordPage
             LIST_ASSIGN_RECORD: 'nCw7zQlJ0xTWIzzm1bgRXz3xj7_1fgIlvaM5_su0tTBjMTLygd7iLtd',
+            //views.principal.getAssignList
+            GET_MEMBER:'IOJh6wigEGbdSz8kMGDxuXzKy4IYbdwKO_xO7UTHg7o',
+
             //views.principal.getAssignPrincipalList
             GET_ASSIGN_PRINCIPAL_LIST:'x77jc6zPwxkVdqd4f6sYTAg8bkgHHIqKmpt3SGCskN4wVAkeGG3w4SS',
+
 
             //views.assignPrincipal.assignConfig
             ASSIGN_CONFIG:'z284s2jxcbia1ws0upI9L_r9g4bdHIwP7HJyNl8cmj_y5oowzEE',

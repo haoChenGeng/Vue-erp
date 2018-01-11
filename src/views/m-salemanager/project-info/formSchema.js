@@ -237,10 +237,10 @@ export default {
                     prop: "sourceProjectId",
                     label: "项目ID"
                 },
-                {
-                    prop: "bizType",
-                    label: "业务类型"
-                },
+                // {
+                //     prop: "bizType",
+                //     label: "业务类型"
+                // },
                 {
                     prop: "reason",
                     label: "派工原因"
@@ -496,10 +496,10 @@ export default {
                     prop: "sourceProjectId",
                     label: "项目ID"
                 },
-                {
-                    prop: "bizType",
-                    label: "业务类型"
-                },
+                // {
+                //     prop: "bizType",
+                //     label: "业务类型"
+                // },
                 {
                     prop: "reason",
                     label: "派工原因"

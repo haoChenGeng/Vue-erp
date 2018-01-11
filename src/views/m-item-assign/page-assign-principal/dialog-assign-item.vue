@@ -390,7 +390,6 @@
                         //调用派单接口
                         itemAssignServiceApi.assign(args)
                             .then((res => {
-
                                 var msgType = ''
                                 var msg = ''
                                 if (res.data.status === 200) {
@@ -401,7 +400,9 @@
                                         msg = '操作失败！'
                                     }
                                     this.$router.push({path: this.goBackRoute})
-                                } else {
+                                } else if (res.data.status === 200500) {
+                                     this.$msgbox({title: '排期修改状态失败！',type: 'error', message: res.data.result.join('')})
+                                }else {
                                     this.submitting = false
                                     msgType = 'error'
                                     msg = res.data.message

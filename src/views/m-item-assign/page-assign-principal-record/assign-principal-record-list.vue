@@ -44,7 +44,6 @@
                 tableColumns: [
                     {prop: 'rootOrgName', label: '装修公司'},
                     {prop: 'sourceProjectId', label: '项目ID'},
-                    {prop: 'bizType', label: '业务类型'},
                     {prop: 'reason', label: '派工原因'},
                     {prop: 'assignType', label: '派工类型'},
                     {prop: 'principalName', label: '负责人'},
@@ -93,8 +92,8 @@
                     service: itemAssignService.ITEM_ASSIGN.name,
                     method: itemAssignService.ITEM_ASSIGN.methods.EXPORT_ASSIGN_RECORD,
                     args: {search:exportArgs},
-                    headers: '装修公司,项目ID,业务类型,派工原因,派工类型,负责人,单据状态,操作人,操作时间',
-                    sorts: "rootOrgName,sourceProjectId,bizType,reason,assignType,principalName,stateName,assignerName,assignTimeName"
+                    headers: '装修公司,项目ID,派工原因,派工类型,负责人,单据状态,操作人,操作时间',
+                    sorts: "rootOrgName,sourceProjectId,reason,assignType,principalName,stateName,assignerName,assignTimeName"
                 })
             },
             // 调用辅助资料接口

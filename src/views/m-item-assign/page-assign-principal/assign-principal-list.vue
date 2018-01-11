@@ -31,7 +31,7 @@
                 ref="assignForm" label-width="120px">
                 <el-form-item label="下单人员："
                     prop="assignName">
-                    <el-select placeholder="请选择下单人员"
+                    <el-select filterable  placeholder="请选择下单人员"
                         v-model="formData.assignName">
                         <!-- todo: get the dealer -->
                         <el-option v-for="(item,sk) in searchOptions.checkmanList"
@@ -51,7 +51,7 @@
                 <el-form-item label="审核人员："
                     v-if="formData.isCheck"
                     prop="checkMan">
-                    <el-select placeholder="请选择审核人员"
+                    <el-select filterable  placeholder="请选择审核人员"
                         v-model="formData.checkMan">
                         <!-- todo: get the dealer -->
                         <el-option v-for="(item,sk) in searchOptions.checkmanList"
@@ -305,6 +305,7 @@ export default {
             let yid = selectRow.projectId
             projectId = selectRow.projectId
             this.loadPrincipal(yid, _ => {
+                debugger
                 this.formData = {
                     ...{
                         assignName: null,
@@ -330,7 +331,7 @@ export default {
         // 加载接单人信息
         loadPrincipal: function(val, cb) {
             itemAssignApi
-                .getAssignPrincipalList({ projectId: val })
+                .getMember({ projectId: val })
                 .then(res => {
                     let list = []
                     if (res.data.status === 200) {

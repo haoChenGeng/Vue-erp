@@ -141,6 +141,13 @@ export default {
             args: args
         })
     },
+    getMember (args) {
+        return axios({
+            method: Service.ITEM_ASSIGN.methods.GET_MEMBER,
+            service: Service.ITEM_ASSIGN.name,
+            args: args
+        })
+    },
     assign (args) {
         return axios({
             method: Service.ITEM_ASSIGN.methods.ASSIGN,
