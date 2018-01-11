@@ -156,37 +156,7 @@ export default {
             this.$refs[formName].resetFields()
         },
         onLogout() {
-            const cookieArr = [
-                'to8to_auth',
-                'to8to_la',
-                'to8to_nick',
-                'to8to_uid',
-                'to8to_ind',
-                'to8to_styleid',
-                'to8to_username',
-                'to8to_tbdl_login',
-                'to8to_fcm_admin',
-                'to8to_fcm_tid',
-                'to8to_fcm_auth',
-                'to8to_username_t',
-                'to8to_tuxin_uid',
-                'to8to_tuxin_username',
-                'to8to_tuxin_boundid',
-                'to8to_tuxin_rootorgid',
-                't8t-tc-ticket',
-                't8t-tc-uid',
-                't8t-tc-username',
-                't8t-tc-comname',
-            ]
-            cookieArr.forEach(item => {
-                Cookie.remove(item, { domain: '.to8to.com' })
-            })
-            //预留，清除本地的cookie
-            Cookie.remove('t8t-tc-ticket')
-            Cookie.remove('t8t-tc-uid')
-            Cookie.remove('t8t-tc-username')
-            Cookie.remove('t8t-tc-comname')
-            Utils.redirectLoginPage()
+            Utils.logout()
         },
     },
 }

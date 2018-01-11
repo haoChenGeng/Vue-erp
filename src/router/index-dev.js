@@ -103,14 +103,36 @@ router.beforeEach((to, from, next) => {
 
         api.account.checkPermission(args)
             .then((res) => {
-                if (res.data.status === 200 && res.data.result === true) {
-                    next()
-                } else {
+                if (res.data.status === 200) {
+                    if(res.data.result === true){
+                        next()
+                    }else{
+                        next('/forbidden/404?status=2')
+                    }
+
+                }
+
+                //不合法的ticket
+                else if(res.data.status === 605){
+                    //直接登出
+                    Utils.logout(false)
+
+                    //提示被别人挤出
                     next('/forbidden/404?status=1')
+                }
+
+                //权限校验失败，当前用户没有操作某个接口或服务的权限 或者 接口/服务未在访问白名单 或者没有页面访问权限
+                else if(res.data.status === 607 || res.data.status === 602 || res.data.status === 80098){
+                    next('/forbidden/404?status=2')
+                }
+
+                //其他错误
+                else{
+                    next('/forbidden/404?status=4')
                 }
             })
             .catch((err) => {
-                next('/forbidden/404?status=2')
+                next('/forbidden/404?status=4')
             })
     }
 

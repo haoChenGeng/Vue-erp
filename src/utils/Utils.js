@@ -8,6 +8,7 @@
 import Config from 'src/config/server.js'
 import Cookie from 'js-cookie'
 import axios from 'axios'
+import gwStatus from 'src/status/comm/Status.js'
 
 let Utils = {
 
@@ -66,6 +67,56 @@ let Utils = {
     getFullURLById(id) {
         let _url = Config.gatewayAddr + '?file=' + id + '&action=file&uid=' + Cookie.get('t8t-tc-uid') + '&ticket=' + Cookie.get('t8t-tc-ticket')
         return _url
+    },
+
+    /**
+     * 匹配网关返回状态码的错误信息，以更友好的信息展示给用户
+     * @param code 网关返回的错误码
+     * @param defaultMessage 默认信息， 错误码未匹配到错误信息时候使用
+     * @returns {*|string}
+     */
+    getGatewayError(code, defaultMessage){
+        return gwStatus[code] || (defaultMessage || '访问系统出错，请联系工作人员处理。')
+    },
+    //
+    /**
+     * 登出
+     * @param jumpToLogin 是否跳转到登录页， 1 清除cookie并跳转，传false清除cookie但不跳转
+     */
+    logout( jumpToLogin = 1 ) {
+        const cookieArr = [
+            'to8to_auth',
+            'to8to_la',
+            'to8to_nick',
+            'to8to_uid',
+            'to8to_ind',
+            'to8to_styleid',
+            'to8to_username',
+            'to8to_tbdl_login',
+            'to8to_fcm_admin',
+            'to8to_fcm_tid',
+            'to8to_fcm_auth',
+            'to8to_username_t',
+            'to8to_tuxin_uid',
+            'to8to_tuxin_username',
+            'to8to_tuxin_boundid',
+            'to8to_tuxin_rootorgid',
+        ]
+        cookieArr.forEach(item => {
+            Cookie.remove(item, { domain: '.to8to.com' })
+        })
+
+        //预留，清除本地的cookie
+
+        if( jumpToLogin ){
+            Cookie.remove('t8t-tc-ticket', { domain: '.to8to.com' })
+            Cookie.remove('t8t-tc-uid', { domain: '.to8to.com' })
+            Cookie.remove('t8t-tc-username', { domain: '.to8to.com' })
+            Cookie.remove('t8t-tc-comname', { domain: '.to8to.com' })
+            Cookie.remove('t8t-tc-comid', { domain: '.to8to.com' })
+            this.redirectLoginPage()
+        }
+
     }
 }
 

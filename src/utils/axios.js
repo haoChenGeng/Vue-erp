@@ -22,12 +22,33 @@ axios.interceptors.request.use((config) => {
     // code状态码200判断
 axios.interceptors.response.use((res) => {
 
-    // ticket过期处理
-    if (res.data && res.data.status === 605) {
-        Utils.redirectLoginPage()
-    } else if (res.data && res.data.status !== 200 && res.data.message) {
-        res.data.message = res.data.message.split('|||')[0]
+    if(res.data &&  res.data.status !== 200){
+        // ticket过期处理
+        if (res.data.status === 605) {
+
+            // 直接踢出
+            Utils.logout(false)
+        }
+
+        //可控的、有必要让用户知道的错误类型进行弹框提示
+        let status = [
+            601,
+            602,
+            603,
+            604,
+            605,
+            607,
+            619
+        ]
+        if( status.indexOf(res.data.status) > -1 ){
+            let msg = Utils.getGatewayError(res.data.status)
+            Vue.prototype.$message.error(msg)
+            res.data.message = res.data.error = msg
+        }else if(res.data.message){
+            res.data.message = res.data.message.split('|||')[0]
+        }
     }
+
     return res
 }, (error) => {
     console.log('网络异常！')
