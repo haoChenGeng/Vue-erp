@@ -13,7 +13,7 @@
 
         <div class="g-main-container-column">
 
-            <t8t-grid
+            <t8t-table
                 :columns="columns"
                 :service="service"
                 :method="method"
@@ -22,15 +22,20 @@
                 :commonData="commonData"
                 ref="t8tTable"
                 :selectCol="false"
+                @data-loaded="dataLoaded"
+                @row-double-click="jumpToProjectDetail"
             >
+
+                <template scope="scope" slot="sourceProjectId"><span class="hand">{{scope.row.sourceProjectId}}</span></template>
+
                 <template scope="scope" slot="projectId">
                     <el-button v-if="[0,1,2,3,4].indexOf(scope.row.contractStatus) > -1"
-                               @click="contractButton(scope.row)"
+                               @click.stop="contractButton(scope.row)"
                                type="primary"
                                size="small"
-                               v-html="( [0,1,4].indexOf(scope.row.contractStatus)  > -1 ) ? (!scope.row.contractStatus && scope.row.orderSubStatus && parseInt(scope.row.orderSubStatus) > 8100602 ? '合同详情' :'发起合同') : ( ([2,3].indexOf(scope.row.contractStatus)  > -1) ? '合同详情' : '')"></el-button>
+                               v-html="( [0,1,4].indexOf(scope.row.contractStatus)  > -1 ) ? (!scope.row.contractStatus && scope.row.orderSubStatus && parseInt(scope.row.orderSubStatus) >= 8100602 ? '合同详情' :'发起合同') : ( ([2,3].indexOf(scope.row.contractStatus)  > -1) ? '合同详情' : '')"></el-button>
                 </template>
-            </t8t-grid>
+            </t8t-table>
         </div>
         <contract-info
             :projectId="currentProjectId"
@@ -78,7 +83,7 @@
               { "prop": "projectId", "label": "操作" },
               { "prop": "projectAddress", "label": "项目地址",width:250},
               { "prop": "owner", "label": "业主称呼" },
-              { "prop": "contractStatus", "label": "合同状态",width:80,list:'contractStatusFull',formatter(v,r,e,i){ if(!r.contractStatus && r.orderSubStatus && parseInt(r.orderSubStatus) > 8100602)return '已签';return i.commonData.contractStatusFull.find( item=> item.value===r.contractStatus ).text || '';}},
+              { "prop": "contractStatusName", "label": "合同状态",width:80},
               { "prop": "decoratePatternName", "label": "装修方式 "  },
               { "prop": "houseStyle", "label": "房屋类型"  },
               { "prop": "contractOffer", "label": "合同金额"  },
@@ -171,7 +176,7 @@
     methods: {
 
         contractButton: function (row){
-            if(!row.contractStatus && row.orderSubStatus && parseInt(row.orderSubStatus) > 8100602) {
+            if(!row.contractStatus && row.orderSubStatus && parseInt(row.orderSubStatus) >= 8100602) {
                 this.$message.error("不支持线上查看，请找线下纸质合同信息")
                 return
             }
@@ -246,6 +251,29 @@
                 })
         },
 
+        jumpToProjectDetail: function (row){
+            this.$router.push({
+                path:'/tuchat-sale-manage/page-project-detail',
+                query:{
+                    id:row.projectId,
+                    goBackRoute:'/tuchat-sale-manage/contract-designer-list'
+                }
+            })
+        },
+        dataLoaded(dataSource){
+            dataSource.map(item => {
+                let arr = this.commonData.contractStatusFull.filter(function (i){ return i.value == item.contractStatus })
+                this.$set(item,'contractStatusName',(item.contractStatus == 0 && item.orderSubStatus >= 8100602) ? '已签' : ( arr.length ? arr[0].text : '--' ))
+            })
+            return dataSource
+        },
+
     }
   }
 </script>
+<style>
+    .contractDesignerList .hand{
+        cursor: pointer;
+        color: #00a0e9;
+    }
+</style>

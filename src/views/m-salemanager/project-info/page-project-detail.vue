@@ -155,6 +155,11 @@ export default {
     },
     created() {
         this.id = this.$route.query.id
+
+        let goBackRoute = this.$route.query.goBackRoute
+        if(goBackRoute){
+            this.goBackRoute = goBackRoute
+        }
         setTimeout(this.setForm('baseForm'), 2000)
     },
     methods: {
