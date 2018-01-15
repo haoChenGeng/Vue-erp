@@ -850,8 +850,8 @@
                     if ( 100 <= width && width <= 1200 && 100 <= height &&  height <= 1200 ) {
                         resolve(true);
                     } else {
-                        _this.$message.error('图片尺寸错误,请上传100*1200内的图片');
-                        reject(new Error('图片尺寸错误,请上传100*1200内图片'));
+                        _this.$message.error('图片尺寸错误，上传图片尺寸需大于等于100*100且小于等于1200*1200');
+                        reject(new Error('图片尺寸错误，上传图片尺寸需大于等于100*100且小于等于1200*1200'));
                     }
 
 

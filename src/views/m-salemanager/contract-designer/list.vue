@@ -4,6 +4,10 @@
 <template>
     <div class="contractDesignerList">
         <t8t-breadcrumb :originData="breadcrumbData"></t8t-breadcrumb>
+         <el-tabs v-model="activeName">
+            <el-tab-pane v-for="(item,keys) in tabList" :key="keys" :label="item.name" :name="item.symbol"></el-tab-pane>
+        </el-tabs>
+
         <t8t-search
             :fields="fields"
             :selectSource="commonData"
@@ -59,6 +63,12 @@
       components:{contractInfo},
     data () {
       return {
+          activeName:1,
+          tabList:[
+              {name:'待签',symbol:1},
+              {name:'已签',symbol:2},
+
+          ],
           breadcrumbData:[{title:'销售管理'},{title:'设计师签约'}],
           contractInfoShow:false,
           currentProjectId:'',
@@ -67,11 +77,10 @@
               //table用的合同状态
               contractStatusFull:config.contractStatus,
 
-              //搜索用的合同状态
+            //   搜索用的合同状态
               contractStatus:[
                   {text:'未签',value:0},
                   {text:'待签',value:2},
-                  {text:'已签',value:3},
                   {text:'作废',value:4},
                   {text:'终止',value:5}
               ],
@@ -161,26 +170,59 @@
               },
              // {type: 'popup',label: '楼盘地址',name: 'houseAddress'},
               {type: 'select',selectSourceKey:'orderStatus',label: '项目状态',name: 'orderSubStatus'},
-              {type: 'select',selectSourceKey:'contractStatus',label: '合同状态',name: 'type'},
+              {type: 'select',selectSourceKey:'contractStatus',label: '合同状态',name: 'contractStatus'},
           ],
           service:contractDesigner.name,
-          method:contractDesigner.methods.queryPage,
-          args:{uid:+Cookie.get('t8t-tc-uid')}
+          method:contractDesigner.methods.contractQuery,
+          args:{uid:+Cookie.get('t8t-tc-uid'),sort:['firstAssignTime_desc'],type:1}
       }
     },
+    watch:{
+        activeName(val){
+            let statusSearch = {type: 'select',selectSourceKey:'contractStatus',label: '合同状态',name: 'contractStatus'}
+            let local = this.fields.find(item=>item.selectSourceKey == 'contractStatus')
+            if(val == 1){
+                // this.$nextTick(_=>{
+                    if(!local) this.fields.push(statusSearch)
+                // })
+                this.args = {
+                    uid:+Cookie.get('t8t-tc-uid'),
+                    sort:['firstAssignTime_desc'],
+                    type:1
+                }
+            }
+            if(val == 2) {
+                if(local) this.fields.splice(this.fields.indexOf(local), 1)
+                this.args = {
+                    uid:+Cookie.get('t8t-tc-uid'),
+                    sort:['firstAssignTime_desc'],
+                    type:val
+                }
+            }
+            console.log(this.fields,this.args)
+
+            // console.log(val)
+            // console.log(this.fields)
+
+        }
+
+    },
     created () {
+        // sort:firstAssignTime_desc
     },
     activated(){
         this.$refs['t8tTable'].reloadTable()
     },
     methods: {
-
         contractButton: function (row){
+            if(row.orderSubStatus && parseInt(row.orderSubStatus) < 8100303) {
+                this.$message.error("请及时登录商家APP进入量房签到页面上传量房图片")
+                return
+            }
             if(!row.contractStatus && row.orderSubStatus && parseInt(row.orderSubStatus) >= 8100602) {
                 this.$message.error("不支持线上查看，请找线下纸质合同信息")
                 return
             }
-
             if(row.ispower != 1){
                 return this.$message.error('没有权限操作合同')
             }
@@ -215,14 +257,8 @@
         },
         //搜素
         submitSearch(objForm) {
-            let obj = Object.assign({},objForm);
-
-            let argsObj = Object.assign({},this.args)
-            argsObj.search = obj;
-            argsObj.type = objForm.type
-
-            delete argsObj.search.type
-            this.args = argsObj;
+            let search = objForm
+            this.args = {...this.args,...{search:objForm}};
         },
         //获取辅助资料
         getCommonOptions: function(fatherCode,selectName) {

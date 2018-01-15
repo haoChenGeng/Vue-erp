@@ -31,7 +31,11 @@ let Services = {
         sign:"CacNMRxICnOr5qUEFZCeITQeMbVc5m2",
 
         //校验是否可发起合同 views.contract.checkCreate
-        checkCreate:'iz9uyjvW3iwnG3m-xCnPyLzl_urQA2NWveqU_a3'
+        checkCreate:'iz9uyjvW3iwnG3m-xCnPyLzl_urQA2NWveqU_a3',
+
+        //分页列表接口 views.contract.contractQuery
+        contractQuery:"68xw5Tj6jqy9a5pkn_KiBYLuCIK5eVsfUcd60z8oYdW"
+
     }
 }
 
