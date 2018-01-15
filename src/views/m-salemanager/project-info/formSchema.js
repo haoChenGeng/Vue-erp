@@ -1,153 +1,178 @@
 import DateUtils from 'src/utils/DateUtils.js'
 import Service from 'src/services/salemanager/project/Service.js'
 export default {
-    baseForm: [{
-        label: '项目信息',
-        name: 'mainInfo',
-        type: 'form',
-        fields: [
-            {
-                type: 'input',
-                label: '项目ID',
-                disabled: 'disabled',
-                prop: 'sourceProjectId',
-            },
-            {
-                type: 'input',
-                label: '项目地区',
-                disabled: 'disabled',
-                prop: 'cityTownName',
-            },
-            {
-                type: 'input',
-                label: '楼盘',
-                disabled: 'disabled',
-                prop: 'estateName',
-            },
-            {
-                type: 'input',
-                label: '详细地址',
-                disabled: 'disabled',
-                prop: 'houseAddress',
-            },
-            {
-                type: 'input',
-                label: '项目状态',
-                disabled: 'disabled',
-                prop: 'orderSubStatusName',
-            },
-            {
-                type: 'input',
-                label: '家装公装',
-                disabled: 'disabled',
-                prop: 'decorateTypeName',
-            },
-            {
-                type: 'input',
-                label: '整改局改',
-                disabled: 'disabled',
-                prop: 'decorateRangeName',
-            },
-            {
-                type: 'input',
-                label: '装修风格',
-                disabled: 'disabled',
-                prop: 'preferStyleName',
-            },
-            {
-                type: 'input',
-                label: '新旧房',
-                disabled: 'disabled',
-                prop: 'houseStatusName',
-            },
-            {
-                type: 'input',
-                label: '房屋类型',
-                disabled: 'disabled',
-                prop: 'houseTypeName',
-            },
-            {
-                type: 'input',
-                label: '户型',
-                disabled: 'disabled',
-                prop: 'houseStyle',
-            },
-            {
-                type: 'input',
-                label: '套内面积',
-                disabled: 'disabled',
-                prop: 'houseArea',
-            },
-            {
-                type: 'input',
-                label: '房屋结构',
-                disabled: 'disabled',
-                prop: 'houseStructName',
-            }
-        ]
-    },
-    {
-        label: '业主信息',
-        name: 'suppliers',
-        type: 'form',
-        fields: [
-            {
-                type: 'input',
-                label: '业主ID',
-                disabled: 'disabled',
-                prop: 'ownerId',
-            },
-            {
-                type: 'input',
-                label: '业主电话ID',
-                disabled: 'disabled',
-                prop: 'phoneId',
-            },
-            {
-                type: 'input',
-                label: '业主姓名',
-                disabled: 'disabled',
-                prop: 'ownerName',
-            },
-            {
-                type: 'input',
-                label: '业主称呼',
-                disabled: 'disabled',
-                prop: 'appellation',
-            }
-        ]
-    },
-    {
-        label: '跟进记录',
-        name: 'followRecord',
-        type: 'table',
-        showPage: false,
-        fields: [
-            {
-                prop: "feedbackType",
-                label: "反馈类型",
-                list: 'feedbackTypeList'
-            },
-            {
-                prop: "feedbackStageName",
-                label: "反馈节点"
-            },
-            {
-                prop: "createTime",
-                label: "反馈时间",
-                formatter: 'dateParser'
-            },
-            {
-                prop: "feedbackContent",
-                label: "反馈内容"
-            },
-            {
-                prop: "createUserNameAndRole",
-                label: "反馈人"
-
-            }
-        ]
-    }],
+    baseForm: [
+        {
+            label: '项目信息',
+            name: 'mainInfo',
+            type: 'form',
+            fields: [
+                {
+                    type: 'input',
+                    label: '项目ID',
+                    disabled: 'disabled',
+                    prop: 'sourceProjectId',
+                },
+                {
+                    type: 'input',
+                    label: '项目地区',
+                    disabled: 'disabled',
+                    prop: 'cityTownName',
+                },
+                {
+                    type: 'input',
+                    label: '楼盘',
+                    disabled: 'disabled',
+                    prop: 'estateName',
+                },
+                {
+                    type: 'input',
+                    label: '详细地址',
+                    disabled: 'disabled',
+                    prop: 'houseAddress',
+                },
+                {
+                    type: 'input',
+                    label: '项目状态',
+                    disabled: 'disabled',
+                    prop: 'orderSubStatusName',
+                },
+                {
+                    type: 'input',
+                    label: '家装公装',
+                    disabled: 'disabled',
+                    prop: 'decorateTypeName',
+                },
+                {
+                    type: 'input',
+                    label: '整改局改',
+                    disabled: 'disabled',
+                    prop: 'decorateRangeName',
+                },
+                {
+                    type: 'input',
+                    label: '装修风格',
+                    disabled: 'disabled',
+                    prop: 'preferStyleName',
+                },
+                {
+                    type: 'input',
+                    label: '新旧房',
+                    disabled: 'disabled',
+                    prop: 'houseStatusName',
+                },
+                {
+                    type: 'input',
+                    label: '房屋类型',
+                    disabled: 'disabled',
+                    prop: 'houseTypeName',
+                },
+                {
+                    type: 'input',
+                    label: '户型',
+                    disabled: 'disabled',
+                    prop: 'houseStyle',
+                },
+                {
+                    type: 'input',
+                    label: '套内面积',
+                    disabled: 'disabled',
+                    prop: 'houseArea',
+                },
+                {
+                    type: 'input',
+                    label: '房屋结构',
+                    disabled: 'disabled',
+                    prop: 'houseStructName',
+                },
+                {
+                    type: 'input',
+                    label: '预算价位',
+                    disabled: 'disabled',
+                    prop: 'orderPriceName',
+                },
+                {
+                    type: 'input',
+                    label: '半包全包',
+                    disabled: 'disabled',
+                    prop: 'decoratePatternName',
+                },
+                {
+                    type: 'datetime',
+                    label: '预计量房时间',
+                    disabled: 'disabled',
+                    prop: 'planMeasureTime',
+                },
+                {
+                    type: 'textarea',
+                    label: '装修要求',
+                    disabled: 'disabled',
+                    prop: 'remarks',
+                },
+            ],
+        },
+        {
+            label: '业主信息',
+            name: 'suppliers',
+            type: 'form',
+            fields: [
+                {
+                    type: 'input',
+                    label: '业主ID',
+                    disabled: 'disabled',
+                    prop: 'ownerId',
+                },
+                {
+                    type: 'input',
+                    label: '业主电话ID',
+                    disabled: 'disabled',
+                    prop: 'phoneId',
+                },
+                {
+                    type: 'input',
+                    label: '业主姓名',
+                    disabled: 'disabled',
+                    prop: 'ownerName',
+                },
+                {
+                    type: 'input',
+                    label: '业主称呼',
+                    disabled: 'disabled',
+                    prop: 'appellation',
+                },
+            ],
+        },
+        {
+            label: '跟进记录',
+            name: 'followRecord',
+            type: 'table',
+            showPage: false,
+            fields: [
+                {
+                    prop: 'feedbackType',
+                    label: '反馈类型',
+                    list: 'feedbackTypeList',
+                },
+                {
+                    prop: 'feedbackStageName',
+                    label: '反馈节点',
+                },
+                {
+                    prop: 'createTime',
+                    label: '反馈时间',
+                    formatter: 'dateParser',
+                },
+                {
+                    prop: 'feedbackContent',
+                    label: '反馈内容',
+                },
+                {
+                    prop: 'createUserNameAndRole',
+                    label: '反馈人',
+                },
+            ],
+        },
+    ],
     customForm: [
         {
             label: '土巴兔客服反馈信息',
@@ -156,30 +181,28 @@ export default {
             showPage: false,
             fields: [
                 {
-                    prop: "feedbackTypeName",
-                    label: "事件类型"
-
+                    prop: 'feedbackTypeName',
+                    label: '事件类型',
                 },
                 {
-                    prop: "feedbackStageName",
-                    label: "状态"
+                    prop: 'feedbackStageName',
+                    label: '状态',
                 },
                 {
-                    prop: "feedbackContent",
-                    label: "进展内容"
+                    prop: 'feedbackContent',
+                    label: '进展内容',
                 },
                 {
-                    prop: "createTime",
-                    label: "记录时间",
-                    formatter: 'dateParser'
-
+                    prop: 'createTime',
+                    label: '记录时间',
+                    formatter: 'dateParser',
                 },
                 {
-                    prop: "createUserName",
-                    label: "记录人"
-                }
-            ]
-        }
+                    prop: 'createUserName',
+                    label: '记录人',
+                },
+            ],
+        },
     ],
     sellForm: [
         {
@@ -189,18 +212,18 @@ export default {
             showPage: false,
             fields: [
                 {
-                    prop: "roleName",
-                    label: "角色"
+                    prop: 'roleName',
+                    label: '角色',
                 },
                 {
-                    prop: "followPersonName",
-                    label: "跟进人"
+                    prop: 'followPersonName',
+                    label: '跟进人',
                 },
                 {
-                    prop: "phone",
-                    label: "电话"
-                }
-            ]
+                    prop: 'phone',
+                    label: '电话',
+                },
+            ],
         },
         {
             label: '分派装修公司记录',
@@ -209,15 +232,15 @@ export default {
             showPage: false,
             fields: [
                 {
-                    prop: "companyName",
-                    label: "装修公司名称"
+                    prop: 'companyName',
+                    label: '装修公司名称',
                 },
                 {
-                    prop: "createTime",
-                    label: "分派时间",
-                    formatter: 'dateParser'
-                }
-            ]
+                    prop: 'createTime',
+                    label: '分派时间',
+                    formatter: 'dateParser',
+                },
+            ],
         },
         {
             label: '派工记录',
@@ -226,50 +249,49 @@ export default {
             showPage: false,
             fields: [
                 {
-                    prop: "id",
-                    label: "单据ID"
+                    prop: 'id',
+                    label: '单据ID',
                 },
                 {
-                    prop: "rootOrgName",
-                    label: "组织"
+                    prop: 'rootOrgName',
+                    label: '组织',
                 },
                 {
-                    prop: "sourceProjectId",
-                    label: "项目ID"
+                    prop: 'sourceProjectId',
+                    label: '项目ID',
                 },
                 // {
                 //     prop: "bizType",
                 //     label: "业务类型"
                 // },
                 {
-                    prop: "reason",
-                    label: "派工原因"
+                    prop: 'reason',
+                    label: '派工原因',
                 },
                 {
-                    prop: "assignType",
-                    label: "派工类型"
+                    prop: 'assignType',
+                    label: '派工类型',
                 },
                 {
-                    prop: "principalName",
-                    label: "负责人"
+                    prop: 'principalName',
+                    label: '负责人',
                 },
                 {
-                    prop: "state",
-                    label: "单据状态",
-                    list: "recordList"
-
+                    prop: 'state',
+                    label: '单据状态',
+                    list: 'recordList',
                 },
                 {
-                    prop: "assignerName",
-                    label: "操作人"
+                    prop: 'assignerName',
+                    label: '操作人',
                 },
                 {
-                    prop: "assignTime",
-                    label: "操作时间",
-                    formatter: 'dateParser'
-                }
-            ]
-        }
+                    prop: 'assignTime',
+                    label: '操作时间',
+                    formatter: 'dateParser',
+                },
+            ],
+        },
     ],
     inviteForm: [
         {
@@ -279,35 +301,35 @@ export default {
             showPage: false,
             fields: [
                 {
-                    prop: "status",
-                    label: "邀约情况",
-                    list: "appointStatus"
+                    prop: 'status',
+                    label: '邀约情况',
+                    list: 'appointStatus',
                 },
                 {
-                    prop: "appointTime",
-                    label: "预计量房时间",
-                    formatter: 'dateParser'
+                    prop: 'appointTime',
+                    label: '预计量房时间',
+                    formatter: 'dateParser',
                 },
                 {
-                    prop: "nextTime",
-                    label: "下次跟进时间",
-                    formatter: 'dateParser'
+                    prop: 'nextTime',
+                    label: '下次跟进时间',
+                    formatter: 'dateParser',
                 },
                 {
-                    prop: "remark",
-                    label: "邀约反馈"
+                    prop: 'remark',
+                    label: '邀约反馈',
                 },
                 {
-                    prop: "createName",
-                    label: "跟进人"
+                    prop: 'createName',
+                    label: '跟进人',
                 },
                 {
-                    prop: "createTime",
-                    label: "操作时间",
-                    formatter: 'dateParser'
-                }
-            ]
-        }
+                    prop: 'createTime',
+                    label: '操作时间',
+                    formatter: 'dateParser',
+                },
+            ],
+        },
     ],
     measureForm: [
         {
@@ -338,8 +360,8 @@ export default {
                     label: '量房地址',
                     disabled: 'disabled',
                     prop: 'measureAddr',
-                }
-            ]
+                },
+            ],
         },
         {
             label: '打卡记录',
@@ -351,8 +373,8 @@ export default {
                 page: 1,
                 size: 20,
                 search: {
-                    projectId: '@id'
-                }
+                    projectId: '@id',
+                },
             },
             showPage: true,
             fields: [
@@ -363,7 +385,7 @@ export default {
                 {
                     label: '打卡时间',
                     prop: 'punchTime',
-                    formatter: 'dateParser'
+                    formatter: 'dateParser',
                 },
                 {
                     label: '打卡地址',
@@ -372,23 +394,23 @@ export default {
                 {
                     label: '操作人',
                     prop: 'createName',
-                }
-            ]
+                },
+            ],
         },
         {
             label: '房屋细节图',
             name: 'measureImgs',
             prop: 'attachVOS',
-            type: 'picList'
-        }
+            type: 'picList',
+        },
     ],
     contractForm: [
         {
             label: '合同预览',
             name: 'contractView',
             prop: 'pdfUrl',
-            type: 'pdf'
-        }
+            type: 'pdf',
+        },
     ],
     financeForm: [
         {
@@ -407,8 +429,34 @@ export default {
                     label: '扣费状态',
                     disabled: 'disabled',
                     prop: 'iscostName',
-                }
-            ]
+                },
+            ],
+        },
+        {
+            label: '账户信息',
+            name: 'accountInfo',
+            type: 'form',
+            fields: [
+                {
+                    type: 'input',
+                    label: '绑定虚拟卡号',
+                    disabled: 'disabled',
+                    prop: 'card_no',
+                },
+                {
+                    type: 'select',
+                    label: '开户主体',
+                    disabled: 'disabled',
+                    prop: 'subcompany_id',
+                    list: 'subcompanyList',
+                },
+                {
+                    type: 'input',
+                    label: '开户行地址',
+                    disabled: 'disabled',
+                    prop: 'bank_addr',
+                },
+            ],
         },
         {
             label: '托管款信息',
@@ -420,18 +468,18 @@ export default {
                 {
                     label: '款项类型',
                     prop: 'type',
-                    list: 'trusteeInfoList'
+                    list: 'trusteeInfoList',
                 },
                 {
                     label: '缴费状态',
                     prop: 'status',
-                    list: "trusteeStatus"
+                    list: 'trusteeStatus',
                 },
                 {
                     label: '金额',
                     prop: 'money',
-                }
-            ]
+                },
+            ],
         },
         {
             label: '返款信息',
@@ -443,19 +491,19 @@ export default {
                 {
                     label: '款项类型',
                     prop: 'type',
-                    list: 'nodeMoneyInfo'
+                    list: 'nodeMoneyInfo',
                 },
                 {
                     label: '返款状态',
                     prop: 'status',
-                    list: 'nodeMoneyStatus'
+                    list: 'nodeMoneyStatus',
                 },
                 {
                     label: '金额',
                     prop: 'money',
-                }
-            ]
-        }
+                },
+            ],
+        },
     ],
     projectForm: [
         {
@@ -475,8 +523,8 @@ export default {
                 {
                     label: '电话',
                     prop: 'phone',
-                }
-            ]
+                },
+            ],
         },
         {
             label: '派工记录',
@@ -485,350 +533,375 @@ export default {
             showPage: false,
             fields: [
                 {
-                    prop: "id",
-                    label: "单据ID"
+                    prop: 'id',
+                    label: '单据ID',
                 },
                 {
-                    prop: "rootOrgName",
-                    label: "组织"
+                    prop: 'rootOrgName',
+                    label: '组织',
                 },
                 {
-                    prop: "sourceProjectId",
-                    label: "项目ID"
+                    prop: 'sourceProjectId',
+                    label: '项目ID',
                 },
                 // {
                 //     prop: "bizType",
                 //     label: "业务类型"
                 // },
                 {
-                    prop: "reason",
-                    label: "派工原因"
+                    prop: 'reason',
+                    label: '派工原因',
                 },
                 {
-                    prop: "assignType",
-                    label: "派工类型"
+                    prop: 'assignType',
+                    label: '派工类型',
                 },
                 {
-                    prop: "principalName",
-                    label: "负责人"
+                    prop: 'principalName',
+                    label: '负责人',
                 },
                 {
-                    prop: "state",
-                    label: "单据状态",
-                    list: "recordList"
-
+                    prop: 'state',
+                    label: '单据状态',
+                    list: 'recordList',
                 },
                 {
-                    prop: "assignerName",
-                    label: "操作人"
+                    prop: 'assignerName',
+                    label: '操作人',
                 },
                 {
-                    prop: "assignTime",
-                    label: "操作时间",
-                    formatter: 'dateParser'
-                }
-            ]
+                    prop: 'assignTime',
+                    label: '操作时间',
+                    formatter: 'dateParser',
+                },
+            ],
         },
     ],
     platCheckForm: [
         {
             label: '工程验收信息',
-            name: "platCheckList",
+            name: 'platCheckList',
             type: 'table',
             showPage: false,
             fields: [
                 {
-                    prop: "billCode",
-                    label: "验收单号"
+                    prop: 'billCode',
+                    label: '验收单号',
                 },
                 {
-                    prop: "checkTypeName",
-                    label: "验收节点"
+                    prop: 'checkTypeName',
+                    label: '验收节点',
                 },
                 {
-                    prop: "projectManagerName",
-                    label: "工长姓名"
+                    prop: 'projectManagerName',
+                    label: '工长姓名',
                 },
                 {
-                    prop: "ownerName",
-                    label: "业主姓名"
+                    prop: 'ownerName',
+                    label: '业主姓名',
                 },
                 {
-                    prop: "qualityControlName",
-                    label: "质检姓名"
+                    prop: 'qualityControlName',
+                    label: '质检姓名',
                 },
                 {
-                    prop: "billStatus",
-                    label: "单据状态",
-                    list: "billStatusList"
+                    prop: 'billStatus',
+                    label: '单据状态',
+                    list: 'billStatusList',
                 },
                 {
-                    prop: "expectTime",
-                    label: "预约验收时间",
+                    prop: 'expectTime',
+                    label: '预约验收时间',
                 },
                 {
-                    prop: "checkTime",
-                    label: "实际验收时间"
+                    prop: 'checkTime',
+                    label: '实际验收时间',
                 },
                 {
-                    prop: "createTime",
-                    label: "创建日期",
-                    formatter: 'dateParser'
-                }
-            ]
-        }
+                    prop: 'createTime',
+                    label: '创建日期',
+                    formatter: 'dateParser',
+                },
+            ],
+        },
     ],
     goodsDemandForm: [
         {
             label: '辅材下单信息',
-            name: "goodsDemand",
+            name: 'goodsDemand',
             type: 'table',
             showPage: false,
             fields: [
                 {
-                    prop: "orderCode",
-                    label: "要货单编号"
+                    prop: 'orderCode',
+                    label: '要货单编号',
                 },
                 {
-                    prop: "materialTypeName",
-                    label: "材料类型"
+                    prop: 'materialTypeName',
+                    label: '材料类型',
                 },
                 {
-                    prop: "goodsDemandSourceName",
-                    label: "要货来源"
+                    prop: 'goodsDemandSourceName',
+                    label: '要货来源',
                 },
                 // {
                 //     prop: "ownerName",
                 //     label: "要货批次"
                 // },
                 {
-                    prop: "workerName",
-                    label: "工长姓名"
+                    prop: 'workerName',
+                    label: '工长姓名',
                 },
                 {
-                    prop: "ownerName",
-                    label: "业主姓名"
+                    prop: 'ownerName',
+                    label: '业主姓名',
                 },
                 {
-                    prop: "orderStatus",
-                    label: "状态",
-                    list: "orderStatusList"
+                    prop: 'orderStatus',
+                    label: '状态',
+                    list: 'orderStatusList',
                 },
                 {
-                    prop: "createTime",
-                    label: "要货日期",
-                    formatter: 'dateParser'
+                    prop: 'createTime',
+                    label: '要货日期',
+                    formatter: 'dateParser',
                 },
                 {
-                    prop: "goodsDemandTime",
-                    label: "创建时间",
-                    formatter: 'dateParser'
+                    prop: 'goodsDemandTime',
+                    label: '创建时间',
+                    formatter: 'dateParser',
                 },
-            ]
-        }
+            ],
+        },
     ],
-    assignForm: [{
-        label: '项目信息',
-        name: 'mainInfo',
-        type: 'form',
-        fields: [
-            {
-                type: 'input',
-                label: '项目ID',
-                disabled: 'disabled',
-                prop: 'sourceProjectId',
-            },
-            {
-                type: 'input',
-                label: '项目地区',
-                disabled: 'disabled',
-                prop: 'cityTownName',
-            },
-            {
-                type: 'input',
-                label: '楼盘',
-                disabled: 'disabled',
-                prop: 'estateName',
-            },
-            {
-                type: 'input',
-                label: '详细地址',
-                disabled: 'disabled',
-                prop: 'houseAddress',
-            },
-            {
-                type: 'input',
-                label: '项目状态',
-                disabled: 'disabled',
-                prop: 'orderSubStatusName',
-            },
-            {
-                type: 'input',
-                label: '家装公装',
-                disabled: 'disabled',
-                prop: 'decorateTypeName',
-            },
-            {
-                type: 'input',
-                label: '整改局改',
-                disabled: 'disabled',
-                prop: 'decorateRangeName',
-            },
-            {
-                type: 'input',
-                label: '装修风格',
-                disabled: 'disabled',
-                prop: 'preferStyleName',
-            },
-            {
-                type: 'input',
-                label: '新旧房',
-                disabled: 'disabled',
-                prop: 'houseStatusName',
-            },
-            {
-                type: 'input',
-                label: '房屋类型',
-                disabled: 'disabled',
-                prop: 'houseTypeName',
-            },
-            {
-                type: 'input',
-                label: '户型',
-                disabled: 'disabled',
-                prop: 'houseStyle',
-            },
-            {
-                type: 'input',
-                label: '套内面积',
-                disabled: 'disabled',
-                prop: 'houseArea',
-            },
-            {
-                type: 'input',
-                label: '房屋结构',
-                disabled: 'disabled',
-                prop: 'houseStructName',
-            }
-        ]
-    },
-    {
-        label: '业主信息',
-        name: 'suppliers',
-        type: 'form',
-        fields: [
-            {
-                type: 'input',
-                label: '业主ID',
-                disabled: 'disabled',
-                prop: 'ownerId',
-            },
-            {
-                type: 'input',
-                label: '业主电话',
-                disabled: 'disabled',
-                prop: 'phone',
-            },
-            {
-                type: 'input',
-                label: '业主姓名',
-                disabled: 'disabled',
-                prop: 'ownerName',
-            },
-            {
-                type: 'input',
-                label: '业主称呼',
-                disabled: 'disabled',
-                prop: 'appellation',
-            }
-        ]
-    },
-    {
-        label: '跟进记录',
-        name: 'followRecord',
-        type: 'table',
-        showPage: false,
-        fields: [
-            {
-                prop: "feedbackType",
-                label: "反馈类型",
-                list: 'feedbackTypeList'
-            },
-            {
-                prop: "feedbackStageName",
-                label: "反馈节点"
-            },
-            {
-                prop: "createTime",
-                label: "反馈时间",
-                formatter: 'dateParser'
-            },
-            {
-                prop: "feedbackContent",
-                label: "反馈内容"
-            },
-            {
-                prop: "createUserNameAndRole",
-                label: "反馈人"
-
-            }
-        ]
-    }],
+    assignForm: [
+        {
+            label: '项目信息',
+            name: 'mainInfo',
+            type: 'form',
+            fields: [
+                {
+                    type: 'input',
+                    label: '项目ID',
+                    disabled: 'disabled',
+                    prop: 'sourceProjectId',
+                },
+                {
+                    type: 'input',
+                    label: '项目地区',
+                    disabled: 'disabled',
+                    prop: 'cityTownName',
+                },
+                {
+                    type: 'input',
+                    label: '楼盘',
+                    disabled: 'disabled',
+                    prop: 'estateName',
+                },
+                {
+                    type: 'input',
+                    label: '详细地址',
+                    disabled: 'disabled',
+                    prop: 'houseAddress',
+                },
+                {
+                    type: 'input',
+                    label: '项目状态',
+                    disabled: 'disabled',
+                    prop: 'orderSubStatusName',
+                },
+                {
+                    type: 'input',
+                    label: '家装公装',
+                    disabled: 'disabled',
+                    prop: 'decorateTypeName',
+                },
+                {
+                    type: 'input',
+                    label: '整改局改',
+                    disabled: 'disabled',
+                    prop: 'decorateRangeName',
+                },
+                {
+                    type: 'input',
+                    label: '装修风格',
+                    disabled: 'disabled',
+                    prop: 'preferStyleName',
+                },
+                {
+                    type: 'input',
+                    label: '新旧房',
+                    disabled: 'disabled',
+                    prop: 'houseStatusName',
+                },
+                {
+                    type: 'input',
+                    label: '房屋类型',
+                    disabled: 'disabled',
+                    prop: 'houseTypeName',
+                },
+                {
+                    type: 'input',
+                    label: '户型',
+                    disabled: 'disabled',
+                    prop: 'houseStyle',
+                },
+                {
+                    type: 'input',
+                    label: '套内面积',
+                    disabled: 'disabled',
+                    prop: 'houseArea',
+                },
+                {
+                    type: 'input',
+                    label: '房屋结构',
+                    disabled: 'disabled',
+                    prop: 'houseStructName',
+                },
+                {
+                    type: 'input',
+                    label: '预算价位',
+                    disabled: 'disabled',
+                    prop: 'orderPriceName',
+                },
+                {
+                    type: 'input',
+                    label: '半包全包',
+                    disabled: 'disabled',
+                    prop: 'decoratePatternName',
+                },
+                {
+                    type: 'datetime',
+                    label: '预计量房时间',
+                    disabled: 'disabled',
+                    prop: 'planMeasureTime',
+                },
+                {
+                    type: 'textarea',
+                    label: '装修要求',
+                    disabled: 'disabled',
+                    prop: 'remarks',
+                },
+            ],
+        },
+        {
+            label: '业主信息',
+            name: 'suppliers',
+            type: 'form',
+            fields: [
+                {
+                    type: 'input',
+                    label: '业主ID',
+                    disabled: 'disabled',
+                    prop: 'ownerId',
+                },
+                {
+                    type: 'input',
+                    label: '业主电话',
+                    disabled: 'disabled',
+                    prop: 'phone',
+                },
+                {
+                    type: 'input',
+                    label: '业主姓名',
+                    disabled: 'disabled',
+                    prop: 'ownerName',
+                },
+                {
+                    type: 'input',
+                    label: '业主称呼',
+                    disabled: 'disabled',
+                    prop: 'appellation',
+                },
+            ],
+        },
+        {
+            label: '跟进记录',
+            name: 'followRecord',
+            type: 'table',
+            showPage: false,
+            fields: [
+                {
+                    prop: 'feedbackType',
+                    label: '反馈类型',
+                    list: 'feedbackTypeList',
+                },
+                {
+                    prop: 'feedbackStageName',
+                    label: '反馈节点',
+                },
+                {
+                    prop: 'createTime',
+                    label: '反馈时间',
+                    formatter: 'dateParser',
+                },
+                {
+                    prop: 'feedbackContent',
+                    label: '反馈内容',
+                },
+                {
+                    prop: 'createUserNameAndRole',
+                    label: '反馈人',
+                },
+            ],
+        },
+    ],
     options: {
         feedbackTypeList: [
-            { value: 1, text: "项目进度" },
-            { value: 2, text: "一般事件" },
+            { value: 1, text: '项目进度' },
+            { value: 2, text: '一般事件' },
         ],
-        recordList: [
-            { value: 1, text: "生效" },
-            { value: 2, text: "作废" }
-
-        ],
+        recordList: [{ value: 1, text: '生效' }, { value: 2, text: '作废' }],
         appointStatus: [
-            { value: 1, text: "邀约成功" },
-            { value: 2, text: "暂不量房" },
-            { value: 3, text: "死单" }
+            { value: 1, text: '邀约成功' },
+            { value: 2, text: '暂不量房' },
+            { value: 3, text: '死单' },
         ],
         billStatusList: [
-            { value: 0, text: "默认" },
-            { value: 1, text: "待验收" },
-            { value: 2, text: "合格" },
-            { value: 3, text: "不合格" }
+            { value: 0, text: '默认' },
+            { value: 1, text: '待验收' },
+            { value: 2, text: '合格' },
+            { value: 3, text: '不合格' },
         ],
         orderStatusList: [
-            { value: 0, text: "待发货" },
-            { value: 1, text: "已发货" },
-            { value: 2, text: "已收货" },
-            { value: 3, text: "取消" },
-            { value: 4, text: "待审核" },
-            { value: 5, text: "已驳回" },
-            { value: 6, text: "新建（暂存）" },
+            { value: 0, text: '待发货' },
+            { value: 1, text: '已发货' },
+            { value: 2, text: '已收货' },
+            { value: 3, text: '取消' },
+            { value: 4, text: '待审核' },
+            { value: 5, text: '已驳回' },
+            { value: 6, text: '新建（暂存）' },
         ],
         trusteeStatus: [
-            { value: 0, text: "已提交" },
-            { value: 1, text: "已缴" },
-            { value: 2, text: "应缴" },
+            { value: 0, text: '已提交' },
+            { value: 1, text: '已缴' },
+            { value: 2, text: '应缴' },
         ],
         nodeMoneyStatus: [
-            { value: 0, text: "已提交" },
-            { value: 1, text: "已返" },
-            { value: 2, text: "应返" },
+            { value: 0, text: '已提交' },
+            { value: 1, text: '已返' },
+            { value: 2, text: '应返' },
         ],
         trusteeInfoList: [
-            { value: "4", text: "首期" },
-            { value: "5", text: "水电增项款" },
-            { value: "6", text: "二期" },
-            { value: "7", text: "三期" }
+            { value: '4', text: '首期' },
+            { value: '5', text: '水电增项款' },
+            { value: '6', text: '二期' },
+            { value: '7', text: '三期' },
         ],
         nodeMoneyInfo: [
-            { value: "3", text: "泥木" },
-            { value: "2", text: "水电" },
-            { value: "4", text: "油漆" },
-            { value: "5", text: "竣工" },
-            { value: "6", text: "开工" },
-            { value: "7", text: "材料" },
-            { value: "8", text: "水电增项" }
-        ]
-    }
-
+            { value: '3', text: '泥木' },
+            { value: '2', text: '水电' },
+            { value: '4', text: '油漆' },
+            { value: '5', text: '竣工' },
+            { value: '6', text: '开工' },
+            { value: '7', text: '材料' },
+            { value: '8', text: '水电增项' },
+        ],
+        subcompanyList: [
+            { value: 0, text: ' '},
+            { value: 1, text: '深圳市彬讯科技有限公司' },
+            { value: 2, text: '土巴兔（深圳）装饰设计工程有限公司' },
+            { value: 3, text: '土巴兔（深圳）装饰设计工程有限公司' },
+        ],
+    },
 }

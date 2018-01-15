@@ -76,11 +76,18 @@ export default {
                     method: 'decorationOrderFindCrmRecordById',
                     args: { id: '@id' },
                 },
+                {
+                    label: '销售派单信息',
+                    name: 'sellForm',
+                    method: 'decorationOrderFindSaleAssignById',
+                    args: { id: '@id' },
+                },
             ],
             //页签数据源
             dataSource: {
                 assignForm: {},
                 customForm: {},
+                sellForm: {},
             },
             isDialogShow: true,
             goBackRoute: '/tuchat-sale-manage/project-assign-list',
@@ -200,6 +207,29 @@ export default {
                             }
                         }
                         break
+                    case 'sellForm':
+                    if (JSON.stringify(res) != '{}') {
+                        _option = {
+                            tables: {
+                                followPerson: Array.isArray(
+                                    res.followPersonVOS
+                                )
+                                    ? res.followPersonVOS
+                                    : [],
+                                assignCompany: Array.isArray(
+                                    res.assignCompanyVOS
+                                )
+                                    ? res.assignCompanyVOS
+                                    : [],
+                                assignRecord: Array.isArray(
+                                    res.assignRecordVOS
+                                )
+                                    ? res.assignRecordVOS
+                                    : [],
+                            },
+                        }
+                    }
+                    break
                 }
                 this.dataSource[val] = { ..._dataSource, ..._option }
                 if (val === 'assignForm') this.getPhoneInfo()

@@ -157,7 +157,7 @@ export default {
         this.id = this.$route.query.id
 
         let goBackRoute = this.$route.query.goBackRoute
-        if(goBackRoute){
+        if (goBackRoute) {
             this.goBackRoute = goBackRoute
         }
         setTimeout(this.setForm('baseForm'), 2000)
@@ -181,9 +181,7 @@ export default {
             if (_mode.method && projectApi[_mode.method]) {
                 projectApi[_mode.method](_args)
                     .then(res => {
-                        if (
-                            res.data.status != 200
-                        ) {
+                        if (res.data.status != 200) {
                             this.$message.error(`${_mode.label}获取失败`)
                             res.data.result = null
                         }
@@ -269,8 +267,8 @@ export default {
                         break
                     case 'contractForm':
                         _option = {
-                            pdf: Utils.getPreviewURL(res)
-                           }
+                            pdf: Utils.getPreviewURL(res),
+                        }
                         break
                     case 'inviteForm':
                         _option = {
@@ -337,12 +335,15 @@ export default {
                         }
                         break
                     case 'financeForm':
-                        let [_trustee, _nodeMoney, _xiaohao, _iscostName] = [
-                            [],
-                            [],
-                            '',
-                            '',
-                        ]
+                        let [
+                            _trustee,
+                            _nodeMoney,
+                            _xiaohao,
+                            _iscostName,
+                            _bank_addr,
+                            _card_no,
+                            _subcompany_id,
+                        ] = [[], [], '', '', '', '', 0]
                         if (res.trusteeInfo) {
                             Object.keys(res.trusteeInfo).forEach(item => {
                                 _trustee.push({
@@ -365,13 +366,21 @@ export default {
                             _xiaohao = res.reFoundInfo.xiaohao
                             _iscostName = res.reFoundInfo.iscostName
                         }
+                        if (res.virtualCardInfo && res.virtualCardInfo.length > 0) {
+                            _bank_addr = res.virtualCardInfo[0].bank_addr
+                            _card_no = res.virtualCardInfo[0].card_no
+                            _subcompany_id = res.virtualCardInfo[0].subcompany_id
+                        }
                         _option = {
                             tables: {
                                 trusteeInfo: _trustee,
                                 nodeMoneyInfo: _nodeMoney,
                             },
-                            xiaohao:_xiaohao,
-                            iscostName:_iscostName
+                            xiaohao: _xiaohao,
+                            iscostName: _iscostName,
+                            bank_addr: _bank_addr,
+                            card_no: _card_no,
+                            subcompany_id: _subcompany_id,
                         }
                         break
                 }
