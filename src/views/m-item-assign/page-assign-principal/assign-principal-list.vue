@@ -116,15 +116,10 @@ export default {
                 ],
                 checkMan: [
                     {
-                        type: 'number',
-                        trigger: 'change',
-                        validator: (rule, value, callback, source, options) => {
-                            if (value ==undefined || value == '') {
-                                callback(false)
-                            }
-                            callback()
-                        },
+                        required: true,
                         message: '请选择审核员',
+                        trigger: 'change',
+                        type: 'number'
                     },
                 ],
             },
@@ -249,6 +244,20 @@ export default {
                 if (isPass) {
                     if (!this.formData.isCheck){
                         this.formData.checkMan = null;
+                    }
+                    var msgType = ''
+                    var msg = ''
+                    if (this.formData.assignName === 0) {
+                        msgType = 'error'
+                        msg = '温馨提示：该下单员的账号数据异常，请在“公司管理”->“人员管理”页面删除该账号，重新创建账号即可派单！'
+                        this.showMsg(msgType, msg)
+                        return
+                    }
+                     if (this.formData.checkMan === 0) {
+                        msgType = 'error'
+                        msg = '温馨提示：该审核员的账号数据异常，请在“公司管理”->“人员管理”页面删除该账号，重新创建账号即可派单！'
+                        this.showMsg(msgType, msg)
+                        return
                     }
                     let args = {
                         projectId: projectId,

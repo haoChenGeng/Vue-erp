@@ -134,8 +134,11 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="工长："  class="form-item-container" prop="name">
+                <el-form-item label="工长姓名："  class="form-item-container" prop="name">
                     <el-input v-model="assignComfirms.name" :readonly="true"></el-input>
+                </el-form-item>
+                 <el-form-item label="工长账号："  class="form-item-container" prop="id">
+                    <el-input v-model="assignComfirms.id" :readonly="true"></el-input>
                 </el-form-item>
                 <el-form-item label="电话："  class="form-item-container"  prop="phone">
                     <el-input v-model="assignComfirms.phone" :readonly="true"></el-input>
@@ -378,6 +381,14 @@
             btnOKClick() {
                 this.$refs["assignComfirm"].validate(isPass => {
                     if(isPass) {
+                        var msgType = ''
+                        var msg = ''
+                        if (this.assignComfirms.id === 0) {
+                                msgType = 'error'
+                                msg = '温馨提示：该账号数据异常，请在“公司管理”->“人员管理”页面删除该账号，重新创建账号即可派单！'
+                                this.showMsg(msgType, msg)
+                                return
+                        }
                         this.submitting = true
                         var args= {
                             'assignPrincipal': {
@@ -389,9 +400,7 @@
                         }
                         //调用派单接口
                         itemAssignServiceApi.assign(args)
-                            .then((res => {
-                                var msgType = ''
-                                var msg = ''
+                            .then((res =>{
                                 if (res.data.status === 200) {
                                     msgType = 'success'
                                     if (res.data.result > 0) {
@@ -401,7 +410,7 @@
                                     }
                                     this.$router.push({path: this.goBackRoute})
                                 } else if (res.data.status === 200500) {
-                                     this.$msgbox({title: '排期修改状态失败！',type: 'error', message: res.data.result.join('')})
+                                     this.$msgbox({title: '修改状态失败！',type: 'error', message: res.data.result.join('')})
                                 }else {
                                     this.submitting = false
                                     msgType = 'error'
