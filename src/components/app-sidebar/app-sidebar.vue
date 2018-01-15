@@ -45,7 +45,7 @@
                 <!-- 第1层非子节点 -->
                 <el-submenu
                     v-for="item1 in sidebarData"
-                    v-if="item1.items"
+                    v-if="item1.items && removeMenuCodes.indexOf(item1.code) == -1"
                     :index="item1.index"
                     class="sidebar-bb"
                 >
@@ -58,7 +58,7 @@
                         <!-- 第2层非子节点 -->
                         <el-submenu
                             v-for="item2 in item1.items"
-                            v-if="item2.items"
+                            v-if="item2.items && removeMenuCodes.indexOf(item2.code) == -1"
                             :index="item2.index"
                             class="ani-menu sidebar23"
                         >
@@ -71,7 +71,7 @@
                                 <!-- 第3层非子节点 -->
                                 <el-submenu
                                     v-for="item3 in item2.items"
-                                    v-if="item3.items"
+                                    v-if="item3.items && removeMenuCodes.indexOf(item3.code) == -1"
                                     :index="item3.index"
                                     class="ani-menu sidebar23"
                                 >
@@ -84,7 +84,7 @@
                                         <!-- 第4层非子节点 -->
                                         <el-submenu
                                             v-for="item4 in item3.items"
-                                            v-if="item4.items"
+                                            v-if="item4.items && removeMenuCodes.indexOf(item4.code) == -1"
                                             :index="item4.index"
                                             class="ani-menu sidebar23"
                                         >
@@ -97,7 +97,7 @@
                                                 <!-- 第5层非子节点 -->
                                                 <el-submenu
                                                     v-for="item5 in item4.items"
-                                                    v-if="item5.items"
+                                                    v-if="item5.items && removeMenuCodes.indexOf(item5.code) == -1"
                                                     :index="item5.index"
                                                     class="ani-menu sidebar23"
                                                 >
@@ -112,7 +112,7 @@
                                                 <!-- 第5层子节点 -->
                                                 <el-menu-item
                                                     v-for="item5 in item4.items"
-                                                    v-if="!item5.items"
+                                                    v-if="!item5.items && removeMenuCodes.indexOf(item5.code) == -1"
                                                     :index="getPath(item5)"
                                                     class="sidebar-item"
                                                 >
@@ -124,7 +124,7 @@
                                         <!-- 第4层子节点 -->
                                         <el-menu-item
                                             v-for="item4 in item3.items"
-                                            v-if="!item4.items"
+                                            v-if="!item4.items && removeMenuCodes.indexOf(item4.code) == -1"
                                             :index="getPath(item4)"
                                             class="sidebar-item"
                                         >
@@ -136,7 +136,7 @@
                                 <!-- 第3层子节点 -->
                                 <el-menu-item
                                     v-for="item3 in item2.items"
-                                    v-if="!item3.items"
+                                    v-if="!item3.items && removeMenuCodes.indexOf(item3.code) == -1"
                                     :index="getPath(item3)"
                                     class="sidebar-item"
                                 >
@@ -148,7 +148,7 @@
                         <!-- 第2层子节点 -->
                         <el-menu-item
                             v-for="item2 in item1.items"
-                            v-if="!item2.items"
+                            v-if="!item2.items && removeMenuCodes.indexOf(item2.code) == -1"
                             :index="getPath(item2)"
                             class="sidebar-item"
                         >
@@ -160,7 +160,7 @@
                 <!-- 第1层子节点 -->
                 <el-menu-item
                     v-for="item1 in sidebarData"
-                    v-if="!item1.items"
+                    v-if="!item1.items && removeMenuCodes.indexOf(item1.code) == -1"
                     :index="getPath(item1)"
                     class="sidebar-item"
                 >
@@ -186,6 +186,7 @@
     import img10 from './img/icon-side10.png'
     import Cookie from 'js-cookie'
     import api from 'src/utils/api.js'
+    import http from 'src/utils/http.js'
 
     export default {
 
@@ -201,7 +202,8 @@
         data() {
             return {
                 sidebarData: [],
-                defaultActive: ''
+                defaultActive: '',
+                removeMenuCodes:[] //需要移除的菜单
             }
         },
         created() {
@@ -236,7 +238,18 @@
                             }
                         }
 
-                        this.sidebarData = temp
+                        //不需要展示的菜单。目前菜单是基于角色控制的， 不能满足业务更细化的配置。临时通过过滤数据实现控制
+                        let removeMenu  = []
+                        this.getRemoveMenuCodes(Cookie.get('t8t-tc-comid')).then((removeMenu) => {
+                           /* temp = temp.filter(function (item) {
+                                return removeMenu.indexOf(item.code) == -1
+                            })*/
+                            this.removeMenuCodes = removeMenu
+                            this.sidebarData = temp
+                        }).catch(e => {
+
+                        })
+
                         // 根据路由初始化展开路径
                         this.$nextTick(function () {
                             this.setDefaultActive('#' + this.$route.path)
@@ -309,6 +322,35 @@
                 }
 
                return path
+            },
+
+            getRemoveMenuCodes(comId){
+               let codes = []
+               return new Promise(function (resolve,reject){
+                   if(comId){
+                       //装修公司下单配置校验, 决定是否开放‘批量采购下单功能’
+                        http.fetch(
+                            'pim/demandConfigCompanyCanOrder',
+                            {
+                                companyId: comId
+                            }
+                        ).then(function (res) {
+                            //1 可以下单 2 不可以下单 3 还未配置
+                            if( res.data.status == 200 ){
+                                //不可以下单和未配置都不允许
+                                if( res.data.result != 1 ){
+                                    codes.push('DSP002003002');//'批量采购下单'功能
+                                }
+                                resolve(codes)
+                            }
+                       }).catch(function (e){
+                           reject()
+                        })
+                   }else{
+                       reject()
+                   }
+               })
+
             }
         }
     }
