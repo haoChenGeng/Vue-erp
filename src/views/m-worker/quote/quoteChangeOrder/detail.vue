@@ -104,16 +104,12 @@
 </template>
 <script>
     import download from 'src/utils/download.js'
-    import Server from 'src/config/server.js'
     import Utils from 'src/utils/Utils.js'
     import config from 'src/views/m-worker/quote/quoteChangeOrder/config.js'
-    import service from 'src/services/worker/quoteChangeOrder/Service.js'
     import methods from 'src/services/worker/quoteChangeOrder/methods.js'
-    import workFlowMethods from 'src/services/procenter/workflow.js'
     import apiCommon from 'src/services/commonApi/commonApi.js'
     import T8tAudit from 'src/components/t8t-audit/t8t-audit.vue'
     import T8tStepPage from 'src/components/t8t-steps/t8t-step-page.vue'
-    import printPDFUtils from 'src/utils/printPDF.js'
     import Cookie from 'js-cookie'
     export default {
         components: {T8tAudit,T8tStepPage},
@@ -165,7 +161,7 @@
                 formFields: [
                     {
                         prop: 'sourceProjectId',
-                        label: '原项目ID',
+                        label: '项目ID',
                         type: 'input',
                         disabled:true
                     },
@@ -229,8 +225,13 @@
             //提交水电增项
             submit: function (){
                 let _this = this
-//                debugger
-                if(null == this.detailInfo.filename || '' == _this.detailInfo.filename || 'null' == _this.detailInfo.filename) {
+               debugger
+               /** 项目金额为0的时候允许不传图片
+                */
+               if (0 ==  _this.detailItems[0].lbfy && (null == _this.detailInfo.filename || 'null' == _this.detailInfo.filename || '' == _this.detailInfo.filename)) {
+                   _this.detailInfo.filename = "#"
+               }
+                if(null == _this.detailInfo.filename || '' == _this.detailInfo.filename || 'null' == _this.detailInfo.filename) {
                     return this.$message.error('请先上传图片')
                 }
 
@@ -314,7 +315,7 @@
                     //   debugger
 
                       //获取路径
-                      if("null" == orderResult.filename || '' == orderResult.filename) {
+                      if("null" == orderResult.filename || '' == orderResult.filename || '#' == orderResult.filename) {
                          this.imageUrl = '';
 
                       } else {

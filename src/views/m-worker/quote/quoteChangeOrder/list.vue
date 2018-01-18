@@ -92,7 +92,6 @@
                 ],
                 formSelectSource: {
                     'orderSubStatuses': [],
-                    'organizes': [],
                     'statusConfirms': [
                         //0.待确认；1.已确认: 2.装修公司申请：3.业主驳回
                         { value: 0, text: '待确认' },
@@ -199,18 +198,18 @@
                 }
                 let selection = selections[0]
                 if(10 !== selection.projectStar)  {
-                    return this.$message.error('此项目无需提交水电增项')
-                }
-                if("8100703" !== selection.orderSubStatus) {
-                    return this.$message.error('水电验收成功状态的项目可添加水电增项')
-                }
-                // debugger
-                if ([0,3].indexOf(selection.statusConfirm) < 0) {
-                    return this.$message.error('水电增项状态为待确认、业主驳回可添加水电增项')
+                    return this.$message.error('该项目不可创建增项，不需要创建水电增项')
                 }
                 if (0 === selection.applyAble) {
-                    return this.$message.error('此项目无需提交水电增项')
+                    return this.$message.error('该项目不可创建增项，不需要创建水电增项')
                 }
+                if ([0,3].indexOf(selection.statusConfirm) < 0) {
+                    return this.$message.error('水电增项状态为待确认、业主驳回可创建水电增项')
+                }
+                if("8100703" !== selection.orderSubStatus) {
+                    return this.$message.error('仅水电验收成功项目状态的项目，才可以提交水电增项')
+                }
+                // debugger
                 this.$TCS.addTag('red_11732_018003010003')
                 let query = {'projectId': selection.projectId}
 
@@ -297,20 +296,6 @@
         },
         created(){
             this.columns = this.quoteColumns
-            //动态获取形态为分公司、门店的组织
-            storages.getAllStore().then((res) => {
-                let list = []
-                if (res.data.status === 200) {
-                    res.data.result.rows.forEach((item) => {
-                        list.push({
-                            value: item.id,
-                            text: item.name
-                        })
-                    })
-
-                    this.formSelectSource.organizes = list
-                }
-            })
             //获取装修公司项目主状态的辅助资料
 //            debugger
             commonApi.queryChildrenByWholeCode("8!810", 3).then((res) => {

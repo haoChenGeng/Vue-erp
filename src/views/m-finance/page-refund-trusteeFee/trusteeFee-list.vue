@@ -37,7 +37,7 @@
             </el-checkbox-group>
 
             <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="submitForm('checkList')">提交</el-button>
+                <el-button type="primary" :disabled="submitAble" @click="submitForm('checkList')">提交</el-button>
                 <el-button @click="resetForm('checkList')">取消</el-button>
             </span>
         </el-dialog>
@@ -87,58 +87,16 @@
                 columns: [
                     {"prop": "sourceProjectId", "label": "项目ID"},
                     {"prop": "applyAble", "label": "操作", "width": "100"},
-                    {"prop": "checkTypeName", "label": "验收类型"},
                     {"prop": "houseAddress", "label": "项目地址"},
                     {"prop": "appellation", "label": "业主称呼"},
-                    {"prop": "checkTypeName", "label": "返款节点"},
-                    {"prop": "projectManagerName", "label": "项目经理"},
+                    {"prop": "cPrice", "label": "合同金额"},
+                    /**
+                    {"prop": "appellation", "label": "返款状态"},
+                    {"prop": "appellation", "label": "倒计时"},
+                    */
+                    {"prop": "comment", "label": "备注"},
+                    {"prop": "checkTypeName", "label": "验收类型"},
                     {"prop": "checkStatus", "label": "验收结果", "list": "checkStatus"},
-                    {
-                        "prop": "expectCheckTime", "label": "申请验收时间",
-                        formatter: function (v, r) {
-                            let expectTimeStr = "";
-                            if (!r.expectStartTime) {
-                                expectTimeStr = ""
-                            } else if (0 == r.expectStartTime) {
-                                expectTimeStr += ""
-                            } else {
-                                let date = new Date(r.expectStartTime * 1000)
-                                expectTimeStr += DateUtils(date, 'yyyy-mm-dd HH:MM:ss');
-                            }
-                            expectTimeStr += "<br/>"
-                            if (!r.expectCheckTime) {
-                                expectTimeStr = ""
-                            } else if (0 == r.expectCheckTime) {
-                            } else {
-                                let date2 = new Date(r.expectCheckTime * 1000)
-                                expectTimeStr += DateUtils(date2, 'yyyy-mm-dd HH:MM:ss');
-                            }
-                            return expectTimeStr
-                        }
-                    },
-                    {
-                        "prop": "checkTime", "label": "实际验收时间",
-                        formatter: function (v, r) {
-                            let expectTimeStr = "";
-                            if (!r.checkStartTime) {
-                                expectTimeStr = ""
-                            } else if (0 == r.checkStartTime) {
-                                expectTimeStr += ""
-                            } else {
-                                let date = new Date(r.checkStartTime * 1000)
-                                expectTimeStr += DateUtils(date, 'yyyy-mm-dd HH:MM:ss');
-                            }
-                            expectTimeStr += "<br/>"
-                            if (!r.checkTime) {
-                                expectTimeStr = ""
-                            } else if (0 == r.checkTime) {
-                            } else {
-                                let date2 = new Date(r.checkTime * 1000)
-                                expectTimeStr +=  DateUtils(date2, 'yyyy-mm-dd HH:MM:ss');
-                            }
-                            return expectTimeStr
-                        }
-                    }
                 ],
                 service: Service.REFUND_MANAGE_CONFIG.name,
                 method: Service.REFUND_MANAGE_CONFIG.methods.TRUSTEE_FEE_REFUND,
@@ -152,6 +110,7 @@
                     accountId: +Cookie.get('t8t-tc-uid')
                 },
                 trusteeFees: [],
+                submitAble:false, //是否可以提交标志
                 checkList: [],
                 checkConstant: [0, 1, 2],
                 checks: ['默认', '合格', '不合格'],
@@ -185,7 +144,9 @@
                     let searchList = [];
                     let rows = res.data.result;
                     for (let i in rows) {
-                        searchList.push({text: rows[i]['propertyName'], value: rows[i]['propertyCode']});
+                        if (rows[i]['propertyCode'] > '81005') {
+                            searchList.push({text: rows[i]['propertyName'], value: rows[i]['propertyCode']});
+                        }
                     }
                     this.selectSource.orderMainStatus = searchList;
                 }
@@ -220,6 +181,7 @@
                     if (res.data.status == 200) {
                         _this.dialogFormVisible = true
                         _this.trusteeFees = res.data.result
+                        this.getSubmitAble();
 
                     } else {
                         _this.$msgbox({
@@ -279,6 +241,18 @@
             },
             handleCheckedCitiesChange (value) {
                 let checkedCount = value.length;
+            },
+            getSubmitAble() {
+                debugger
+                let _submitAble = true;
+                if(null != this.trusteeFees || 0 < this.trusteeFees.size) {
+                    this.trusteeFees.forEach(element => {
+                        if (1 == element.enable) {
+                            _submitAble = false;
+                        }
+                    });
+                }
+                this.submitAble = _submitAble;
             }
         }
     }
