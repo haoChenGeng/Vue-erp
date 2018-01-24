@@ -8,7 +8,6 @@
 import Config from 'src/config/server.js'
 import Cookie from 'js-cookie'
 import axios from 'axios'
-import gwStatus from 'src/status/comm/Status.js'
 
 let Utils = {
 
@@ -69,16 +68,6 @@ let Utils = {
         return _url
     },
 
-    /**
-     * 匹配网关返回状态码的错误信息，以更友好的信息展示给用户
-     * @param code 网关返回的错误码
-     * @param defaultMessage 默认信息， 错误码未匹配到错误信息时候使用
-     * @returns {*|string}
-     */
-    getGatewayError(code, defaultMessage){
-        return gwStatus[code] || (defaultMessage || '访问系统出错，请联系工作人员处理。')
-    },
-    //
     /**
      * 登出
      * @param jumpToLogin 是否跳转到登录页， 1 清除cookie并跳转，传false清除cookie但不跳转
