@@ -123,8 +123,8 @@
                             }
                         }
                     },
-                    { type: 'date', pickertype: 'datetimerange', label: '开工时间:', startField: 'checkTime_gte', endField: 'checkTime_lte', name: 'checkTime', inputWidth: 330 },
-
+                    { type: 'date', label: '开工时间自', name: 'checkTime_gte' },
+                    { type: 'date', label: '开工时间至', name: 'checkTime_lte' },
                 ],
                 //搜索select类型下拉列表数据，对应fields的selectSourceKey
                 selectSource: {
@@ -133,11 +133,12 @@
                 columns:
                 [
                     { "prop": "sourceProjectId", "label": "项目ID", "width": 150 },
+                    { "prop": "projectManagerName", "label": "工长姓名", "width": 200 },
                     { "prop": "ownerName", "label": "业主姓名", "width": 200 },
                     { "prop": "addressDetail", "label": "详细地址", "width": 450, align: "left" },
-                    { "prop": "projectManagerName", "label": "工长姓名", "width": 200 },
                     { "prop": "orderSubStatusName", "label": "项目状态", "width": 200 },
-                    { "prop": "checkTime", "label": "开工时间", "formatter": "dateParser" },
+                    { "prop": "realSignedTime", "label": "签约时间", "formatter": "dateParserDate" },
+                    { "prop": "checkTime", "label": "开工时间", "formatter": "dateParserDate" },
                     { "prop": "createTime", "label": "创建时间", "formatter": "dateParser" },
                 ],
                 commonData: {
@@ -171,6 +172,16 @@
                     dateString = ""
                 } else {
                     dateString = DateUtils(objDate, 'yyyy-mm-dd HH:MM:ss')
+                }
+                return dateString
+            },
+            dateParserDate(text) {
+                let dateString;
+                let objDate = new Date(text * 1000);
+                if (text === 0 || text === null) {
+                    dateString = ""
+                } else {
+                    dateString = DateUtils(objDate, 'yyyy-mm-dd')
                 }
                 return dateString
             }

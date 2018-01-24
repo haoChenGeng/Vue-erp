@@ -15,13 +15,27 @@
                 <el-form-item label="验收节点：" prop="nodeTypeName">
                     <el-input v-model="formData.nodeTypeName" disabled></el-input>
                 </el-form-item>
-                <el-form-item label="申请开始时间：" prop="expectStartTime">
-                    <el-date-picker v-model="formData.expectStartTime" placeholder="" type="datetime">
+                <!-- <el-form-item label="申请开始时间：" prop="expectStartTime">
+                    <el-date-picker v-model="formData.expectStartTime" placeholder="" type="datetime" :picker-options="pickerOptions0">
                     </el-date-picker>
                 </el-form-item>
                 <el-form-item label="申请结束时间：" prop="expectCheckTime">
-                    <el-date-picker v-model="formData.expectCheckTime" placeholder="" type="datetime">
+                    <el-date-picker v-model="formData.expectCheckTime" placeholder="" type="datetime" :picker-options="pickerOptions0">
                     </el-date-picker>
+                </el-form-item> -->
+                <el-form-item label="验收日期:" prop="expectStartTime">
+                    <el-date-picker v-model="formData.expectStartTime" placeholder="" type="date" :picker-options="pickerOptions0">
+                    </el-date-picker>
+                </el-form-item>
+                <!-- <el-form-item v-if="isInspection==false" label="验收时间:" prop="expectCheckTime">
+                        <el-date-picker v-model="formData.expectCheckTime" placeholder="" type="datetime" :picker-options="pickerOptions0">
+                        </el-date-picker>
+                    </el-form-item> -->
+                <el-form-item label="验收时间:" prop="time">
+                    <el-select v-model="formData.time" filterable :allow-create="false" placeholder="请选择验收时间">
+                        <el-option v-for="item in times" :label="item.label" :value="item.value">
+                        </el-option>
+                    </el-select>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -42,8 +56,8 @@
                 if (!value) {
                     return callback(new Error('请选择申请结束时间'));
                 }
-                if (this.formData.expectStartTime && +this.formData.expectStartTime > +this.formData.expectCheckTime) {
-                    return callback(new Error('结束时间必须大于等于开始时间'));
+                if (this.formData.expectStartTime && +this.formData.expectStartTime >= +this.formData.expectCheckTime) {
+                    return callback(new Error('结束时间必须大于开始时间'));
                 }
                 callback();
             }
@@ -53,10 +67,13 @@
                 dialogVisible: true,
                 rules: {
                     expectStartTime: [
-                        { type: 'date', required: true, message: "请选择申请开始时间", trigger: 'change' },
+                        { type: 'date', required: true, message: "请选择验收日期", trigger: 'change' },
                     ],
-                    expectCheckTime: [
-                        { type: 'date', required: true, trigger: 'change', validator: validateExpectCheckTime },
+                    // expectCheckTime: [
+                    //     { type: 'date', required: true, trigger: 'change', validator: validateExpectCheckTime },
+                    // ],
+                    time: [
+                        { type: 'number', required: true, message: "请选择验收时间", trigger: 'change' },
                     ],
                 },
                 //表单
@@ -68,11 +85,24 @@
                     addressDetail: '',
                     sheduleNodeId: null,
                     nodeTypeName: '',
-                    expectStartTime: '',
-                    expectCheckTime: ''
+                    // expectStartTime: new Date(new Date(new Date().toLocaleDateString()).getTime() + 24 * 60 * 60 * 1000),
+                    // expectCheckTime: new Date(new Date(new Date().toLocaleDateString()).getTime() + 24 * 60 * 60 * 1000),
+                    expectStartTime: null,
+                    expectCheckTime: null,
+                    time: null,
                 },
                 isLoading: false,
                 formLoading: false,
+                pickerOptions0: {
+                    disabledDate(time) {
+                        return time.getTime() < Date.now();
+                    }
+                },
+                times: [
+                    { label: "9:00-12:00", value: 1 },
+                    { label: "13:00-15:00", value: 2 },
+                    { label: "15:00-17:00", value: 3 },
+                ],
             }
         },
         props: {
@@ -134,8 +164,10 @@
                             that.isLoading = true;
                             let platCheckAgainCreateDTO = {
                                 id: that.formData.id,
-                                expectStartTime: +Date.parse(that.formData.expectStartTime).toString().substr(0, 10),
-                                expectCheckTime: +Date.parse(that.formData.expectCheckTime).toString().substr(0, 10),
+                                // expectStartTime: +Date.parse(that.formData.expectStartTime).toString().substr(0, 10),
+                                // expectCheckTime: +Date.parse(that.formData.expectCheckTime).toString().substr(0, 10),
+                                expectStartTime: this.dateTransfer(this.formData.expectStartTime, this.formData.time, 1),
+                                expectCheckTime: this.dateTransfer(this.formData.expectStartTime, this.formData.time, 2),
                                 updateUser: +Cookie.get('t8t-tc-uid'),
                             }
                             CheckCommon.againCreate({ againCheck: platCheckAgainCreateDTO })
@@ -177,7 +209,24 @@
                 this.$refs['form'].resetFields()
                 this.dialogVisible = false
                 this.$emit('close')
-            }
+            },
+            dateTransfer(expectStartTime, time, optType) {
+                if (1 == optType && 1 == time) {
+                    expectStartTime.setHours(9);
+                } else if (1 == optType && 2 == time) {
+                    expectStartTime.setHours(13);
+                } else if (1 == optType && 3 == time) {
+                    expectStartTime.setHours(15);
+                } else if (2 == optType && 1 == time) {
+                    expectStartTime.setHours(12);
+                } else if (2 == optType && 2 == time) {
+                    expectStartTime.setHours(15);
+                } else if (2 == optType && 3 == time) {
+                    expectStartTime.setHours(17);
+                }
+
+                return (+Date.parse(expectStartTime).toString().substr(0, 10))
+            },
         }
     }
 

@@ -10,21 +10,27 @@
                     <el-input v-model="formData.ownerName" disabled></el-input>
                 </el-form-item>
                 <el-form-item label="详细地址:" prop="addressDetail">
-                    <el-input type="textarea" rows="3" v-model="formData.addressDetail" disabled></el-input>
+                    <el-input type="textarea" rows="2" v-model="formData.addressDetail" disabled></el-input>
                 </el-form-item>
-                <el-form-item label="验收节点:" prop="sheduleNodeId">
+                <!-- <el-form-item label="验收节点:" prop="sheduleNodeId">
                     <el-select v-model="formData.sheduleNodeId" filterable :allow-create="false" placeholder="请选择验收节点">
                         <el-option v-for="item in projectNodeVOs" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
+                </el-form-item> -->
+                <el-form-item label="工长姓名:" prop="projectManagerName">
+                    <el-input v-model="formData.projectManagerName" disabled></el-input>
+                </el-form-item>
+                <el-form-item label="工长电话:" prop="projectManagerPhone">
+                    <el-input v-model="formData.projectManagerPhone" disabled></el-input>
                 </el-form-item>
                 <el-form-item label="开工时间:" prop="startTime">
-                    <el-date-picker v-model="formData.startTime" placeholder="" type="datetime">
+                    <el-date-picker v-model="formData.startTime" placeholder="" type="date">
                     </el-date-picker>
                 </el-form-item>
             </el-form>
             <el-tabs v-model="activeName" @tab-click="handleClick">
-                <el-tab-pane label="上传图片" name="uploadPic">
+                <el-tab-pane label="上传图片(上传业主签署的开工确认函或现场开工照片)" name="uploadPic">
                     <div class="list-container">
                         <el-upload :action="uploadURL" :data="uploadParams" multiple list-type="picture-card" accept=".jpg,.jpeg,.png,.gif" :file-list="imgList"
                             :on-preview="handlePictureCardPreview" :on-success="handleSuccess" :on-remove="handleRemove" :before-upload="beforeUpload">
@@ -42,16 +48,6 @@
         <el-dialog v-model="picDialogVisible" class="g-w-1000">
             <img width="100%" :src="dialogImageUrl" alt="">
         </el-dialog>
-        <!-- <el-dialog class="insurance-dialog" v-model="insuranceVisible" @close="cycleClick()">
-            <div v-if="fitMessage != ''" class='fitMessage'>
-                <span style="color:orangered;font-size: 16px;">温馨提示：</span>
-                <div class="noteBox" v-html="fitMessage"></div>
-            </div>
-            <div slot="footer" class="dialog-footer">
-                <el-button @click="cycleClick()">我要自行购买</el-button>
-                <el-button @click="onLineClick()">使用泰康在线</el-button>
-            </div>
-        </el-dialog> -->
     </div>
 </template>
 <script>
@@ -77,9 +73,9 @@
                 imgList: [],
                 attachRelation: {}, //附件id及upload组件uid之前的关联关系，只为移除已上传的图片
                 rules: {
-                    sheduleNodeId: [
-                        { type: 'string', required: true, message: "请选择验收节点", trigger: 'change' },
-                    ],
+                    // sheduleNodeId: [
+                    //     { type: 'string', required: true, message: "请选择验收节点", trigger: 'change' },
+                    // ],
                     startTime: [
                         { type: 'date', required: true, message: "请选择开工时间", trigger: 'change' },
                     ]
@@ -89,6 +85,8 @@
                     sourceProjectId: null,
                     projectId: null,
                     ownerName: '',
+                    projectManagerName: '',
+                    projectManagerPhone: '',
                     addressDetail: '',
                     sheduleNodeId: null,
                     startTime: '',
@@ -140,13 +138,20 @@
                                 list.push({ label: item.nodeTypeName, value: item.id });
                             });
                             this.projectNodeVOs = list;
+                            let _this = this
+                            setTimeout(function () {
+                                _this.formData.sheduleNodeId = list.length > 0 ? list[0].value : "";
+                            }, 1)
                             this.formData = Object.assign(this.formData, res.data.result);
+                            if (null == this.projectNodeVOs || list.length <= 0) {
+                                message = "联系运营人员检查项目节点是否正确！";
+                            }
                         }
                         else if (resStatus.indexOf(res.data.status) != -1) {
-                            message = res.data.result == null ? (res.data.message == null ? '系统异常,请稍后再试！' : res.data.message) : res.data.result
+                            message = res.data.result == null ? (res.data.message == null ? '未获取到数据,请稍后再试！' : res.data.message) : res.data.result
                         }
                         else {
-                            message = '系统异常,请稍后再试！';
+                            message = '未获取到数据,请稍后再试！';
                         }
                         if (message != '') {
                             this.$msgbox({

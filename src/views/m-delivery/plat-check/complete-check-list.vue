@@ -7,7 +7,7 @@
                 <t8t-toolbar :symbolList="symbolList" @DETAIL="detail" @AGAINCREATE="againCreate" ref="toolbar">
                 </t8t-toolbar>
                 <t8t-table :radioCol="true" :columns="columns" :service="service" :method="method" :args="args" :pageBar="true" :commonData="commonData"
-                    ref="t8tTable" @current-row-change="selectionChange">
+                    :preLoad=false ref="t8tTable" @current-row-change="selectionChange">
                 </t8t-table>
             </div>
         </div>
@@ -127,9 +127,13 @@
                             }
                         }
                     },
+                    // { type: 'date', pickertype: 'datetimerange', label: '申请验收时间:', startField: 'expectStartTime_gte', endField: 'expectCheckTime_lte', name: 'expectCheckTime', inputWidth: 330 },
+                    // { type: 'date', pickertype: 'datetimerange', label: '实际验收时间:', startField: 'checkStartTime_gte', endField: 'checkTime_lte', name: 'checkTime', inputWidth: 330 },
+                    { type: 'date', label: '申请验收时间自', name: 'expectStartTime_gte' },
+                    { type: 'date', label: '申请验收时间至', name: 'expectCheckTime_lte' },
+                    { type: 'date', label: '实际验收时间自', name: 'checkStartTime_gte' },
+                    { type: 'date', label: '实际验收时间至', name: 'checkTime_lte' },
                     { type: 'select', label: '是否免检:', name: 'source', selectSourceKey: 'sources' },
-                    { type: 'date', pickertype: 'datetimerange', label: '申请验收时间:', startField: 'expectStartTime_gte', endField: 'expectCheckTime_lte', name: 'expectCheckTime', inputWidth: 330 },
-                    { type: 'date', pickertype: 'datetimerange', label: '实际验收时间:', startField: 'checkStartTime_gte', endField: 'checkTime_lte', name: 'checkTime', inputWidth: 330 },
                 ],
                 //搜索select类型下拉列表数据，对应fields的selectSourceKey
                 selectSource: {
@@ -222,9 +226,10 @@
             this.selectSource.checkTypeCodes = list;
         },
         activated() {
-            if (this.$route.path == '/delivery/plat-check-list' && typeof this.$route.query.refresh !== 'undefined') {
-                this.getTableData();
-            }
+            // if (this.$route.path == '/delivery/plat-check-list' && typeof this.$route.query.refresh !== 'undefined') {
+
+            // }
+            this.getTableData();
         },
         methods: {
             //搜素

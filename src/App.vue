@@ -2,16 +2,38 @@
     <div id="app">
         <router-view></router-view>
         <vue-progress-bar></vue-progress-bar>
+        <!-- 工具条 -->
+        <div class="t8t-toolbar-scroll">
+            <!--<div class="tool" :class="{'toggle-fullscreen': true, 'exit': isFullScreen}"
+                 @click="screenToggle"></div>-->
+
+            <!--页面的使用帮助-->
+            <div class="tool" v-if="helpId" @click="toggleHelp()" title="使用帮助">使用帮助</div>
+
+            <!--全屏页面回到顶部-->
+            <div class="tool" v-if="runBackToTop && showBackToTop" @click="toTop" title="回到顶部"><i class="el-icon-caret-top"></i></div>
+        </div>
     </div>
 </template>
 
 <script>
     import Cookie from 'js-cookie'
-
+    import axios from 'src/utils/axios.js'
+    import throttle from 'throttle-debounce/throttle';
     const HAS_NOTIFIED = 'hasNotified'
     const DOWNLOAD_ADDR = 'http://www.google.cn/chrome/browser/desktop/'
 
     export default {
+        data() {
+            return {
+                showHelp:false,
+                helpContent:'没有帮助内容',
+                helpTitle:'',
+                helpId:0,
+                runBackToTop: false,
+                showBackToTop:false
+            }
+        },
         mounted() {
             this.$Progress.finish()
             // 浏览器版本检测提示代码
@@ -29,7 +51,28 @@
             })
             this.$router.afterEach(() => {
                 this.$Progress.finish()
+
+                //暂时不用
+                /*this.runBackToTop = (this.$router.history.current && this.$router.history.current.meta.isFulldialog == true)
+                this.getHelpId()
+                this.$nextTick(function (){
+                    let that = this
+                    function scroll(fn) {
+                        that.runBackToTop && document.querySelector('.el-dialog--full').addEventListener('scroll', () => {
+                            fn();
+                        }, false);
+                    }
+                    scroll(() => {
+                    });
+                    this.throttledScrollHandler = throttle(300, this.handleScroll);
+                    this.runBackToTop && document.querySelector('.el-dialog--full').addEventListener('scroll', this.throttledScrollHandler);
+                })*/
             })
+
+        },
+
+        beforeDestroy() {
+            this.runBackToTop && document.querySelector('.el-dialog--full').removeEventListener('scroll', this.throttledScrollHandler);
         },
         methods: {
             browserNotify() {
@@ -62,6 +105,68 @@
                     ret.browser.version = _version
                 }
                 return ret
+            },
+
+            /*展示/隐藏帮助内容*/
+            toggleHelp: function (){
+                window.open(window.location.origin + '/#/helpcenter/page-faq/info?id='+this.helpId,'_blank')
+            },
+
+            /*回到顶部*/
+            toTop() {
+                this.showBackToTop = false;
+                document.querySelector('.el-dialog--full').scrollTop = 0
+            },
+
+            handleScroll() {
+                this.showBackToTop = (document.querySelector('.el-dialog--full').scrollTop) >= 150;
+            },
+
+            //获取帮助文档
+            getHelpId(){
+                return ;//页面使用帮助更换为别的展现形式
+                let url = this.$route.path
+                let that = this
+                that.helpId = 0 //清除上次设置的内容
+                this.$http.fetch('permission/queryPage',{
+                        search:{
+                            url: '#'+url
+                        },
+                        page:1,
+                        size:2
+                }).then(res => {
+                    if( res.data.status == 200 && res.data.result  && res.data.result.rows.length > 0 ){
+                        let  description = res.data.result.rows[0].description
+                        if( description && description.length > 0){
+                            try {
+                                description = JSON.parse(description)
+                                if( description.helpId ){
+                                    that.helpId = description.helpId
+                                }
+                            }catch (e){
+
+                            }
+                        }
+
+                    }
+                })
+            },
+
+            //获取帮助内容
+            getHelpDataById()
+            {
+                if (this.helpId) {
+                    const args = {
+                        id: this.helpId
+                    }
+                    helpApi.getDetailById(args)
+                        .then(res => {
+                            if (res.data.status === 200) {
+                                this.helpContent = res.data.result.content ? res.data.result.content : ''
+                                this.helpTitle = res.data.result.title ? res.data.result.title : ''
+                            }
+                        })
+                }
             }
         }
     }
@@ -350,5 +455,28 @@
     .full-dialog-toolbar-container .el-dialog__wrapper .t8t-toolbar .el-button--toolbar:hover {
         color: #1e3046;
         background-color: #d2deeb;
+    }
+</style>
+
+<style lang="css" scoped>
+    /*工具栏*/
+    .t8t-toolbar-scroll{
+        position: fixed;
+        bottom: 50px;
+        right: 15px;
+        width: 36px;
+        z-index: 10000;
+        text-align: center;
+        font-size: 12px;
+        color: #FFFFFF;
+        background: rgba(0, 0, 0, 0.4);
+    }
+    .t8t-toolbar-scroll .tool{
+        padding:5px;
+        border-bottom: 1px solid #ffffff;
+        cursor: pointer;
+        text-align: center;
+        /*line-height: 15px;*/
+        margin: auto;
     }
 </style>

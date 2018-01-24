@@ -8,6 +8,7 @@ import Cookie from 'js-cookie'
 window.Cookie = Cookie
 
 import T8tElementUI from 't8t-element-ui'
+import T8tBreadcrumb from 'src/components/t8t-breadcrumb'
 import 't8t-element-ui/lib/theme-default/index.css'
 // 皮肤覆盖文件
 import 'src/components/element-ui/erp-theme.css'
@@ -27,6 +28,7 @@ Vue.use(Tcs)
 import App from './App'
 
 Vue.use(T8tElementUI)
+Vue.use(T8tBreadcrumb)
 
 
 import Filter from './utils/filter'

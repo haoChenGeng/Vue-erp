@@ -4,15 +4,15 @@
         </t8t-search>
         <div class="g-main-container">
             <div class="g-main-container-column">
-                <t8t-toolbar :symbolList="symbolList" @APPLY="apply" ref="toolbar">
+                <t8t-toolbar :symbolList="symbolList" ref="toolbar">
                 </t8t-toolbar>
                 <t8t-table :columns="columns" :service="service" :method="method" :args="args" :pageBar="true" :commonData="commonData" ref="t8tTable"
-                    :selectCol="false">
+                    :preLoad=false :selectCol="false">
                 </t8t-table>
             </div>
         </div>
-        <add-plat-check v-if="addDialogVisible" :editType="editType" :title="dialogTitle" @close="closeAddDialog" @getTableData="getTableData">
-        </add-plat-check>
+        <!-- <add-plat-check v-if="addDialogVisible" :editType="editType" :title="dialogTitle" @close="closeAddDialog" @getTableData="getTableData">
+        </add-plat-check> -->
         <!-- <op-dialog v-if="dialogVisible" :id="id" :rowId="rowId" :billCode="billCode" :editType="editType" :title="dialogTitle" @close="dialogVisible=false"
             @getTableData="getTableData">
         </op-dialog> -->
@@ -34,7 +34,7 @@
         data() {
             let that = this;
             return {
-                symbolList: ['APPLY'],
+                symbolList: [''],
                 //搜索表单项配置
                 fields: [
                     { type: 'input', label: '项目ID:', name: 'sourceProjectId' },
@@ -131,10 +131,11 @@
                             }
                         }
                     },
+                    // { type: 'date', pickertype: 'datetimerange', label: '申请验收时间:', startField: 'expectStartTime_gte', endField: 'expectCheckTime_lte', name: 'expectCheckTime', inputWidth: 330 },
+                    // { type: 'date', pickertype: 'datetimerange', label: '实际验收时间:', startField: 'checkStartTime_gte', endField: 'checkTime_lte', name: 'checkTime', inputWidth: 330 },
+                    { type: 'date', label: '申请验收时间自', name: 'expectStartTime_gte' },
+                    { type: 'date', label: '申请验收时间至', name: 'expectCheckTime_lte' },
                     { type: 'select', label: '是否免检:', name: 'source', selectSourceKey: 'sources' },
-                    { type: 'date', pickertype: 'datetimerange', label: '申请验收时间:', startField: 'expectStartTime_gte', endField: 'expectCheckTime_lte', name: 'expectCheckTime', inputWidth: 330 },
-                    { type: 'date', pickertype: 'datetimerange', label: '实际验收时间:', startField: 'checkStartTime_gte', endField: 'checkTime_lte', name: 'checkTime', inputWidth: 330 },
-
                 ],
                 //搜索select类型下拉列表数据，对应fields的selectSourceKey
                 selectSource: {
@@ -167,14 +168,14 @@
                         },
                         width: '265px'
                     },
-                    {
-                        "prop": "checkTime",
-                        "label": "实际验收时间",
-                        "formatter": function (val, row, col) {
-                            return that.dateParser(row.checkStartTime) + ' - ' + that.dateParser(row.checkTime);
-                        },
-                        width: '265px'
-                    },
+                    // {
+                    //     "prop": "checkTime",
+                    //     "label": "实际验收时间",
+                    //     "formatter": function (val, row, col) {
+                    //         return that.dateParser(row.checkStartTime) + ' - ' + that.dateParser(row.checkTime);
+                    //     },
+                    //     width: '265px'
+                    // },
                     { "prop": "createTime", "label": "创建日期", "formatter": this.dateParser },
                     {
                         "prop": "source", "label": "备注", "formatter": function (val, row) { return row.source == 4 ? '免检' : '' }
@@ -198,8 +199,8 @@
                 service: Service.YANSHOU.name,
                 method: Service.YANSHOU.methods.platCheckQueryPage,
                 args: { sort: ['createTime_desc'], search: { checkTypeCode_ne: '8!821!82101!1001', billStatus_in: [0, 1], source_in: [1, 4] } },
-                editType: 'add',
-                addDialogVisible: false,
+                //editType: 'add',
+                //addDialogVisible: false,
                 selectedRows: null,
                 filterData: {
                     checkTypeCode_ne: '8!821!82101!1001',
@@ -227,9 +228,10 @@
             this.selectSource.checkTypeCodes = list;
         },
         activated() {
-            if (this.$route.path == '/delivery/plat-check-list' && typeof this.$route.query.refresh !== 'undefined') {
-                this.getTableData();
-            }
+            // if (this.$route.path == '/delivery/plat-check-list' && typeof this.$route.query.refresh !== 'undefined') {
+
+            // }
+            this.getTableData();
         },
         methods: {
             //搜素
@@ -252,15 +254,15 @@
                 }
                 return dateString
             },
-            apply() {
-                //集成点击流  TODO
-                //this.$TCS.addTag('red_2928_010004001001');
-                let selections = this.$refs['t8tTable'].getSelectRows();
-                this.dialogTitle = '验收申请'
-                this.editType = 'add'
-                this.addDialogVisible = true
+            // apply() {
+            //     //集成点击流  TODO
+            //     //this.$TCS.addTag('red_2928_010004001001');
+            //     let selections = this.$refs['t8tTable'].getSelectRows();
+            //     this.dialogTitle = '验收申请'
+            //     this.editType = 'add'
+            //     this.addDialogVisible = true
 
-            },
+            // },
             //表格
             getTableData() {
                 this.$refs['t8tTable'].reloadTable()
@@ -272,9 +274,9 @@
                 //启用禁用按钮交互
 
             },
-            closeAddDialog() {
-                this.addDialogVisible = false
-            }
+            // closeAddDialog() {
+            //     this.addDialogVisible = false
+            // }
         }
     }
 

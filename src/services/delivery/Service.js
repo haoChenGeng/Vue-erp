@@ -120,6 +120,7 @@ let Services = {
             getAgainOrderInfo:'0QQBFlzZzuXQFc7ABu5C1R5NLbrwC-A8UWrlZhMxDgzGCBd',//views.platCheck.getAgainOrderInfo
             againCreate:'tK8prfIhGsmeCztYwh_rbl7hqLppr9-oIb1sro3',//views.platCheck.againCreate
             queryCorpMember:'CG3FzczQAvSJFozK9_fQr5lL--rd5XlaAqhXtJEouFuAWli',//views.platCheck.queryCorpMember
+            queryPageAccountByRootId:'4USU3RzXDqgXN5y5R__mG5U20Pz-ygusxDHAuJBPYjIWWrcF-wJBjt3Fpmp',//views.platCheck.queryPageAccountByRootId
             verifyFit:'blkNJ3GpcwvKJcC15fFOyJpKmBRcggmISCVbo3s',//views.platCheck.verifyFit
             checkUpdate: 'w6M5AVqhT5IwL7VSU78V53s-lUI', // views.check.update
             checkGetHead: 'hnpnTAAuAf2lrlgqh0e2V4TKXXi0ArH', // views.check.getHead

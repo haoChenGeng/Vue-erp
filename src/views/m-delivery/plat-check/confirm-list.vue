@@ -2,10 +2,10 @@
 	<div class="confirm-list">
 	     <t8t-breadcrumb :data="breadcrumbData"></t8t-breadcrumb>
 		 <el-tabs v-model="tab" @tab-click="handleTabClick">
-		 	<el-tab-pane label="提交开工确认函" name="deal">
+		 	<el-tab-pane label="待开工确认" name="deal">
 		 		<unconfirmed-list class="flex1"></unconfirmed-list>
 		 	</el-tab-pane>
-		 	<el-tab-pane label="查询开工确认函" name="view">
+		 	<el-tab-pane label="已开工确认" name="view">
 		 		<confirmed-list class="flex1"></confirmed-list>
 		 	</el-tab-pane>
 		 </el-tabs>
