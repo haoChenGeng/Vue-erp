@@ -111,8 +111,8 @@
                 <div class="full-dialog-tabs-container">
                     <el-tabs v-model="activeTabName">
                         <div class="my-container">
-                            <t8t-search class="my-search" ref="principal-search" :formData="searchForm" :fields="searchFields" :selectSource="commonOptionsConfig" :showToggleBtn="true"
-                                @submit="searchSubmit">
+                            <t8t-search class="my-search" ref="principal-search" :formData="searchForm" :fields="searchFields" :selectSource="commonOptionsConfig"
+                                :showToggleBtn="true" @submit="searchSubmit">
                             </t8t-search>
                             <p></p>
                             <t8t-grid ref="t8ttable" :columns="columns" :selectCol="false" :pageBar="false" :editable="true" :dataSource="principals"
@@ -128,7 +128,7 @@
 
         <el-dialog title="确认派工" class="assign-dialog" v-model="assignVisible" @close="closeAssignDialog">
             <el-form :model="assignComfirms" :rules="assingRules" ref="assignComfirm">
-                <el-form-item label="更换原因："v-if="viewData.projectManagerId > 0"prop="reasonType">
+                <el-form-item label="更换原因：" v-if="viewData.projectManagerId > 0" prop="reasonType">
                     <el-select placeholder="请选择更换原因" v-model="assignComfirms.reasonType">
                         <el-option v-for="item in commonOptionsConfig.assignReasons" :label="item.text" :value="item.value">
                         </el-option>
@@ -165,22 +165,23 @@
 
     let mode
     let projectId
+    let backUrl
 
     export default {
         components: {},
         name: 'dialog-assigin-delivery',
         data() {
             return {
-                searchForm:{},
+                searchForm: {},
                 assignComfirms: {},
                 assignVisible: false,
                 isLoading: false,
                 isDialogShow: true,
-                submitting:false,
+                submitting: false,
                 viewData: {},
-                assingRules:{
-                    reasonType:[
-                        {required: true, message: '请选择重新派单原因'}
+                assingRules: {
+                    reasonType: [
+                        { required: true, message: '请选择重新派单原因' }
                     ]
                 },
                 principals: [],
@@ -219,8 +220,8 @@
                 ],
                 // 搜索信息
                 searchFields: [
-                    { type: 'input', label: '工长',placeholder:'姓名|电话', name: 'searchContent' },
-                    { type: 'select', label: '状态',  name: 'state', selectSourceKey: 'acceptStates' }
+                    { type: 'input', label: '工长', placeholder: '姓名 |电话', name: 'searchContent' },
+                    { type: 'select', label: '状态', name: 'state', selectSourceKey: 'acceptStates' }
                 ],
                 searchDataSource: {},
                 // 辅助资料配置
@@ -228,7 +229,7 @@
                     assessObjcts: [],
                     assignReasons: [],   // 派单原因
                     acceptStates: [
-                        { value: 0, text: '生效'},
+                        { value: 0, text: '生效' },
                     ],
                 },
                 // 点击关闭后的返回route
@@ -238,6 +239,7 @@
         beforeCreate() {
             mode = this.$route.query.mode
             projectId = this.$route.query.id
+
         },
         created() {
             // 辅助资料初始化
@@ -245,13 +247,17 @@
             // 加载项目数据,加载接单人列表
             this.loadData(projectId)
             this.loadPrincipal(projectId)
-            this.searchForm = {'state': 0}
+            this.searchForm = { 'state': 0 }
+            backUrl = this.$route.query.backUrl
+            if (backUrl) {
+                this.goBackRoute = backUrl
+            }
         },
         methods: {
             confirmAssign(row, event) {
                 // todo 要什么数据插进来
                 let form = {
-                    id:null,
+                    id: null,
                     name: null,
                     phone: null,
                     orderNum: null,
@@ -337,11 +343,11 @@
             // 加载负责人列表
             loadPrincipal: function (projectId, search) {
                 this.principals = []
-                var args={
+                var args = {
                     'projectId': projectId,
-                    'searchContent': search==null ? null : search['searchContent'],
+                    'searchContent': search == null ? null : search['searchContent'],
                     'state': search == null ? null : search['state'],
-                    'assignCode':'01'
+                    'assignCode': '01'
                 }
                 // 加载接单人信息
                 itemAssignServiceApi.getAssignPrincipalList(args)
@@ -352,7 +358,7 @@
                                 list.push({
                                     name: item.name,
                                     phone: item.phone,
-                                    id:item.accountId,
+                                    id: item.accountId,
                                     orderNum: item.orderNum,
                                     acceptLimit: item.limitOrder,
                                     first: true
@@ -390,7 +396,7 @@
                                 return
                         }
                         this.submitting = true
-                        var args= {
+                        var args = {
                             'assignPrincipal': {
                                 'projectId': projectId,
                                 'principalId': this.assignComfirms.id,
@@ -410,12 +416,13 @@
                                     }
                                     this.$router.push({path: this.goBackRoute})
                                 } else if (res.data.status === 200500) {
-                                     this.$msgbox({title: '修改状态失败！',type: 'error', message: res.data.result.join('')})
+                                      msgType = 'error'
+                                      msg = "修改排期状态异常！请联系土巴兔业务对接人"
                                 }else {
-                                    this.submitting = false
                                     msgType = 'error'
                                     msg = res.data.message
                                 }
+                                this.submitting = false
                                 this.showMsg(msgType, msg)
 
                             }))
@@ -582,16 +589,16 @@
         width: 1200px;
     }
 
-    .assign-item-dialog .el-dialog--small{
+    .assign-item-dialog .el-dialog--small {
         width: 320px !important
     }
+
     .assign-item-dialog .el-dialog--small .el-form-item__label {
         width: 96px;
     }
+
     .assign-item-dialog .el-dialog--small .el-form-item__content {
-        float:right;
+        float: right;
         width: 178px;
-
     }
-
 </style>

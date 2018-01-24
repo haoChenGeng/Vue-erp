@@ -71,7 +71,7 @@
                 class="dialog-footer">
                 <el-button @click="btnOKClick"
                     type="primary"
-                    :loading="edit_isLoading">确定</el-button>
+                    :loading="submitting" :disabled="submitting">确定</el-button>
                 <el-button @click="closeEditDialog">取消</el-button>
             </div>
         </el-dialog>
@@ -207,6 +207,7 @@ export default {
                 assignReasons: [], // 派工原因
                 checkmanList: [],
             },
+            submitting: false,
         }
     },
     methods: {
@@ -265,6 +266,7 @@ export default {
                         partOrder: this.formData.assignName,
                         assignUser: +Cookie.get('t8t-tc-uid'),
                     }
+                    this.submitting = true
                     itemAssignApi.assignConfig(args).then(res => {
                         var msgType = ''
                         var msg = ''
@@ -282,6 +284,7 @@ export default {
                             msgType = 'error'
                             msg = res.data.message
                         }
+                        this.submitting = false
                         this.showMsg(msgType, msg)
                     })
                 }
@@ -314,7 +317,6 @@ export default {
             let yid = selectRow.projectId
             projectId = selectRow.projectId
             this.loadPrincipal(yid, _ => {
-                debugger
                 this.formData = {
                     ...{
                         assignName: null,
