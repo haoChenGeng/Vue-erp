@@ -134,17 +134,17 @@ export default {
                 { prop: 'sourceProjectId', label: '项目ID' },
                 { prop: 'address', label: '地址' },
                 { prop: 'ownerName', label: '业主' },
-                {
-                    prop: 'firstPayment',
-                    label: '首期款',
-                    formatter(v, r, e) {
-                        if (v === 1) {
-                            return '已交'
-                        } else {
-                            return "<span style='color: red'>未交</span>"
-                        }
-                    },
-                },
+                // {
+                //     prop: 'firstPayment',
+                //     label: '首期款',
+                //     formatter(v, r, e) {
+                //         if (v === 1) {
+                //             return '已交'
+                //         } else {
+                //             return "<span style='color: red'>未交</span>"
+                //         }
+                //     },
+                // },
                 { prop: 'itemManager', label: '项目经理' },
                 { prop: 'projectState', label: '项目状态' },
                 { prop: 'partOrder', label: '下单员' },
