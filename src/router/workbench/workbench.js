@@ -5,7 +5,7 @@ const WorkBench = resolve => require(['src/views/workbench/workbench.vue'], reso
 const routes = [
     // 可视化图表
     {
-        path: '/index',
+        path: '/tuchat-index',
         component: Console,
         children: [
             { path: '', meta: { isFulldialog: false, auth: false, title: '我的工作台' }, component: WorkBench }

@@ -37,10 +37,10 @@ import om from './operationdata/index.js'
 
 let routes = []
 
-// 只输入域名时，跳转到/index
+// 只输入域名时，跳转到首页
 routes.push({
     path: '/',
-    redirect: '/index'
+    redirect: '/tuchat-index'
 })
 
 routes = routes.concat(
@@ -90,7 +90,7 @@ router.beforeEach((to, from, next) => {
         }*/
 
         let jumpUrl = {
-            path: query['url'] ? decodeURI(query['url']) : '/index',
+            path: query['url'] ? decodeURI(query['url']) : '/tuchat-index',
             //query:query,
             replace: true
         }
@@ -121,6 +121,11 @@ router.beforeEach((to, from, next) => {
         if( (!Cookie.get('t8t-tc-ticket') || !Cookie.get('t8t-tc-uid') ) && ['/login/','/login'].indexOf(to.path) < 0 ) {
             Utils.redirectLoginPage()
             return
+        }
+
+        //首页地址更改
+        if (['/index/','/index'].indexOf(to.path) > -1) {
+            return next('/tuchat-index')
         }
 
         // 不需要鉴权页面可以直接跳转
