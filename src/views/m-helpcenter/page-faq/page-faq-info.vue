@@ -1,5 +1,5 @@
 <template>
-    <div class="t8t-detail-view">
+    <div class="t8t-detail-view faqInfoPage">
         <el-dialog v-model="dialogVisible" @close="closeDialog" size="full" class="t8t-full-dialog2 dialog-new">
             <div class="t8t-full-dialog2-container faq-wrapper">
                 <h2 class="faq-title">{{title}}</h2>
@@ -83,5 +83,9 @@
 
     .t8t-detail-view .faq-title {
         text-align: center;
+    }
+
+    .faqInfoPage .el-dialog__headerbtn{
+        right:20px;
     }
 </style>

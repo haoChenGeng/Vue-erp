@@ -232,6 +232,14 @@
             this.getTableData();
         },
         methods: {
+            tableDoLayout() {
+                setTimeout(() => {
+                    this.$refs['t8tTable'].doLayout();
+                }, 0);
+                setTimeout(() => {
+                    this.$refs['t8tTable'].doLayout();
+                }, 0);
+            },
             //搜素
             submitSearch(obj) {
                 // let fields = this.args.fields;

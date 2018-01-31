@@ -26,6 +26,74 @@ export default {
             args: args
         })
     },
+
+    /*
+    this.getPropertyByParentCodes([82301,42102]).then(res => {
+            console.log(res)
+        }).catch(e => {
+            console.log(e)
+        })
+    * 根据多个分类code批量查询供应链辅助资料，
+    * 适用于需要多次请求分类辅助资料的场景，
+    * 不适用于结果总条数大于1000的场景（辅助资料的总数是可以预估的）
+    * 参数：
+    * codes  分类code集合 必传 如：[82301,42102]
+    * size 查询的条数 非必传 不要大于1000， 不确定可以传-1
+    * propertyStatus 辅助资料的状态 非必传
+    * return 对象，如{82301:[{},{}],42102:[{},{}]}
+    * */
+    getPropertyByParentCodes (codes, ...args) {
+        let properties = {}
+        codes.forEach(item => {
+            properties[item] = []
+        })
+
+        var serviceArgs = {
+            page: 1,
+            search: {
+                pPropertyCodes: codes
+            }
+        }
+        // 查询条数和状态，非必传
+        let [size, propertyStatus] = (args)
+
+        if (propertyStatus !== undefined) {
+            serviceArgs.search.propertyStatus = propertyStatus
+        }
+
+        serviceArgs.size = (size === undefined || size < 1) ? (codes.length * 50) : size
+
+        // console.log(serviceArgs)
+        return new Promise((resolve, reject) => {
+            if (serviceArgs.size > 1000) {
+                reject('查询 size 大于 1000')
+            }
+            axios({
+                method: Service.SUPPLY_CONFIGURE.methods.queryUnionParent,
+                service: Service.SUPPLY_CONFIGURE.name,
+                args: serviceArgs
+            }).then(res => {
+                if (res.data.status === 200) {
+                    res.data.result.forEach((item) => {
+                        // 以父级code为key
+                        properties[item.pPropertyCode].push({
+                            value: item.id,
+                            text: item.propertyName,
+                            code: item.propertyCode,
+                            propertyCode: item.propertyCode,
+                            propertyStatus: item.propertyStatus,
+                            wholeCode: item.wholeCode
+                        })
+                    })
+                    resolve(properties)
+                } else {
+                    reject()
+                }
+            }).catch(e => {
+                reject(e)
+            })
+        })
+    },
     queryPage(args) {
         return axios({
             method: Service.SUPPLY_CONFIGURE.methods.QUERY_PAGE,

@@ -466,7 +466,7 @@ showB: false,
                 initChart() {
                     let that = this;
                     let args = {
-                        "fatherUrl": "#/index/",
+                        "fatherUrl": "#/tuchat-index/",
                         "accountID": Cookie.get('t8t-tc-uid')
                     };
                     WorkBench.queryWorkBenchByFatherUrl(args)

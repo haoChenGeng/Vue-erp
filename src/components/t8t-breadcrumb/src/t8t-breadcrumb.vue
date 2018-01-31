@@ -137,7 +137,12 @@
     }
     .t8t-breadcrumb .pageHelpButton{
         margin-left: 20px;
-        border-color: rgb(232, 237, 241);
-        color: rgb(50, 139, 239);
+        border-color: red;
+        color: red;
+    }
+
+    .t8t-breadcrumb .pageHelpButton:focus,.t8t-breadcrumb .pageHelpButton:hover {
+        color: red;
+        border-color: red;
     }
 </style>

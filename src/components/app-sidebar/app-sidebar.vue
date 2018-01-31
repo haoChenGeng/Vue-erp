@@ -214,7 +214,7 @@
 
                         let item1 = {
                             index: "1-101",
-                            url: {path: "#/index/"},
+                            url: {path: "#/tuchat-index/"},
                             title: "我的工作台"
                         }
 

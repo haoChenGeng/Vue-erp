@@ -7,7 +7,8 @@
                 <t8t-toolbar :symbolList="symbolList" @APPLY="apply" ref="toolbar">
                 </t8t-toolbar>
                 <t8t-table :radioCol=true :columns="columns" :service="service" :method="method" :args="args" :pageBar="true" :commonData="commonData"
-                    :preLoad=false ref="t8tTable" @current-row-change="selectionChange" @data-loaded="dataLoaded">
+                    :preLoad=false ref="t8tTable" @current-row-change="selectionChange" @data-loaded="dataLoaded" @row-double-click="jumpToProjectDetail">
+                    <template scope="scope" slot="sourceProjectId"><span class="hand">{{scope.row.decorationOrderVO.sourceProjectId}}</span></template>
                 </t8t-table>
             </div>
         </div>
@@ -25,9 +26,16 @@
                 <el-button @click="cancleClick()">取消</el-button>
             </div>
         </el-dialog>
-        <!-- <add-start-bill v-if="addDialogVisible" :projectId="projectId" :editType="editType" :title="dialogTitle" @close="addDialogVisible=false"
-            @getTableData="getTableData">
-        </add-start-bill> -->
+        <el-dialog class="insurance-dialog" v-model="insuranceVisible" @close="cycleClick()">
+            <div v-if="fitMessage != ''" class='fitMessage'>
+                <span style="color:blue;font-size: 16px;">温馨提示：</span>
+                <div class="fitNoteBox" v-html="fitMessage"></div>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="cycleClick()">我要自行购买</el-button>
+                <el-button @click="onLineClick()">使用泰康在线</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -195,6 +203,7 @@
                 checkMessage: '',
                 confirmCheck: false,
                 assignManager: false,
+                insuranceVisible: false,
 
             }
         },
@@ -221,6 +230,12 @@
             this.selectSource.orderSubStatusList = list;
         },
         activated() {
+            setTimeout(() => {
+                this.$refs['t8tTable'].doLayout();
+            }, 0);
+            setTimeout(() => {
+                this.$refs['t8tTable'].doLayout();
+            }, 0);
             this.getTableData();
         },
         methods: {
@@ -265,64 +280,94 @@
                 } else if (selections.length > 1) {
                     this.$message.error('只能选择一行进行操作！')
                 } else {
-                    this.assignManager = false;
-                    this.confirmCheck = false;
-                    let message = '';
-                    let checkMessage = '';
-                    let orderSubStatus = selections[0].decorationOrderVO.orderSubStatus;
-                    let projectManagerName = selections[0].projectManagerName;
-                    if (orderSubStatus == "8100801" || orderSubStatus == "8100802")//已工程竣工,已财务竣工
-                    {
-                        //项目已竣工
-                        this.$msgbox({
-                            title: '消息',
-                            type: 'error',
-                            message: "该项目已竣工,不能申请验收!",
-                            confirmButtonText: '知道了',
-                            confirmButtonClass: 'is-plain'
-                        });
-                    } else {
-                        if (!projectManagerName || projectManagerName == "") {
-                            checkMessage = "1.未派工长，点击“去派工长”按钮可链接至派工长界面".concat("<br>");
-                            this.assignManager = true;
-                        }
-                        if (orderSubStatus == "8100602")//已签约
-                        {
-                            if (checkMessage != '') {
-                                checkMessage = checkMessage.concat(2.);
-                            } else {
-                                checkMessage = checkMessage.concat(1.);
-                            }
-                            checkMessage = checkMessage.concat("该项目还未开工,请点击“去开工确认”按钮可链接至开工确认界面").concat("<br>");
-                            this.confirmCheck = true;
-                            //去开工确认
-                        }
-                        this.checkMessage = checkMessage;
-                        if (checkMessage != '') {
-                            this.checkVisible = true;
-                        } else {
-                            let projectId = selections[0].decorationOrderVO.id;
-                            if (projectId == null || projectId == '') {
-                                message = "未获取到数据,请稍后再试!";
-                            } else {
-                                //let selections = this.$refs['t8tTable'].getSelectRows();
-                                this.dialogTitle = '验收申请'
-                                this.editType = 'add'
-                                this.addDialogVisible = true
-                                this.projectId = projectId;
-                            }
-                        }
-                    }
 
-                    if (message != '') {
-                        this.$msgbox({
-                            title: '消息',
-                            type: 'error',
-                            message: message,
-                            confirmButtonText: '知道了',
-                            confirmButtonClass: 'is-plain'
-                        });
-                    }
+                    //校验是否满足泰康保险
+                    CheckCommon.verifyFit({ sourceProjectId: this.selectedRows.decorationOrderVO.sourceProjectId })
+                        .then((res) => {
+                            let reminder = '';
+                            let fitMessage = '';
+                            if (res.data.status === 211519)//泰康保险的条件
+                            {
+                                //弹框
+                                fitMessage = '请参照土巴兔推广服务合作合同工地保障条款购买建筑工程意外险，自行购买请联系BD，在线购买建议使用泰康在线。';
+                                this.fitMessage = fitMessage;
+                            }
+                            else if (res.data.status === 200) {
+                                this.assignManager = false;
+                                this.confirmCheck = false;
+                                let message = '';
+                                let checkMessage = '';
+                                let orderSubStatus = selections[0].decorationOrderVO.orderSubStatus;
+                                let projectManagerName = selections[0].projectManagerName;
+                                if (orderSubStatus == "8100801" || orderSubStatus == "8100802")//已工程竣工,已财务竣工
+                                {
+                                    //项目已竣工
+                                    this.$msgbox({
+                                        title: '消息',
+                                        type: 'error',
+                                        message: "该项目已竣工,不能申请验收!",
+                                        confirmButtonText: '知道了',
+                                        confirmButtonClass: 'is-plain'
+                                    });
+                                } else {
+                                    if (!projectManagerName || projectManagerName == "") {
+                                        checkMessage = "1.未派工长，点击“去派工长”按钮可链接至派工长界面".concat("<br>");
+                                        this.assignManager = true;
+                                    }
+                                    if (orderSubStatus == "8100602")//已签约
+                                    {
+                                        if (checkMessage != '') {
+                                            checkMessage = checkMessage.concat(2.);
+                                        } else {
+                                            checkMessage = checkMessage.concat(1.);
+                                        }
+                                        checkMessage = checkMessage.concat("该项目还未开工,请点击“去开工确认”按钮可链接至开工确认界面").concat("<br>");
+                                        this.confirmCheck = true;
+                                        //去开工确认
+                                    }
+                                    this.checkMessage = checkMessage;
+                                    if (checkMessage != '') {
+                                        this.checkVisible = true;
+                                    } else {
+                                        let projectId = selections[0].decorationOrderVO.id;
+                                        if (projectId == null || projectId == '') {
+                                            message = "未获取到数据,请稍后再试!";
+                                        } else {
+                                            //let selections = this.$refs['t8tTable'].getSelectRows();
+                                            this.dialogTitle = '验收申请'
+                                            this.editType = 'add'
+                                            this.addDialogVisible = true
+                                            this.projectId = projectId;
+                                        }
+                                    }
+                                }
+
+                                if (message != '') {
+                                    this.$msgbox({
+                                        title: '消息',
+                                        type: 'error',
+                                        message: message,
+                                        confirmButtonText: '知道了',
+                                        confirmButtonClass: 'is-plain'
+                                    });
+                                }
+                            }
+                            else if (res.data.status != 200) {
+                                reminder = '系统异常,请稍后再试！';
+                            }
+                            if (reminder != '') {
+                                this.$msgbox({
+                                    title: '消息',
+                                    type: 'error',
+                                    message: reminder,
+                                    confirmButtonText: '知道了',
+                                    confirmButtonClass: 'is-plain'
+                                });
+                            }
+                            if (fitMessage != '') {
+                                this.insuranceVisible = true;
+                            }
+                        })
                 }
             },
             //表格
@@ -363,11 +408,48 @@
             confirmCheckClick() {
                 this.checkVisible = false;
                 this.$router.push({ path: '/tuchat-delivery/confirm-list' })
-            }
+            },
+            cycleClick()//取消
+            {
+                this.insuranceVisible = false
+            },
+            onLineClick() {//跳转泰康在线
+                //var link = "http://ecuat.taikang.com/channel/coop_test/tbt/index.html";//test uat
+                var link = "http://act.tk.cn/tbt/index.html";//线上url
+                window.open(link);
+            },
+            jumpToProjectDetail: function (row) {
+                this.$router.push({
+                    path: '/tuchat-sale-manage/page-project-detail',
+                    query: {
+                        id: row.decorationOrderVO.id,
+                        goBackRoute: '/tuchat-delivery/plat-check-list'
+                    }
+                })
+            },
         }
     }
 
 </script>
+<style>
+    .hand {
+        cursor: pointer;
+        color: #00a0e9;
+    }
+</style>
+<style lang="css" scoped>
+    .fitMessage {
+        color: black;
+        text-decoration: none;
+        margin-left: 10px;
+        line-height: 32px;
+        font-size: 14px;
+    }
+
+    .fitNoteBox {
+        margin-left: 2em;
+    }
+</style>
 <style lang="css" scoped>
     .checkMessage {
         color: black;

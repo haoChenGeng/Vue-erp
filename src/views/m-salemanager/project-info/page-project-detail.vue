@@ -157,10 +157,14 @@ export default {
         this.id = this.$route.query.id
 
         let goBackRoute = this.$route.query.goBackRoute
+        let tab = this.$route.query.tab
+        if(tab) {
+            this.mainActiveTab = tab
+        }
         if (goBackRoute) {
             this.goBackRoute = goBackRoute
         }
-        setTimeout(this.setForm('baseForm'), 2000)
+        setTimeout(this.setForm(this.mainActiveTab), 2000)
     },
     methods: {
         // 关闭弹窗
