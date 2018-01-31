@@ -9,7 +9,7 @@
 				<apply-check-list class="flex1"></apply-check-list>
 			</el-tab-pane>
 			<el-tab-pane label="已验收任务" name="view">
-				<complete-check-list class="flex1"></complete-check-list>
+				<complete-check-list class="flex1" ref="view"></complete-check-list>
 			</el-tab-pane>
 		</el-tabs>
 	</div>
@@ -37,7 +37,9 @@
 		},
 		methods: {
 			handleTabClick(tab) {
-
+				if(tab.name==="view") {
+					this.$refs['view'].tableDoLayout()
+				}
 			}
 		}
 	}
