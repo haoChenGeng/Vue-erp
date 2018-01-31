@@ -41,6 +41,17 @@
                 <el-button @click="resetForm('checkList')">取消</el-button>
             </span>
         </el-dialog>
+        <el-dialog class="insurance-dialog" v-model="insuranceVisible" @close="cycleClick()">
+            <div v-if="fitMessage != ''" class='fitMessage'>
+                <span style="color:blue;font-size: 16px;">温馨提示：</span>
+                <div class="fitNoteBox" v-html="fitMessage"></div>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="cycleClick()">我要自行购买</el-button>
+                <el-button @click="onLineClick()">使用泰康在线</el-button>
+            </div>
+        </el-dialog>
+
     </div>
 </template>
 
@@ -52,6 +63,7 @@
     import Methods from 'src/services/finance/refundOrder.js'
     import TemplateOperator1 from 'src/services/delivery/pcm.js'
     import commonApi from 'src/services/commonApi/commonApi.js'
+    import CheckCommon from 'src/services/delivery/check/checkCommon.js'
 
     export default {
         name: 'trusteeFeeList',
@@ -142,7 +154,8 @@
                 dialogFormVisible: false,
                 reasonText: '',
                 formLabelWidth: '20%',
-
+                insuranceVisible: false,
+                fitMessage: '',
             }
         },
         created() {
@@ -189,15 +202,15 @@
             cellClick: function (row, column, cell, event) {
                 if (column.property === 'applyAble') {
                     if (row.applyAble === 1) {
-//                        debugger
-                        this.getTrusteeFeeInfo(row.sourceProjectId)
+                    //    debugger
+                        this.getTrusteeFeeInfo(row)
                         //申请托管款的参数
                         this.submitArgs.dto.projectId = row.projectId
                         this.submitArgs.dto.sourceProjectId = row.sourceProjectId
                     }
                 }
                 else if (column.property === 'projectId') {
-                  debugger
+                //   debugger
                     this.$router.push({path: '/tuchat-sale-manage/page-project-detail',
                     query: {
                         id: row.projectId,
@@ -206,38 +219,51 @@
                     }})
                 }
             },
-            getTrusteeFeeInfo(sourceProjectId) {
+            getTrusteeFeeInfo(row) {
                 //请求托管款信息参数
-                this.searchArgs.sourceProjectId = sourceProjectId
+                this.searchArgs.sourceProjectId = row.sourceProjectId
                 let _this = this
-                Methods.queryTrusteeFeeInfo(_this.searchArgs).then(res => {
-//                    debugger
-                    if (res.data.status == 200) {
-                        _this.dialogFormVisible = true
-                        _this.trusteeFees = res.data.result
-                        this.getSubmitAble();
-
-                    } else {
+                //校验是否满足泰康保险
+                CheckCommon.verifyFit({ sourceProjectId: row.sourceProjectId }).then((res) => {
+                    // debugger
+                        let reminder = '';
+                        let fitMessage = '';
+                        if (res.data.status === 211519)//泰康保险的条件
+                        {
+                            //弹框
+                            fitMessage = '请参照土巴兔推广服务合作合同工地保障条款购买建筑工程意外险，自行购买请联系BD，在线购买建议使用泰康在线。';
+                            _this.fitMessage = fitMessage;
+                            _this.insuranceVisible = true;
+                        } else {
+                            //申请返款弹框
+                            Methods.queryTrusteeFeeInfo(_this.searchArgs).then(res1 => {
+            //                    debugger
+                                if (res1.data.status == 200) {
+                                    _this.dialogFormVisible = true
+                                    _this.trusteeFees = res1.data.result
+                                    _this.getSubmitAble();
+                                } else {
+                                    _this.$msgbox({
+                                        'type': 'error',
+                                        'message': '请求失败，请重试',
+                                        'title': '',
+                                    })
+                                }
+                            })
+                        }
+                    }).catch(e => {
                         _this.$msgbox({
                             'type': 'error',
                             'message': '请求失败，请重试',
                             'title': '',
                         })
-                    }
-                }).catch(e => {
-                    _this.$msgbox({
-                        'type': 'error',
-                        'message': '请求失败，请重试',
-                        'title': '',
-                    })
-                });
-
+                    });
             },
             // 提交托管款
             submitRoundOrder () {
                 let _this = this;
                 Methods.backTrusteeFees(_this.submitArgs).then((res) => {
-//                    debugger
+                   debugger
                     if (res.data.status == 200) {
                         _this.$msgbox({
                             'type': 'success',
@@ -246,18 +272,37 @@
                         })
                         this.$refs['t8tTable'].reloadTable()
                     } else {
+                        if (res.data.result == '通知业主余额不足') {
+                        /** 业主余额不足就是需要提交100%托管款才可以 */
                         _this.$msgbox({
                             'type': 'error',
-                            'message': '提交失败，请重试',
-                            'title': '',
-                        })
+                            'message': '请确认是否交齐100%托管款！',
+                            'title': '请求失败',
+                            })
+                        } else {
+                            _this.$msgbox({
+                                'type': 'error',
+                                'message': '',
+                                'title': '请求失败，请重试',
+                            })
+                        }
                     }
                 }).catch(e => {
-                    _this.$msgbox({
-                        'type': 'error',
-                        'message': '请求失败，请重试',
-                        'title': '',
-                    })
+                    debugger
+                    if (e.data.result === '通知业主余额不足') {
+                        /** 业主余额不足就是需要提交100%托管款才可以 */
+                        _this.$msgbox({
+                            'type': 'error',
+                            'message': '请确认是否交齐100%托管款！',
+                            'title': '请求失败',
+                        })
+                    } else {
+                        _this.$msgbox({
+                            'type': 'error',
+                            'message': '',
+                            'title': '请求失败，请重试',
+                        })
+                    }
                 });
             },
             submitForm (formName) {
@@ -277,7 +322,7 @@
                 let checkedCount = value.length;
             },
             getSubmitAble() {
-                debugger
+                // debugger
                 let _submitAble = true;
                 if(null != this.trusteeFees || 0 < this.trusteeFees.size) {
                     this.trusteeFees.forEach(element => {
@@ -287,7 +332,30 @@
                     });
                 }
                 this.submitAble = _submitAble;
-            }
+            },
+            cycleClick()//取消
+            {
+                this.insuranceVisible = false
+            },
+            onLineClick() {//跳转泰康在线
+                // var link = "http://ecuat.taikang.com/channel/coop_test/tbt/index.html";//test uat
+                var link = "http://act.tk.cn/tbt/index.html";//线上url
+                window.open(link);
+            },
         }
     }
 </script>
+
+<style lang="css" scoped>
+    .fitMessage {
+        color: black;
+        text-decoration: none;
+        margin-left: 10px;
+        line-height: 32px;
+        font-size: 14px;
+    }
+
+    .fitNoteBox {
+        margin-left: 2em;
+    }
+</style>
