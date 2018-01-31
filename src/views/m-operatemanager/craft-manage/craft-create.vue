@@ -11,7 +11,7 @@
                     <div class="toolbar-container">
 
                         <t8t-toolbar class="t8t-dark"
-                            @AUDITING-SUBMIT="SubmitBtn"
+                            @SUBMIT="SubmitBtn"
                             :symbolList="symbolList"
                             ref="indexToolbar">
                         </t8t-toolbar>
@@ -22,18 +22,6 @@
                     <!-- 表单区 -->
 
                     <div class="full-dialog-form-container">
-                        <!-- <el-form
-                            :model="ruleForm"
-                            :rules="rules"
-                            ref="t8tAudit"
-                            label-width="80px"
-                            class="t8t-audit-form">
-                            <div class="dialog2-form-item-container">
-                                <el-form-item label="审批批注" prop="idea" v-show="isPass">
-                                    <el-input type="text" v-model="ruleForm.idea"  :rows="4" placeholder="请输入内容" ></el-input>
-                                </el-form-item>
-                            </div>
-                        </el-form> -->
                     </div>
 
 
@@ -52,33 +40,36 @@
                                         label-width="100px">
                                         <div class="dialog2-form-item-container">
                                             <el-form-item label="工艺标题：">
-                                                <el-input v-model="craft.name"></el-input>
+                                                <el-input v-model="technologyInfo.technologyName"></el-input>
                                             </el-form-item>
                                         </div>
                                     </el-form>
-                                    <div style="margin: 20px auto;width:65%">
+                                    <div class="create-title">
                                         <el-button
                                             size="small"
                                             @click="addTab(editableTabsValue)"
+
                                         >
                                             新建子标题
                                         </el-button>
                                     </div>
                                     <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab" >
                                         <el-tab-pane
-                                            v-for="(item, index) in craftTabs"
-                                            :label="item.title"
-                                            :name="item.name"
-                                            :key="item.index"
+                                            v-for="(value, key, index) in craftTabs"
+                                            :label="key"
+                                            :name="key"
+                                            :key="index"
+                                            class="create-title-tab"
                                         >
-                                        <el-button
-                                            size="small"
-                                            @click="add('upload', '123')"
-                                        >
-                                            新增图片
-                                        </el-button>
+                                            <el-button
+                                                size="small"
+                                                @click="add('Upload', '11',$event)"
+                                                class="add-pic-btn"
+                                            >
+                                                新增图片
+                                            </el-button>
                                             <ul>
-                                                <li :is="item.component" :key='item.index' :text="item.text" v-for="item in items"></li>
+                                                <li :is="item.component" @blur="getComponentValue" @delete="deleteUploadPic" :key='item.index' :title="key" :text="item.text" v-for="item in value"></li>
                                             </ul>
                                         </el-tab-pane>
                                     </el-tabs>
@@ -89,20 +80,18 @@
                 </div>
             </div>
         </el-dialog>
-        <!-- <div id="picDiv">
+        <div id="picDiv">
             <t8t-gallery ref="gallery"
                 :data="dialogImageUrl"
                 v-model="dialogVisible"></t8t-gallery>
-        </div> -->
+        </div>
     </div>
 </template>
 
 <script>
 import Cookie from "js-cookie";
-import Server from "src/config/server.js";
-import axios from "src/utils/axios.js";
-import commonApi from "src/services/commonApi/commonApi.js";
 import Upload from './upload.vue'
+import Service from 'src/services/craftmanager/Service.js'
 export default {
     name: "craft-check",
     created() {
@@ -115,13 +104,17 @@ export default {
     },
     data() {
         return {
-            items: [],
-            editableTabsValue: '2',
-            craftTabs: [],
-            tabIndex: 2,
+            createPath: 'dcs/TechnologyInfo/create',
+            // picLists: [],
+            editableTabsValue: '0',
+            craftTabs: {
+
+            },
+            tabIndex: 0,
             isDialogShow: true,
-            craft: {
-                name: ""
+            technologyInfo: {
+                technologyName: "",
+                technologyInfoMaps: {}
             },
             isPass: false,
             activeTabName: "changeContent",
@@ -160,10 +153,7 @@ export default {
                     }
                 ]
             },
-            scope: {
-                row: {}
-            },
-
+            mark: []
         };
     },
     props: {
@@ -174,7 +164,6 @@ export default {
 
         },
         addTab(targetName) {
-            console.log(Upload);
             let newTabName = ++this.tabIndex + '';
             this.$prompt('请输入子标题名称','',{
                 confirmButtonText: '确定',
@@ -182,34 +171,97 @@ export default {
                 inputPattern: /^[0-9a-zA-Z\u4e00-\u9fa5]*$/,
                 inputErrorMessage: '请输入正确格式标题'
             }).then(({value}) => {
-                this.craftTabs.push({
-                    title: value,
-                    name: newTabName,
-                })
-                this.editableTabsValue = newTabName;
+// this.craftTabs[value] = [];
+                this.$set(this.craftTabs,value,[]);
+// console.log(this.craftTabs)
+                this.technologyInfo.technologyInfoMaps[value] = [];
+                this.editableTabsValue = value;
+// console.log(newTabName);
+// console.log(this.editableTabsValue)
             })
         },
         removeTab(targetName) {
+
             let tabs = this.craftTabs;
             let activeName = this.editableTabsValue;
-            if (activeName === targetName) {
-            tabs.forEach((tab, index) => {
-                if (tab.name === targetName) {
-                let nextTab = tabs[index + 1] || tabs[index - 1];
-                if (nextTab) {
-                    activeName = nextTab.name;
+            this.editableTabsValue = activeName;
+            this.$delete(this.craftTabs,targetName);
+        },
+        add(component, text,event) {
+            let name = event.target.parentNode.parentNode.parentNode.parentNode.firstElementChild.querySelector('.el-tabs__item.is-active.is-closable').innerText;
+            let mark = new Date().getTime();
+
+// console.log(this.craftTabs);
+            this.craftTabs[name].push({
+                'component': component,
+                'text': mark,
+            })
+
+
+
+        },
+        getComponentValue(data) {
+            let moduleName = data.$parent.$options.propsData.label;
+            let picData = data.picData;
+            // let mark = [];
+// console.log(picData);
+            if (picData.picRemark === '') {
+                this.$message.error('请填写图片描述');
+            }else if (picData.picUrl === '') {
+                this.$message.error('请添加图片')
+            }else {
+// console.log(this.craftTabs)
+                // mark.push(picData.mark);
+                if (this.mark.indexOf(picData.mark) == -1) {
+                    this.mark.push(picData.mark);
+                    let item = {
+                        detailTitle: moduleName,
+                        detailDescribe: picData.picRemark,
+                        imageUrl: picData.picUrl
+                    }
+                    this.technologyInfo.technologyInfoMaps[moduleName].push(item);
                 }
+// console.log(mark);
+// console.log(this.technologyInfo);
+            }
+        },
+        deleteUploadPic(that,picData) {
+            let mark = picData.mark;
+            let title = picData.title;
+// console.log();
+            let i = null;
+            this.craftTabs[title].forEach((item,index) => {
+                if (item.text === mark) {
+                    i = index;
                 }
             });
-            }
+            this.$delete(this.mark,mark);
+            this.$delete(this.craftTabs[title],i);
+            this.technologyInfo.technologyInfoMaps[title] = this.craftTabs[title];
+// console.log(this.technologyInfo);
 
-            this.editableTabsValue = activeName;
-            this.craftTabs = tabs.filter(tab => tab.name !== targetName);
         },
-        add(component, text) {
-            this.items.push({
-                'component': component,
-                'text': text,
+        SubmitBtn() {
+            if (this.technologyInfo.technologyName === '') {
+                this.$message.error('请输入工艺标题');
+            }else {
+                let technologyInfo = Object.assign({},this.technologyInfo)
+                let args = {technologyInfo: technologyInfo} ;
+                this.$http.fetch(this.createPath,args).then( res => {
+                    if (res.result.status === 200) {
+                        this.$message.success('创建工艺成功');
+                        this.$router.push({
+                            path: '/tuchat-craft-manage/craft-manage'
+                        })
+                    }else {
+                        this.$message.error('创建失败')
+                    }
+                })
+            }
+        },
+        closeDialog() {
+            this.$router.push({
+                path: '/tuchat-craft-manage/craft-manage'
             })
         }
 
@@ -231,6 +283,16 @@ export default {
 .operate-view .el-textarea__inner {
     max-height: 100px;
 }
+.create-title {
+    margin: 20px auto;
+    width:1220px;
 
-
+}
+.add-pic-btn {
+    margin-top: 20px;
+}
+.create-title-tab {
+    width: 1220px;
+    margin: auto;
+}
 </style>

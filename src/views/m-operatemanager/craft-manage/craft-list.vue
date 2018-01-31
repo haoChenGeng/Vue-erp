@@ -8,9 +8,15 @@
         :showTree="false"
         :tableColumns="tableColumns"
         :tableIndexCol="true"
-        @list-view="onView"
+        :tableCommonData="tableCommonData"
+        :tablePath="tablePath"
+        :tableArgs="tableArgs"
+        @list-craft-view="onView"
         @search-submit="onSearchSubmit"
-        @create-craft="onCreateCraft"
+        @list-craft-create="onCreateCraft"
+        @list-craft-edit="onEdit"
+        @list-craft-delete="onDelete"
+        @table-selection-change="selectionChange"
     >
     </t8t-list-view>
 </template>
@@ -22,71 +28,106 @@
         components: {  },
         data () {
             return {
+                tablePath: 'dcs/TechnologyInfo/queryPage',
+                deletePath: 'dcs/TechnologyInfo/delete',
                 tableColumns: [
                     { prop: "createTime", label: "创建时间", formatter: "dateParser" },
-                    { prop: "craftName", label: "工艺名称" },
-                    { prop: "verifyResult", label: "审核结果", list: "bizStatusMap" },
-                    { prop: "verifyComment", label: "备注" }
+                    { prop: "technologyName", label: "工艺名称" },
+                    { prop: "verifyStatus", label: "审核结果", list: "bizStatusMap" },
+                    { prop: "verifyRemark", label: "备注" }
                 ],
                 searchFields: [
-                    { type: "input", label: "工艺名称", name: "craftName" },
+                    { type: "input", label: "工艺名称", name: "technologyName" },
                     {
                         type: "select",
                         label: "审核结果",
-                        name: "verifyResult",
+                        name: "verifyStatus",
                         selectSourceKey: "bizStatusMap"
                     }
                 ],
                 searchOptions: {
                     bizStatusMap: [
-                        { text: "全部", value: 1 },
-                        { text: "审核中", value: 2 },
-                        { text: "审核通过", value: 3 },
-                        { text: "审核不通过", value: 4 }
+                        { text: "全部", value: null },
+                        { text: "审核中", value: 0 },
+                        { text: "审核通过", value: 1 },
+                        { text: "审核不通过", value: 2 }
                     ]
                 },
+                tableCommonData: {
+                    bizStatusMap: [
+                        { text: "全部", value: null },
+                        { text: "审核中", value: 0 },
+                        { text: "审核通过", value: 1 },
+                        { text: "审核不通过", value: 2 }
+                    ]
+                },
+                selectedRows: [],
+                selIds: null,
+                tableArgs: {
+                    technologyInfo: {
+                        technologyName: null,
+                        verifyStatus: null
+                    },
+                    page: 1,
+                    size: 20
+                }
             }
         },
         created() {
-            this.getCraftList();
+            // this.getCraftList();
         },
         methods: {
             onView (symbol, event) {
-                console.log(this.$TCS);
-                this.$refs['list-view'].disableBySymbol(symbol)
-            },
-            onSearchSubmit (formData) {
-                console.log(formData)
-            },
-            onCreateCraft() {
+// console.log(22222222)
+                // this.$refs['list-view'].disableBySymbol(symbol)
                 const row = this.getLastSelectRow();
-                console.log(row)
                 if (row) {
                     this.$router.push({
-                        path: '/tuchat-craft-manage/craft-create',
+                        path: '/tuchat-craft-manage/craft-view',
                         query: {
-                            uid: row[0].uid
+                            id: row[0].id
                         }
                     })
                 }
             },
-            getCraftList() {
-                // console.log(122);
-                let args = {
-                    technologyInfo: {
-                        technologyName: '',
-                        verifyStatus: null
-                    },
-                    page: 1,
-                    pageSize: 12
+            onEdit() {
+                const row = this.getLastSelectRow();
+                if (row) {
+                    this.$router.push({
+                        path: '/tuchat-craft-manage/craft-edit',
+                        id: row[0].id
+                    })
                 }
-                // console.log(Service)
-                this.$http.fetchOld(Service.CRAFT.name, Service.CRAFT.queryCraftList, args).then(res => {
-                    console.log(res)
-                    if (res.data.status === 200) {
-                        console.log(res)
-                    }
-                })
+            },
+            onSearchSubmit (formData) {
+// console.log(formData)
+                let args = Object.assign({},formData);
+                this.tableArgs = { technologyInfo: args };
+            },
+            onCreateCraft() {
+// console.log(1111111)
+                    this.$router.push({path: '/tuchat-craft-manage/craft-create'})
+
+
+            },
+            onDelete() {
+                let row = this.getLastSelectRow();
+                let args = {technologyInfo: {id: row[0].id}}
+                if (row) {
+                    this.$http.fetch(this.deletePath, args).then(res => {
+                        if (res.result.status === 200) {
+                            this.$message.success('删除成功');
+                            this.$refs['list-view'].getTableInstance().reloadTable()
+                        }else {
+                            this.$message.error('删除失败，'+res.result.result)
+                        }
+                    })
+                }
+            },
+            selectionChange(rows, selIds) {
+                //已选择行
+                this.selectedRows = rows;
+                this.selIds = selIds;
             },
             getLastSelectRow() {
 
