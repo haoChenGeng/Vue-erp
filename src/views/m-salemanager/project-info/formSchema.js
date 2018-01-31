@@ -108,6 +108,7 @@ export default {
                     label: '装修要求',
                     disabled: 'disabled',
                     prop: 'remarks',
+                    rows: 4
                 },
             ],
         },
@@ -781,6 +782,7 @@ export default {
                     label: '装修要求',
                     disabled: 'disabled',
                     prop: 'remarks',
+                    rows: 4
                 },
             ],
         },

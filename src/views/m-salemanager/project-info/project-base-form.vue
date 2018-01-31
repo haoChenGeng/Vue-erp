@@ -150,7 +150,10 @@ export default {
     display: flex;
     flex-direction: column;
 }
-
+.base-form-date .el-form .el-input.is-disabled .el-input__inner,.base-form-date .el-form .el-textarea.is-disabled .el-textarea__inner{
+        cursor: auto;
+        background-color: #fff;
+}
 .base-form-date .el-form {
     flex: 1;
     display: flex;
