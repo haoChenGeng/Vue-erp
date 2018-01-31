@@ -12,6 +12,7 @@ import axios from 'axios'
 let Utils = {
 
     redirectLoginPage() {
+        this.cleanUserInfo()
         //跳转到装修公司登陆页面
         window.location = 'http://www.to8to.com/com_login.php'
         /*window.location.href = window.location.origin + '/#/login/'
@@ -74,6 +75,22 @@ let Utils = {
      */
     logout( jumpToLogin = 1 ) {
         let domain = '.to8to.com'
+        this.cleanUserInfo()
+
+        // 清除本地的cookie
+        if (jumpToLogin) {
+            Cookie.remove('t8t-tc-ticket', { domain: domain })
+            Cookie.remove('t8t-tc-uid', { domain: domain })
+            Cookie.remove('t8t-tc-username', { domain: domain })
+            Cookie.remove('t8t-tc-comname', { domain: domain })
+            Cookie.remove('t8t-tc-comid', { domain: domain })
+            this.redirectLoginPage()
+        }
+    },
+
+    // 清除老装修公司后台cookie信息
+    cleanUserInfo () {
+        let domain = '.to8to.com'
         const cookieArr = [
             'to8to_auth',
             'to8to_la',
@@ -90,23 +107,11 @@ let Utils = {
             'to8to_tuxin_uid',
             'to8to_tuxin_username',
             'to8to_tuxin_boundid',
-            'to8to_tuxin_rootorgid',
+            'to8to_tuxin_rootorgid'
         ]
         cookieArr.forEach(item => {
             Cookie.remove(item, { domain: domain })
         })
-
-        //预留，清除本地的cookie
-
-        if( jumpToLogin ){
-            Cookie.remove('t8t-tc-ticket', { domain: domain })
-            Cookie.remove('t8t-tc-uid', { domain: domain })
-            Cookie.remove('t8t-tc-username', { domain: domain })
-            Cookie.remove('t8t-tc-comname', { domain: domain })
-            Cookie.remove('t8t-tc-comid', { domain: domain })
-            this.redirectLoginPage()
-        }
-
     }
 }
 
