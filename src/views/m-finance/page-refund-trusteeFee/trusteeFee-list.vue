@@ -20,9 +20,9 @@
             @cell-click="cellClick"
         >
             <template scope="scope" slot="applyAble">
-                <el-button type="primary" :disabled="scope.row.applyAble === 0" size="small">申请返款</el-button>
-                <!-- <a v-if="scope.row.applyAble ===1" style="color:blue;cursor: pointer;"> 申请返款 </a> -->
-                <!-- <a v-if="scope.row.applyAble ===0" style="color:gray;cursor: pointer;"> 不可申请返款 </a> -->
+                <el-button type="primary" :disabled="scope.row.applyAble !== 1" size="small">
+                    {{scope.row.applyAble === 0?'系统自动返款':'申请返款'}}
+                    </el-button>
             </template>
         </t8t-grid>
 
@@ -51,6 +51,7 @@
     import DateUtils from 'src/utils/DateUtils.js'
     import Methods from 'src/services/finance/refundOrder.js'
     import TemplateOperator1 from 'src/services/delivery/pcm.js'
+    import commonApi from 'src/services/commonApi/commonApi.js'
 
     export default {
         name: 'trusteeFeeList',
@@ -59,10 +60,11 @@
             return {
                 breadcrumbData: [{title: '财务'}, {title: '返款管理'}, {title: '托管款'}],
                 fields: [
+                    {type: 'input', label: '业主电话号码', name: 'phoneNumber',},
                     {type: 'input', label: '项目ID', name: 'sourceProjectId',},
                     // {type: 'input', label: '业主称呼', name: 'ownerName',},
                     {type: 'input', label: '楼盘地址', name: 'estateName',},
-                    {type: 'select', label: '项目状态', name: 'orderMainStatus', selectSourceKey: 'orderMainStatus',},
+                    {type: 'select', label: '项目状态', name: 'orderSubStatus', selectSourceKey: 'orderSubStatus',},
                 ],
                 selectSource: {
                     //验收状态:0-默认,1-合格,2-不合格
@@ -73,6 +75,7 @@
                     ],
                     //项目状态
                     orderMainStatus: [],
+                    orderSubStatus: [],
                     //返款状态 1.全部 2.无返款状态 3.返款申请中 4.待定 5.已返款 6.返款被驳回
                     reFundStatuses: [
                         {text: '全部', value: 1},
@@ -87,6 +90,11 @@
                 columns: [
                     {"prop": "sourceProjectId", "label": "项目ID"},
                     {"prop": "applyAble", "label": "操作", "width": "100"},
+                    {"prop": "projectId", "label": "返款状态", "width": "100",
+                        formatter(val, row) {
+                            return `<a href="javascript:;">返款详情</a>`
+                        }
+                    },
                     {"prop": "houseAddress", "label": "项目地址"},
                     {"prop": "appellation", "label": "业主称呼"},
                     {"prop": "cPrice", "label": "合同金额"},
@@ -105,7 +113,8 @@
                         projectId: null,
                         appellation: null,
                         estateName: null,
-                        orderMainStatus: null
+                        orderMainStatus: null,
+                        orderSubStatus: null
                     },
                     accountId: +Cookie.get('t8t-tc-uid')
                 },
@@ -151,6 +160,22 @@
                     this.selectSource.orderMainStatus = searchList;
                 }
             });
+
+            //获取装修公司项目主状态的辅助资料
+//            debugger
+            commonApi.queryChildrenByWholeCode("8!810", 3).then((res) => {
+            //    debugger
+                if (res.data.status === 200) {
+                    let searchList = [];
+                    let rows = res.data.result;
+                    for (let i in rows) {
+                        if (rows[i]['propertyCode'] > '8100601') {
+                            searchList.push({text: rows[i]['propertyName'], value: rows[i]['propertyCode']});
+                        }
+                    }
+                    this.selectSource.orderSubStatus = searchList;
+                }
+            });
         },
         methods: {
             submitSearch(objForm) {
@@ -170,6 +195,15 @@
                         this.submitArgs.dto.projectId = row.projectId
                         this.submitArgs.dto.sourceProjectId = row.sourceProjectId
                     }
+                }
+                else if (column.property === 'projectId') {
+                  debugger
+                    this.$router.push({path: '/tuchat-sale-manage/page-project-detail',
+                    query: {
+                        id: row.projectId,
+                        goBackRoute: '/tuchat-finance/page-refund-trusteeFee',
+                        tab:'financeForm'
+                    }})
                 }
             },
             getTrusteeFeeInfo(sourceProjectId) {
