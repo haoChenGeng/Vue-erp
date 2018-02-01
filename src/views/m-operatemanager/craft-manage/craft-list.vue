@@ -76,10 +76,13 @@
         created() {
             // this.getCraftList();
         },
+        activated(){
+
+            this.$refs['list-view'].getTableInstance().reloadTable();
+
+        },
         methods: {
             onView (symbol, event) {
-// console.log(22222222)
-                // this.$refs['list-view'].disableBySymbol(symbol)
                 const row = this.getLastSelectRow();
                 if (row) {
                     this.$router.push({
@@ -95,31 +98,29 @@
                 if (row) {
                     this.$router.push({
                         path: '/tuchat-craft-manage/craft-edit',
-                        id: row[0].id
+                        query: {
+                            id: row[0].id
+                        }
                     })
                 }
             },
             onSearchSubmit (formData) {
-// console.log(formData)
                 let args = Object.assign({},formData);
                 this.tableArgs = { technologyInfo: args };
             },
             onCreateCraft() {
-// console.log(1111111)
-                    this.$router.push({path: '/tuchat-craft-manage/craft-create'})
-
-
+                this.$router.push({path: '/tuchat-craft-manage/craft-create'})
             },
             onDelete() {
                 let row = this.getLastSelectRow();
                 let args = {technologyInfo: {id: row[0].id}}
                 if (row) {
                     this.$http.fetch(this.deletePath, args).then(res => {
-                        if (res.result.status === 200) {
+                        if (res.data.status === 200) {
                             this.$message.success('删除成功');
                             this.$refs['list-view'].getTableInstance().reloadTable()
                         }else {
-                            this.$message.error('删除失败，'+res.result.result)
+                            this.$message.error('删除失败，'+res.data.result)
                         }
                     })
                 }

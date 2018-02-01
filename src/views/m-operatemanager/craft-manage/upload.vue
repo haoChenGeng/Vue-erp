@@ -56,29 +56,31 @@ export default {
     },
     methods: {
         handleRemove(file, fileList) {
-console.log(file, fileList);
+// console.log(file, fileList);
             this.picData.mark = this.text;
             this.picData.title = this.title;
             this.$emit('delete',this,this.picData);
         },
         handlePreview(file) {
-console.log(file);
+// console.log(file);
             this.dialogImageUrl = file.url;
             // this.dialogVisible = true;
         },
         handleSuccess(response, file, fileList){
-console.log(response)
+// console.log(response)
             this.picData.picUrl = file.url;
             this.uploadVisible = true;
+            this.$emit("picSuccess",this,this.picData);
         },
         handleBlur(event) {
-console.log(this.picData);
+// console.log(this.picData);
             this.picData.picRemark = event.target.value;
             this.picData.mark = this.text;
+            this.picData.title = this.title;
             this.$emit("blur", this,  this.picData);
         },
         handleChange(value) {
-console.log(value);
+// console.log(value);
             this.picData.picRemark = event.target.value;
             this.$emit("change", this, this.picData);
         }

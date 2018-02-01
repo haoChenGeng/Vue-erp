@@ -47,20 +47,21 @@
                                             </el-form-item>
                                         </div>
                                     </el-form>
-                                    <div style="margin: 20px auto;width:1220px">
+                                    <!-- <div style="margin: 20px auto;width:1220px">
                                         <el-button
                                             size="small"
                                             @click="editTab"
                                         >
                                             继续上传
                                         </el-button>
-                                    </div>
+                                    </div> -->
                                     <el-tabs type="card" >
                                         <el-tab-pane
                                             v-for="(value, key, index) in technologyInfo.technologyInfoMaps"
                                             :label="key"
                                             :name="index"
                                             :key="index"
+                                            style="width:1220px;margin:auto;"
                                         >
                                         <!-- <upload /> -->
                                             <div class="craft-module" v-for="(item,index) in value" :key="item.id">

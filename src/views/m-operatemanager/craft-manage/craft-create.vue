@@ -69,7 +69,7 @@
                                                 新增图片
                                             </el-button>
                                             <ul>
-                                                <li :is="item.component" @blur="getComponentValue" @delete="deleteUploadPic" :key='item.index' :title="key" :text="item.text" v-for="item in value"></li>
+                                                <li :is="item.component" @blur="getComponentValue" @delete="deleteUploadPic" @picSuccess="picUpload" :key='item.index' :title="key" :text="item.text" v-for="item in value"></li>
                                             </ul>
                                         </el-tab-pane>
                                     </el-tabs>
@@ -97,7 +97,6 @@ export default {
     created() {
     },
     mounted() {
-        // console.log(222);
     },
     components: {
         Upload
@@ -105,7 +104,6 @@ export default {
     data() {
         return {
             createPath: 'dcs/TechnologyInfo/create',
-            // picLists: [],
             editableTabsValue: '0',
             craftTabs: {
 
@@ -165,54 +163,88 @@ export default {
         },
         addTab(targetName) {
             let newTabName = ++this.tabIndex + '';
-            this.$prompt('请输入子标题名称','',{
+            this.$prompt('请输入子标题名称','提示',{
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
-                inputPattern: /^[0-9a-zA-Z\u4e00-\u9fa5]*$/,
-                inputErrorMessage: '请输入正确格式标题'
+                // inputPattern: /^[0-9a-zA-Z\u4e00-\u9fa5]{1,15}$/g,
+                inputValidator: (value) => {
+                    let reg = /^[0-9a-zA-Z\u4e00-\u9fa5]{1,15}$/g;
+                    if (!reg.test(value)) {
+                        return '请输入正确子标题(数字，字母，中文),不超过15字'
+                    }
+                    if (value === null) {
+                        return '子标题不能为空'
+                    }
+                },
+                inputErrorMessage: '请输入正确子标题名，不超过15字'
             }).then(({value}) => {
-// this.craftTabs[value] = [];
                 this.$set(this.craftTabs,value,[]);
-// console.log(this.craftTabs)
                 this.technologyInfo.technologyInfoMaps[value] = [];
                 this.editableTabsValue = value;
-// console.log(newTabName);
-// console.log(this.editableTabsValue)
             })
         },
         removeTab(targetName) {
-
+// console.log(targetName);
             let tabs = this.craftTabs;
             let activeName = this.editableTabsValue;
             this.editableTabsValue = activeName;
             this.$delete(this.craftTabs,targetName);
+            this.$delete(this.technologyInfo.technologyInfoMaps,targetName);
         },
         add(component, text,event) {
+// console.log(event);
             let name = event.target.parentNode.parentNode.parentNode.parentNode.firstElementChild.querySelector('.el-tabs__item.is-active.is-closable').innerText;
             let mark = new Date().getTime();
 
-// console.log(this.craftTabs);
-            this.craftTabs[name].push({
-                'component': component,
-                'text': mark,
-            })
-
-
-
+            if (this.craftTabs[name].length > 10) {
+                this.$message.error('上传图片不能超过10张');
+            }else {
+                this.craftTabs[name].push({
+                    'component': component,
+                    'text': mark,
+                })
+            }
+// console.log(this.technologyInfo.technologyInfoMaps);
+        },
+        picUpload(that,data) {
+// console.log(data);
+// console.log(this.technologyInfo.technologyInfoMaps);
+            if (data.picRemark !== '' && this.mark.indexOf(data.mark) === -1) {
+                this.mark.push(data.mark);
+                let item = {
+                    detailTitle: data.title,
+                    detailDescribe: data.picRemark,
+                    imageUrl: data.picUrl
+                }
+                this.technologyInfo.technologyInfoMaps[data.title].push(item);
+            }
         },
         getComponentValue(data) {
             let moduleName = data.$parent.$options.propsData.label;
             let picData = data.picData;
-            // let mark = [];
-// console.log(picData);
             if (picData.picRemark === '') {
+// console.log(333);
                 this.$message.error('请填写图片描述');
+                let index = this.mark
+                if (this.mark.indexOf(picData.mark) !== -1) {
+                    this.$delete(this.mark,picData.mark);
+                    let i = null
+                    this.technologyInfo.technologyInfoMaps[moduleName].forEach((item,index) => {
+                        if (item.imageUrl === picData.picUrl) {
+                            i = index;
+                        }
+                    })
+                    this.$delete(this.technologyInfo.technologyInfoMaps[moduleName],i);
+                }
             }else if (picData.picUrl === '') {
+// console.log(222)
                 this.$message.error('请添加图片')
+                if (this.mark.indexOf(picData.mark) !== -1) {
+                    this.$delete(this.mark,picData.mark);
+                }
             }else {
-// console.log(this.craftTabs)
-                // mark.push(picData.mark);
-                if (this.mark.indexOf(picData.mark) == -1) {
+// console.log(1111)
+                if (this.mark.indexOf(picData.mark) === -1) {
                     this.mark.push(picData.mark);
                     let item = {
                         detailTitle: moduleName,
@@ -221,14 +253,12 @@ export default {
                     }
                     this.technologyInfo.technologyInfoMaps[moduleName].push(item);
                 }
-// console.log(mark);
-// console.log(this.technologyInfo);
             }
+// console.log(this.technologyInfo);
         },
         deleteUploadPic(that,picData) {
             let mark = picData.mark;
             let title = picData.title;
-// console.log();
             let i = null;
             this.craftTabs[title].forEach((item,index) => {
                 if (item.text === mark) {
@@ -238,17 +268,37 @@ export default {
             this.$delete(this.mark,mark);
             this.$delete(this.craftTabs[title],i);
             this.technologyInfo.technologyInfoMaps[title] = this.craftTabs[title];
-// console.log(this.technologyInfo);
-
         },
         SubmitBtn() {
-            if (this.technologyInfo.technologyName === '') {
+// console.log(this.technologyInfo);
+            let values = Object.values(this.technologyInfo.technologyInfoMaps);
+            let keys = Object.keys(this.technologyInfo.technologyInfoMaps);
+            let module = this.technologyInfo.technologyInfoMaps;
+            for (const key in module) {
+                if (module.hasOwnProperty(key)) {
+                    const element = module[key];
+                    if (element.length === 0) {
+                        this.$delete(module,key);
+                    }
+                }
+            }
+// console.log(this.technologyInfo.technologyName.length);
+            if (values.length < 1) {
+                this.$message.error('请上传图片');
+                return false;
+            }else if (keys.length > 15 || keys < 1) {
+                this.$message.error('子标题为1到15个');
+                return false;
+            }else if (this.technologyInfo.technologyName === '') {
                 this.$message.error('请输入工艺标题');
+                return false;
+            }else if (this.technologyInfo.technologyName.length > 5) {
+                this.$message.error('工艺标题不能超过5个字');
             }else {
                 let technologyInfo = Object.assign({},this.technologyInfo)
                 let args = {technologyInfo: technologyInfo} ;
                 this.$http.fetch(this.createPath,args).then( res => {
-                    if (res.result.status === 200) {
+                    if (res.data.status === 200) {
                         this.$message.success('创建工艺成功');
                         this.$router.push({
                             path: '/tuchat-craft-manage/craft-manage'
