@@ -7,6 +7,8 @@
             :on-preview="handlePreview"
             :on-remove="handleRemove"
             :on-success="handleSuccess"
+            :on-error="handleError"
+            :on-progress="handelProgress"
             :file-list="fileList2"
             :data="uploadParams"
             accept=".png,.jpg,.jpeg"
@@ -15,9 +17,9 @@
             >
             <i class="el-icon-plus"></i>
         </el-upload>
-        <!-- <el-dialog v-model="dialogVisible" size="tiny">
+        <el-dialog v-model="dialogVisible" @close="closeDialog" :modal="false" :before-close="handleClose" size="tiny">
             <img width="100%" v-if="dialogImageUrl" :src="dialogImageUrl" alt="">
-        </el-dialog> -->
+        </el-dialog>
         <el-input
             type="textarea"
             :rows="7"
@@ -62,14 +64,30 @@ export default {
             this.$emit('delete',this,this.picData);
         },
         handlePreview(file) {
-// console.log(file);
+console.log(file);
             this.dialogImageUrl = file.url;
-            // this.dialogVisible = true;
+            this.dialogVisible = true;
+        },
+        handleClose(done) {
+            done();
+        },
+        handleError(file) {
+            this.uploadVisible = false;
+        },
+        handelProgress(file) {
+            this.uploadVisible = true;
+        },
+        closeDialog() {
+            console.log(this);
         },
         handleSuccess(response, file, fileList){
 // console.log(response)
+// console.log(fileList);
+            if (fileList.length > 1) {
+                fileList.length = 1;
+            }
             this.picData.picUrl = file.url;
-            this.uploadVisible = true;
+            // this.uploadVisible = true;
             this.$emit("picSuccess",this,this.picData);
         },
         handleBlur(event) {

@@ -74,7 +74,7 @@
                                                         :action="uploadURL"
                                                         list-type="picture-card"
                                                         :on-preview="handlePreview"
-                                                        :on-remove="handleRemove"
+                                                        :on-remove="handleRemove(item)"
                                                         :on-success="handleSuccess"
                                                         :data="uploadParams"
                                                         accept=".png,.jpg,.jpeg"
@@ -283,8 +283,18 @@ export default {
                 })
             }
         },
-        handleRemove(file, fileList) {
-            console.log(file, fileList);
+        handleRemove(item,file, fileList) {
+            console.log(item);
+            console.log(this.craftTabs);
+            for (const key in this.craftTabs) {
+                if (this.craftTabs.hasOwnProperty(key)) {
+                    const element = this.craftTabs[key];
+                    if (element.id === item.id) {
+                        // this.$delete(this.craftTabs[key])
+                    }
+                }
+            }
+            // this.$delete(this.craftTabs[item.id])
             this.uploadVisible = false;
             this.editUploadVisible = false;
         },

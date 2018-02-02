@@ -175,6 +175,9 @@ export default {
                     if (value === null) {
                         return '子标题不能为空'
                     }
+                    if (Object.keys(this.craftTabs).length > 14) {
+                        return '子标题数不能超过15个'
+                    }
                 },
                 inputErrorMessage: '请输入正确子标题名，不超过15字'
             }).then(({value}) => {
@@ -204,11 +207,8 @@ export default {
                     'text': mark,
                 })
             }
-// console.log(this.technologyInfo.technologyInfoMaps);
         },
         picUpload(that,data) {
-// console.log(data);
-// console.log(this.technologyInfo.technologyInfoMaps);
             if (data.picRemark !== '' && this.mark.indexOf(data.mark) === -1) {
                 this.mark.push(data.mark);
                 let item = {
@@ -222,8 +222,9 @@ export default {
         getComponentValue(data) {
             let moduleName = data.$parent.$options.propsData.label;
             let picData = data.picData;
-            if (picData.picRemark === '') {
-// console.log(333);
+            if (picData.picRemark.length > 300 || picData.picRemark.length < 15) {
+                this.$message.error('图片描述为15-300字');
+            }else if (picData.picRemark === '') {
                 this.$message.error('请填写图片描述');
                 let index = this.mark
                 if (this.mark.indexOf(picData.mark) !== -1) {
@@ -237,13 +238,11 @@ export default {
                     this.$delete(this.technologyInfo.technologyInfoMaps[moduleName],i);
                 }
             }else if (picData.picUrl === '') {
-// console.log(222)
                 this.$message.error('请添加图片')
                 if (this.mark.indexOf(picData.mark) !== -1) {
                     this.$delete(this.mark,picData.mark);
                 }
             }else {
-// console.log(1111)
                 if (this.mark.indexOf(picData.mark) === -1) {
                     this.mark.push(picData.mark);
                     let item = {
@@ -254,7 +253,7 @@ export default {
                     this.technologyInfo.technologyInfoMaps[moduleName].push(item);
                 }
             }
-// console.log(this.technologyInfo);
+console.log(this.technologyInfo);
         },
         deleteUploadPic(that,picData) {
             let mark = picData.mark;
@@ -287,7 +286,7 @@ export default {
                 this.$message.error('请上传图片');
                 return false;
             }else if (keys.length > 15 || keys < 1) {
-                this.$message.error('子标题为1到15个');
+                this.$message.error('子标题数为1到15个');
                 return false;
             }else if (this.technologyInfo.technologyName === '') {
                 this.$message.error('请输入工艺标题');
