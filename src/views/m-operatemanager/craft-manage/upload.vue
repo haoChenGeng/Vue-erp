@@ -9,7 +9,7 @@
             :on-success="handleSuccess"
             :on-error="handleError"
             :on-progress="handelProgress"
-            :file-list="fileList2"
+            :file-list="uploadPicUrl"
             :data="uploadParams"
             accept=".png,.jpg,.jpeg"
             :multiple="false"
@@ -24,7 +24,7 @@
             type="textarea"
             :rows="7"
             placeholder="请输入内容"
-            v-model="textarea"
+            v-model="item.detailDescribe"
             class="pic-remark"
             @blur="handleBlur"
             @change="handleChange"
@@ -36,13 +36,22 @@
 <script>
 import Utils from 'src/utils/Utils.js'
 export default {
-    props: ['text','title'],
+    // props: ['uploadVisible','fileList2'],
+    props: {
+        item: Object,
+        index: Number,
+    },
+    created() {
+        // debugger
+console.log(this.fileList2);
+    },
     data() {
         return {
-            fileList2: [],
+            // fileList2: [],
             picData: {
                 picUrl: '',
-                picRemark: ''
+                picRemark: '',
+                upId: null
             },
             dialogVisible: false,
             uploadURL: Utils.getPicUploadURL(),
@@ -50,19 +59,42 @@ export default {
             textarea: '',
             uploadParams: {
                 bucket: 'scm',
-                module: 'delivery'
+                module: 'pic/dcs/technology'
             },
             pictureCard: 'picture-card',
-            uploadVisible: false
+            isProgress: false
+            // uploadVisible: false
         };
+    },
+    watch: {
+
+    },
+    computed: {
+        uploadPicUrl: function() {
+            if (this.item.imageUrl === '') {
+                return []
+            }else {
+                return [{id: this.item.id,url: Utils.getFullURL(this.item.imageUrl)}]
+            }
+        },
+        uploadVisible: function() {
+            if (this.isProgress) {
+                return true;
+            }
+            if (this.item.imageUrl !== '') {
+                return true;
+            }
+        }
     },
     methods: {
         handleRemove(file, fileList) {
-// console.log(file, fileList);
-            this.picData.mark = this.text;
-            this.picData.title = this.title;
-            this.$emit('delete',this,this.picData);
+console.log()
+            this.fileList2 = [];
+            this.$emit('delete',this.index,this.item.detailTitle);
         },
+        // getUrl(item) {
+        //     return [{id: item.id,url: Utils.getFullURL(item.imageUrl)}]
+        // },
         handlePreview(file) {
 console.log(file);
             this.dialogImageUrl = file.url;
@@ -72,30 +104,30 @@ console.log(file);
             done();
         },
         handleError(file) {
-            this.uploadVisible = false;
+            // this.uploadVisible = false;
         },
         handelProgress(file) {
-            this.uploadVisible = true;
+            this.isProgress = true;
+            // this.uploadVisible = true;
         },
         closeDialog() {
             console.log(this);
         },
         handleSuccess(response, file, fileList){
-// console.log(response)
-// console.log(fileList);
+console.log(response)
             if (fileList.length > 1) {
                 fileList.length = 1;
             }
-            this.picData.picUrl = file.url;
-            // this.uploadVisible = true;
+            this.item.imageUrl = response.result.filePath;
+            // this.picData.picUrl = response.result.filePath;
+            // this.picData.mark = this.text;
+            // this.picData.title = this.title;
             this.$emit("picSuccess",this,this.picData);
         },
         handleBlur(event) {
-// console.log(this.picData);
-            this.picData.picRemark = event.target.value;
             this.picData.mark = this.text;
             this.picData.title = this.title;
-            this.$emit("blur", this,  this.picData);
+            this.$emit("blur", this.index,this.item.detailTitle);
         },
         handleChange(value) {
 // console.log(value);

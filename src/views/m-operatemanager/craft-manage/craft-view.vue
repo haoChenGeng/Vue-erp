@@ -66,7 +66,7 @@
                                         <!-- <upload /> -->
                                             <div class="craft-module" v-for="(item,index) in value" :key="item.id">
                                                 <img
-                                                    v-bind:src="item.imageUrl"
+                                                    v-bind:src="getTechnologyUrl(item.imageUrl)"
                                                     style="vertical-align:8px;width:138px;height:138px;cursor:pointer;"
                                                     @click="showPicture($event.target.src)">
                                                 <el-input
@@ -104,6 +104,7 @@ import Server from "src/config/server.js";
 import axios from "src/utils/axios.js";
 import commonApi from "src/services/commonApi/commonApi.js";
 import Upload from './upload.vue'
+import Utils from 'src/utils/Utils.js'
 export default {
     name: "craft-check",
     created() {
@@ -212,11 +213,14 @@ export default {
                 this.$message.error(error);
             })
         },
+        getTechnologyUrl(url) {
+            return Utils.getFullURL(url)
+        },
         showPicture(url) {
             this.dialogVisible = true;
-
+console.log(Utils);
             this.dialogImageUrl = [
-                { src: url }
+                { src: Utils.getFullURL(url) }
             ]
         },
         initPrams: function () {

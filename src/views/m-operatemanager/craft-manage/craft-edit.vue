@@ -11,7 +11,7 @@
                     <div class="toolbar-container">
 
                         <t8t-toolbar class="t8t-dark"
-                            @SUBMIT="SubmitBtn"
+                            @EDIT-SUBMIT="SubmitBtn"
                             :symbolList="symbolList"
                             ref="indexToolbar">
                         </t8t-toolbar>
@@ -52,56 +52,23 @@
                                             新建子标题
                                         </el-button>
                                     </div>
-                                    <el-tabs type="card" closable @tab-remove="removeTab" >
+                                    <el-tabs type="card" v-model="editableTabsValue" closable @tab-remove="removeTab" >
                                         <el-tab-pane
-                                            v-for="(item,index) in craftTabs"
-                                            :label="item.title"
-                                            :name="index"
+                                            v-for="(value, key, index) in craftTabs"
+                                            :label="key"
+                                            :name="key"
                                             :key="index"
                                             class="create-title-tab"
                                         >
                                             <el-button
                                                 size="small"
-                                                @click="add('Upload', '123')"
+                                                @click="add(key)"
                                                 class="add-pic-btn"
                                             >
                                                 新增图片
                                             </el-button>
-                                            <div v-for="(item,index) in item.content" :key="item.id">
-                                                <div class="upload-remark edit-upload">
-                                                    <el-upload
-                                                        :class="{ 'class-a': editUploadVisible, 'upload-pic':true}"
-                                                        :action="uploadURL"
-                                                        list-type="picture-card"
-                                                        :on-preview="handlePreview"
-                                                        :on-remove="handleRemove(item)"
-                                                        :on-success="handleSuccess"
-                                                        :data="uploadParams"
-                                                        accept=".png,.jpg,.jpeg"
-                                                        :multiple="false"
-                                                        :auto-upload="true"
-                                                        :file-list="getPicUrl(item.imageUrl,item.id)"
-                                                        >
-                                                        <i class="el-icon-plus"></i>
-                                                    </el-upload>
-                                                    <el-dialog v-model="dialogVisible" size="tiny">
-                                                        <img width="100%" v-if="dialogImageUrl" :src="dialogImageUrl" alt="">
-                                                    </el-dialog>
-                                                    <el-input
-                                                        type="textarea"
-                                                        :rows="7"
-                                                        placeholder="请输入内容"
-                                                        v-model="item.detailDescribe"
-                                                        class="pic-remark"
-                                                        @blur="handleBlur"
-                                                        @change="handleChange"
-                                                    >
-                                                    </el-input>
-                                                </div>
-                                            </div>
-                                            <ul>
-                                                <li :is="item.component" @blur="getComponentValue" :key='item.index' :text="item.text" v-for="item in picLists"></li>
-                                            </ul>
+                                            <upload @blur="getBlur" @delete="deleteUploadPic" :key="index1" :fileList2="getPicUrl(item1.imageUrl,item1.id)" :index="index1" :item="item1" v-for="(item1,index1) in value"></upload>
+                                            </upload>
                                         </el-tab-pane>
                                     </el-tabs>
                                 </el-tab-pane>
@@ -130,7 +97,6 @@ export default {
     created() {
         this.initPrams();
         this.getTechnologyInfo();
-        console.log(this.technologyInfo);
     },
     mounted() {
         // console.log(222);
@@ -141,12 +107,12 @@ export default {
     data() {
         return {
             getDetailUrl: 'dcs/TechnologyInfo/findById',
-            createPath: 'dcs/TechnologyInfo/create',
+            updatePath: 'dcs/TechnologyInfo/update',
             picLists: [],
             uploadURL: Utils.getPicUploadURL(),
-            editableTabsValue: '2',
-            craftTabs: [],
-            tabIndex: 2,
+            editableTabsValue: '0',
+            craftTabs: {},
+            tabIndex: 0,
             isDialogShow: true,
             editUploadVisible: true,
             technologyInfo: {
@@ -165,45 +131,17 @@ export default {
                 { props: "url", label: "图片" },
                 { props: "des", label: "描述" }
             ],
-            ruleForm: {
-                agree: null,
-                idea: false
-            },
-            rules: {
-                agree: [
-                    {
-                        required: true,
-                        message: "请选择审核方案",
-                        trigger: "change"
-                    }
-                ],
-                idea: [
-                    {
-                        required: true,
-                        message: "请填写审批意见",
-                        trigger: "blur"
-                    },
-                    {
-                        max: 200,
-                        message: "审批意见最多200字",
-                        trigger: "blur"
-                    }
-                ]
-            },
-
         };
     },
     props: {
     },
     methods: {
-        changeRadio() {},
-        handleTabsEdit() {
-
-        },
         getPicUrl(url,id) {
-            return [{name: id,url: url}]
+
+            console.log(url,id);
+            return [{name: id,url: Utils.getFullURL(url)}]
         },
-        addTab(targetName) {
+        /* addTab(targetName) {
             let newTabName = ++this.tabIndex + '';
             this.$prompt('请输入子标题名称','',{
                 confirmButtonText: '确定',
@@ -235,88 +173,122 @@ export default {
 
             this.editableTabsValue = activeName;
             this.craftTabs = tabs.filter(tab => tab.name !== targetName);
-        },
-        add(component, text) {
-            console.log(component);
-            this.picLists.push({
-                'component': component,
-                'text': text,
-            })
-        },
-        getComponentValue(data) {
-            let moduleName = data.$parent.$options.propsData.label;
-            let picData = data.picData;
-// console.log(data.$parent.$options.propsData.label)
-// console.log(data.picData);
-// console.log(this.technologyInfo);
-            if (picData.picRemark === '') {
-                this.$message.error('请填写图片描述');
-            }else if (picData.picUrl === '') {
-                this.$message.error('请添加图片')
+        }, */
+        addTab(targetName) {
+            let newTabName = ++this.tabIndex + '';
+            if (Object.keys(this.craftTabs).length > 14) {
+                return '子标题数不能超过15个'
             }else {
-                let item = {
-                    detailTitle: moduleName,
-                    detailDescribe: picData.picRemark,
-                    imageUrl: picData.picUrl
-                }
-                this.technologyInfo.technologyInfoMaps[moduleName].push(item);
-                console.log(this.technologyInfo);
-            }
-        },
-        SubmitBtn() {
-            if (this.technologyInfo.technologyName === '') {
-                this.$message.error('请输入工艺标题');
-            }else {
-                let technologyInfo = Object.assign({},this.technologyInfo)
-                let args = {technologyInfo: technologyInfo} ;
-                console.log(33333);
-                this.$http.fetch(this.createPath,args).then( res => {
-                    console.log(res)
-                    if (res.data.status === 200) {
-                        this.$message.success('工艺成功');
-                        this.$router.push({
-                            path: '/tuchat-craft-manage/craft-manage'
-                        })
+                this.$prompt('请输入子标题名称','提示',{
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    inputValidator: (value) => {
+                        let reg = /^[0-9a-zA-Z\u4e00-\u9fa5]{1,15}$/g;
+                        if (!reg.test(value)) {
+                            return '请输入正确子标题(数字，字母，中文),不超过15字'
+                        }
+                        if (value === null) {
+                            return '子标题不能为空'
+                        }
+                    },
+                    inputErrorMessage: '请输入正确子标题名，不超过15字'
+                }).then(({value}) => {
+                    // debugger
+                    if (!this.craftTabs[value]) {
+                        // debugger
+                        this.$set(this.craftTabs,value,[]);
+                        this.editableTabsValue = value;
                     }else {
-                        this.$message.error('失败')
+                        this.$message.error('已存在该子标题');
                     }
+                    // this.technologyInfo.technologyInfoMaps[value] = [];
+                    // this.$set(this.technologyInfo.technologyInfoMaps,value,[]);
                 })
             }
         },
-        handleRemove(item,file, fileList) {
-            console.log(item);
+        removeTab(targetName,index) {
+console.log(targetName,index)
+            let activeName = this.editableTabsValue;
+            this.editableTabsValue = activeName;
+            this.$delete(this.craftTabs,targetName);
+        },
+        add(title) {
+            if (this.craftTabs[title].length > 10) {
+                this.$message.error('图片不能超过10张')
+            }else {
+                this.craftTabs[title].push({
+                    detailDescribe: '',
+                    imageUrl: '',
+                    detailTitle: title
+                })
+            }
             console.log(this.craftTabs);
-            for (const key in this.craftTabs) {
-                if (this.craftTabs.hasOwnProperty(key)) {
-                    const element = this.craftTabs[key];
-                    if (element.id === item.id) {
-                        // this.$delete(this.craftTabs[key])
+        },
+        getBlur(index,title) {
+            let des = this.craftTabs[title][index].detailDescribe;
+            if (des.length > 300 || des.length < 15) {
+                this.$message.error('图片描述为15-300字');
+            }
+        },
+        validateRemark(item,index) {
+            if (item.imageUrl === '') {
+                this.$message.error('子标题:' + item.detailTitle + '下有图片未添加');
+                return false;
+            }else if (item.detailDescribe.length > 300 || item.detailDescribe.length < 15) {
+                this.$message.error('子标题' + item.detailTitle + '下有描述应为15-300字');
+                return false;
+            }else {
+                return true;
+            }
+        },
+        deleteUploadPic(index,title) {
+            console.log(this.craftTabs);
+            this.$delete(this.craftTabs[title],index);
+        },
+        SubmitBtn() {
+            let args = this.craftTabs;
+console.log(args)
+            if (this.technologyInfo.technologyName == '') {
+                this.$message.error('请输入工艺标题');
+            }else {
+                let pass = true;
+                for (const key in args) {
+                    if (args.hasOwnProperty(key)) {
+                        const element = args[key];
+                        if (element.length === 0) {
+                            this.$message.error('子标题' + key + '没有图片');
+                            pass = false;
+                        }
+                        element.forEach((item,index) => {
+                            if (!this.validateRemark(item,index)) {
+                                pass = false;
+                            }
+                        });
                     }
                 }
+                if (pass) {
+                    this.technologyInfo['technologyInfoMaps'] = this.craftTabs;
+                    let technologyArgs = {technologyInfo: this.technologyInfo} ;
+console.log(technologyArgs);
+                    this.$http.fetch(this.updatePath,technologyArgs).then( res => {
+                        debugger
+                        if (res.data.status === 200) {
+                            this.$message.success('编辑工艺成功');
+                            this.$router.push({
+                                path: '/tuchat-craft-manage/craft-manage'
+                            })
+                        }else {
+                            this.$message.error('编辑失败')
+                        }
+                    })
+                }
+
             }
-            // this.$delete(this.craftTabs[item.id])
-            this.uploadVisible = false;
-            this.editUploadVisible = false;
         },
-        handlePreview(file) {
-            console.log(file);
-            this.dialogImageUrl = file.url;
-            // this.dialogVisible = true;
-        },
-        handleSuccess(response, file, fileList){
-            console.log(response)
-            this.picData.picUrl = file.url;
-            this.uploadVisible = true;
-        },
-        handleBlur(event) {
-            console.log(this.picData);
-            this.picData.picRemark = event.target.value;
-            this.$emit("blur", this,  this.picData);
-        },
-        handleChange(value) {
-            console.log(value);
-            this.picData.picRemark = event.target.value;
-            this.$emit("change", this, this.picData);
+        closeDialog() {
+            this.$router.push({
+                path: '/tuchat-craft-manage/craft-manage'
+            })
         },
         initPrams: function () {
             //公司id
@@ -328,22 +300,13 @@ export default {
             }
             this.$http.fetch(this.getDetailUrl, args).then(res => {
                 if (res.data.status === 200) {
-console.log(res.data.result)
                     this.technologyInfo = res.data.result;
-console.log(this.technologyInfo);
-                    let tabsArr = this.technologyInfo.technologyInfoMaps;
-                    if (Object.keys(tabsArr) !== 0) {
-                        for (const key in tabsArr) {
-
-                                this.craftTabs.push({
-                                    title: key,
-                                    name: key,
-                                    content: tabsArr[key]
-                                });
-
-                        }
-                    }
+// console.log(this.technologyInfo);
+                    // let tabsArr = this.technologyInfo.technologyInfoMaps;
+                    this.craftTabs = this.technologyInfo.technologyInfoMaps;
 console.log(this.craftTabs);
+                }else {
+                    this.$message.error(res.data.result);
                 }
             }).catch(error => {
                 this.$message.error(error);
