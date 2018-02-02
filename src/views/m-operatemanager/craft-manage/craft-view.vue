@@ -200,10 +200,16 @@ export default {
                 id: this.id
             }
             this.$http.fetch(this.getDetailUrl, args).then(res => {
+                console.log(222222)
                 if (res.data.status === 200) {
                     console.log(res.data.result)
                     this.technologyInfo = res.data.result;
+                }else {
+                    console.log(111)
+                    this.$message.error(res.data.result || res.data.error || res.data.message);
                 }
+            }).catch(error => {
+                this.$message.error(error);
             })
         },
         showPicture(url) {
