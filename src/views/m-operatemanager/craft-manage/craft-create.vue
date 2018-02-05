@@ -69,8 +69,8 @@
                                                 新增图片
                                             </el-button>
 
-                                            <upload @blur="getBlur" @delete="deleteUploadPic" :key="index1" :index="index1" :item="item1" v-for="(item1,index1) in value"></upload>
-
+                                            <upload @blur="getBlur" @delete="deleteUploadPic" ref="profile" :key="index1" :index="index1" :item="item1" v-for="(item1,index1) in value"></upload>
+                                            <div style="margin-top:130px;visibility:hidden"><a id="msg_end" name="1"  href="#1">123</a></div>
                                         </el-tab-pane>
                                     </el-tabs>
                                 </el-tab-pane>
@@ -95,8 +95,6 @@ import Service from 'src/services/craftmanager/Service.js'
 export default {
     name: "craft-check",
     created() {
-    },
-    mounted() {
     },
     components: {
         Upload
@@ -156,11 +154,13 @@ export default {
     },
     props: {
     },
+    mounted () {
+    },
     methods: {
         addTab(targetName) {
             let newTabName = ++this.tabIndex + '';
             if (Object.keys(this.craftTabs).length > 14) {
-                return '子标题数不能超过15个'
+                this.$message.error('子标题数不能超过15个');
             }else {
                 this.$prompt('请输入子标题名称','提示',{
                     confirmButtonText: '确定',
@@ -177,8 +177,6 @@ export default {
                     inputErrorMessage: '请输入正确子标题名，不超过15字'
                 }).then(({value}) => {
                     this.$set(this.craftTabs,value,[]);
-                    // this.technologyInfo.technologyInfoMaps[value] = [];
-                    // this.$set(this.technologyInfo.technologyInfoMaps,value,[]);
                     this.editableTabsValue = value;
                 })
             }
@@ -189,7 +187,7 @@ export default {
             this.$delete(this.craftTabs,targetName);
         },
         add(title) {
-            if (this.craftTabs[title].length > 10) {
+            if (this.craftTabs[title].length > 9) {
                 this.$message.error('图片不能超过10张')
             }else {
                 this.craftTabs[title].push({
@@ -197,8 +195,9 @@ export default {
                     imageUrl: '',
                     detailTitle: title
                 })
+                document.getElementById('msg_end').scrollIntoView(true);
             }
-            console.log(this.craftTabs);
+            // console.log(this.craftTabs);
         },
         getBlur(index,title) {
             let des = this.craftTabs[title][index].detailDescribe;
@@ -227,6 +226,10 @@ console.log(args)
 
             if (this.technologyInfo.technologyName == '') {
                 this.$message.error('请输入工艺标题');
+            }else if (this.technologyInfo.technologyName.length > 5) {
+                this.$message.error('工艺标题不能超过5个字')
+            }else if (Object.keys(args).length === 0) {
+                this.$message.error('请创建子标题');
             }else {
                 let pass = true;
                 for (const key in args) {
@@ -235,12 +238,16 @@ console.log(args)
                         if (element.length === 0) {
                             this.$message.error('子标题' + key + '没有图片');
                             pass = false;
+                        }else if (element.length > 10) {
+                            this.$message.error('子标题' + key + '图片超过10个')
+                            pass = false;
+                        }else {
+                            element.forEach((item,index) => {
+                                if (!this.validateRemark(item,index)) {
+                                    pass = false;
+                                }
+                            });
                         }
-                        element.forEach((item,index) => {
-                            if (!this.validateRemark(item,index)) {
-                                pass = false;
-                            }
-                        });
                     }
                 }
                 if (pass) {
@@ -254,7 +261,7 @@ console.log(technologyArgs);
                                 path: '/tuchat-craft-manage/craft-manage'
                             })
                         }else {
-                            this.$message.error('创建失败')
+                            this.$message.error('创建失败'+ res.data.result || res.data.status)
                         }
                     })
                 }

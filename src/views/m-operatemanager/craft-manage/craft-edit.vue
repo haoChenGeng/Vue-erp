@@ -141,43 +141,10 @@ export default {
             console.log(url, id)
             return [{ name: id, url: Utils.getFullURL(url) }]
         },
-        /* addTab(targetName) {
-            let newTabName = ++this.tabIndex + '';
-            this.$prompt('请输入子标题名称','',{
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                inputPattern: /^[0-9a-zA-Z\u4e00-\u9fa5]*$/,
-                inputErrorMessage: '请输入正确格式标题'
-            }).then(({value}) => {
-                this.craftTabs.push({
-                    title: value,
-                    name: newTabName,
-                });
-                this.technologyInfo.technologyInfoMaps[value] = [];
-                this.editableTabsValue = newTabName;
-            })
-        },
-        removeTab(targetName) {
-            let tabs = this.craftTabs;
-            let activeName = this.editableTabsValue;
-            if (activeName === targetName) {
-            tabs.forEach((tab, index) => {
-                if (tab.name === targetName) {
-                let nextTab = tabs[index + 1] || tabs[index - 1];
-                if (nextTab) {
-                    activeName = nextTab.name;
-                }
-                }
-            });
-            }
-
-            this.editableTabsValue = activeName;
-            this.craftTabs = tabs.filter(tab => tab.name !== targetName);
-        }, */
         addTab(targetName) {
             let newTabName = ++this.tabIndex + ''
             if (Object.keys(this.craftTabs).length > 14) {
-                return '子标题数不能超过15个'
+                this.$message.error('子标题数不能超过15个')
             } else {
                 this.$prompt('请输入子标题名称', '提示', {
                     confirmButtonText: '确定',
@@ -201,8 +168,6 @@ export default {
                     } else {
                         this.$message.error('已存在该子标题')
                     }
-                    // this.technologyInfo.technologyInfoMaps[value] = [];
-                    // this.$set(this.technologyInfo.technologyInfoMaps,value,[]);
                 })
             }
         },
@@ -213,7 +178,7 @@ export default {
             this.$delete(this.craftTabs, targetName)
         },
         add(title) {
-            if (this.craftTabs[title].length > 10) {
+            if (this.craftTabs[title].length > 9) {
                 this.$message.error('图片不能超过10张')
             } else {
                 this.craftTabs[title].push({
@@ -257,7 +222,11 @@ export default {
             console.log(args)
             if (this.technologyInfo.technologyName == '') {
                 this.$message.error('请输入工艺标题')
-            } else {
+            } else if (this.technologyInfo.technologyName.length > 5) {
+                this.$message.error('工艺标题不能超过5个字')
+            }else if (Object.keys(args).length === 0) {
+                this.$message.error('请创建子标题');
+            }else {
                 let pass = true
                 for (const key in args) {
                     if (args.hasOwnProperty(key)) {
@@ -265,12 +234,13 @@ export default {
                         if (element.length === 0) {
                             this.$message.error('子标题' + key + '没有图片')
                             pass = false
+                        }else {
+                            element.forEach((item, index) => {
+                                if (!this.validateRemark(item, index)) {
+                                    pass = false
+                                }
+                            })
                         }
-                        element.forEach((item, index) => {
-                            if (!this.validateRemark(item, index)) {
-                                pass = false
-                            }
-                        })
                     }
                 }
                 if (pass) {
@@ -292,7 +262,7 @@ export default {
                                     path: '/tuchat-craft-manage/craft-manage',
                                 })
                             } else {
-                                this.$message.error('编辑失败')
+                                this.$message.error('编辑失败' + res.data.result || res.data.status)
                             }
                         })
                 }
@@ -316,8 +286,6 @@ export default {
                 .then(res => {
                     if (res.data.status === 200) {
                         this.technologyInfo = res.data.result
-                        // console.log(this.technologyInfo);
-                        // let tabsArr = this.technologyInfo.technologyInfoMaps;
                         this.craftTabs = this.technologyInfo.technologyInfoMaps
                         console.log(this.craftTabs)
                     } else {
