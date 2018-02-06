@@ -5,7 +5,7 @@
             :action="uploadURL"
             list-type="picture-card"
             :on-preview="handlePreview"
-            :on-remove="handleRemove"
+            :on-remove="handleRemovePic"
             :on-success="handleSuccess"
             :on-error="handleError"
             :on-progress="handelProgress"
@@ -30,20 +30,25 @@
             @change="handleChange"
         >
         </el-input>
+        <el-button
+            size="small"
+            @click="handleRemove"
+            class="delete-pic-btn"
+        >
+            删除
+        </el-button>
     </div>
 </template>
 
 <script>
 import Utils from 'src/utils/Utils.js'
 export default {
-    // props: ['uploadVisible','fileList2'],
     props: {
         item: Object,
         index: Number,
     },
     created() {
         // debugger
-console.log(this.fileList2);
     },
     data() {
         return {
@@ -78,25 +83,28 @@ console.log(this.fileList2);
             }
         },
         uploadVisible: function() {
+console.log(this.item);
             if (this.isProgress) {
                 return true;
             }
             if (this.item.imageUrl !== '') {
                 return true;
+            }else {
+                return false;
             }
         }
     },
     methods: {
         handleRemove(file, fileList) {
-console.log()
-            this.fileList2 = [];
             this.$emit('delete',this.index,this.item.detailTitle);
         },
-        // getUrl(item) {
-        //     return [{id: item.id,url: Utils.getFullURL(item.imageUrl)}]
-        // },
+        handleRemovePic(file, fileList) {
+            this.item.imageUrl = '';
+            this.$emit('deletePic',this.index,this.item.detailTitle);
+
+        },
         handlePreview(file) {
-console.log(file);
+// console.log(file);
             this.dialogImageUrl = file.url;
             this.dialogVisible = true;
         },
@@ -104,29 +112,27 @@ console.log(file);
             done();
         },
         handleError(file) {
-            // this.uploadVisible = false;
+            this.$message.error('upload error')
         },
         handelProgress(file) {
             this.isProgress = true;
-            // this.uploadVisible = true;
         },
         closeDialog() {
-            console.log(this);
+            // console.log(this);
         },
         handleSuccess(response, file, fileList){
 console.log(response)
+console.log(this.item);
+            this.isProgress = false;
             if (fileList.length > 1) {
                 fileList.length = 1;
             }
             this.item.imageUrl = response.result.filePath;
-            // this.picData.picUrl = response.result.filePath;
-            // this.picData.mark = this.text;
-            // this.picData.title = this.title;
             this.$emit("picSuccess",this,this.picData);
         },
         handleBlur(event) {
-            this.picData.mark = this.text;
-            this.picData.title = this.title;
+            // this.picData.mark = this.text;
+            // this.picData.title = this.title;
             this.$emit("blur", this.index,this.item.detailTitle);
         },
         handleChange(value) {
@@ -146,6 +152,7 @@ console.log(response)
     width: 40%;
     margin-left: 20px;
     height: 148px;
+    vertical-align: text-bottom;
 }
 .upload-remark {
     margin-top: 20px;
@@ -179,5 +186,9 @@ console.log(response)
   .el-upload--picture-card {
       height: 138px;
       vertical-align: 7px;
+  }
+  .delete-pic-btn {
+      vertical-align: 65px;
+      margin-left: 30px;
   }
 </style>

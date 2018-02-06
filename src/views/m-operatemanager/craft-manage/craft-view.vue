@@ -47,26 +47,18 @@
                                             </el-form-item>
                                         </div>
                                     </el-form>
-                                    <!-- <div style="margin: 20px auto;width:1220px">
-                                        <el-button
-                                            size="small"
-                                            @click="editTab"
-                                        >
-                                            继续上传
-                                        </el-button>
-                                    </div> -->
                                     <el-tabs type="card" >
                                         <el-tab-pane
-                                            v-for="(value, key, index) in technologyInfo.technologyInfoMaps"
-                                            :label="key"
+                                            v-for="(item,index) in technologyInfo.technologyInfoMaps"
+                                            :label="item[0].detailTitle"
                                             :name="index"
                                             :key="index"
                                             style="width:1220px;margin:auto;"
                                         >
                                         <!-- <upload /> -->
-                                            <div class="craft-module" v-for="(item,index) in value" :key="item.id">
+                                            <div class="craft-module" v-for="(item1,index1) in item" :key="item1.id">
                                                 <img
-                                                    v-bind:src="getTechnologyUrl(item.imageUrl)"
+                                                    v-bind:src="getTechnologyUrl(item1.imageUrl)"
                                                     style="vertical-align:8px;width:138px;height:138px;cursor:pointer;"
                                                     @click="showPicture($event.target.src)">
                                                 <el-input
@@ -74,7 +66,7 @@
                                                     :rows="7"
                                                     placeholder="请输入内容"
                                                     :disabled="true"
-                                                    v-model="item.detailDescribe"
+                                                    v-model="item1.detailDescribe"
                                                     class="pic-remark"
                                                     @blur="handleBlur"
                                                     @change="handleChange"

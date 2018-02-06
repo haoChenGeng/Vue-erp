@@ -95,13 +95,18 @@
             },
             onEdit() {
                 const row = this.getLastSelectRow();
+                // row[0].verifyStatus = 1;
                 if (row) {
-                    this.$router.push({
-                        path: '/tuchat-craft-manage/craft-edit',
-                        query: {
-                            id: row[0].id
-                        }
-                    })
+                    if (row[0].verifyStatus === 0) {
+                        this.$message.error('审核中工艺不可编辑');
+                    }else {
+                        this.$router.push({
+                            path: '/tuchat-craft-manage/craft-edit',
+                            query: {
+                                id: row[0].id
+                            }
+                        })
+                    }
                 }
             },
             onSearchSubmit (formData) {
@@ -115,14 +120,18 @@
                 let row = this.getLastSelectRow();
                 let args = {technologyInfo: {id: row[0].id}}
                 if (row) {
-                    this.$http.fetch(this.deletePath, args).then(res => {
-                        if (res.data.status === 200) {
-                            this.$message.success('删除成功');
-                            this.$refs['list-view'].getTableInstance().reloadTable()
-                        }else {
-                            this.$message.error('删除失败，'+res.data.result)
-                        }
-                    })
+                    if (row[0].verifyStatus === 0) {
+                        this.$message.error('审核中工艺不可删除');
+                    }else {
+                        this.$http.fetch(this.deletePath, args).then(res => {
+                            if (res.data.status === 200) {
+                                this.$message.success('删除成功');
+                                this.$refs['list-view'].getTableInstance().reloadTable()
+                            }else {
+                                this.$message.error('删除失败，'+ res.data.result)
+                            }
+                        })
+                    }
                 }
             },
             selectionChange(rows, selIds) {

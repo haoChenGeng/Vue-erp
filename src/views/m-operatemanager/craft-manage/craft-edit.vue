@@ -53,24 +53,26 @@
                                         v-model="editableTabsValue"
                                         closable
                                         @tab-remove="removeTab">
-                                        <el-tab-pane v-for="(value, key, index) in craftTabs"
-                                            :label="key"
-                                            :name="key"
+                                        <el-tab-pane v-for="(item,index) in craftTabs"
+                                            :label="item.title"
+                                            :name="item.name"
                                             :key="index"
                                             class="create-title-tab">
                                             <el-button size="small"
-                                                @click="add(key)"
+                                                @click="add(item.title,index)"
                                                 class="add-pic-btn">
                                                 新增图片
                                             </el-button>
                                             <upload @blur="getBlur"
-                                                @delete="deleteUploadPic"
+                                                @delete="deleteUpload"
+                                                @deletePic="deleteUploadPic"
                                                 :key="index1"
                                                 :fileList2="getPicUrl(item1.imageUrl,item1.id)"
                                                 :index="index1"
                                                 :item="item1"
-                                                v-for="(item1,index1) in value"></upload>
+                                                v-for="(item1,index1) in item.content"></upload>
                                             </upload>
+                                            <div style="margin-top:140px;visibility:hidden" id="msg_end"></div>
                                         </el-tab-pane>
                                     </el-tabs>
                                 </el-tab-pane>
@@ -110,16 +112,14 @@ export default {
         return {
             getDetailUrl: 'dcs/TechnologyInfo/findById',
             updatePath: 'dcs/TechnologyInfo/updateTechnologyInfoV2',
-            picLists: [],
             uploadURL: Utils.getPicUploadURL(),
             editableTabsValue: '0',
-            craftTabs: {},
-            tabIndex: 0,
+            craftTabs: [],
             isDialogShow: true,
             editUploadVisible: true,
             technologyInfo: {
                 technologyName: '',
-                technologyInfoMaps: {},
+                technologyInfoMaps: [],
             },
             isPass: false,
             activeTabName: 'changeContent',
@@ -136,14 +136,23 @@ export default {
         }
     },
     props: {},
+    computed: {
+        tabIndex: function() {
+            if (this.craftTabs.length) {
+                return this.craftTabs.length
+            }else {
+                return 0
+            }
+        }
+    },
     methods: {
         getPicUrl(url, id) {
-            console.log(url, id)
+            // console.log(url, id)
             return [{ name: id, url: Utils.getFullURL(url) }]
         },
         addTab(targetName) {
             let newTabName = ++this.tabIndex + ''
-            if (Object.keys(this.craftTabs).length > 14) {
+            if (this.craftTabs.length > 14) {
                 this.$message.error('子标题数不能超过15个')
             } else {
                 this.$prompt('请输入子标题名称', '提示', {
@@ -160,40 +169,67 @@ export default {
                     },
                     inputErrorMessage: '请输入正确子标题名，不超过15字',
                 }).then(({ value }) => {
-                    // debugger
-                    if (!this.craftTabs[value]) {
-                        // debugger
-                        this.$set(this.craftTabs, value, [])
-                        this.editableTabsValue = value
-                    } else {
-                        this.$message.error('已存在该子标题')
-                    }
+                    this.craftTabs.push({
+                        title: value,
+                        name: newTabName,
+                        content: []
+                    })
+                    this.editableTabsValue = newTabName;
+console.log(this.editableTabsValue);
                 })
             }
         },
-        removeTab(targetName, index) {
-            console.log(targetName, index)
-            let activeName = this.editableTabsValue
-            this.editableTabsValue = activeName
-            this.$delete(this.craftTabs, targetName)
+        removeTab(targetName) {
+            let tabs = this.craftTabs;
+            let activeName = this.editableTabsValue;
+            if (activeName === targetName) {
+                tabs.forEach((tab, index) => {
+                    if (tab.name === targetName) {
+                        let nextTab = tabs[index + 1] || tabs[index - 1];
+                        if (nextTab) {
+                            activeName = nextTab.name;
+                        }
+                    }
+                });
+            }
+            this.editableTabsValue = activeName;
+            this.craftTabs = tabs.filter(tab => tab.name !== targetName);
+console.log(this.craftTabs);
         },
-        add(title) {
-            if (this.craftTabs[title].length > 9) {
+        add(title,index) {
+            if (this.craftTabs[index].content.length > 9) {
                 this.$message.error('图片不能超过10张')
             } else {
-                this.craftTabs[title].push({
+                this.craftTabs[index].content.push({
                     detailDescribe: '',
                     imageUrl: '',
                     detailTitle: title,
                 })
+                document.getElementById('msg_end').scrollIntoView(true);
             }
-            console.log(this.craftTabs)
+            // console.log(this.craftTabs)
         },
         getBlur(index, title) {
-            let des = this.craftTabs[title][index].detailDescribe
-            if (des.length > 300 || des.length < 15) {
-                this.$message.error('图片描述为15-300字')
+            let des = this.craftTabs.filter((item,index) => {
+                return item.title === title
+            })
+            if (des[0].content[index].detailDescribe.length > 300 || des[0].content[index].detailDescribe.length < 15) {
+                this.$message.error('图片描述为15-300字');
             }
+        },
+        deleteUpload(index,title) {
+            this.craftTabs.forEach(element => {
+                if (element.title === title) {
+                    this.$delete(element.content,index)
+                }
+            });
+        },
+        deleteUploadPic(index,title) {
+            this.craftTabs.forEach(element => {
+                if (element.title === title) {
+                    element.content[index].imageUrl = '';
+                }
+            });
         },
         validateRemark(item, index) {
             if (item.imageUrl === '') {
@@ -213,58 +249,49 @@ export default {
                 return true
             }
         },
-        deleteUploadPic(index, title) {
-            console.log(this.craftTabs)
-            this.$delete(this.craftTabs[title], index)
-        },
         SubmitBtn() {
             let args = this.craftTabs
-            console.log(args)
             if (this.technologyInfo.technologyName == '') {
                 this.$message.error('请输入工艺标题')
             } else if (this.technologyInfo.technologyName.length > 5) {
                 this.$message.error('工艺标题不能超过5个字')
-            }else if (Object.keys(args).length === 0) {
+            }else if (args.length === 0) {
                 this.$message.error('请创建子标题');
             }else {
                 let pass = true
-                for (const key in args) {
-                    if (args.hasOwnProperty(key)) {
-                        const element = args[key]
-                        if (element.length === 0) {
-                            this.$message.error('子标题' + key + '没有图片')
-                            pass = false
-                        }else {
-                            element.forEach((item, index) => {
-                                if (!this.validateRemark(item, index)) {
-                                    pass = false
-                                }
-                            })
-                        }
+                for (let i = 0; i < args.length; i++) {
+                    const element = args[i];
+                    if (element.content.length === 0) {
+                        this.$message.error('子标题' + element.title + '没有图片');
+                        pass = false;
+                    }else if (element.content.length > 10) {
+                        this.$message.error('子标题' + element.title + '图片超过10个')
+                        pass = false;
+                    }else {
+                        element.content.forEach((item,index) => {
+                            if (!this.validateRemark(item,index)) {
+                                pass = false;
+                            }
+                        });
                     }
                 }
                 if (pass) {
-                    this.technologyInfo['technologyInfoMaps'] = this.craftTabs
-                    let technologyArgs = {
-                        id: this.technologyInfo.id,
-                        technologyInfo: this.technologyInfo,
+                    for (let index = 0; index < args.length; index++) {
+                        const element = args[index];
+                        this.technologyInfo['technologyInfoMaps'].push(element.content);
                     }
-                    console.log(technologyArgs)
-                    this.$http
-                        .fetch(this.updatePath, technologyArgs)
-                        .then(res => {
-                            if (
-                                res.data.status === 200 &&
-                                res.data.result === 1
-                            ) {
-                                this.$message.success('编辑工艺成功')
-                                this.$router.push({
-                                    path: '/tuchat-craft-manage/craft-manage',
-                                })
-                            } else {
-                                this.$message.error('编辑失败' + res.data.result || res.data.status)
-                            }
-                        })
+                    let technologyArgs = {technologyInfo: this.technologyInfo,id: this.id} ;
+                    this.$http.fetch(this.updatePath,technologyArgs).then( res => {
+                        if (res.data.status === 200) {
+                            // debugger
+                            this.$message.success('编辑工艺成功');
+                            this.$router.push({
+                                path: '/tuchat-craft-manage/craft-manage'
+                            })
+                        }else {
+                            this.$message.error('编辑失败:'+ res.data.error || res.data.result)
+                        }
+                    })
                 }
             }
         },
@@ -285,11 +312,30 @@ export default {
                 .fetch(this.getDetailUrl, args)
                 .then(res => {
                     if (res.data.status === 200) {
-                        this.technologyInfo = res.data.result
-                        this.craftTabs = this.technologyInfo.technologyInfoMaps
-                        console.log(this.craftTabs)
+                        let data = res.data.result.technologyInfoMaps;
+                        data.forEach((item,index) => {
+                            this.craftTabs.push({
+                                title: item[0].detailTitle,
+                                name: index,
+                                content: item
+                            })
+                        });
+                        /* for (const key in data) {
+                            if (data.hasOwnProperty(key)) {
+                                const element = data[key];
+                                this.craftTabs.push({
+                                    title: key,
+                                    name: key,
+                                    content: element
+                                })
+                            }
+                        } */
+console.log(this.craftTabs);
+                        // this.editableTabsValue = this.craftTabs[0].name;
+console.log(this.editableTabsValue);
+                        this.technologyInfo.technologyName = res.data.result.technologyName;
                     } else {
-                        this.$message.error(res.data.result)
+                        this.$message.error(res.data.result || res.data.error)
                     }
                 })
                 .catch(error => {
@@ -371,10 +417,9 @@ export default {
     height: 138px;
     vertical-align: 7px;
 }
-/* .el-upload-list--picture-card .el-upload-list__item {
-      width: 138px;
-      height: 138px;
-  } */
+.el-upload-list--picture-card .el-upload-list__item {
+    margin: 0;
+}
 .edit-upload {
     margin-left: 40px;
 }

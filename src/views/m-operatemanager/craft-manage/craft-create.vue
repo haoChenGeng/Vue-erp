@@ -55,22 +55,31 @@
                                     </div>
                                     <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab" >
                                         <el-tab-pane
-                                            v-for="(value, key, index) in craftTabs"
-                                            :label="key"
-                                            :name="key"
+                                            v-for="(item, index) in craftTabs"
+                                            :label="item.title"
+                                            :name="item.name"
                                             :key="index"
                                             class="create-title-tab"
                                         >
                                             <el-button
                                                 size="small"
-                                                @click="add(key)"
+                                                @click="add(item.title,index)"
                                                 class="add-pic-btn"
                                             >
                                                 新增图片
                                             </el-button>
 
-                                            <upload @blur="getBlur" @delete="deleteUploadPic" ref="profile" :key="index1" :index="index1" :item="item1" v-for="(item1,index1) in value"></upload>
-                                            <div style="margin-top:130px;visibility:hidden"><a id="msg_end" name="1"  href="#1">123</a></div>
+                                            <upload
+                                                @blur="getBlur"
+                                                @delete="deleteUpload"
+                                                @deletePic="deleteUploadPic"
+                                                :key="index1"
+                                                :index="index1"
+                                                :item="item1"
+                                                v-for="(item1,index1) in item.content"
+                                            >
+                                            </upload>
+                                            <div style="margin-top:140px;visibility:hidden" id="msg_end"></div>
                                         </el-tab-pane>
                                     </el-tabs>
                                 </el-tab-pane>
@@ -103,14 +112,12 @@ export default {
         return {
             createPath: 'dcs/TechnologyInfo/create',
             editableTabsValue: '0',
-            craftTabs: {
-
-            },
+            craftTabs: [],
             tabIndex: 0,
             isDialogShow: true,
             technologyInfo: {
                 technologyName: "",
-                technologyInfoMaps: {}
+                technologyInfoMaps: []
             },
             isPass: false,
             activeTabName: "changeContent",
@@ -159,7 +166,7 @@ export default {
     methods: {
         addTab(targetName) {
             let newTabName = ++this.tabIndex + '';
-            if (Object.keys(this.craftTabs).length > 14) {
+            if (this.craftTabs.length > 14) {
                 this.$message.error('子标题数不能超过15个');
             }else {
                 this.$prompt('请输入子标题名称','提示',{
@@ -176,37 +183,76 @@ export default {
                     },
                     inputErrorMessage: '请输入正确子标题名，不超过15字'
                 }).then(({value}) => {
-                    this.$set(this.craftTabs,value,[]);
-                    this.editableTabsValue = value;
+                    // this.$set(this.craftTabs,value,[]);
+                    this.craftTabs.push({
+                        title: value,
+                        name: newTabName,
+                        content: []
+                    });
+                    this.editableTabsValue = newTabName;
+console.log(this.craftTabs);
                 })
             }
         },
+        // removeTab(targetName) {
+        //     let activeName = this.editableTabsValue;
+        //     this.editableTabsValue = activeName;
+        //     this.$delete(this.craftTabs,targetName);
+        // },
         removeTab(targetName) {
+            let tabs = this.craftTabs;
             let activeName = this.editableTabsValue;
+            if (activeName === targetName) {
+                tabs.forEach((tab, index) => {
+                    if (tab.name === targetName) {
+                        let nextTab = tabs[index + 1] || tabs[index - 1];
+                        if (nextTab) {
+                            activeName = nextTab.name;
+                        }
+                    }
+                });
+            }
             this.editableTabsValue = activeName;
-            this.$delete(this.craftTabs,targetName);
+            this.craftTabs = tabs.filter(tab => tab.name !== targetName);
+console.log(this.craftTabs);
         },
-        add(title) {
-            if (this.craftTabs[title].length > 9) {
-                this.$message.error('图片不能超过10张')
+        add(title,index) {
+            if (this.craftTabs[index].content.length > 9) {
+                this.$message.error('图片不能超过10张');
             }else {
-                this.craftTabs[title].push({
+                this.craftTabs[index].content.push({
                     detailDescribe: '',
                     imageUrl: '',
                     detailTitle: title
                 })
                 document.getElementById('msg_end').scrollIntoView(true);
+console.log(this.craftTabs);
             }
-            // console.log(this.craftTabs);
         },
         getBlur(index,title) {
-            let des = this.craftTabs[title][index].detailDescribe;
-            if (des.length > 300 || des.length < 15) {
+            let des = this.craftTabs.filter((item,index) => {
+                return item.title === title
+            })
+            if (des[0].content[index].detailDescribe.length > 300 || des[0].content[index].detailDescribe.length < 15) {
                 this.$message.error('图片描述为15-300字');
             }
-
+        },
+        deleteUpload(index,title) {
+            this.craftTabs.forEach(element => {
+                if (element.title === title) {
+                    this.$delete(element.content,index)
+                }
+            });
+        },
+        deleteUploadPic(index,title) {
+            this.craftTabs.forEach(element => {
+                if (element.title === title) {
+                    element.content[index].imageUrl = '';
+                }
+            });
         },
         validateRemark(item,index) {
+console.log(item);
             if (item.imageUrl === '') {
                 this.$message.error('子标题:' + item.detailTitle + '下有图片未添加');
                 return false;
@@ -217,9 +263,6 @@ export default {
                 return true;
             }
         },
-        deleteUploadPic(index,title) {
-            this.$delete(this.craftTabs[title],index);
-        },
         SubmitBtn() {
             let args = this.craftTabs;
 console.log(args)
@@ -228,44 +271,45 @@ console.log(args)
                 this.$message.error('请输入工艺标题');
             }else if (this.technologyInfo.technologyName.length > 5) {
                 this.$message.error('工艺标题不能超过5个字')
-            }else if (Object.keys(args).length === 0) {
+            }else if (args.length === 0) {
                 this.$message.error('请创建子标题');
             }else {
                 let pass = true;
-                for (const key in args) {
-                    if (args.hasOwnProperty(key)) {
-                        const element = args[key];
-                        if (element.length === 0) {
-                            this.$message.error('子标题' + key + '没有图片');
-                            pass = false;
-                        }else if (element.length > 10) {
-                            this.$message.error('子标题' + key + '图片超过10个')
-                            pass = false;
-                        }else {
-                            element.forEach((item,index) => {
-                                if (!this.validateRemark(item,index)) {
-                                    pass = false;
-                                }
-                            });
-                        }
+                for (let i = 0; i < args.length; i++) {
+                    const element = args[i];
+                    if (element.content.length === 0) {
+                        this.$message.error('子标题' + element.title + '没有图片');
+                        pass = false;
+                    }else if (element.content.length > 10) {
+                        this.$message.error('子标题' + element.title + '图片超过10个')
+                        pass = false;
+                    }else {
+                        element.content.forEach((item,index) => {
+                            if (!this.validateRemark(item,index)) {
+                                pass = false;
+                            }
+                        });
                     }
                 }
                 if (pass) {
-                    this.technologyInfo['technologyInfoMaps'] = this.craftTabs;
+                    for (let index = 0; index < args.length; index++) {
+                        const element = args[index];
+                        this.technologyInfo['technologyInfoMaps'].push(element.content);
+                    }
                     let technologyArgs = {technologyInfo: this.technologyInfo} ;
 console.log(technologyArgs);
                     this.$http.fetch(this.createPath,technologyArgs).then( res => {
                         if (res.data.status === 200) {
+                            // debugger
                             this.$message.success('创建工艺成功');
                             this.$router.push({
                                 path: '/tuchat-craft-manage/craft-manage'
                             })
                         }else {
-                            this.$message.error('创建失败'+ res.data.result || res.data.status)
+                            this.$message.error('创建失败:'+ res.data.error || res.data.result)
                         }
                     })
                 }
-
             }
         },
         closeDialog() {
