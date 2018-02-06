@@ -46,6 +46,7 @@ export default {
     props: {
         item: Object,
         index: Number,
+        tabIndex: Number
     },
     created() {
         // debugger
@@ -96,11 +97,11 @@ console.log(this.item);
     },
     methods: {
         handleRemove(file, fileList) {
-            this.$emit('delete',this.index,this.item.detailTitle);
+            this.$emit('delete',this.index,this.item.detailTitle,this.tabIndex);
         },
         handleRemovePic(file, fileList) {
             this.item.imageUrl = '';
-            this.$emit('deletePic',this.index,this.item.detailTitle);
+            this.$emit('deletePic',this.index,this.item.detailTitle,this.tabIndex);
 
         },
         handlePreview(file) {
@@ -121,8 +122,6 @@ console.log(this.item);
             // console.log(this);
         },
         handleSuccess(response, file, fileList){
-console.log(response)
-console.log(this.item);
             this.isProgress = false;
             if (fileList.length > 1) {
                 fileList.length = 1;

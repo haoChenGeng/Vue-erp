@@ -166,6 +166,8 @@ export default {
     methods: {
         addTab(targetName) {
             let newTabName = ++this.tabIndex + '';
+            let names = this.craftTabs.map((item,index) => { return item.title });
+console.log(names);
             if (this.craftTabs.length > 14) {
                 this.$message.error('子标题数不能超过15个');
             }else {
@@ -183,22 +185,20 @@ export default {
                     },
                     inputErrorMessage: '请输入正确子标题名，不超过15字'
                 }).then(({value}) => {
-                    // this.$set(this.craftTabs,value,[]);
-                    this.craftTabs.push({
-                        title: value,
-                        name: newTabName,
-                        content: []
-                    });
-                    this.editableTabsValue = newTabName;
+                    if (names.indexOf(value) !== -1) {
+                        this.$message.error('已存在相同子标题');
+                    }else {
+                        this.craftTabs.push({
+                            title: value,
+                            name: newTabName,
+                            content: []
+                        });
+                        this.editableTabsValue = newTabName;
+                    }
 console.log(this.craftTabs);
                 })
             }
         },
-        // removeTab(targetName) {
-        //     let activeName = this.editableTabsValue;
-        //     this.editableTabsValue = activeName;
-        //     this.$delete(this.craftTabs,targetName);
-        // },
         removeTab(targetName) {
             let tabs = this.craftTabs;
             let activeName = this.editableTabsValue;

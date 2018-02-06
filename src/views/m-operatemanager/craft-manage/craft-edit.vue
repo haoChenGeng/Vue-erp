@@ -66,6 +66,7 @@
                                             <upload @blur="getBlur"
                                                 @delete="deleteUpload"
                                                 @deletePic="deleteUploadPic"
+                                                :tabIndex="index"
                                                 :key="index1"
                                                 :fileList2="getPicUrl(item1.imageUrl,item1.id)"
                                                 :index="index1"
@@ -151,10 +152,12 @@ export default {
             return [{ name: id, url: Utils.getFullURL(url) }]
         },
         addTab(targetName) {
-            let newTabName = ++this.tabIndex + ''
+            let newTabName = ++this.tabIndex + '';
+            let names = this.craftTabs.map((item,index) => { return item.title });
+console.log(names);
             if (this.craftTabs.length > 14) {
                 this.$message.error('子标题数不能超过15个')
-            } else {
+            }else {
                 this.$prompt('请输入子标题名称', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -169,12 +172,16 @@ export default {
                     },
                     inputErrorMessage: '请输入正确子标题名，不超过15字',
                 }).then(({ value }) => {
-                    this.craftTabs.push({
-                        title: value,
-                        name: newTabName,
-                        content: []
-                    })
-                    this.editableTabsValue = newTabName;
+                    if (names.indexOf(value) !== -1) {
+                        this.$message.error('已存在相同名字子标题');
+                    }else {
+                        this.craftTabs.push({
+                            title: value,
+                            name: newTabName,
+                            content: []
+                        })
+                        this.editableTabsValue = newTabName;
+                    }
 console.log(this.editableTabsValue);
                 })
             }
@@ -217,19 +224,21 @@ console.log(this.craftTabs);
                 this.$message.error('图片描述为15-300字');
             }
         },
-        deleteUpload(index,title) {
-            this.craftTabs.forEach(element => {
+        deleteUpload(index,title,tabIndex) {
+            this.$delete(this.craftTabs[tabIndex].content,index);
+            /* this.craftTabs.forEach(element => {
                 if (element.title === title) {
                     this.$delete(element.content,index)
                 }
-            });
+            }); */
         },
-        deleteUploadPic(index,title) {
-            this.craftTabs.forEach(element => {
+        deleteUploadPic(index,title,tabIndex) {
+            this.craftTabs[tabIndex].content[index].imageUrl = '';
+            /* this.craftTabs.forEach(element => {
                 if (element.title === title) {
                     element.content[index].imageUrl = '';
                 }
-            });
+            }); */
         },
         validateRemark(item, index) {
             if (item.imageUrl === '') {
@@ -281,9 +290,10 @@ console.log(this.craftTabs);
                         this.technologyInfo['technologyInfoMaps'].push(element.content);
                     }
                     let technologyArgs = {technologyInfo: this.technologyInfo,id: this.id} ;
+console.log(technologyArgs);
                     this.$http.fetch(this.updatePath,technologyArgs).then( res => {
                         if (res.data.status === 200) {
-                            // debugger
+                            debugger
                             this.$message.success('编辑工艺成功');
                             this.$router.push({
                                 path: '/tuchat-craft-manage/craft-manage'
@@ -320,19 +330,8 @@ console.log(this.craftTabs);
                                 content: item
                             })
                         });
-                        /* for (const key in data) {
-                            if (data.hasOwnProperty(key)) {
-                                const element = data[key];
-                                this.craftTabs.push({
-                                    title: key,
-                                    name: key,
-                                    content: element
-                                })
-                            }
-                        } */
 console.log(this.craftTabs);
                         // this.editableTabsValue = this.craftTabs[0].name;
-console.log(this.editableTabsValue);
                         this.technologyInfo.technologyName = res.data.result.technologyName;
                     } else {
                         this.$message.error(res.data.result || res.data.error)
