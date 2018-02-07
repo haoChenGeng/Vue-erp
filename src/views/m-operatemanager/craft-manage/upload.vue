@@ -84,11 +84,7 @@ export default {
             }
         },
         uploadVisible: function() {
-console.log(this.item);
-            if (this.isProgress) {
-                return true;
-            }
-            if (this.item.imageUrl !== '') {
+            if (this.isProgress || this.item.imageUrl !== '') {
                 return true;
             }else {
                 return false;
@@ -100,6 +96,7 @@ console.log(this.item);
             this.$emit('delete',this.index,this.item.detailTitle,this.tabIndex);
         },
         handleRemovePic(file, fileList) {
+            this.isProgress = false;
             this.item.imageUrl = '';
             this.$emit('deletePic',this.index,this.item.detailTitle,this.tabIndex);
 
@@ -112,7 +109,9 @@ console.log(this.item);
         handleClose(done) {
             done();
         },
-        handleError(file) {
+        handleError(err,file) {
+console.log(err);
+            this.isProgress = false;
             this.$message.error('upload error')
         },
         handelProgress(file) {
@@ -122,7 +121,7 @@ console.log(this.item);
             // console.log(this);
         },
         handleSuccess(response, file, fileList){
-            this.isProgress = false;
+            this.isProgress = true;
             if (fileList.length > 1) {
                 fileList.length = 1;
             }
@@ -130,8 +129,6 @@ console.log(this.item);
             this.$emit("picSuccess",this,this.picData);
         },
         handleBlur(event) {
-            // this.picData.mark = this.text;
-            // this.picData.title = this.title;
             this.$emit("blur", this.index,this.item.detailTitle);
         },
         handleChange(value) {
@@ -151,7 +148,7 @@ console.log(this.item);
     width: 40%;
     margin-left: 20px;
     height: 148px;
-    vertical-align: text-bottom;
+    vertical-align: 1px;
 }
 .upload-remark {
     margin-top: 20px;
@@ -183,8 +180,9 @@ console.log(this.item);
       display: none;
   }
   .el-upload--picture-card {
-      height: 138px;
+      height: 148px;
       vertical-align: 7px;
+      margin-right: 8px;
   }
   .delete-pic-btn {
       vertical-align: 65px;

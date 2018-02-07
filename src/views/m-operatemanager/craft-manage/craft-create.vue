@@ -156,7 +156,7 @@ export default {
                     }
                 ]
             },
-            mark: []
+            titleReg: /^[0-9a-zA-Z\u4e00-\u9fa5]{1,15}$/g
         };
     },
     props: {
@@ -233,7 +233,7 @@ console.log(this.craftTabs);
             let des = this.craftTabs.filter((item,index) => {
                 return item.title === title
             })
-            if (des[0].content[index].detailDescribe.length > 300 || des[0].content[index].detailDescribe.length < 15) {
+            if (des[0].content[index].detailDescribe.trim().length > 300 || des[0].content[index].detailDescribe.trim().length < 15) {
                 this.$message.error('图片描述为15-300字');
             }
         },
@@ -256,7 +256,7 @@ console.log(item);
             if (item.imageUrl === '') {
                 this.$message.error('子标题:' + item.detailTitle + '下有图片未添加');
                 return false;
-            }else if (item.detailDescribe.length > 300 || item.detailDescribe.length < 15) {
+            }else if (item.detailDescribe.trim().length > 300 || item.detailDescribe.trim().length < 15) {
                 this.$message.error('子标题' + item.detailTitle + '下有描述应为15-300字');
                 return false;
             }else {
@@ -265,12 +265,12 @@ console.log(item);
         },
         SubmitBtn() {
             let args = this.craftTabs;
-console.log(args)
-
+            let reg = /^[0-9a-zA-Z\u4e00-\u9fa5]{1,15}$/g;
+console.log(typeof this.technologyInfo.technologyName)
             if (this.technologyInfo.technologyName == '') {
                 this.$message.error('请输入工艺标题');
-            }else if (this.technologyInfo.technologyName.length > 5) {
-                this.$message.error('工艺标题不能超过5个字')
+            }else if (!reg.test(this.technologyInfo.technologyName)) {
+                this.$message.error('请输入正确工艺标题(数字，字母，中文)，不超过5个字')
             }else if (args.length === 0) {
                 this.$message.error('请创建子标题');
             }else {

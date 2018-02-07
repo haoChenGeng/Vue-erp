@@ -71,7 +71,9 @@
                                                 :fileList2="getPicUrl(item1.imageUrl,item1.id)"
                                                 :index="index1"
                                                 :item="item1"
-                                                v-for="(item1,index1) in item.content"></upload>
+                                                class="edit-upload"
+                                                v-for="(item1,index1) in item.content"
+                                            >
                                             </upload>
                                             <div style="margin-top:140px;visibility:hidden" id="msg_end"></div>
                                         </el-tab-pane>
@@ -226,19 +228,9 @@ console.log(this.craftTabs);
         },
         deleteUpload(index,title,tabIndex) {
             this.$delete(this.craftTabs[tabIndex].content,index);
-            /* this.craftTabs.forEach(element => {
-                if (element.title === title) {
-                    this.$delete(element.content,index)
-                }
-            }); */
         },
         deleteUploadPic(index,title,tabIndex) {
             this.craftTabs[tabIndex].content[index].imageUrl = '';
-            /* this.craftTabs.forEach(element => {
-                if (element.title === title) {
-                    element.content[index].imageUrl = '';
-                }
-            }); */
         },
         validateRemark(item, index) {
             if (item.imageUrl === '') {
@@ -259,11 +251,12 @@ console.log(this.craftTabs);
             }
         },
         SubmitBtn() {
-            let args = this.craftTabs
-            if (this.technologyInfo.technologyName == '') {
+            let args = this.craftTabs;
+            let reg = /^[0-9a-zA-Z\u4e00-\u9fa5]{1,15}$/g;
+            if (this.technologyInfo.technologyName === null) {
                 this.$message.error('请输入工艺标题')
-            } else if (this.technologyInfo.technologyName.length > 5) {
-                this.$message.error('工艺标题不能超过5个字')
+            } else if (!reg.test(this.technologyInfo.technologyName)) {
+                this.$message.error('请输入正确工艺标题(数字，字母，中文)，不超过5个字')
             }else if (args.length === 0) {
                 this.$message.error('请创建子标题');
             }else {
@@ -293,7 +286,7 @@ console.log(this.craftTabs);
 console.log(technologyArgs);
                     this.$http.fetch(this.updatePath,technologyArgs).then( res => {
                         if (res.data.status === 200) {
-                            debugger
+                            // debugger
                             this.$message.success('编辑工艺成功');
                             this.$router.push({
                                 path: '/tuchat-craft-manage/craft-manage'
@@ -420,9 +413,17 @@ console.log(this.craftTabs);
     margin: 0;
 }
 .edit-upload {
-    margin-left: 40px;
+    /* margin-left: 40px; */
 }
-.edit-upload .el-upload-list--picture-card .el-upload-list__item {
+
+.edit-upload .el-upload-list--picture-card li.el-upload-list__item {
+    height: 138px;
+    margin-right: 0;
+}
+/* .upload-pic .el-upload-list--picture-card .el-upload-list__item {
+    height: 138px;
+} */
+.upload-pic .is-success.el-upload-list__item {
     height: 138px;
 }
 </style>
