@@ -39,7 +39,7 @@
                                         label-width="100px">
                                         <div class="dialog2-form-item-container">
                                             <el-form-item label="工艺标题：">
-                                                <el-input v-model="technologyInfo.technologyName"></el-input>
+                                                <el-input v-model.trim="technologyInfo.technologyName"></el-input>
                                             </el-form-item>
                                         </div>
                                     </el-form>
@@ -156,7 +156,7 @@ export default {
         addTab(targetName) {
             let newTabName = ++this.tabIndex + '';
             let names = this.craftTabs.map((item,index) => { return item.title });
-console.log(names);
+// console.log(names);
             if (this.craftTabs.length > 14) {
                 this.$message.error('子标题数不能超过15个')
             }else {
@@ -184,7 +184,7 @@ console.log(names);
                         })
                         this.editableTabsValue = newTabName;
                     }
-console.log(this.editableTabsValue);
+// console.log(this.editableTabsValue);
                 })
             }
         },
@@ -203,7 +203,7 @@ console.log(this.editableTabsValue);
             }
             this.editableTabsValue = activeName;
             this.craftTabs = tabs.filter(tab => tab.name !== targetName);
-console.log(this.craftTabs);
+// console.log(this.craftTabs);
         },
         add(title,index) {
             if (this.craftTabs[index].content.length > 9) {
@@ -252,7 +252,7 @@ console.log(this.craftTabs);
         },
         SubmitBtn() {
             let args = this.craftTabs;
-            let reg = /^[0-9a-zA-Z\u4e00-\u9fa5]{1,15}$/g;
+            let reg = /^[0-9a-zA-Z\u4e00-\u9fa5]{1,5}$/g;
             if (this.technologyInfo.technologyName === null) {
                 this.$message.error('请输入工艺标题')
             } else if (!reg.test(this.technologyInfo.technologyName)) {
@@ -283,7 +283,7 @@ console.log(this.craftTabs);
                         this.technologyInfo['technologyInfoMaps'].push(element.content);
                     }
                     let technologyArgs = {technologyInfo: this.technologyInfo,id: this.id} ;
-console.log(technologyArgs);
+// console.log(technologyArgs);
                     this.$http.fetch(this.updatePath,technologyArgs).then( res => {
                         if (res.data.status === 200) {
                             // debugger
@@ -323,7 +323,7 @@ console.log(technologyArgs);
                                 content: item
                             })
                         });
-console.log(this.craftTabs);
+// console.log(this.craftTabs);
                         // this.editableTabsValue = this.craftTabs[0].name;
                         this.technologyInfo.technologyName = res.data.result.technologyName;
                     } else {

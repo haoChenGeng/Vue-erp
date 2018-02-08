@@ -40,7 +40,7 @@
                                         label-width="100px">
                                         <div class="dialog2-form-item-container">
                                             <el-form-item label="工艺标题：">
-                                                <el-input v-model="technologyInfo.technologyName"></el-input>
+                                                <el-input v-model.trim="technologyInfo.technologyName"></el-input>
                                             </el-form-item>
                                         </div>
                                     </el-form>
@@ -156,7 +156,6 @@ export default {
                     }
                 ]
             },
-            titleReg: /^[0-9a-zA-Z\u4e00-\u9fa5]{1,15}$/g
         };
     },
     props: {
@@ -167,7 +166,7 @@ export default {
         addTab(targetName) {
             let newTabName = ++this.tabIndex + '';
             let names = this.craftTabs.map((item,index) => { return item.title });
-console.log(names);
+// console.log(names);
             if (this.craftTabs.length > 14) {
                 this.$message.error('子标题数不能超过15个');
             }else {
@@ -195,7 +194,7 @@ console.log(names);
                         });
                         this.editableTabsValue = newTabName;
                     }
-console.log(this.craftTabs);
+// console.log(this.craftTabs);
                 })
             }
         },
@@ -214,7 +213,7 @@ console.log(this.craftTabs);
             }
             this.editableTabsValue = activeName;
             this.craftTabs = tabs.filter(tab => tab.name !== targetName);
-console.log(this.craftTabs);
+// console.log(this.craftTabs);
         },
         add(title,index) {
             if (this.craftTabs[index].content.length > 9) {
@@ -226,7 +225,7 @@ console.log(this.craftTabs);
                     detailTitle: title
                 })
                 document.getElementById('msg_end').scrollIntoView(true);
-console.log(this.craftTabs);
+// console.log(this.craftTabs);
             }
         },
         getBlur(index,title) {
@@ -252,7 +251,7 @@ console.log(this.craftTabs);
             });
         },
         validateRemark(item,index) {
-console.log(item);
+// console.log(item);
             if (item.imageUrl === '') {
                 this.$message.error('子标题:' + item.detailTitle + '下有图片未添加');
                 return false;
@@ -265,8 +264,8 @@ console.log(item);
         },
         SubmitBtn() {
             let args = this.craftTabs;
-            let reg = /^[0-9a-zA-Z\u4e00-\u9fa5]{1,15}$/g;
-console.log(typeof this.technologyInfo.technologyName)
+            let reg = /^[0-9a-zA-Z\u4e00-\u9fa5]{1,5}$/g;
+// console.log(typeof this.technologyInfo.technologyName)
             if (this.technologyInfo.technologyName == '') {
                 this.$message.error('请输入工艺标题');
             }else if (!reg.test(this.technologyInfo.technologyName)) {
@@ -297,7 +296,7 @@ console.log(typeof this.technologyInfo.technologyName)
                         this.technologyInfo['technologyInfoMaps'].push(element.content);
                     }
                     let technologyArgs = {technologyInfo: this.technologyInfo} ;
-console.log(technologyArgs);
+// console.log(technologyArgs);
                     this.$http.fetch(this.createPath,technologyArgs).then( res => {
                         if (res.data.status === 200) {
                             // debugger

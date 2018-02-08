@@ -24,7 +24,7 @@
             type="textarea"
             :rows="7"
             placeholder="请输入内容"
-            v-model="item.detailDescribe"
+            v-model.trim="item.detailDescribe"
             class="pic-remark"
             @blur="handleBlur"
             @change="handleChange"
