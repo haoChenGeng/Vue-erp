@@ -310,7 +310,7 @@
         contractPdfUrl:null,//合同pdf地址
         showPdfView:false,//展示合同预览
         contractChecked:false,//是否已阅读合同
-        
+
         //业主信息
         userInfo:{
 
@@ -513,7 +513,7 @@
                 if( labels.length == 3 ){
                     citysLabel = [labels[0],labels[1],labels[2].replace(labels[1],'')].join('')
                 }else if(labels.length>0){
-                    citysLabel = labels.currentLabels.join('')
+                    citysLabel = labels.join('')
                 }
 
             }
