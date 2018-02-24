@@ -1,6 +1,7 @@
 <template>
     <div class="upload-remark" :picData="picData">
         <el-upload
+          ref="my-upload"
             :class="{ 'class-a': uploadVisible, 'upload-pic':true}"
             :action="uploadURL"
             list-type="picture-card"
@@ -49,7 +50,7 @@ export default {
         tabIndex: Number
     },
     created() {
-        // debugger
+
     },
     data() {
         return {
@@ -84,6 +85,7 @@ export default {
             }
         },
         uploadVisible: function() {
+console.log(this.item);
             if (this.isProgress || this.item.imageUrl !== '') {
                 return true;
             }else {
@@ -98,11 +100,10 @@ export default {
         handleRemovePic(file, fileList) {
             this.isProgress = false;
             this.item.imageUrl = '';
-            this.$emit('deletePic',this.index,this.item.detailTitle,this.tabIndex);
-
+            this.$emit('deletePic', this.index, this.item.detailTitle, this.tabIndex);
         },
         handlePreview(file) {
-// console.log(file);
+console.log(file);
             this.dialogImageUrl = file.url;
             this.dialogVisible = true;
         },
@@ -121,12 +122,17 @@ console.log(err);
             // console.log(this);
         },
         handleSuccess(response, file, fileList){
-            this.isProgress = true;
-            if (fileList.length > 1) {
+            if (response.status !== 200) {
+              this.$message.error(response['message']);
+                this.$refs['my-upload'].clearFiles();
+            }else {
+              if (fileList.length > 1) {
                 fileList.length = 1;
+              }
+              this.isProgress = true;
+              this.item.imageUrl = response.result.filePath;
+              this.$emit("picSuccess",this,this.picData);
             }
-            this.item.imageUrl = response.result.filePath;
-            this.$emit("picSuccess",this,this.picData);
         },
         handleBlur(event) {
             this.$emit("blur", this.index,this.item.detailTitle);

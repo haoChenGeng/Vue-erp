@@ -35,7 +35,7 @@ import helpcenter from './helpcenter/index'
 // 系统运营数据
 import om from './operationdata/index.js'
 
-//工艺展示
+// 工艺展示
 import craft from './operatemanager/index.js'
 
 let routes = []
