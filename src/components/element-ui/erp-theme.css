@@ -236,3 +236,16 @@
 .el-form-item__error{
     padding-top: 2px;
 }
+
+
+.console,
+.console-body,
+.app-content-container,
+.app-content,
+.g-main-container,
+.g-main-container-column,
+.t8t-table,
+.table-container {
+    min-width: 0;
+    min-height: 0;
+}
