@@ -3,10 +3,12 @@
  */
 import contractDesigner from './contractDesigner.js'
 import project from './project.js'
+import stores from './stores'
 
 let routes = [].concat(
     contractDesigner,
-    project
+    project,
+    stores
 )
 
 export default routes

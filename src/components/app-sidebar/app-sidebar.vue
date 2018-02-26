@@ -244,7 +244,7 @@
                            /* temp = temp.filter(function (item) {
                                 return removeMenu.indexOf(item.code) == -1
                             })*/
-                            this.removeMenuCodes = removeMenu
+                            this.removeMenuCodes = removeMenu.filter(item => { if (item) return item })
                             this.sidebarData = temp
                         }).catch(e => {
 
@@ -325,32 +325,54 @@
             },
 
             getRemoveMenuCodes(comId){
-               let codes = []
-               return new Promise(function (resolve,reject){
-                   if(comId){
-                       //装修公司下单配置校验, 决定是否开放‘批量采购下单功能’
+                const baseRemove = new Promise(function (resolve, reject) {
+                    if (comId) {
+                        // 装修公司下单配置校验, 决定是否开放‘批量采购下单功能’
                         http.fetch(
                             'pim/demandConfigCompanyCanOrder',
                             {
                                 companyId: comId
                             }
                         ).then(function (res) {
-                            //1 可以下单 2 不可以下单 3 还未配置
-                            if( res.data.status == 200 ){
-                                //不可以下单和未配置都不允许
-                                if( res.data.result != 1 ){
-                                    codes.push('DSP002003002');//'批量采购下单'功能
+                            // 1 可以下单 2 不可以下单 3 还未配置
+                            if (res.data.status === 200) {
+                                // 不可以下单和未配置都不允许
+                                if (res.data.result === 1) {
+                                    resolve()
                                 }
-                                resolve(codes)
                             }
-                       }).catch(function (e){
-                           reject()
+                            resolve('DSP002003002')
+                        }).catch(function (e) {
+                            resolve('DSP002003002')
                         })
-                   }else{
-                       reject()
-                   }
-               })
-
+                    } else {
+                        resolve('DSP002003002')
+                    }
+                })
+                const storeRemove = new Promise(function (resolve, reject) {
+                    if (comId) {
+                        // 装修公司下单配置校验, 决定是否开放‘批量采购下单功能’
+                        http.fetch(
+                            'dcm/company/shoptreasure',
+                            {
+                                companyId: comId
+                            }
+                        ).then(function (res) {
+                            if (res.data.status === 200) {
+                                // 到期 未合作的不展示店铺宝
+                                if (res.data.result.cooperation) {
+                                    resolve()
+                                }
+                            }
+                            resolve('DSP009')
+                        }).catch(function (e) {
+                            resolve('DSP009')
+                        })
+                    } else {
+                        resolve('DSP009')
+                    }
+                })
+                return Promise.all([baseRemove, storeRemove])
             }
         }
     }
