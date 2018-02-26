@@ -310,7 +310,7 @@
         contractPdfUrl:null,//合同pdf地址
         showPdfView:false,//展示合同预览
         contractChecked:false,//是否已阅读合同
-
+        
         //业主信息
         userInfo:{
 
