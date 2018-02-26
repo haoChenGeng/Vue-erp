@@ -182,6 +182,7 @@
                                 @change="onChangeRelated"></t8t-division-old>
 
                                 <div v-else-if='field.prop === "orderImg"'>
+
                                             <div class="upload-box">
                                                 <el-upload
                                                     class="avatar-uploader"
@@ -190,11 +191,9 @@
                                                     :action="uploadURL"
                                                     :show-file-list="false"
                                                     :on-success="handleUploadScucessCover"
-                                                    :on-progress="onProgress"
                                                     :before-upload="beforeUpload">
-                                                    <el-progress v-if = "imgObj.status == 'uploading'" type="circle" :width="100" :percentage="parseInt(imgObj.percentage)"></el-progress>
-                                                    <img width="100" height="100" v-if="contractInfo['orderImg']['cover']&&imgObj.status != 'uploading'" :src="'http://pic.to8to.com/'+contractInfo['orderImg']['cover']" class="avatar">
-                                                    <i v-if="!contractInfo['orderImg']['cover']&&imgObj.status != 'uploading'" class="el-icon-plus uploader-icon"></i>
+                                                    <img width="100" height="100" v-if="contractInfo['orderImg']['cover']" :src="'http://pic.to8to.com/'+contractInfo['orderImg']['cover']" class="avatar">
+                                                    <i v-else class="el-icon-plus uploader-icon"></i>
                                                 </el-upload>
                                                 <div>合同封面</div>
                                             </div>
@@ -206,11 +205,9 @@
                                                     :action="uploadURL"
                                                     :show-file-list="false"
                                                     :on-success="handleUploadScucessFirst"
-                                                    :on-progress="onProgressFirst"
                                                     :before-upload="beforeUpload">
-                                                    <el-progress v-if = "imgObj1.status == 'uploading'" type="circle" :width="100" :percentage="parseInt(imgObj1.percentage)"></el-progress>
-                                                    <img width="100" height="100" v-if="contractInfo['orderImg']['first']&&imgObj1.status != 'uploading'" :src="'http://pic.to8to.com/'+contractInfo['orderImg']['first']" class="avatar">
-                                                    <i v-if="!contractInfo['orderImg']['first']&&imgObj1.status != 'uploading'" class="el-icon-plus uploader-icon"></i>
+                                                    <img width="100" height="100" v-if="contractInfo['orderImg']['first']" :src="'http://pic.to8to.com/'+contractInfo['orderImg']['first']" class="avatar">
+                                                    <i v-else class="el-icon-plus uploader-icon"></i>
                                                 </el-upload>
                                                 <div>合同第一页</div>
                                             </div>
@@ -222,11 +219,9 @@
                                                     :action="uploadURL"
                                                     :show-file-list="false"
                                                     :on-success="handleUploadScucessLast"
-                                                    :on-progress="onProgressTwo"
                                                     :before-upload="beforeUpload">
-                                                    <el-progress v-if = "imgObj2.status == 'uploading'" type="circle" :width="100" :percentage="parseInt(imgObj2.percentage)"></el-progress>
-                                                    <img width="100" height="100" v-if="contractInfo['orderImg']['last']&&imgObj2.status != 'uploading'" :src="'http://pic.to8to.com/'+contractInfo['orderImg']['last']" class="avatar">
-                                                    <i v-if="!contractInfo['orderImg']['last']&&imgObj2.status != 'uploading'" class="el-icon-plus uploader-icon"></i>
+                                                    <img width="100" height="100" v-if="contractInfo['orderImg']['last']" :src="'http://pic.to8to.com/'+contractInfo['orderImg']['last']" class="avatar">
+                                                    <i v-else class="el-icon-plus uploader-icon"></i>
                                                 </el-upload>
                                                 <div>合同最后一页</div>
                                             </div>
@@ -310,7 +305,7 @@
         contractPdfUrl:null,//合同pdf地址
         showPdfView:false,//展示合同预览
         contractChecked:false,//是否已阅读合同
-        
+
         //业主信息
         userInfo:{
 
@@ -377,7 +372,7 @@
         },
         acceptImg:'image/jpeg,image/jpg,image/png',
         acceptZip:'application/x-zip-compressed,application/octet-stream,application/zip',
-        maxSizeImg: 1024 * 1024 * 10,// 10M
+        maxSizeImg: 1024 * 1024 * 2,// 2M
         maxSizeZip: 1024 * 1024 * 8,// 8M
         uploadModel:'',
         commonData:{
@@ -403,12 +398,7 @@
         signing:false,//正在签署
           resigning:false,//正在重新签署
         intervalPdf : '',
-        contractDetailVisible: true,//控制页面展示隐藏
-
-        //进度条
-        imgObj:{},
-        imgObj1:{},
-        imgObj2:{},
+        contractDetailVisible: true//控制页面展示隐藏
       }
     },
     created () {
@@ -843,7 +833,7 @@
                 return false
             }
             if (!lessThenMaxSize) {
-                this.$message.error('上传文件大小不能超过 10MB!');
+                this.$message.error('上传文件大小不能超过 2MB!');
                 return false
             }
 
@@ -853,15 +843,15 @@
                 var img = new Image()
                 img.onload = function (e) {
 
-                    //上传图片尺寸应该限制最小100*100，最大5000*5000
+                    //上传图片尺寸应该限制最小100*100，最大1200*1200
                     let height = e.path[0]['height']
                     let width = e.path[0]['width']
 
-                    if ( 100 <= width && width <= 5000 && 100 <= height &&  height <= 5000 ) {
+                    if ( 100 <= width && width <= 1200 && 100 <= height &&  height <= 1200 ) {
                         resolve(true);
                     } else {
-                        _this.$message.error('图片尺寸错误，上传图片尺寸需大于等于100*100且小于等于5000*5000');
-                        reject(new Error('图片尺寸错误，上传图片尺寸需大于等于100*100且小于等于5000*5000'));
+                        _this.$message.error('图片尺寸错误，上传图片尺寸需大于等于100*100且小于等于1200*1200');
+                        reject(new Error('图片尺寸错误，上传图片尺寸需大于等于100*100且小于等于1200*1200'));
                     }
 
 
@@ -965,19 +955,7 @@
                 this.disabledFields.splice(this.disabledFields.indexOf(prop),1)
                 this.userChecked = false //重新验证用户信息 TODO 精细化控制需要编辑的文本域
             }
-        },
-        onProgress(event, file, fileList)
-        {
-            this.imgObj = file
-        },
-        onProgressFirst(event, file, fileList)
-        {
-            this.imgObj1 = file
-        },
-        onProgressTwo(event, file, fileList)
-        {
-            this.imgObj2 = file
-        },
+        }
     }
   }
 </script>
@@ -997,11 +975,6 @@
         /*overflow: hidden;*/
         display: inline-block;
         text-align: center;
-        width: 100px;
-        height: 100px;
-    }
-
-    .contractDesignerDetail .el-upload-list--picture-card .el-upload-list__item{
         width: 100px;
         height: 100px;
     }
