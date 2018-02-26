@@ -246,6 +246,6 @@
 .g-main-container-column,
 .t8t-table,
 .table-container {
-    min-width: 0;
+    /*min-width: 0;*/
     min-height: 0;
 }
