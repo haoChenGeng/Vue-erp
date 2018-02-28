@@ -101,7 +101,8 @@
                     discountsContent: [
                         {required: true, message: '请输入服务内容', trigger: 'blur'},
                         {min: 6, message: '优惠内容至少6个字符', trigger: 'blur'},
-                        {max: 36, message: '优惠内容最多36个字符', trigger: 'blur'}
+                        {max: 36, message: '优惠内容最多36个字符', trigger: 'blur'},
+                        {pattern: /^[^\n\r]+$/, message: '优惠内容不能包含换行符'}
                     ],
                     times: [
                         {type: 'array', required: true, message: '请选择有效时间'}

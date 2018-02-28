@@ -101,7 +101,8 @@
                     promotionActivityContent: [
                         {required: true, message: '请输入促销内容', trigger: 'blur'},
                         {min: 6, message: '促销内容至少6个字符', trigger: 'blur'},
-                        {max: 36, message: '促销内容最多36个字符', trigger: 'blur'}
+                        {max: 36, message: '促销内容最多36个字符', trigger: 'blur'},
+                        {pattern: /^[^\n\r]+$/, message: '促销内容不能包含换行符'}
                     ],
                     times: [
                         {type: 'array', required: true, message: '请选择有效时间', trigger: 'blur'}
