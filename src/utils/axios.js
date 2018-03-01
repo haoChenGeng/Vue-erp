@@ -7,12 +7,19 @@ import Utils from './Utils.js'
 import Config from 'src/config/server.js'
 import commStatus from 'src/status/comm/Status.js'
 import allStatus from 'src/status/index.js'
+import System from 'src/utils/System.js'
 
 axios.defaults.timeout = 20000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
     // POST传参序列化
 axios.interceptors.request.use((config) => {
+
+        // 如果是演示系统，所有请求加header头
+        if (System.isDemoSystem()) {
+            config.headers['demo'] = System.getLocalTag()
+        }
+
         if (config.method === 'post') {
             config.data = qs.stringify(config.data)
         }
