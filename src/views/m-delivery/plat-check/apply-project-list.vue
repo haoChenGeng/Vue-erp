@@ -414,7 +414,6 @@
                 this.insuranceVisible = false
             },
             onLineClick() {//跳转泰康在线
-                //var link = "http://ecuat.taikang.com/channel/coop_test/tbt/index.html";//test uat
                 var link = "http://act.tk.cn/tbt/index.html";//线上url
                 window.open(link);
             },
