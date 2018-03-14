@@ -31,7 +31,7 @@
                          @click="viewPhone(scope.row)" :disabled="scope.row.loading">查看</el-button>
             </template>
             <template scope="scope" slot="recordUrl">
-                <span class="play-radio" @click="showPlay(scope.row)" v-if="!(scope.row).showRadio"></span>
+                <span class="play-radio" @click="showPlay(scope.row)" v-if="!(scope.row).showRadio && scope.row.recordUrl"></span>
                 <div class="audio" style="display: flex;height: 32px" v-if="(scope.row).showRadio">
                     <audio controls autoplay>
                         <source :src="scope.row.recordUrl" type="audio/mpeg">
@@ -130,7 +130,7 @@
         },
         methods: {
             showPlay(obj) {
-                obj.recordUrl = obj.sourceType ? Utils.getFullURL(obj.recordUrl) : obj.recordUrl
+                obj.recordUrl = obj.recordUrl ? obj.recordUrl : ''
                 obj.showRadio = true
             },
             submitSearch(obj) {
