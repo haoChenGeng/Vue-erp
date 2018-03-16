@@ -25,8 +25,13 @@
             :indexCol="true"
             :selectCol="false"
             :pageSizes="[5,10,20,50,100]">
+            <template scope="scope" slot="axbPhone">
+              {{scope.row.axbPhone}}
+              <el-button v-if="!scope.row.axbPhone && scope.row.appointmentId" class="view-phone"
+                         @click="viewPhone(scope.row)" :disabled="scope.row.loading">查看</el-button>
+            </template>
             <template scope="scope" slot="recordUrl">
-                <span class="play-radio" @click="showPlay(scope.row)" v-if="!(scope.row).showRadio"></span>
+                <span class="play-radio" @click="showPlay(scope.row)" v-if="!(scope.row).showRadio && scope.row.recordUrl"></span>
                 <div class="audio" style="display: flex;height: 32px" v-if="(scope.row).showRadio">
                     <audio controls autoplay>
                         <source :src="scope.row.recordUrl" type="audio/mpeg">
@@ -42,6 +47,7 @@
 <script>
     import Service from 'src/services/salemanager/stores/Service.js'
     import Utils from 'src/utils/Utils.js'
+    import Api from 'src/services/salemanager/stores/storeApi.js'
 
     export default {
         data() {
@@ -124,13 +130,33 @@
         },
         methods: {
             showPlay(obj) {
-                obj.recordUrl = obj.sourceType ? Utils.getFullURL(obj.recordUrl) : obj.recordUrl
+                obj.recordUrl = obj.recordUrl ? obj.recordUrl : ''
                 obj.showRadio = true
             },
             submitSearch(obj) {
                 delete obj['times']
                 if(obj.createTime_lte) obj.createTime_lte += 24 * 3600 - 1
                 this.args = {...this.args, ...{search: obj}}
+            },
+            viewPhone(row) {
+              this.$set(row, 'loading', true)
+              Api.OWNERAPPOINTMENT.getPhone({appointmentId: row.appointmentId}).then(res => {
+                row.loading = false
+                if (res.data.status === 200) {
+                  if (res.data.result.code) {
+                    this.$message.success('操作成功')
+                    row.axbPhone = res.data.result.info
+                  } else {
+                    this.$message.error(res.data.result.info || '电话获取失败')
+                  }
+                } else {
+                  this.$message.error(res.data.error || res.data.message || '电话获取失败')
+                  return
+                }
+              }).catch(_ => {
+                row.loading = false
+                this.$message.error('电话获取失败')
+              })
             }
         }
     }
@@ -153,6 +179,17 @@
         line-height: 16px;
         margin-left: 20px;
         color: #FF0000;
+    }
+    .charge-record .view-phone {
+      color: #00a0e9;
+      cursor: pointer;
+      border: none;
+      background: none;
+      /* height: 4px; */
+      font-size: 12px;
+    }
+    .charge-record .view-phone.is-disabled:hover{
+      background: none;
     }
 
 </style>

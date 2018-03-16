@@ -187,6 +187,7 @@
     import Cookie from 'js-cookie'
     import api from 'src/utils/api.js'
     import http from 'src/utils/http.js'
+    import System from 'src/utils/System'
 
     export default {
 
@@ -270,8 +271,14 @@
                 this.handleIndex(path)
             },
             handleIndex(path) {
+                let routePrefix = path[0]
                 if (path[0] === '#') {
                     this.$router.push(path.slice(1))
+                } else if (routePrefix === '$') {
+                    // 跳转演示系统逻辑
+                    Cookie.set('demo', System.createSystemTag(), { path: '/', domain: '.to8to.com' })
+                    let realPath = path.slice(1)
+                    window.open(realPath)
                 } else {
                     //window.location.href = 'http://www.to8to.com/' + path.replace(new RegExp('^\\/+', 'g'), '');
                     window.open(this.urlRewrite(path))

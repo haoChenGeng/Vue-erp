@@ -366,7 +366,8 @@
         cursor: pointer;
         position: relative;
         overflow: hidden;
-        line-height:200px
+        line-height:200px;
+        width: 100%;
     }
 
     .banner-pic-box .avatar-uploader {
