@@ -1,12 +1,12 @@
 <template>
-    <div class="console">
-        <app-header></app-header>
-        <div class="console-body">
-            <app-sidebar :hide="sidebarHide"
-                         @toggle-button-click="handleToggleButtonClick"></app-sidebar>
-            <app-content :stretch="sidebarHide"></app-content>
-        </div>
+  <div class="console">
+    <app-header></app-header>
+    <div class="console-body">
+      <app-sidebar :hide="sidebarHide"
+        @toggle-button-click="handleToggleButtonClick"></app-sidebar>
+      <app-content :stretch="sidebarHide"></app-content>
     </div>
+  </div>
 </template>
 <script>
 import AppHeader from '../../components/app-header/app-header.vue'
@@ -17,7 +17,7 @@ export default {
     components: {
         AppHeader,
         AppSidebar,
-        AppContent
+        AppContent,
     },
     data() {
         return {
@@ -27,10 +27,9 @@ export default {
     methods: {
         handleToggleButtonClick() {
             this.sidebarHide = !this.sidebarHide
-        }
-    }
+        },
+    },
 }
-
 </script>
 
 <style>
@@ -48,7 +47,7 @@ export default {
     box-sizing: border-box;
     height: 100%;
     display: flex;
-    position: relative
+    position: relative;
 }
 
 .console .erp-progress {
@@ -66,10 +65,5 @@ export default {
 
 .console .el-progress-bar__inner {
     border-radius: 0;
-}
-
-.console .app-header {
-    width: 100%;
-    height: 60px;
 }
 </style>
