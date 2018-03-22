@@ -5,7 +5,7 @@ import Cookie from 'js-cookie'
 import Utils from 'src/utils/Utils.js'
 
 Vue.use(VueRouter)
-    // 判断是否生产环境
+// 判断是否生产环境
 const debug = process.env.NODE_ENV !== 'production'
 
 // 登录
@@ -38,53 +38,56 @@ import om from './operationdata/index.js'
 // 工艺展示
 import craft from './operatemanager/index.js'
 
+// 生成分销二维码
+import mpDistribution from './mpdistrubution/index.js'
+
 let routes = []
 
 // 只输入域名时，跳转到首页
 routes.push({
-    path: '/',
-    redirect: '/tuchat-index'
+  path: '/',
+  redirect: '/tuchat-index',
 })
 
 routes = routes.concat(
-    forbidden,
-    finance,
-    workbench,
-    procenter,
-    delivery,
-    commodule,
-    itemAssign,
-    worker,
-    salemanager,
-    om,
-    login,
-    helpcenter,
-    craft
+  forbidden,
+  finance,
+  workbench,
+  procenter,
+  delivery,
+  commodule,
+  itemAssign,
+  worker,
+  salemanager,
+  om,
+  login,
+  helpcenter,
+  craft,
+  mpDistribution
 )
 
 // =========================================================================================
 
 const router = new VueRouter({
-    routes
+  routes,
 })
 
 router.beforeEach((to, from, next) => {
+  // if(!Cookie.get('t8t-tc-uid')) {
+  //     Utils.redirectLoginPage()
+  //     // window.location.href = "http://www.to8to.com/com_login.php"
+  //     return
+  // }
 
-    // if(!Cookie.get('t8t-tc-uid')) {
-    //     Utils.redirectLoginPage()
-    //     // window.location.href = "http://www.to8to.com/com_login.php"
-    //     return
-    // }
+  let _args = { ...{ local: 'tuchat-pc' }, ...to.query }
 
-    let _args = {... { local: 'tuchat-pc' }, ...to.query }
+  if (_args.uid && _args.certificate && _args.from) {
+    //认证成功后跳转的链接地址
+    var query = to.query
+    var uid = to.query.uid
 
-    if (_args.uid && _args.certificate && _args.from) {
-        //认证成功后跳转的链接地址
-        var query = to.query
-        var uid = to.query.uid
-
-        //
-        /* delete query['uid']
+    //
+    /* delete query['uid']
         delete query['from']
         delete query['certificate']
         let jumpUrl = {
@@ -93,159 +96,205 @@ router.beforeEach((to, from, next) => {
             replace: true
         }*/
 
-        let jumpUrl = {
-            path: query['url'] ? decodeURI(query['url']) : '/tuchat-index',
-            //query:query,
-            replace: true
-        }
-
-        let args = {
-            'local': 'tuchat-pc',
-            uid: _args['uid'],
-            certificate: _args['certificate'],
-            from: _args['from']
-        }
-
-        if (Cookie.get('t8t-tc-uid') && Cookie.get('t8t-tc-uid') != uid) {
-            Vue.prototype.$confirm(`警告：${Cookie.get('t8t-tc-username')}已登录系统，继续登录将使${Cookie.get('t8t-tc-username')}下线`, '警告', {
-                confirmButtonText: '继续登录',
-                cancelButtonText: '取消登录',
-                type: 'warning'
-            }).then(_ => {
-                routerCheckCertificate(args, jumpUrl)
-            }).catch(_ => {
-                console.log("取消")
-            })
-        } else {
-            routerCheckCertificate(args, jumpUrl)
-        }
-    } else {
-
-        //未登录则重定向到登录页, 排除login页面防止死循环
-        if ((!Cookie.get('t8t-tc-ticket') || !Cookie.get('t8t-tc-uid')) && ['/login/', '/login'].indexOf(to.path) < 0) {
-            Utils.redirectLoginPage()
-            return
-        }
-
-        //首页地址更改
-        if (['/index/','/index'].indexOf(to.path) > -1) {
-            return next('/tuchat-index')
-        }
-
-        // 不需要鉴权页面可以直接跳转
-        if (to.meta.auth === false || ['/login/', '/login'].indexOf(to.path) > -1 || debug === true) {
-            return next()
-        }
-
-        // 鉴权页面
-        let args = {
-            ticket: Cookie.get('t8t-tc-ticket'),
-            accountId: Cookie.get('t8t-tc-uid'),
-            url: '#' + to.path
-        }
-
-        api.account.checkPermission(args)
-            .then((res) => {
-                if (res.data.status === 200) {
-                    if (res.data.result === true) {
-                        next()
-                    } else {
-                        next('/forbidden/404?status=2')
-                    }
-
-                }
-
-                //不合法的ticket
-                else if (res.data.status === 605) {
-                    //直接登出
-                    Utils.logout(false)
-
-                    //提示被别人挤出
-                    next('/forbidden/404?status=1')
-                }
-
-                //权限校验失败，当前用户没有操作某个接口或服务的权限 或者 接口/服务未在访问白名单
-                else if (res.data.status === 607 || res.data.status === 602 || res.data.status === 80098) {
-                    next('/forbidden/404?status=2')
-                }
-
-                //其他错误
-                else {
-                    next('/forbidden/404?status=4')
-                }
-            })
-            .catch((err) => {
-                next('/forbidden/404?status=4')
-            })
+    let jumpUrl = {
+      path: query['url'] ? decodeURI(query['url']) : '/tuchat-index',
+      //query:query,
+      replace: true,
     }
 
+    let args = {
+      local: 'tuchat-pc',
+      uid: _args['uid'],
+      certificate: _args['certificate'],
+      from: _args['from'],
+    }
+
+    if (Cookie.get('t8t-tc-uid') && Cookie.get('t8t-tc-uid') != uid) {
+      Vue.prototype
+        .$confirm(
+          `警告：${Cookie.get(
+            't8t-tc-username'
+          )}已登录系统，继续登录将使${Cookie.get('t8t-tc-username')}下线`,
+          '警告',
+          {
+            confirmButtonText: '继续登录',
+            cancelButtonText: '取消登录',
+            type: 'warning',
+          }
+        )
+        .then(_ => {
+          routerCheckCertificate(args, jumpUrl)
+        })
+        .catch(_ => {
+          console.log('取消')
+        })
+    } else {
+      routerCheckCertificate(args, jumpUrl)
+    }
+  } else {
+    //未登录则重定向到登录页, 排除login页面防止死循环
+    if (
+      (!Cookie.get('t8t-tc-ticket') || !Cookie.get('t8t-tc-uid')) &&
+      ['/login/', '/login'].indexOf(to.path) < 0
+    ) {
+      Utils.redirectLoginPage()
+      return
+    }
+
+    //首页地址更改
+    if (['/index/', '/index'].indexOf(to.path) > -1) {
+      return next('/tuchat-index')
+    }
+
+    // 不需要鉴权页面可以直接跳转
+    if (
+      to.meta.auth === false ||
+      ['/login/', '/login'].indexOf(to.path) > -1 ||
+      debug === true
+    ) {
+      return next()
+    }
+
+    // 鉴权页面
+    let args = {
+      ticket: Cookie.get('t8t-tc-ticket'),
+      accountId: Cookie.get('t8t-tc-uid'),
+      url: '#' + to.path,
+    }
+
+    api.account
+      .checkPermission(args)
+      .then(res => {
+        if (res.data.status === 200) {
+          if (res.data.result === true) {
+            next()
+          } else {
+            next('/forbidden/404?status=2')
+          }
+        } else if (res.data.status === 605) {
+          //不合法的ticket
+          //直接登出
+          Utils.logout(false)
+
+          //提示被别人挤出
+          next('/forbidden/404?status=1')
+        } else if (
+          res.data.status === 607 ||
+          res.data.status === 602 ||
+          res.data.status === 80098
+        ) {
+          //权限校验失败，当前用户没有操作某个接口或服务的权限 或者 接口/服务未在访问白名单
+          next('/forbidden/404?status=2')
+        } else {
+          //其他错误
+          next('/forbidden/404?status=4')
+        }
+      })
+      .catch(err => {
+        next('/forbidden/404?status=4')
+      })
+  }
 })
 
 router.afterEach(route => {
-    let title
-    if (route.meta.title) {
-        title = route.meta.title + ' - 土巴兔商家后台'
-    } else {
-        title = '土巴兔商家后台'
-    }
-    document.title = title
-        // 本地开发路由弹窗提示
-    routerAlert(route)
+  let title
+  if (route.meta.title) {
+    title = route.meta.title + ' - 土巴兔商家后台'
+  } else {
+    title = '土巴兔商家后台'
+  }
+  document.title = title
+  // 本地开发路由弹窗提示
+  routerAlert(route)
 })
 
 function routerAlert(route) {
-    if (debug && route.meta.auth !== false && route.meta.isFulldialog !== true && route.meta.isFulldialog !== false) {
-        let _url = 'http://192.168.1.156:3000/kai-fa-zhi-nan/lu-you-shi-yong-gui-fan.html'
-        Vue.prototype.$confirm('此页面路由写法不规范<br><a href="' + _url + '" target="_blank">到这里查看规范</a>', '警告', {
-            confirmButtonText: '去看看',
-            cancelButtonText: '残忍拒绝',
-            type: 'warning'
-        }).then(() => {
-            let a = document.createElement('a')
-            a.href = _url
-            a.target = "_blank"
-            a.click()
-        }).catch(() => {
-            console.log('残忍拒绝')
-        })
-    }
+  if (
+    debug &&
+    route.meta.auth !== false &&
+    route.meta.isFulldialog !== true &&
+    route.meta.isFulldialog !== false
+  ) {
+    let _url =
+      'http://192.168.1.156:3000/kai-fa-zhi-nan/lu-you-shi-yong-gui-fan.html'
+    Vue.prototype
+      .$confirm(
+        '此页面路由写法不规范<br><a href="' +
+          _url +
+          '" target="_blank">到这里查看规范</a>',
+        '警告',
+        {
+          confirmButtonText: '去看看',
+          cancelButtonText: '残忍拒绝',
+          type: 'warning',
+        }
+      )
+      .then(() => {
+        let a = document.createElement('a')
+        a.href = _url
+        a.target = '_blank'
+        a.click()
+      })
+      .catch(() => {
+        console.log('残忍拒绝')
+      })
+  }
 }
 
 function routerCheckCertificate(_args, jumpUrl) {
-    api.newaccount.checkCertificate(_args)
-        .then(res => {
-            if (res.data.status == 200) {
-                Vue.prototype.$message.success("登录成功")
-                Cookie.set('t8t-tc-ticket', res.data.result.tickets['tuchat-pc'].value, { domain: '.to8to.com' })
-                Cookie.set('t8t-tc-uid', res.data.result.user.id, { domain: '.to8to.com' })
-                Cookie.set('t8t-tc-username', res.data.result.user.name, { domain: '.to8to.com' })
-                    //装修公司id
-                let comid = (res.data.result.bounds.length >= 1 ? res.data.result.bounds[0].extId : 0)
-                Cookie.set('t8t-tc-comid', comid, { domain: '.to8to.com' })
-                    //获取登录的装修公司信息
-
-                if (comid) {
-                    Vue.prototype.$http.fetch(
-                        'fcominfo/getbyId', {
-                            id: comid
-                        }
-                    ).then((res) => {
-                        if (res.data.status == 200) {
-                            Cookie.set('t8t-tc-comname', res.data.result && res.data.result.name ? res.data.result.name : '', { domain: '.to8to.com' })
-                        }
-                        router.replace(jumpUrl)
-                    })
-                } else {
-                    router.replace(jumpUrl)
-                }
-            } else {
-                Vue.prototype.$message.error(`授权登录失败`)
-            }
-        }).catch(err => {
-            debugger
-            Vue.prototype.$message.error("请求超时或服务器出错")
-            console.log(err)
+  api.newaccount
+    .checkCertificate(_args)
+    .then(res => {
+      if (res.data.status == 200) {
+        Vue.prototype.$message.success('登录成功')
+        Cookie.set(
+          't8t-tc-ticket',
+          res.data.result.tickets['tuchat-pc'].value,
+          { domain: '.to8to.com' }
+        )
+        Cookie.set('t8t-tc-uid', res.data.result.user.id, {
+          domain: '.to8to.com',
         })
+        Cookie.set('t8t-tc-username', res.data.result.user.name, {
+          domain: '.to8to.com',
+        })
+        //装修公司id
+        let comid =
+          res.data.result.bounds.length >= 1
+            ? res.data.result.bounds[0].extId
+            : 0
+        Cookie.set('t8t-tc-comid', comid, { domain: '.to8to.com' })
+        //获取登录的装修公司信息
+
+        if (comid) {
+          Vue.prototype.$http
+            .fetch('fcominfo/getbyId', {
+              id: comid,
+            })
+            .then(res => {
+              if (res.data.status == 200) {
+                Cookie.set(
+                  't8t-tc-comname',
+                  res.data.result && res.data.result.name
+                    ? res.data.result.name
+                    : '',
+                  { domain: '.to8to.com' }
+                )
+              }
+              router.replace(jumpUrl)
+            })
+        } else {
+          router.replace(jumpUrl)
+        }
+      } else {
+        Vue.prototype.$message.error(`授权登录失败`)
+      }
+    })
+    .catch(err => {
+      debugger
+      Vue.prototype.$message.error('请求超时或服务器出错')
+      console.log(err)
+    })
 }
 
 export default router
