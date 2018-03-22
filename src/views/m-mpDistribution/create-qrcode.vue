@@ -1,33 +1,5 @@
 <template>
     <div>
-        <!-- <t8t-list-view ref="list-view"
-            :breadcrumbData="breadcrumbData"
-            :searchFields="false"
-            :showSearchToggleBtn="false"
-            :showTree="false"
-            :tableColumns="tableColumns"
-            :tableCommonData="tableCommonData"
-            :tablePath="getHistoryPath"
-            :tableArgs="historyArgs"
-            :tableSelectCol="false"
-            :reserve-selection="false"
-            @list-channel-qrcode="createChannelCode"
-            @list-member-qrcode="createMemberCode">
-            <template scope="scope"
-                slot="path">
-                <a style="color:blue;"
-                    @click="viewCode(scope.row)">查看</a>
-                <a style="color:blue;"
-                    :href="scope.row"
-                    @click="downloadCode(scope.row)">下载</a>
-            </template>
-        </t8t-list-view> -->
-        <!-- <t8t-grid
-            ref="t8tgrid"
-            :columns="columns"
-            :service="service"
-            :method="method"
-        ></t8t-grid> -->
         <t8t-breadcrumb :breadcrumbData="breadcrumbData"></t8t-breadcrumb>
         <div class="g-main-container">
 
@@ -49,10 +21,10 @@
                     :args="historyArgs">
                     <template scope="scope"
                         slot="path">
-                        <a style="color:blue;"
+                        <a class="viewqrCode"
                             @click="viewCode(scope.row)">查看</a>
                         <a style="color:blue;"
-                            :href="scope.row"
+                            :href="scope.row.qrImgUrl"
                             @click="downloadCode(scope.row)">下载</a>
                     </template>
                 </t8t-table>
@@ -136,7 +108,7 @@
 // import Service from 'src/services/craftmanager/Service.js'
 import Utils from 'src/utils/Utils.js'
 import Cookie from 'js-cookie'
-import md5 from 'md5'
+import Download from 'src/utils/download.js'
 export default {
     name: 'crate-qrcode',
     components: {},
@@ -236,13 +208,12 @@ export default {
             ],
             memberOptions: [],
             selectedRows: [],
-            // selIds: null,
-            // pageConfig: {},
         }
     },
     created() {
         this.getMemberList()
         this.getCase()
+        this.getConstructionList()
     },
     activated() {
         // this.$refs['list-view'].getTableInstance().reloadTable()
@@ -279,6 +250,7 @@ export default {
                 companyId: ~~this.companyId,
                 groupType: 1,
             }
+
             let arr = []
             this.$http.fetch(this.getMemberPath, designGroupArgs).then(res => {
                 if (res.data.status === 200) {
@@ -311,20 +283,43 @@ export default {
                             },
                         ],
                     })
-                    this.memberOptions.push(
-                        {
-                            value: 1,
-                            label: '施工团队',
-                            disabled: true,
-                        },
-                        {
-                            value: 2,
-                            label: '设计团队',
-                            children: arr,
-                        }
-                    )
+                    this.memberOptions.push({
+                        value: 2,
+                        label: '设计团队',
+                        children: arr,
+                    })
                 } else {
                     this.$message.error(res.data.error)
+                }
+            })
+        },
+        getConstructionList() {
+            let constructionArgs = {
+                companyId: ~~this.companyId,
+                groupType: 2,
+            }
+            let consArr = []
+            this.$http.fetch(this.getMemberPath, constructionArgs).then(res => {
+                if (res.data.status === 200) {
+                    console.log('success')
+                    let data = res.data.result
+                    data.map(item => {
+                        let memberItem = {
+                            value:
+                                item.tid +
+                                '!' +
+                                item.jobsName +
+                                '/' +
+                                item.tname,
+                            label: item.jobsName + '/' + item.tname,
+                        }
+                        consArr.push(memberItem)
+                    })
+                    this.memberOptions.push({
+                        value: 1,
+                        label: '施工团队',
+                        children: consArr,
+                    })
                 }
             })
         },
@@ -334,22 +329,24 @@ export default {
         createMemberCode() {
             this.memberVisible = true
         },
-        handleChange(val) {
-            // console.log(val)
-            // console.log(this.channelForm)
-            // console.log(this.memberForm)
-        },
+        handleChange(val) {},
         submitChannelCode() {
             this.channelSubmit = true
             this.$refs['channelForm'].validate(valid => {
                 if (valid) {
                     let qrId = 0
+                    let name = ''
                     if (this.channelForm.location[0] == 1) {
                         qrId = this.companyId
                     } else if (this.channelForm.location[0] == 2) {
                         qrId = this.channelForm.location[2].split('!')[0]
                     } else {
                         qrId = this.channelForm.location[1].split('!')[0]
+                    }
+                    if (this.channelForm.location[0] == 2) {
+                        name = this.channelForm.location[2].split('!')[1]
+                    } else if (this.channelForm.location[0] == 3) {
+                        name = this.channelForm.location[1].split('!')[1]
                     }
                     console.log(this.channelForm)
                     let args = {
@@ -366,26 +363,33 @@ export default {
                             qrCodeTypeDTO: {
                                 type: this.channelForm.location[0], //  进入页面类型 1、主页 2、团队成员 3、案例
                                 yid: 0, // 项目id,没有传0
-                                scene_id: this.channelForm.location[1]
-                                    ? this.channelForm.location[1].split('!')[0]
-                                    : 0, // 案例id
-                                tid: this.channelForm.location[2]
-                                    ? this.channelForm.location[2].split('!')[0]
-                                    : 0, // 设计师id
-                                roleName: this.channelForm.location[2]
-                                    ? this.channelForm.location[2].split('!')[1]
-                                    : 0, // 设计师职位+名字
+                                scene_id:
+                                    this.channelForm.location[0] == 3
+                                        ? this.channelForm.location[1].split(
+                                              '!'
+                                          )[0]
+                                        : 0, // 案例id
+                                tid:
+                                    this.channelForm.location[0] == 2
+                                        ? this.channelForm.location[2].split(
+                                              '!'
+                                          )[0]
+                                        : 0, // 设计师id
+                                roleName: name, // 设计师职位+名字
                             },
                         },
                     }
                     this.$http
                         .fetch(this.createCodePath, args)
                         .then(res => {
+                            console.log(res.data.result.result, res.data.status)
                             this.channelSubmit = false
                             if (
                                 res.data.status === 200 &&
                                 res.data.result.result === 1
                             ) {
+                                console.log(Download)
+                                Download(res.data.result.url)
                                 this.$message.success('创建渠道二维码成功')
                                 this.$refs.channelForm.resetFields()
                                 this.$refs.channelCodeDialog.close()
@@ -411,6 +415,7 @@ export default {
             this.$refs['memberForm'].validate(valid => {
                 if (valid) {
                     let qrId = 0
+                    let name = ''
                     if (this.memberForm.location[0] == 1) {
                         qrId = this.companyId
                     } else if (this.memberForm.location[0] == 2) {
@@ -418,7 +423,11 @@ export default {
                     } else {
                         qrId = this.memberForm.location[1].split('!')[0]
                     }
-
+                    if (this.memberForm.location[0] == 2) {
+                        name = this.memberForm.location[2].split('!')[1]
+                    } else if (this.memberForm.location[0] == 3) {
+                        name = this.memberForm.location[1].split('!')[1]
+                    }
                     let args = {
                         dto: {
                             qrType: this.memberForm.location[0], // 进入页面类型  1、主页 2、团队成员 3、案例
@@ -431,19 +440,23 @@ export default {
                             threeChannel: 2, // 生成二维码类型 1、生成渠道二维码 2、生成成员二维码
                             fourChannel: this.memberForm.member[1].split(
                                 '!'
-                            )[0], // 生成渠道二维码，填写的位置信息
+                            )[0], // 生成成员二维码，填写的成员id
                             qrCodeTypeDTO: {
                                 type: this.memberForm.location[0], //  进入页面类型 1、主页 2、团队成员 3、案例
                                 yid: 0, // 项目id,没有传0
-                                scene_id: this.memberForm.location[1]
-                                    ? this.memberForm.location[1].split('!')[0]
-                                    : 0, // 案例id
-                                tid: this.memberForm.location[2]
-                                    ? this.memberForm.location[2].split('!')[0]
-                                    : 0,
-                                roleName: this.memberForm.location[2]
-                                    ? this.memberForm.location[2].split('!')[1]
-                                    : 0,
+                                scene_id:
+                                    this.memberForm.location[0] == 3
+                                        ? this.memberForm.location[1].split(
+                                              '!'
+                                          )[0]
+                                        : 0, // 案例id
+                                tid:
+                                    this.memberForm.location[0] == 2
+                                        ? this.memberForm.location[2].split(
+                                              '!'
+                                          )[0]
+                                        : 0,
+                                roleName: name,
                             },
                         },
                     }
@@ -451,12 +464,11 @@ export default {
                         .fetch(this.createCodePath, args)
                         .then(res => {
                             this.channelSubmit = false
-                            // console.log(res.data.status, res.data.result.result)
-                            // debugger
                             if (
                                 res.data.status === 200 &&
                                 res.data.result.result === 1
                             ) {
+                                Download(res.data.result.result)
                                 this.$message.success('创建成员二维码成功')
                                 this.$refs.memberForm.resetFields()
                                 this.$refs.memberCodeDialog.close()
@@ -476,9 +488,16 @@ export default {
                 }
             })
         },
-        viewCode(row) {},
-        downLoadCode(row) {},
-        closeViewCode() {},
+        viewCode(row) {
+            console.log(row)
+            this.imageUrl = row.qrImgUrl
+        },
+        downLoadCode(row) {
+            console.log(row)
+        },
+        closeViewCode() {
+            this.imageUrl = ''
+        },
     },
 }
 </script>
@@ -495,5 +514,11 @@ export default {
 .el-button--primary {
     display: block;
     margin: auto;
+}
+.viewqrCode {
+    color: blue;
+}
+.viewqrCode:hover {
+    cursor: pointer;
 }
 </style>
