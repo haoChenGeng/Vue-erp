@@ -24,7 +24,7 @@
                         <a class="view-code"
                             @click="viewCode(scope.row)">查看</a>
                         <a class="download-code"
-                            :href="getFull(scope.row.qrImgUrl)">下载</a>
+                            @click="downloadImg(scope.row.qrImgUrl)">下载</a>
                     </template>
                 </t8t-table>
             </div>
@@ -151,6 +151,7 @@ export default {
             channelSubmit: false,
             imageUrl: '',
             urlReg: /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)\//i,
+            urlImg: 'http://pic.to8to.com/',
             historyArgs: {
                 search: {
                     companyId: Cookie.get('t8t-tc-comid'),
@@ -225,7 +226,7 @@ export default {
     },
     methods: {
         getFull(url) {
-            return Utils.getFullURL(url)
+            return this.urlImg + url
         },
         getCase() {
             let args = {
@@ -292,7 +293,7 @@ export default {
                         ],
                     })
                     this.memberOptions.push({
-                        value: 2,
+                        value: 3,
                         label: '设计团队',
                         children: arr,
                     })
@@ -324,7 +325,7 @@ export default {
                         consArr.push(memberItem)
                     })
                     this.memberOptions.push({
-                        value: 1,
+                        value: 2,
                         label: '施工团队',
                         children: consArr,
                     })
@@ -337,7 +338,9 @@ export default {
         createMemberCode() {
             this.memberVisible = true
         },
-        handleChange(val) {},
+        handleChange(val) {
+            console.log(val)
+        },
         submitChannelCode() {
             this.$refs['channelForm'].validate(valid => {
                 if (valid) {
@@ -395,17 +398,22 @@ export default {
                                 res.data.status === 200 &&
                                 res.data.result.result === 1
                             ) {
+                                console.log('success')
                                 let url = res.data.result.url
-
-                                Download(
+                                /*  Download(
                                     Utils.getFullURL(
                                         url.replace(
                                             url.match(this.urlReg)[0],
                                             ''
                                         )
                                     )
+                                ) */
+                                this.downloadImg(
+                                    url.replace(
+                                        url.match(this.urlReg)[0],
+                                        this.urlImg
+                                    )
                                 )
-                                // Download(url)
                                 this.$message.success('创建渠道二维码成功')
                                 this.$refs.channelForm.resetFields()
                                 this.$refs.channelCodeDialog.close()
@@ -418,7 +426,7 @@ export default {
                             this.$message.error(err)
                         })
                 } else {
-                    console.log('error')
+                    console.log('validate error')
                     return false
                 }
             })
@@ -449,7 +457,7 @@ export default {
                         dto: {
                             qrType: locationType, // 进入页面类型  1、主页 2、团队成员 3、案例
                             qrTypeId: qrId, //进入页面类型ID
-                            channelType: this.memberForm.member[0] == 1 ? 2 : 3, // 生成二维码类型 1、渠道二维码    2、施工团队二维码   3、设计团队二维码
+                            channelType: this.memberForm.member[0], // 生成二维码类型 1、渠道二维码    2、施工团队二维码   3、设计团队二维码
                             companyName: this.companyName,
                             companyId: this.companyId,
                             width: 0,
@@ -483,8 +491,29 @@ export default {
                                 res.data.status === 200 &&
                                 res.data.result.result === 1
                             ) {
-                                console.log(Download)
-                                Download(res.data.result.url)
+                                console.log('success')
+                                let url = res.data.result.url
+                                /* Download(
+                                    Utils.getFullURL(
+                                        url.replace(
+                                            url.match(this.urlReg)[0],
+                                            ''
+                                        )
+                                    )
+                                ) */
+                                /* console.log(
+                                    url.replace(
+                                        url.match(this.urlReg)[0],
+                                        this.urlImg
+                                    )
+                                ) */
+                                // debugger
+                                this.downloadImg(
+                                    url.replace(
+                                        url.match(this.urlReg)[0],
+                                        this.urlImg
+                                    )
+                                )
                                 this.$message.success('创建成员二维码成功')
                                 this.$refs.memberForm.resetFields()
                                 this.$refs.memberCodeDialog.close()
@@ -497,22 +526,58 @@ export default {
                             this.$message.error(err)
                         })
                 } else {
-                    console.log('error')
+                    console.log('validate error')
                     return false
                 }
             })
         },
         viewCode(row) {
-            console.log(row)
-            this.imageUrl = Utils.getFullURL(row.qrImgUrl)
+            // console.log(row)
+            // this.imageUrl = Utils.getFullURL(row.qrImgUrl)
+            this.imageUrl = this.urlImg + row.qrImgUrl
             this.viewCodeVisible = true
+            // console.log(this.imageUrl)
         },
-        downLoadCode(row) {
+        /* downLoadCode(row) {
             console.log(row)
-        },
+        }, */
         closeViewCode() {
             this.imageUrl = ''
             this.viewCodeVisible = false
+            // console.log(this.imageUrl)
+        },
+        downloadImg2(url) {
+            let a = document.createElement('a')
+            a.setAttribute('href', this.urlImg + url)
+            a.setAttribute('download', '')
+            console.log(a)
+            debugger
+            a.click()
+        },
+        downloadImg(url) {
+            var $a = document.createElement('a')
+            $a.setAttribute('href', this.urlImg + url)
+            $a.setAttribute('download', '')
+
+            var evObj = document.createEvent('MouseEvents')
+            evObj.initMouseEvent(
+                'click',
+                true,
+                true,
+                window,
+                0,
+                0,
+                0,
+                0,
+                0,
+                false,
+                false,
+                true,
+                false,
+                0,
+                null
+            )
+            $a.dispatchEvent(evObj)
         },
     },
 }
@@ -540,5 +605,8 @@ export default {
 .download-code {
     color: blue;
     text-decoration: none;
+}
+.download-code:hover {
+    cursor: pointer;
 }
 </style>
