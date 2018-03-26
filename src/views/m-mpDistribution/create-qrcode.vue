@@ -24,6 +24,7 @@
                         <a class="view-code"
                             @click="viewCode(scope.row)">查看</a>
                         <a class="download-code"
+                            :dataUrl="getFull(scope.row.qrImgUrl)"
                             @click="downloadImg(scope.row.qrImgUrl)">下载</a>
                     </template>
                 </t8t-table>
@@ -409,10 +410,7 @@ export default {
                                     )
                                 ) */
                                 this.downloadImg(
-                                    url.replace(
-                                        url.match(this.urlReg)[0],
-                                        this.urlImg
-                                    )
+                                    url.replace(url.match(this.urlReg)[0], '')
                                 )
                                 this.$message.success('创建渠道二维码成功')
                                 this.$refs.channelForm.resetFields()
@@ -493,26 +491,9 @@ export default {
                             ) {
                                 console.log('success')
                                 let url = res.data.result.url
-                                /* Download(
-                                    Utils.getFullURL(
-                                        url.replace(
-                                            url.match(this.urlReg)[0],
-                                            ''
-                                        )
-                                    )
-                                ) */
-                                /* console.log(
-                                    url.replace(
-                                        url.match(this.urlReg)[0],
-                                        this.urlImg
-                                    )
-                                ) */
                                 // debugger
                                 this.downloadImg(
-                                    url.replace(
-                                        url.match(this.urlReg)[0],
-                                        this.urlImg
-                                    )
+                                    url.replace(url.match(this.urlReg)[0], '')
                                 )
                                 this.$message.success('创建成员二维码成功')
                                 this.$refs.memberForm.resetFields()
@@ -538,23 +519,21 @@ export default {
             this.viewCodeVisible = true
             // console.log(this.imageUrl)
         },
-        /* downLoadCode(row) {
-            console.log(row)
-        }, */
         closeViewCode() {
             this.imageUrl = ''
             this.viewCodeVisible = false
             // console.log(this.imageUrl)
         },
-        downloadImg2(url) {
+        /* downloadImg2(url) {
             let a = document.createElement('a')
             a.setAttribute('href', this.urlImg + url)
             a.setAttribute('download', '')
             console.log(a)
             debugger
             a.click()
-        },
+        }, */
         downloadImg(url) {
+            console.log(url)
             var $a = document.createElement('a')
             $a.setAttribute('href', this.urlImg + url)
             $a.setAttribute('download', '')
