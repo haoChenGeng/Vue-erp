@@ -95,11 +95,11 @@
             </el-form>
         </el-dialog>
         <el-dialog v-model="viewCodeVisible"
-            size="large"
+            size="small"
             @close="closeViewCode">
             <img width="100%"
                 :src="imageUrl"
-                alt="">
+                alt="小程序二维码">
         </el-dialog>
     </div>
 </template>
@@ -108,7 +108,7 @@
 // import Service from 'src/services/craftmanager/Service.js'
 import Utils from 'src/utils/Utils.js'
 import Cookie from 'js-cookie'
-import Download from 'src/utils/download.js'
+// import Download from 'src/utils/download.js'
 export default {
     name: 'crate-qrcode',
     components: {},
@@ -500,8 +500,6 @@ export default {
             })
         },
         viewCode(row) {
-            // console.log(row)
-            // this.imageUrl = Utils.getFullURL(row.qrImgUrl)
             this.imageUrl = this.urlImg + row.qrImgUrl
             this.viewCodeVisible = true
             // console.log(this.imageUrl)
@@ -511,14 +509,6 @@ export default {
             this.viewCodeVisible = false
             // console.log(this.imageUrl)
         },
-        /* downloadImg2(url) {
-            let a = document.createElement('a')
-            a.setAttribute('href', this.urlImg + url)
-            a.setAttribute('download', '')
-            console.log(a)
-            debugger
-            a.click()
-        }, */
         downloadImg(url) {
             console.log(url)
             var $a = document.createElement('a')
