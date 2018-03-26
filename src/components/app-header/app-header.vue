@@ -69,7 +69,8 @@ export default {
         },
         onContact() {},
         onLogout() {
-            Utils.logout()
+            Utils.logout();
+            Cookie.remove('hasChecked')
         },
     },
 }
