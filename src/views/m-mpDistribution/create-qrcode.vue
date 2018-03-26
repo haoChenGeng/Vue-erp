@@ -151,7 +151,7 @@ export default {
             memberSubmit: false,
             channelSubmit: false,
             imageUrl: '',
-            urlReg: /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)\//i,
+            // urlReg: /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)\/pic\//i,
             urlImg: 'http://pic.to8to.com/',
             historyArgs: {
                 search: {
@@ -363,7 +363,7 @@ export default {
                     } else if (locationType == 3) {
                         name = selectCase.split('!')[1]
                     }
-                    console.log(this.channelForm)
+                    // console.log(this.channelForm)
                     let args = {
                         dto: {
                             qrType: locationType, // 进入页面类型  1、主页 2、团队成员 3、案例
@@ -393,25 +393,14 @@ export default {
                     this.$http
                         .fetch(this.createCodePath, args)
                         .then(res => {
-                            console.log(res.data.result.result, res.data.status)
+                            // console.log(res.data.result.result, res.data.status)
                             this.channelSubmit = false
                             if (
                                 res.data.status === 200 &&
                                 res.data.result.result === 1
                             ) {
-                                console.log('success')
                                 let url = res.data.result.url
-                                /*  Download(
-                                    Utils.getFullURL(
-                                        url.replace(
-                                            url.match(this.urlReg)[0],
-                                            ''
-                                        )
-                                    )
-                                ) */
-                                this.downloadImg(
-                                    url.replace(url.match(this.urlReg)[0], '')
-                                )
+                                this.downloadImg(url)
                                 this.$message.success('创建渠道二维码成功')
                                 this.$refs.channelForm.resetFields()
                                 this.$refs.channelCodeDialog.close()
@@ -430,7 +419,7 @@ export default {
             })
         },
         submitMemberCode() {
-            console.log(this.memberForm)
+            // console.log(this.memberForm)
             this.$refs['memberForm'].validate(valid => {
                 if (valid) {
                     this.channelSubmit = true
@@ -489,12 +478,10 @@ export default {
                                 res.data.status === 200 &&
                                 res.data.result.result === 1
                             ) {
-                                console.log('success')
+                                // console.log('success')
                                 let url = res.data.result.url
                                 // debugger
-                                this.downloadImg(
-                                    url.replace(url.match(this.urlReg)[0], '')
-                                )
+                                this.downloadImg(url)
                                 this.$message.success('创建成员二维码成功')
                                 this.$refs.memberForm.resetFields()
                                 this.$refs.memberCodeDialog.close()
@@ -537,7 +524,7 @@ export default {
             var $a = document.createElement('a')
             $a.setAttribute('href', this.urlImg + url)
             $a.setAttribute('download', '')
-
+            console.log($a)
             var evObj = document.createEvent('MouseEvents')
             evObj.initMouseEvent(
                 'click',
