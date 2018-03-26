@@ -409,10 +409,7 @@ export default {
                                     )
                                 ) */
                                 this.downloadImg(
-                                    url.replace(
-                                        url.match(this.urlReg)[0],
-                                        this.urlImg
-                                    )
+                                    url.replace(url.match(this.urlReg)[0], '')
                                 )
                                 this.$message.success('创建渠道二维码成功')
                                 this.$refs.channelForm.resetFields()
@@ -493,26 +490,9 @@ export default {
                             ) {
                                 console.log('success')
                                 let url = res.data.result.url
-                                /* Download(
-                                    Utils.getFullURL(
-                                        url.replace(
-                                            url.match(this.urlReg)[0],
-                                            ''
-                                        )
-                                    )
-                                ) */
-                                /* console.log(
-                                    url.replace(
-                                        url.match(this.urlReg)[0],
-                                        this.urlImg
-                                    )
-                                ) */
                                 // debugger
                                 this.downloadImg(
-                                    url.replace(
-                                        url.match(this.urlReg)[0],
-                                        this.urlImg
-                                    )
+                                    url.replace(url.match(this.urlReg)[0], '')
                                 )
                                 this.$message.success('创建成员二维码成功')
                                 this.$refs.memberForm.resetFields()
@@ -538,9 +518,6 @@ export default {
             this.viewCodeVisible = true
             // console.log(this.imageUrl)
         },
-        /* downLoadCode(row) {
-            console.log(row)
-        }, */
         closeViewCode() {
             this.imageUrl = ''
             this.viewCodeVisible = false
@@ -555,6 +532,7 @@ export default {
             a.click()
         },
         downloadImg(url) {
+            console.log(url)
             var $a = document.createElement('a')
             $a.setAttribute('href', this.urlImg + url)
             $a.setAttribute('download', '')
