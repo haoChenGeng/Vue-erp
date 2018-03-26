@@ -709,4 +709,3 @@ export default {
 	box-shadow: 5px 6px 20px 0px #6b6b6b;
 }
 </style>
-
