@@ -48,7 +48,7 @@
                         class="channel-input">
                     </el-input>
                 </el-form-item>
-                <p>第二部：选择扫码后进入的页面</p>
+                <p>第二步：选择扫码后进入的页面</p>
                 <el-form-item prop="location">
                     <el-cascader :options="locationOptions"
                         v-model="channelForm.location"
@@ -80,7 +80,7 @@
                         @change="handleChange">
                     </el-cascader>
                 </el-form-item>
-                <p>第二部：选择扫码后进入的页面</p>
+                <p>第二步：选择扫码后进入的页面</p>
                 <el-form-item prop="location">
                     <el-cascader :options="locationOptions"
                         v-model="memberForm.location"
@@ -108,7 +108,7 @@
 // import Service from 'src/services/craftmanager/Service.js'
 import Utils from 'src/utils/Utils.js'
 import Cookie from 'js-cookie'
-// import Download from 'src/utils/download.js'
+import DateUtils from 'src/utils/DateUtils.js'
 export default {
     name: 'crate-qrcode',
     components: {},
@@ -186,7 +186,17 @@ export default {
                 {
                     prop: 'updateTime',
                     label: '修改时间',
-                    formatter: 'dateParser',
+                    formatter(val) {
+                        console.log(val)
+                        if (~~val == 0) {
+                            return ''
+                        } else {
+                            return DateUtils(
+                                parseInt(val) * 1000,
+                                'yyyy-mm-dd HH:MM:ss'
+                            )
+                        }
+                    },
                 },
                 {
                     prop: 'channelName',
@@ -447,13 +457,13 @@ export default {
                             channelType: this.memberForm.member[0], // 生成二维码类型 1、渠道二维码    2、施工团队二维码   3、设计团队二维码
                             companyName: this.companyName,
                             companyId: this.companyId,
-                            width: 0,
                         },
                         dto1: {
                             threeChannel: 2, // 生成二维码类型 1、生成渠道二维码 2、生成成员二维码
                             fourChannel: this.memberForm.member[1].split(
                                 '!'
                             )[0], // 生成成员二维码，填写的成员id
+                            fourName: this.memberForm.member[1].split('!')[1],
                             qrCodeTypeDTO: {
                                 type: locationType, //  进入页面类型 1、主页 2、团队成员 3、案例
                                 yid: 0, // 项目id,没有传0
