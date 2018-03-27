@@ -422,7 +422,7 @@ export default {
             // console.log(this.memberForm)
             this.$refs['memberForm'].validate(valid => {
                 if (valid) {
-                    this.channelSubmit = true
+                    this.memberSubmit = true
                     let qrId = 0
                     let name = ''
                     let locationType = this.memberForm.location[0]
@@ -473,7 +473,7 @@ export default {
                         .fetch(this.createCodePath, args)
                         .then(res => {
                             // console.log(res.data.status, res.data.result.result)
-                            this.channelSubmit = false
+                            this.memberSubmit = false
                             if (
                                 res.data.status === 200 &&
                                 res.data.result.result === 1
@@ -510,11 +510,11 @@ export default {
             // console.log(this.imageUrl)
         },
         downloadImg(url) {
-            console.log(url)
+            // console.log(url)
             var $a = document.createElement('a')
             $a.setAttribute('href', this.urlImg + url)
             $a.setAttribute('download', '')
-            console.log($a)
+            // console.log($a)
             var evObj = document.createEvent('MouseEvents')
             evObj.initMouseEvent(
                 'click',
